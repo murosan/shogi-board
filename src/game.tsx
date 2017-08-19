@@ -34,6 +34,13 @@ export default class Game extends React.Component<{ init: Positions }, GameState
     const positions = this.state.positions;
     const turn = positions.turn;
 
+    const setPos = ((pos: Positions, kif?: Kif) => {
+      this.setState({
+        positions: pos,
+        kif: kif ? kif : this.state.kif,
+      });
+    });
+
     const move = ((target: CellComponent, source: PieceObj) => {
       const moved: [Positions, string | undefined] = positions.move(target, source);
       const pos: Positions = moved[0];
@@ -43,39 +50,44 @@ export default class Game extends React.Component<{ init: Positions }, GameState
       setPos(pos, kif);
     });
 
-    const setPos = ((pos: Positions, kif?: Kif) => {
-      this.setState({
-        positions: pos,
-        kif: kif ? kif : this.state.kif,
-      });
-    });
-
-    if (!selected) {
-      // 選択されたものがないとき
+    const notSelected = (() => {
       if ((target instanceof PieceObj) && (target.whose === turn)) {
         // targetが駒かつ、手番側の駒
         target.canMoveTo = movings({ pieceObj: target, positions: positions });
         setPos(positions.select(target));
       }
-    } else if ((selected instanceof PromotionConfirmObj) && (target instanceof PieceObj)) {
-      // 成/不成の選択がされたとき(selected: PromotionConfirm, target: PieceObj)
-      move(selected, target);
-    } else if (selected instanceof PieceObj) {
-      // 選択されたものが駒のとき
+    });
+
+    const selectedIsPiece = ((selected: PieceObj) => {
       if ((target instanceof EmpObj) || ((target instanceof PieceObj) && (target.whose !== turn))) {
         // targetが空ます、または、手番ではない側の駒
         if (selected.canMove(target)) { move(target, selected); }
       } else if (target instanceof PieceObj) {
         // targetが手番側の駒
-        if (target === selected) {
-          // 同じ駒をクリックしたら選択状態を解除
-          setPos(positions.update());
-        } else {
-          // 違う駒をクリックしたら選択状態にする
-          target.canMoveTo = movings({ pieceObj: target, positions: positions });
-          setPos(positions.select(target));
-        }
+        targetIsMine(target);
       }
+    });
+
+    const targetIsMine = ((target: PieceObj) => {
+      if (target === selected) {
+        // 同じ駒をクリックしたら選択状態を解除
+        setPos(positions.update());
+      } else {
+        // 違う駒をクリックしたら選択状態にする
+        target.canMoveTo = movings({ pieceObj: target, positions: positions });
+        setPos(positions.select(target));
+      }
+    });
+
+    if (!selected) {
+      // 選択されたものがないとき
+      notSelected();
+    } else if ((selected instanceof PromotionConfirmObj) && (target instanceof PieceObj)) {
+      // 成/不成の選択がされたとき(selected: PromotionConfirm, target: PieceObj)
+      move(selected, target);
+    } else if (selected instanceof PieceObj) {
+      // 選択されたものが駒のとき
+      selectedIsPiece(selected);
     }
   }
 

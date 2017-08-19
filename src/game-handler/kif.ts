@@ -1,6 +1,7 @@
 import Positions from './positions';
 import Branch from './branch';
 
+// OneStep = 一手(棋譜の文字列 + 配置)
 export interface OneStep {
   str: string;
   positions: Positions;
@@ -27,7 +28,7 @@ export class Kif {
   }
 
   /**
-   * 局面を追加する
+   * 局面を追加したKifを返す
    * @param target 追加する局面
    * @param current 現在局面
    */
@@ -49,7 +50,7 @@ export class Kif {
   }
 
   /**
-   * nextがoneStepと同一局面か判定し、違う場合は分岐を作成する
+   * nextがoneStepと同一局面か判定し、違う場合は分岐を作成後、Kifを返す
    * @param target 追加するOneStep
    * @param nextIndex 
    */
@@ -68,6 +69,10 @@ export class Kif {
     }
   }
 
+  /**
+   * 棋譜の表示箇所を変更したKifを返す
+   * @param target 表示したい一手
+   */
   changeIndex(target: OneStep): Kif {
     const includeTarget: boolean = this.history.includes(target);
     return new Kif(
@@ -82,6 +87,9 @@ export class Kif {
     );
   }
 
+  /**
+   * displayIndexを0にする
+   */
   setIndexZero(): Kif {
     return new Kif(
       this.history.map((h) => {
@@ -90,12 +98,18 @@ export class Kif {
       }), 0);
   }
 
+  /**
+   * 現在の一手を返す
+   */
   getCurrent(): OneStep {
     const cur: KifComponent = this.history[this.displayIndex];
     if (cur instanceof Branch) { return cur.getCurrent(); }
     else { return cur; }
   }
 
+  /**
+   * 分岐のない棋譜を配列で返す
+   */
   getAsInline(): Array<OneStep> {
     return Array.prototype.concat.apply([],
       this.history.map((kc: KifComponent) => {

@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "noUnusedLocals" : true,
+    "alwaysStrict": true,
+    "sourceMap": true,
+    "pretty": true,
+    "outDir": "./public/dist/",
+    "lib": ["dom", "es2017"],
+    "target": "es5",
+    "jsx": "react"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

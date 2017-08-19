@@ -1,0 +1,25 @@
+doctype html
+html(lang='ja')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    title= title
+    link(rel='stylesheet', href='/dist/main.css')
+  body
+    h1 将棋 検討盤
+    block content
+    footer#footer
+      div © 2017 
+        a(href='https://github.com/murosan' target='_blank') 
+          u murosan
+        |  - 
+        a(href='')
+          u GitHub
+    footer#footer
+      div pieces and board(adapted) images : by 
+        a(href='http://mucho.girly.jp/bona' target='_blank') muchonovski
+        |  under 
+        a(href='https://creativecommons.org/licenses/by-nc/2.1/jp/' target='_blank')
+          | Creative Commons 表示-非営利 2.1 日本 License
+    script(src='dist/game.bundle.js')

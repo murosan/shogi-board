@@ -1,0 +1,52 @@
+@import 'dclrs';
+@import 'pieces';
+@import 'board';
+@import 'capture-stage';
+@import 'info-area';
+
+body {
+	margin: 0;
+}
+
+h1 {
+  color: $color-title;
+	background: linear-gradient(to right, $color-gradi-start, $color-gradi-end, $color-gradi-start);
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid $color-title-border;
+}
+
+#app {
+  width: 100%;
+  display: flex;
+}
+
+#play-area {
+	@include flex-disp(1);
+	@include backgr;
+	padding: 1em;
+	min-width: 550px; 
+	// background-repeat: repeat;
+	background-image: url($img-path-c + '/tatami.jpg');
+}
+
+#left-side-part {
+	@include flex-disp(1);
+	flex-direction: column;
+}
+
+#right-side-part {
+	@include flex-disp(1);
+	flex-direction: column-reverse;
+}
+
+footer {
+	color: $color-title;
+	text-align: center;
+	margin: .5vw;
+}
+
+a {
+	color: $color-title;
+}

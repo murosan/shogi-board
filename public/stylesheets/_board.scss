@@ -1,0 +1,65 @@
+@import 'dclrs';
+
+#board {
+	@include backgr;
+	flex: 3;
+	background-image: url($img-path-c + '/board.png');
+	.row-container {
+		@include flex-disp(1);
+		.cell {
+			@include flex-disp(3);
+			@include aspect(109%);
+			border-top: 2px solid;
+			border-left: 2px solid;
+			.piece {
+				@include flex-disp(1);
+				@include backgr;
+				flex-direction: column;
+				.confirm-button {
+					@include flex-disp(1);
+					@include backgr;
+					font-size: .4vw;
+					display: block;
+				}
+				#cbtn-promote {
+					background-size: 38%;
+					background-color: $color-promote;
+					background-image: url($img-path-c + '/promote.png');
+					&:hover {
+						background-color: $color-promote-hv;
+					}
+				}
+				#cbtn-not-promote {
+					background-size: 75%;
+					background-color: $color-not-promote;
+					background-image: url($img-path-c + '/notpromote.png');
+					&:hover {
+						background-color: $color-not-promote-hv;
+					}
+				}
+			}
+			.selected {
+				background-color: $color-gr-selected;
+			}
+		}
+		.cell-bottom {
+			border-bottom: 2px solid;
+		}
+		.cell-right {
+			border-right: 2px solid;
+		}
+		.corner {
+			@include flex-disp(1);
+			@include aspect(100%);
+		}
+		.edge-vertical {
+			@include edge(1);
+		}
+		.edge-horizontal {
+			@include edge(3);
+		}
+		.edge-text {
+			font-size: 9%;
+		}
+	}
+}

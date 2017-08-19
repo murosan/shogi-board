@@ -4,13 +4,15 @@
 ブラウザで動く将棋検討盤です。  
 駒はルールに則って動きます(王手、詰み判定はありません)。
 
+<img src="https://github.com/murosan/pictures-for-readme/blob/master/shogi-board-ex.png" width="60%;">
+
 ## 対応ブラウザ
 
 最新版の Google Chrome、Safari
 
 ## 開発
 
-- セットアップ
+- セットアップ
 
   Node.js v6.11.1 以上が必要です。
 

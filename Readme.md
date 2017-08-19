@@ -8,7 +8,9 @@
 
 ## 対応ブラウザ
 
-最新版の Google Chrome、Safari
+最新版のGoogle Chrome、Safari(共にPCのみ動作)。
+今回はCSSでFlexBoxをどうしても使いたかったので非対応。スマホで見ると盛大にバグります。
+いつか対応したいと思っていますが、優先度低め。
 
 ## 開発
 
@@ -39,7 +41,6 @@ $ npm run webpack
   - [React.js](https://github.com/facebook/react)
   - [Sass](https://github.com/sass/sass)
   - [Webpack](https://github.com/webpack/webpack)
-
 
 
 ## ライセンス

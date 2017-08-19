@@ -4,8 +4,7 @@
 ブラウザで動く将棋検討盤です。  
 駒はルールに則って動きます(王手、詰み判定はありません)。
 
-|![例](https://github.com/murosan/pictures-for-readme/blob/master/shogi-board-ex.png)|
-|---|
+<img src="https://github.com/murosan/pictures-for-readme/blob/master/shogi-board-ex.png" width="60%;">
 
 ## 対応ブラウザ
 

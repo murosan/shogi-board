@@ -31,8 +31,8 @@ export default class Game extends React.Component<{ init: Positions }, GameState
 
   handleClick(target: CellComponent): void {
     const selected: PieceObj | PromotionConfirmObj | undefined = this.state.positions.selected;
-    const positions = this.state.positions;
-    const turn = positions.turn;
+    const positions: Positions = this.state.positions;
+    const turn: number = positions.turn;
 
     const setPos = ((pos: Positions, kif?: Kif) => {
       this.setState({
@@ -129,7 +129,7 @@ export default class Game extends React.Component<{ init: Positions }, GameState
   copyKif(): void {
     const inline: Array<OneStep> = this.state.kif.getAsInline();
     const kifStr: Array<string> = [];
-    inline.forEach((e, i) => {
+    inline.forEach((e: OneStep, i: number) => {
       if (i !== 0) { kifStr.push(i + ' ' + e.str); }
     });
     const tarea = document.createElement('textarea');
@@ -141,8 +141,8 @@ export default class Game extends React.Component<{ init: Positions }, GameState
   }
 
   render() {
-    const positions = this.state.positions;
-    const indexes = this.state.indexes;
+    const positions: Positions = this.state.positions;
+    const indexes: Array<number> = this.state.indexes;
     return (
       <div id='play-area'>
         <LeftSide

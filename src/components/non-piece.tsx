@@ -20,17 +20,16 @@ export class EmpElm extends React.Component<{ onClick: () => void }, {}> {
 
 export class PromotionConfirmElm extends React.Component<PCProps, {}> {
   render() {
-    const pco = this.props.pcObj;
     return (
       <div className={'piece'}>
-        <Promote onClick={() => this.props.onClick(pco.promoted)} />
-        <NotPromote onClick={() => this.props.onClick(pco.moved)} />
+        <Promote onClick={() => this.props.onClick(this.props.pcObj.promoted)} />
+        <NotPromote onClick={() => this.props.onClick(this.props.pcObj.moved)} />
       </div>
     );
   }
 }
 
-class Promote extends React.Component<{ onClick: any }, {}> {
+class Promote extends React.Component<{ onClick: () => void }, {}> {
   render() {
     return (
       <div
@@ -42,7 +41,7 @@ class Promote extends React.Component<{ onClick: any }, {}> {
   }
 }
 
-class NotPromote extends React.Component<{ onClick: any }, {}> {
+class NotPromote extends React.Component<{ onClick: () => void }, {}> {
   render() {
     return (
       <div

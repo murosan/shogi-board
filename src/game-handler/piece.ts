@@ -45,7 +45,7 @@ export default class PieceObj {
 
   canMove(target: PorE): boolean {
     const movs = this.canMoveTo;
-    if (movs && (movs.indexOf(target) !== -1)) {
+    if (movs && movs.includes(target)) {
       return true;
     } else {
       return false;

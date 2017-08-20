@@ -15,7 +15,7 @@ export default class RowContainer extends React.Component<RowContainerProps, {}>
   render() {
     const r = this.props.row;
     const rowIsEdge = r === -1 || r === 9;
-    const rc = this.props.indexes.map((c) => {
+    const rc = this.props.indexes.map((c: number) => {
       const colIsEdge = c === -1 || c === 9;
       if (rowIsEdge && colIsEdge) {
         return <Corner key={'co:' + r + c} />;

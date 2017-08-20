@@ -28,7 +28,7 @@ export default class Branch {
    */
   add(target: OneStep, current: OneStep): Branch {
     return new Branch(
-      this.branch.map((b, i) => {
+      this.branch.map((b: Kif, i: number) => {
         if (i === this.displayIndex) { return b.add(target, current); }
         else { return b; }
       }),
@@ -41,8 +41,8 @@ export default class Branch {
    * @param target 追加する一手
    */
   incBranch(target: OneStep): Branch {
-    const br = this.branch.slice();
-    const match = this.hasSamePos(target.positions);
+    const br: Array<Kif> = this.branch.slice();
+    const match: [boolean, number | undefined] = this.hasSamePos(target.positions);
     if (match[0]) {
       // targetと同じ局面が分岐にすでにある場合は、displayIndexを更新するのみ
       return new Branch(br, match[1]);
@@ -57,7 +57,7 @@ export default class Branch {
    * @param current 現在局面
    */
   hasCurrent(current: Positions): [boolean, number | undefined] {
-    let index;
+    let index: number | undefined;
     const result: boolean = !this.branch.every((k: Kif, i: number) => {
       const h: KifComponent = k.history[0];
       const res: boolean = (!(h instanceof Branch)) && (h.positions !== current);
@@ -72,7 +72,7 @@ export default class Branch {
    * @param positions 比較する配置
    */
   hasSamePos(positions: Positions): [boolean, number | undefined] {
-    let index;
+    let index: number | undefined;
     const result: boolean = !this.branch.every((k: Kif, i: number) => {
       const head: KifComponent = k.history[0];
       const match: boolean = (head instanceof Branch) ? false :
@@ -88,7 +88,7 @@ export default class Branch {
    * @param target 表示したい一手
    */
   changeIndex(target: OneStep): Branch {
-    const headHas = this.hasCurrent(target.positions);
+    const headHas: [boolean, number | undefined] = this.hasCurrent(target.positions);
     if (headHas[0]) {
       return new Branch(
         this.branch.map((k: Kif, i: number) => {
@@ -98,8 +98,8 @@ export default class Branch {
         headHas[1]
       );
     } else {
-      const br = this.branch.slice();
-      const dispKif = br[this.displayIndex];
+      const br: Array<Kif> = this.branch.slice();
+      const dispKif: Kif = br[this.displayIndex];
       br.splice(br.indexOf(dispKif), 1);
       const branch = br.concat(dispKif.changeIndex(target))
       return new Branch(
@@ -114,7 +114,7 @@ export default class Branch {
    */
   setEachIndexZero(): Branch {
     return new Branch(
-      this.branch.map((b) => { return b.setIndexZero(); }),
+      this.branch.map((b: Kif) => { return b.setIndexZero(); }),
       this.displayIndex
     );
   }

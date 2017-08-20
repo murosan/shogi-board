@@ -27,9 +27,9 @@ export default class Positions {
    * @param p 配置
    */
   match(p: Positions): boolean {
-    const posA = p.pos;
-    const matchPos: boolean = this.pos.every((rowContainer, row: number) => {
-      return rowContainer.every((b, col: number) => {
+    const posA: Array<Array<CellComponent>> = p.pos;
+    const matchPos: boolean = this.pos.every((rowContainer: Array<CellComponent>, row: number) => {
+      return rowContainer.every((b: CellComponent, col: number) => {
         const a: CellComponent = posA[row][col];
         if ((b instanceof EmpObj) && (a instanceof EmpObj)) {
           return true;
@@ -51,33 +51,16 @@ export default class Positions {
    * @param source 移動元
    */
   move(target: CellComponent, source: PieceObj): [Positions, string | undefined] {
-    const pos = this.pos.slice();
-    const cap0 = this.cap0;
-    const cap1 = this.cap1;
-    const turn = this.turn;
+    const pos: Array<Array<CellComponent>> = this.pos.slice();
+    const cap0: Captures = this.cap0;
+    const cap1: Captures = this.cap1;
+    const turn: number = this.turn;
     const newSelected: Array<nonEmpCells> = [];
     const kif: Array<string> = [];
 
     const pushKif = ((status: '' | '成' | '不成' | '打',
       targetRow: number, targetCol: number, source_: PieceObj) => {
       kif.push(generateKif(targetRow, targetCol, source_.name, source_.row, source_.col, status));
-    });
-
-    const handleCaptures = (() => {
-      if (source.row === -1 && (target instanceof EmpObj)) {
-        // 持ち駒を空ますに置くとき
-        return (turn === 0) ?
-          [cap0.dec(source), cap1.update()] :
-          [cap0.update(), cap1.dec(source)];
-      } else if (target instanceof PieceObj && target.whose !== turn) {
-        // 移動先(target) が相手の駒のとき
-        return (turn === 0) ?
-          [cap0.inc(target.captured()), cap1.update()] :
-          [cap0.update(), cap1.inc(target.captured())];
-      } else {
-        // 移動先が (promotion confirm | 盤上の駒を空ますに移動) のとき
-        return [cap0.update(), cap1.update()];
-      }
     });
 
     const targetIsConfirm = ((target: PromotionConfirmObj, cell: CellComponent,
@@ -131,7 +114,24 @@ export default class Positions {
       });
     });
 
-    const captures = handleCaptures();
+    const handleCaptures: () => [Captures, Captures] = (() => {
+      if ((source.row === -1) && (target instanceof EmpObj)) {
+        // 持ち駒を空ますに置くとき
+        return (turn === 0) ?
+          [cap0.dec(source), cap1.update()] :
+          [cap0.update(), cap1.dec(source)];
+      } else if ((target instanceof PieceObj) && (target.whose !== turn)) {
+        // 移動先(target) が相手の駒のとき
+        return (turn === 0) ?
+          [cap0.inc(target.captured()), cap1.update()] :
+          [cap0.update(), cap1.inc(target.captured())];
+      } else {
+        // 移動先が (promotion confirm | 盤上の駒を空ますに移動) のとき
+        return [cap0.update(), cap1.update()];
+      }
+    });
+
+    const captures: [Captures, Captures] = handleCaptures();
 
     return [
       new Positions(
@@ -154,8 +154,8 @@ export default class Positions {
    * 全てのCellComponentsが更新されたPositionsを返す
    */
   update(): Positions {
-    const newPos = this.pos.map((r) => {
-      return r.slice().map((c) => {
+    const newPos: Array<Array<CellComponent>> = this.pos.map((r: Array<CellComponent>) => {
+      return r.slice().map((c: CellComponent) => {
         return c.update();
       });
     });

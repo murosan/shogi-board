@@ -33,15 +33,15 @@ export class Kif {
    * @param current 現在局面
    */
   add(target: OneStep, current: OneStep): Kif {
-    const last = this.history[this.history.length - 1];
-    const nextIndex = this.displayIndex + 1;
+    const last: KifComponent = this.history[this.history.length - 1];
+    const nextIndex: number = this.displayIndex + 1;
 
     if (last === current) {
       // 現在局面が最後なら後ろに追加して返す
       return new Kif(this.history.concat(target), nextIndex);
     } else if ((!this.history.includes(current)) && (last instanceof Branch)) {
       // 現在局面が含まれない、かつ最後が分岐
-      const former = this.history.slice(0, this.displayIndex);
+      const former: Array<KifComponent> = this.history.slice(0, this.displayIndex);
       return new Kif(former.concat(last.add(target, current)), this.displayIndex);
     } else {
       // 現在局面が含まれる、かつ最後ではない
@@ -55,7 +55,7 @@ export class Kif {
    * @param nextIndex 
    */
   makeBranch(target: OneStep, nextIndex: number): Kif {
-    const next = this.history[nextIndex];
+    const next: KifComponent = this.history[nextIndex];
     if (!(next instanceof Branch) && next.positions.match(target.positions)) {
       return new Kif(this.history, nextIndex);
     } else {
@@ -76,7 +76,7 @@ export class Kif {
   changeIndex(target: OneStep): Kif {
     const includeTarget: boolean = this.history.includes(target);
     return new Kif(
-      this.history.map((h) => {
+      this.history.map((h: KifComponent) => {
         if (h instanceof Branch) {
           return includeTarget ? h.setEachIndexZero() : h.changeIndex(target);
         } else {
@@ -92,7 +92,7 @@ export class Kif {
    */
   setIndexZero(): Kif {
     return new Kif(
-      this.history.map((h) => {
+      this.history.map((h: KifComponent) => {
         if (h instanceof Branch) { return h.setEachIndexZero(); }
         else { return h; }
       }), 0);

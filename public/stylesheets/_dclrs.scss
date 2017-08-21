@@ -38,7 +38,7 @@ $img-path-c: '../images/components';
 
 @mixin edge($fl) {
 	@include flex-disp($fl);
-	flex-basis: 0;
+	flex-basis: 0%;
 	flex-flow: wrap;
 	justify-content: center;
 	align-items: center;

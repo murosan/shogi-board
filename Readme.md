@@ -4,34 +4,32 @@
 ブラウザで動く将棋検討盤です。  
 駒はルールに則って動きます(王手、詰み判定はありません)。
 
-<img src="https://github.com/murosan/pictures-for-readme/blob/master/shogi-board-ex.png" width="60%;">
+<img src="https://github.com/murosan/pictures-for-readme/blob/master/shogi-board-ex.png" width="75%;">
 
 ## 対応ブラウザ
 
-最新版のGoogle Chrome、Safari(共にPCのみ動作)。  
-今回はCSSでFlexBoxをどうしても使いたかったのでスマホ非対応。スマホで見ると盛大にバグります。おそらく`flex-basis: 0;`が働かないため。  
-いつか対応したいと思っていますが、優先度低め。
+最新版のGoogle Chrome、Safari。PCで見てください。  
 
 ## 開発
 
 - セットアップ
 
-  Node.js v6.11.1 以上が必要です。
+  Node.js v6.11.1 以上が必要です。また、npmに変えてyarnを使用しています。
 
 ```
 $ git clone https://github.com/murosan/shogi-board
 $ cd shogi-board
-$ npm install
-$ npm start
-// npm run start-w で自動化
+$ yarn
+$ yarn start
+// yarn run start-w で自動化
 // localhost:3000にアクセス
 ```
 
 - ビルド
 
 ```
-$ npm run webpack
-// npm run webpack-w で自動化
+$ yarn run webpack
+// yarn run webpack-w で自動化
 ```
 
 - 使用した主なライブラリ

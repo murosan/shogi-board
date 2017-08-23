@@ -18,7 +18,7 @@ $img-path-p: '../images/pieces';
 $img-path-c: '../images/components';
 
 @mixin flex-disp($fl) {
-  flex: $fl;
+  flex: $fl 1 1px;
   display: flex;
 }
 

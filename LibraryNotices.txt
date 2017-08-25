@@ -2,7 +2,7 @@ Notices of Libraries
 
 Table of Contents
 
-  1 TypeScript
+  1 TypeScript(https://github.com/Microsoft/TypeScript)
   2 React(https://github.com/facebook/react)
   3 Webpack(https://github.com/webpack/webpack)
   4 Node-Sass(https://github.com/sass/node-sass)

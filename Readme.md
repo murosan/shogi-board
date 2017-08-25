@@ -37,7 +37,7 @@ $ yarn run webpack
   - [Express](https://github.com/expressjs/express)
   - [TypeScript](https://github.com/Microsoft/TypeScript)
   - [React.js](https://github.com/facebook/react)
-  - [Sass](https://github.com/sass/sass)
+  - [Node-Sass](https://github.com/sass/node-sass)
   - [Webpack](https://github.com/webpack/webpack)
 
 

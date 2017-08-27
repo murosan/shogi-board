@@ -29,6 +29,7 @@ export default class RightSide extends React.Component<RightSideProps, {}> {
           kif={this.props.kif}
           kifClick={this.props.kifClick}
           positions={this.props.positions}
+          inlineKif={this.props.kif.getAsInline()}
         />
       </div>
     );

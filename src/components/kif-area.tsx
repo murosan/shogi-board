@@ -7,7 +7,8 @@ const crypto = require('crypto');
 interface KifAreaProps {
   positions: Positions;
   kif: Kif;
-  kifClick: (oneStep: OneStep) => void
+  kifClick: (oneStep: OneStep) => void;
+  inlineKif: Array<OneStep>;
 }
 
 export default class KifArea extends React.Component<KifAreaProps, { current: OneStep }> {
@@ -17,7 +18,7 @@ export default class KifArea extends React.Component<KifAreaProps, { current: On
         key={crypto.randomBytes(8).toString('hex')}
         onClick={() => this.props.kifClick(o)}
         id={(o === current) ? 'current-kif' : undefined}
-      >{`${o.str}`}</div>
+      >{`[${this.props.inlineKif.indexOf(o) || 0}] ${o.str}`}</div>
     );
   }
 

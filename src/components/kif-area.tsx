@@ -16,7 +16,7 @@ export default class KifArea extends React.Component<KifAreaProps, { current: On
       <div
         key={crypto.randomBytes(8).toString('hex')}
         onClick={() => this.props.kifClick(o)}
-        className={(o === current) ? 'current' : undefined}
+        id={(o === current) ? 'current-kif' : undefined}
       >{`${o.str}`}</div>
     );
   }
@@ -66,5 +66,15 @@ export default class KifArea extends React.Component<KifAreaProps, { current: On
         <div className={'space'}></div>
       </div>
     );
+  }
+
+  componentDidMount(): void {
+    const cur = document.getElementById('current-kif');
+    if (cur) { cur.scrollIntoView(); }
+  }
+
+  componentDidUpdate(): void {
+    const cur = document.getElementById('current-kif');
+    if (cur) { cur.scrollIntoView(); }
   }
 }

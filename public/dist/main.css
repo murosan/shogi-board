@@ -341,7 +341,7 @@
       font-size: 90%;
       color: #517943;
       margin-left: 1.5vw; }
-    .info-area .kif-area .current {
+    .info-area .kif-area #current-kif {
       background-color: rgba(255, 255, 255, 0.75); }
   .info-area .btn-area {
     -webkit-box-flex: 3;

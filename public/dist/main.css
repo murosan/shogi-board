@@ -178,10 +178,11 @@
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
+      overflow: scroll;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
       -ms-flex-preferred-size: 0%;
           flex-basis: 0%;
-      -ms-flex-flow: wrap;
-          flex-flow: wrap;
       -webkit-box-pack: center;
           -ms-flex-pack: center;
               justify-content: center;
@@ -191,8 +192,7 @@
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
           -ms-flex-direction: column;
-              flex-direction: column;
-      overflow: hidden; }
+              flex-direction: column; }
     #board .row-container .edge-horizontal {
       -webkit-box-flex: 3;
           -ms-flex: 3 1 1px;
@@ -200,10 +200,11 @@
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
+      overflow: scroll;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
       -ms-flex-preferred-size: 0%;
           flex-basis: 0%;
-      -ms-flex-flow: wrap;
-          flex-flow: wrap;
       -webkit-box-pack: center;
           -ms-flex-pack: center;
               justify-content: center;
@@ -213,8 +214,7 @@
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
           -ms-flex-direction: column;
-              flex-direction: column;
-      overflow: hidden; }
+              flex-direction: column; }
     #board .row-container .edge-text {
       font-size: 9%; }
 
@@ -287,6 +287,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  overflow: scroll;
   margin-left: .25vw;
   margin-right: .25vw;
   /* 	
@@ -324,19 +325,22 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    padding: .5vw 1vw .5vw 1vw;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    resize: none;
-    overflow: scroll;
-    margin-bottom: .5vw;
+    overflow-x: scroll;
     border-radius: .25vw;
     border: 0.25vw solid #85a478;
-    background-color: rgba(248, 246, 246, 0.64); }
-    .info-area .kif-area div:hover {
-      background-color: rgba(255, 255, 255, 0.75); }
+    background-color: rgba(248, 246, 246, 0.64);
+    margin-bottom: .5vw;
+    padding-top: .5vw; }
+    .info-area .kif-area .kif {
+      white-space: nowrap; }
+      .info-area .kif-area .kif:hover {
+        background-color: rgba(255, 255, 255, 0.75); }
+      .info-area .kif-area .kif span {
+        margin-left: 1vw; }
     .info-area .kif-area .branch {
       font-size: 90%;
       color: #517943;
@@ -437,7 +441,8 @@ h1 {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
-          flex-direction: column; }
+          flex-direction: column;
+  overflow: scroll; }
 
 #right-side-part {
   -webkit-box-flex: 1;
@@ -449,7 +454,8 @@ h1 {
   -webkit-box-orient: vertical;
   -webkit-box-direction: reverse;
       -ms-flex-direction: column-reverse;
-          flex-direction: column-reverse; }
+          flex-direction: column-reverse;
+  overflow: scroll; }
 
 footer {
   color: #9b9b9b;

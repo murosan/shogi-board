@@ -34,11 +34,13 @@ h1 {
 #left-side-part {
 	@include flex-disp(1);
 	flex-direction: column;
+	overflow: scroll;
 }
 
 #right-side-part {
 	@include flex-disp(1);
 	flex-direction: column-reverse;
+	overflow: scroll;
 }
 
 footer {

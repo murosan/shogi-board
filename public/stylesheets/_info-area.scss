@@ -16,6 +16,7 @@
 .info-area {
 	@include flex-disp(2);
 	flex-direction: column;
+	overflow: scroll;
 	margin-left: .25vw;
 	margin-right: .25vw;
 	.space {
@@ -45,17 +46,20 @@
 
 	.kif-area {
 		@include flex-disp(3);
-		padding: .5vw 1vw .5vw 1vw;
 		flex-direction: column;
-		resize: none;
-		overflow: scroll;
-		margin-bottom: .5vw;
+		overflow-x: scroll;
 		border-radius: .25vw;
 		border: .25vw solid $color-gr;
 		background-color: $color-gray;
-		div {
+		margin-bottom: .5vw;
+		padding-top: .5vw;
+		.kif {
+			white-space: nowrap;
 			&:hover {
 				background-color: $color-gray-hv;
+			}
+			span {
+				margin-left: 1vw;
 			}
 		}
 		.branch {

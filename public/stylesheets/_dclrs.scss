@@ -37,11 +37,11 @@ $img-path-c: '../images/components';
 }
 
 @mixin edge($fl) {
-	@include flex-disp($fl);
-	flex-basis: 0%;
-	flex-flow: wrap;
+  @include flex-disp($fl);
+  overflow: scroll;
+  flex-wrap: wrap;
+	flex-basis:  0%;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	overflow: hidden;
 }

@@ -20,8 +20,11 @@ export default class KifArea extends React.Component<KifAreaProps, { current: On
         className={'kif'}
         id={(o === current) ? 'current-kif' : undefined}
       >
+        <span className={'number'}>
+          {`${this.props.inlineKif.indexOf(o) || 0} :`}
+        </span>
         <span>
-          {`[${this.props.inlineKif.indexOf(o) || 0}] ${o.str}`}
+          {`${o.str}`}
         </span>
       </div>
     );
@@ -73,16 +76,16 @@ export default class KifArea extends React.Component<KifAreaProps, { current: On
       </div>
     );
   }
-/* 
-TODO 駒を動かした時に、現在局面の棋譜が枠内に自動スクロールされるように
-  componentDidMount(): void {
-    const cur = document.getElementById('current-kif');
-    if (cur) { cur.scrollIntoView(); }
-  }
-
-  componentDidUpdate(): void {
-    const cur = document.getElementById('current-kif');
-    if (cur) { cur.scrollIntoView(); }
-  }
-   */
+  /* 
+  TODO 駒を動かした時に、現在局面の棋譜が枠内に自動スクロールされるように
+    componentDidMount(): void {
+      const cur = document.getElementById('current-kif');
+      if (cur) { cur.scrollIntoView(); }
+    }
+  
+    componentDidUpdate(): void {
+      const cur = document.getElementById('current-kif');
+      if (cur) { cur.scrollIntoView(); }
+    }
+     */
 }

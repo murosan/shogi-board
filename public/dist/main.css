@@ -339,7 +339,9 @@
       white-space: nowrap; }
       .info-area .kif-area .kif:hover {
         background-color: rgba(255, 255, 255, 0.75); }
-      .info-area .kif-area .kif span {
+      .info-area .kif-area .kif span.number {
+        color: gray;
+        margin-right: 1vw;
         margin-left: 1vw; }
     .info-area .kif-area .branch {
       font-size: 90%;

@@ -58,7 +58,9 @@
 			&:hover {
 				background-color: $color-gray-hv;
 			}
-			span {
+			span.number {
+				color: gray;
+				margin-right: 1vw;
 				margin-left: 1vw;
 			}
 		}

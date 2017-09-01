@@ -16,21 +16,21 @@
 
   Node.js v6.11.1 以上が必要です。また、npmに変えてyarnを使用しています。
 
-```
-$ git clone https://github.com/murosan/shogi-board
-$ cd shogi-board
-$ yarn
-$ yarn start
-// yarn run start-w で自動化
-// localhost:3000にアクセス
-```
+  ```
+  $ git clone https://github.com/murosan/shogi-board
+  $ cd shogi-board
+  $ yarn
+  $ yarn start
+  // yarn run start-w で自動化
+  // localhost:3000にアクセス
+  ```
 
 - ビルド
 
-```
-$ yarn run webpack
-// yarn run webpack-w で自動化
-```
+  ```
+  $ yarn run webpack
+  // yarn run webpack-w で自動化
+  ```
 
 - 使用した主なライブラリ
 

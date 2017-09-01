@@ -28,7 +28,7 @@ export default class Buttons extends React.Component<ButtonsProps, {}> {
           <div className={'btn-row'}>
             <button className={'btn'}
               onClick={() => this.props.changeIndexToEnd('head')}>｜＜＜</button>
-            <button className={'btn'} id={'to-end'}
+            <button className={'btn'}
               onClick={() => this.props.changeIndexToEnd('last')}>＞＞｜</button>
           </div>
           <div className={'btn-row'}>

@@ -45,6 +45,10 @@ export default class Cell extends React.Component<CellProps, {}> {
     const piece = this.props.positions.pos[r][c];
     if ((!rv && r === 8) || (rv && r === 0)) { classNameList.push('cell-bottom'); }
     if ((!rv && c === 8) || (rv && c === 0)) { classNameList.push('cell-right'); }
+    if ((!rv && ((r === 2 && c === 2) || (r === 2 && c === 5) || (r === 5 && c === 2) || (r === 5 && c === 5)))
+      || (rv && ((r === 6 && c === 6) || (r === 6 && c === 3) || (r === 3 && c === 6) || (r === 3 && c === 3)))) {
+      classNameList.push('star');
+    }
 
     return (
       <div className={classNameList.join(' ')}>

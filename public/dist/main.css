@@ -110,8 +110,8 @@
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
-      border-top: 2px solid;
-      border-left: 2px solid; }
+      border-top: .2vw solid;
+      border-left: .2vw solid; }
       #board .row-container .cell:after {
         content: '';
         display: block;
@@ -157,9 +157,20 @@
       #board .row-container .cell .selected {
         background-color: rgba(133, 164, 120, 0.79); }
     #board .row-container .cell-bottom {
-      border-bottom: 2px solid; }
+      border-bottom: .2vw solid; }
     #board .row-container .cell-right {
-      border-right: 2px solid; }
+      border-right: .2vw solid; }
+    #board .row-container .star {
+      position: relative; }
+      #board .row-container .star:before {
+        content: '';
+        position: absolute;
+        right: -.57vw;
+        bottom: -.57vw;
+        height: 1vw;
+        width: 1vw;
+        border-radius: 50%;
+        background-color: black; }
     #board .row-container .corner {
       -webkit-box-flex: 1;
           -ms-flex: 1 1 1px;

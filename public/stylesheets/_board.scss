@@ -9,8 +9,8 @@
 		.cell {
 			@include flex-disp(3);
 			@include aspect(109%);
-			border-top: 2px solid;
-			border-left: 2px solid;
+			border-top: .2vw solid;
+			border-left: .2vw solid;
 			.piece {
 				@include flex-disp(1);
 				@include backgr;
@@ -43,10 +43,23 @@
 			}
 		}
 		.cell-bottom {
-			border-bottom: 2px solid;
+			border-bottom: .2vw solid;
 		}
 		.cell-right {
-			border-right: 2px solid;
+			border-right: .2vw solid;
+		}
+		.star {
+			position: relative;
+			&:before {
+				content: '';
+				position: absolute;
+				right: -.57vw;
+				bottom: -.57vw;
+				height: 1vw;
+				width: 1vw;
+				border-radius: 50%;
+				background-color: black;
+			}
 		}
 		.corner {
 			@include flex-disp(1);

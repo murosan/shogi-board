@@ -10,6 +10,7 @@ import PromotionConfirmObj from './game-handler/promotion-confirm';
 import { Kif, OneStep } from './game-handler/kif';
 import movings from './fn/movings';
 import init from './fn/init';
+const styleAdjuster = require('../public/stylesheets/style');
 
 export type CellComponent = PieceObj | EmpObj | PromotionConfirmObj;
 
@@ -169,6 +170,10 @@ export default class Game extends React.Component<{ init: Positions }, GameState
       </div>
     );
   }
+
+  componentDidMount() {
+    styleAdjuster.adjust();
+  }
 }
 
 // ============================================
@@ -177,4 +182,3 @@ ReactDOM.render(
   <Game init={init()} />,
   document.getElementById('app')
 );
-

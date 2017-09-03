@@ -4,6 +4,7 @@ import { setStyles } from '../fn/cap-styles';
 import Positions from '../game-handler/positions';
 import { CellComponent } from '../game';
 import Captures from '../game-handler/captures';
+const adjuster = require('../../public/stylesheets/style');
 
 export interface CaptureStageProps {
   positions: Positions;
@@ -75,5 +76,13 @@ export default class CaptureStage extends React.Component<CaptureStageProps, {}>
         </div>
       </div>
     );
+  }
+
+  componentDidMount(): void {
+    adjuster.adjustCapPiece();
+  }
+
+  componentDidUpdate(): void {
+    adjuster.adjustCapPiece();
   }
 }

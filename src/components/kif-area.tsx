@@ -3,6 +3,7 @@ import Positions from '../game-handler/positions';
 import { Kif, OneStep, History, KifComponent } from '../game-handler/kif';
 import Branch from '../game-handler/branch';
 const crypto = require('crypto');
+const $ = require('jquery');
 
 interface KifAreaProps {
   positions: Positions;
@@ -76,16 +77,26 @@ export default class KifArea extends React.Component<KifAreaProps, { current: On
       </div>
     );
   }
-  /* 
-  TODO 駒を動かした時に、現在局面の棋譜が枠内に自動スクロールされるように
-    componentDidMount(): void {
-      const cur = document.getElementById('current-kif');
-      if (cur) { cur.scrollIntoView(); }
-    }
-  
-    componentDidUpdate(): void {
-      const cur = document.getElementById('current-kif');
-      if (cur) { cur.scrollIntoView(); }
-    }
-     */
+
+  componentDidMount(): void {
+    const cur = document.getElementById('current-kif');
+    if (cur) { intoView(cur); }
+  }
+
+  componentDidUpdate(): void {
+    const cur = document.getElementById('current-kif');
+    if (cur) { intoView(cur); }
+  }
+}
+
+function intoView(cur: HTMLElement) {
+  const ch = $(cur).height();
+  const ka = $($('.kif-area')[0]);
+  const kh = ka.height();
+  const top = $(cur).offset().top - ka.offset().top;
+  if (top < 0) {
+    ka.scrollTop(top + ka.scrollTop());
+  } else if (top + ch > kh) {
+    ka.scrollTop(top + ch + ka.scrollTop() - kh);
+  }
 }

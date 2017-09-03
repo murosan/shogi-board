@@ -18,7 +18,7 @@ $img-path-p: '../images/pieces';
 $img-path-c: '../images/components';
 
 @mixin flex-disp($fl) {
-  flex: $fl 1 1px;
+  flex: $fl 0 1px;
   display: flex;
 }
 
@@ -38,10 +38,6 @@ $img-path-c: '../images/components';
 
 @mixin edge($fl) {
   @include flex-disp($fl);
-  overflow: scroll;
-  flex-wrap: wrap;
-	flex-basis:  0%;
 	justify-content: center;
 	align-items: center;
-	flex-direction: column;
 }

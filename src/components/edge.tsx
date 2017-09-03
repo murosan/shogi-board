@@ -17,7 +17,7 @@ export class EdgeHor extends React.Component<EdgeProps, {}> {
     if (this.props.row === -1) {
       return (
         <div className={'edge-horizontal'}>
-          <div><div className={'edge-text'}>{colString(this.props.col)}</div></div>
+          <div className={'edge-text'}>{colString(this.props.col)}</div>
         </div>
       );
     } else {

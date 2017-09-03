@@ -8,7 +8,7 @@
 
 ## 対応ブラウザ
 
-最新版のGoogle Chrome、Safari。PCで見てください。  
+最新版のGoogle Chrome、Safari、Firefox。PCで見てください。  
 
 ## 開発
 

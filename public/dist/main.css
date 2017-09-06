@@ -436,7 +436,7 @@ h1 {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  overflow: scroll; }
+  overflow: auto; }
 
 #right-side-part {
   -webkit-box-flex: 1;
@@ -449,7 +449,7 @@ h1 {
   -webkit-box-direction: reverse;
       -ms-flex-direction: column-reverse;
           flex-direction: column-reverse;
-  overflow: scroll; }
+  overflow: auto; }
 
 footer {
   color: #9b9b9b;

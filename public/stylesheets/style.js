@@ -9,12 +9,26 @@ function adjust() {
 
 function browserCheck() {
   const userAgent = window.navigator.userAgent.toLowerCase();
-  if (userAgent.includes('chrome')
-    || userAgent.includes('safari')) {
-    // css supported
+  // true: css supported, false: need to fix height
+  if (userAgent.includes('msie') || userAgent.includes('trident')) {
+    // ie
+    return false;
+  } else if (userAgent.includes('edge')) {
+    // edge
+    return false;
+  } else if (userAgent.includes('chrome')) {
+    // chrome
     return true;
+  } else if (userAgent.includes('safari')) {
+    // safari
+    return true;
+  } else if (userAgent.includes('firefox')) {
+    // firefox
+    return false;
+  } else if (userAgent.includes('opera')) {
+    // opera
+    return false;
   } else {
-    // need to adjust height
     return false;
   }
 }

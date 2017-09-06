@@ -280,7 +280,6 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  overflow: scroll;
   margin-left: .25vw;
   margin-right: .25vw;
   /* 	
@@ -322,7 +321,7 @@
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    overflow-x: scroll;
+    overflow: auto;
     border-radius: .25vw;
     border: 0.25vw solid #85a478;
     background-color: rgba(248, 246, 246, 0.64);

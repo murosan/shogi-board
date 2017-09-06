@@ -16,7 +16,6 @@
 .info-area {
 	@include flex-disp(2);
 	flex-direction: column;
-	overflow: scroll;
 	margin-left: .25vw;
 	margin-right: .25vw;
 	.space {
@@ -47,7 +46,7 @@
 	.kif-area {
 		@include flex-disp(3);
 		flex-direction: column;
-		overflow-x: scroll;
+		overflow: auto;
 		border-radius: .25vw;
 		border: .25vw solid $color-gr;
 		background-color: $color-gray;

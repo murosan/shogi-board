@@ -45,13 +45,16 @@
 
 	.kif-area {
 		@include flex-disp(3);
+		@include overflow;
 		flex-direction: column;
-		overflow: auto;
 		border-radius: .25vw;
 		border: .25vw solid $color-gr;
 		background-color: $color-gray;
 		margin-bottom: .5vw;
 		padding-top: .5vw;
+		&:-webkit-scrollbar {
+			display: none;
+		}
 		.kif {
 			white-space: nowrap;
 			&:hover {

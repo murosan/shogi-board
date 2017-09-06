@@ -34,13 +34,19 @@ h1 {
 #left-side-part {
 	@include flex-disp(1);
 	flex-direction: column;
-	overflow: auto;
+	@include overflow;
+	&:-webkit-scrollbar {
+		display: none;
+	}
 }
 
 #right-side-part {
 	@include flex-disp(1);
 	flex-direction: column-reverse;
-	overflow: auto;
+	@include overflow;
+	&:-webkit-scrollbar {
+		display: none;
+	}
 }
 
 footer {

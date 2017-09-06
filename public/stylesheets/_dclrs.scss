@@ -41,3 +41,8 @@ $img-path-c: '../images/components';
 	justify-content: center;
 	align-items: center;
 }
+
+@mixin overflow() {
+  overflow: auto;
+  -ms-overflow-style: none;
+}

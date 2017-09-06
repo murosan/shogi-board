@@ -1,6 +1,6 @@
 # 将棋 検討盤
 
-動作例 : https://fast-citadel-13484.herokuapp.com/  
+動作例 : https://shogi-board.herokuapp.com/  
 ブラウザで動く将棋検討盤です。  
 駒はルールに則って動きます(王手、詰み判定はありません)。
 

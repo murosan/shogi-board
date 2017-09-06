@@ -27,7 +27,7 @@ function browserCheck() {
     return false;
   } else if (userAgent.includes('opera')) {
     // opera
-    return false;
+    return true;
   } else {
     return false;
   }

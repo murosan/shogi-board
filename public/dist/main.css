@@ -317,16 +317,19 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    overflow: auto;
+    -ms-overflow-style: none;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    overflow: auto;
     border-radius: .25vw;
     border: 0.25vw solid #85a478;
     background-color: rgba(248, 246, 246, 0.64);
     margin-bottom: .5vw;
     padding-top: .5vw; }
+    .info-area .kif-area:-webkit-scrollbar {
+      display: none; }
     .info-area .kif-area .kif {
       white-space: nowrap; }
       .info-area .kif-area .kif:hover {
@@ -436,7 +439,10 @@ h1 {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  overflow: auto; }
+  overflow: auto;
+  -ms-overflow-style: none; }
+  #left-side-part:-webkit-scrollbar {
+    display: none; }
 
 #right-side-part {
   -webkit-box-flex: 1;
@@ -449,7 +455,10 @@ h1 {
   -webkit-box-direction: reverse;
       -ms-flex-direction: column-reverse;
           flex-direction: column-reverse;
-  overflow: auto; }
+  overflow: auto;
+  -ms-overflow-style: none; }
+  #right-side-part:-webkit-scrollbar {
+    display: none; }
 
 footer {
   color: #9b9b9b;

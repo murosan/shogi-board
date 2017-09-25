@@ -45,9 +45,7 @@ export default class Branch {
    */
   incBranch(target: OneStep): Branch {
     const br: Array<Kif> = this.branch.slice();
-    const match: [boolean, number | undefined] = this.hasSamePos(
-      target.positions
-    );
+    const match: [boolean, number | undefined] = this.hasSamePos(target.positions);
     if (match[0]) {
       // targetと同じ局面が分岐にすでにある場合は、displayIndexを更新するのみ
       return new Branch(br, match[1]);
@@ -97,9 +95,7 @@ export default class Branch {
    * @param target 表示したい一手
    */
   changeIndex(target: OneStep): Branch {
-    const headHas: [boolean, number | undefined] = this.hasCurrent(
-      target.positions
-    );
+    const headHas: [boolean, number | undefined] = this.hasCurrent(target.positions);
     if (headHas[0]) {
       return new Branch(
         this.branch.map((k: Kif, i: number) => {

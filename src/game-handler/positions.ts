@@ -57,10 +57,7 @@ export default class Positions {
    * @param target 移動先
    * @param source 移動元
    */
-  move(
-    target: CellComponent,
-    source: PieceObj
-  ): [Positions, string | undefined] {
+  move(target: CellComponent, source: PieceObj): [Positions, string | undefined] {
     const pos: Array<Array<CellComponent>> = this.pos.slice();
     const cap0: Captures = this.cap0;
     const cap1: Captures = this.cap1;
@@ -75,14 +72,7 @@ export default class Positions {
       source_: PieceObj
     ) => {
       kif.push(
-        generateKif(
-          targetRow,
-          targetCol,
-          source_.name,
-          source_.row,
-          source_.col,
-          status
-        )
+        generateKif(targetRow, targetCol, source_.name, source_.row, source_.col, status)
       );
     };
 
@@ -190,16 +180,11 @@ export default class Positions {
   update(): Positions {
     const newPos: Array<
       Array<CellComponent>
-      > = this.pos.map((r: Array<CellComponent>) => {
-        return r.slice().map((c: CellComponent) => {
-          return c.update();
-        });
+    > = this.pos.map((r: Array<CellComponent>) => {
+      return r.slice().map((c: CellComponent) => {
+        return c.update();
       });
-    return new Positions(
-      newPos,
-      this.cap0.update(),
-      this.cap1.update(),
-      this.turn
-    );
+    });
+    return new Positions(newPos, this.cap0.update(), this.cap1.update(), this.turn);
   }
 }

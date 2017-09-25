@@ -17,12 +17,36 @@ export function locationString(r: number, c: number): string {
 }
 
 export function turnOverPieceName(name: string, opt: 'promote' | 'demote'): string {
-  const names = ['歩', '香', '桂', '銀', '金', '角', '飛', '玉',
-    'と', '成香', '成桂', '成銀', '', '馬', '龍', ''];
+  function isOnBoardAndPromoted(index: number): Boolean {
+    return index < 8 && opt === 'promote';
+  }
+
+  function isCaptured(index: number): Boolean {
+    return 8 <= index && opt === 'demote';
+  }
+
+  const names = [
+    '歩',
+    '香',
+    '桂',
+    '銀',
+    '金',
+    '角',
+    '飛',
+    '玉',
+    'と',
+    '成香',
+    '成桂',
+    '成銀',
+    '',
+    '馬',
+    '龍',
+    ''
+  ];
   const index = names.indexOf(name);
-  if (index < 8 && opt === 'promote') {
+  if (isOnBoardAndPromoted(index)) {
     return names[index + 8];
-  } else if (8 <= index && opt === 'demote') {
+  } else if (isCaptured(index)) {
     return names[index - 8];
   } else {
     return names[index];
@@ -30,26 +54,62 @@ export function turnOverPieceName(name: string, opt: 'promote' | 'demote'): stri
 }
 
 export function pieceId(name: string, w: number, isReversed: boolean): string {
-  const whose = isReversed ? (1 - w) : w;
-  if (name === '玉') { return 'gy-' + whose; }
-  if (name === '飛') { return 'hi-' + whose; }
-  if (name === '角') { return 'ka-' + whose; }
-  if (name === '金') { return 'ki-' + whose; }
-  if (name === '銀') { return 'gi-' + whose; }
-  if (name === '桂') { return 'ke-' + whose; }
-  if (name === '香') { return 'ky-' + whose; }
-  if (name === '歩') { return 'fu-' + whose; }
-  if (name === '龍') { return 'ry-' + whose; }
-  if (name === '馬') { return 'um-' + whose; }
-  if (name === '成銀') { return 'ng-' + whose; }
-  if (name === '成桂') { return 'nk-' + whose; }
-  if (name === '成香') { return 'ny-' + whose; }
-  else /* name === 'と' */ { return 'to-' + whose; }
+  const whose = isReversed ? 1 - w : w;
+  if (name === '玉') {
+    return 'gy-' + whose;
+  }
+  if (name === '飛') {
+    return 'hi-' + whose;
+  }
+  if (name === '角') {
+    return 'ka-' + whose;
+  }
+  if (name === '金') {
+    return 'ki-' + whose;
+  }
+  if (name === '銀') {
+    return 'gi-' + whose;
+  }
+  if (name === '桂') {
+    return 'ke-' + whose;
+  }
+  if (name === '香') {
+    return 'ky-' + whose;
+  }
+  if (name === '歩') {
+    return 'fu-' + whose;
+  }
+  if (name === '龍') {
+    return 'ry-' + whose;
+  }
+  if (name === '馬') {
+    return 'um-' + whose;
+  }
+  if (name === '成銀') {
+    return 'ng-' + whose;
+  }
+  if (name === '成桂') {
+    return 'nk-' + whose;
+  }
+  if (name === '成香') {
+    return 'ny-' + whose;
+  }
+  /* name === 'と' */
+  return 'to-' + whose;
 }
 
-export function generateKif(targetRow: number, targetCol: number,
-  name: string, row: number, col: number, status: '' | '成' | '不成' | '打'): string {
+export function generateKif(
+  targetRow: number,
+  targetCol: number,
+  name: string,
+  row: number,
+  col: number,
+  status: '' | '成' | '不成' | '打'
+): string {
   const k = locationString(targetRow, targetCol) + name + status;
-  if (status === '打') { return k; }
-  else { return k + '(' + (9 - col) + (row + 1) + ')' }
+  if (status === '打') {
+    return k;
+  } else {
+    return k + '(' + (9 - col) + (row + 1) + ')';
+  }
 }

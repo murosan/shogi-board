@@ -4,4 +4,4 @@ export default class Emp {
   update() {
     return new Emp();
   }
-};
+}

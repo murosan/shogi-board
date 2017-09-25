@@ -10,13 +10,15 @@ export interface RightSideProps {
   indexes: Array<number>;
   onClick: (t: CellComponent) => void;
   kif: Kif;
-  kifClick: (oneStep: OneStep) => void
+  kifClick: (oneStep: OneStep) => void;
 }
 
 export default class RightSide extends React.Component<RightSideProps, {}> {
   render() {
-    const isReversed = (this.props.indexes[0] === -1) ? false : true;
-    const caps = isReversed ? this.props.positions.cap1 : this.props.positions.cap0;
+    const isReversed = this.props.indexes[0] === -1 ? false : true;
+    const caps = isReversed
+      ? this.props.positions.cap1
+      : this.props.positions.cap0;
     return (
       <div id={'right-side-part'}>
         <CaptureStage

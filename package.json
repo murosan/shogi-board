@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "shogi-board for browser",
   "main": "app.js",
-  "keywords": [
-    "shogi",
-    "board"
-  ],
+  "keywords": ["shogi", "board"],
   "author": "murosan",
   "license": "ISC",
   "scripts": {

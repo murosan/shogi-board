@@ -8,7 +8,7 @@ export interface EdgeProps {
 
 export class Corner extends React.Component<{}, {}> {
   render() {
-    return <div className={'corner'}></div>;
+    return <div className={'corner'} />;
   }
 }
 
@@ -21,7 +21,7 @@ export class EdgeHor extends React.Component<EdgeProps, {}> {
         </div>
       );
     } else {
-      return <div className={'edge-horizontal'}></div>;
+      return <div className={'edge-horizontal'} />;
     }
   }
 }
@@ -35,7 +35,7 @@ export class EdgeVer extends React.Component<EdgeProps, {}> {
         </div>
       );
     } else {
-      return <div className={'edge-vertical'}></div>;
+      return <div className={'edge-vertical'} />;
     }
   }
 }

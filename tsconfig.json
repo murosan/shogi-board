@@ -6,7 +6,7 @@
     "removeComments": true,
     "preserveConstEnums": true,
     "strictNullChecks": true,
-    "noUnusedLocals" : true,
+    "noUnusedLocals": true,
     "alwaysStrict": true,
     "sourceMap": true,
     "pretty": true,
@@ -15,10 +15,6 @@
     "target": "es5",
     "jsx": "react"
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

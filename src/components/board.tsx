@@ -11,7 +11,7 @@ export interface BoardProps {
 
 export default class Board extends React.Component<BoardProps, {}> {
   render() {
-    const board = this.props.indexes.map((r) => {
+    const board = this.props.indexes.map(r => {
       return (
         <RowContainer
           key={'rc:' + r}
@@ -23,6 +23,6 @@ export default class Board extends React.Component<BoardProps, {}> {
       );
     });
 
-    return <div id='board'>{board}</div>;
+    return <div id="board">{board}</div>;
   }
 }

@@ -1,39 +1,41 @@
-@import 'dclrs';
-
 .capture-stage {
-	@include flex-disp(1);
-	@include backgr;
-	border-radius: .5vw;
-	flex-direction: column;
-	.cap-row {
-		@include flex-disp(1);
-		.cap-sep-area {
-			flex: 1;
-			padding-top: .1em;
-			position: relative;
-			.cap-piece {
-				@include backgr;
-				@include aspect(109%);
-				width: 82%;
-				position: absolute;
-				display: inline-block;
-				vertical-align: bottom;
-			}
-			.selected {
-				background-color: $color-gr;
-			}
-		}
-	}
-	.cap-row-1 {
-		flex-direction: row-reverse;
-	}
+  @include flex-disp(1);
+  @include backgr;
+  border-radius: 0.5vw;
+  flex-direction: column;
+
+  .cap-row {
+    @include flex-disp(1);
+
+    .cap-sep-area {
+      flex: 1;
+      padding-top: 0.1em;
+      position: relative;
+
+      .cap-piece {
+        @include backgr;
+        @include aspect(109%);
+        position: absolute;
+        display: inline-block;
+        vertical-align: bottom;
+      }
+
+      .selected {
+        background-color: $color-gr;
+      }
+    }
+  }
+
+  .cap-row-1 {
+    flex-direction: row-reverse;
+  }
 }
 
 .cap-stg-0 {
-	background-image: url($img-path-c + '/cap_stand0.png');
+  background-image: url($img-path-c + '/cap_stand0.png');
 }
 
 .cap-stg-1 {
-	flex-direction: column-reverse;
-	background-image: url($img-path-c + '/cap_stand1.png');
+  flex-direction: column-reverse;
+  background-image: url($img-path-c + '/cap_stand1.png');
 }

@@ -13,6 +13,8 @@ import init from './fn/init';
 const styleAdjuster = require('../public/stylesheets/style');
 
 export type CellComponent = PieceObj | EmpObj | PromotionConfirmObj;
+type SelectedPossibility = PieceObj | PromotionConfirmObj | undefined;
+type TupOfPosKif = [Positions, string | undefined];
 
 interface GameState {
   positions: Positions;
@@ -26,69 +28,97 @@ export default class Game extends React.Component<{ init: Positions }, GameState
     this.state = {
       positions: props.init,
       indexes: [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      kif: new Kif([{ positions: props.init, str: '開始局面' }]),
+      kif: new Kif([{ positions: props.init, str: '開始局面' }])
     };
   }
 
   handleClick(target: CellComponent): void {
-    const selected: PieceObj | PromotionConfirmObj | undefined = this.state.positions.selected;
+    const selected: SelectedPossibility = this.state.positions.selected;
     const positions: Positions = this.state.positions;
     const turn: number = positions.turn;
 
-    const setPos = ((pos: Positions, kif?: Kif) => {
+    function isPiece(cc: CellComponent): cc is PieceObj {
+      return cc instanceof PieceObj;
+    }
+
+    function isPromotionConfirm(cc: CellComponent): cc is PromotionConfirmObj {
+      return cc instanceof PromotionConfirmObj;
+    }
+
+    function isEmp(cc: CellComponent): cc is EmpObj {
+      return cc instanceof EmpObj;
+    }
+
+    function isEmpOrEnemyPiece(cc: CellComponent): cc is EmpObj | PieceObj {
+      return isEmp(cc) || (isPiece(cc) && cc.whose !== turn);
+    }
+
+    function isPieceAndMine(cc: CellComponent): cc is PieceObj {
+      return isPiece(target) && target.whose === turn;
+    }
+
+    function setCanMoveTo(target: PieceObj) {
+      target.canMoveTo = movings({ pieceObj: target, positions: positions });
+    }
+
+    const setPos = (pos: Positions, kif?: Kif) => {
       this.setState({
         positions: pos,
-        kif: kif ? kif : this.state.kif,
+        kif: kif ? kif : this.state.kif
       });
-    });
+    };
 
-    const move = ((target: CellComponent, source: PieceObj) => {
-      const moved: [Positions, string | undefined] = positions.move(target, source);
+    const move = (target: CellComponent, source: PieceObj) => {
+      const moved: TupOfPosKif = positions.move(target, source);
       const pos: Positions = moved[0];
       const kifStr: string = moved[1] || '';
-      const kif = pos.selected ? undefined :
-        this.state.kif.add({ positions: pos, str: kifStr }, this.state.kif.getCurrent());
+      const kif = pos.selected
+        ? undefined
+        : this.state.kif.add({ positions: pos, str: kifStr }, this.state.kif.getCurrent());
       setPos(pos, kif);
-    });
+    };
 
-    const notSelected = (() => {
-      if ((target instanceof PieceObj) && (target.whose === turn)) {
-        // targetが駒かつ、手番側の駒
-        target.canMoveTo = movings({ pieceObj: target, positions: positions });
-        setPos(positions.select(target));
+    function setSelectedToPos(target: PieceObj) {
+      const selected = positions.select(target);
+      setCanMoveTo(target);
+      setPos(selected);
+    }
+
+    function select(target: CellComponent) {
+      if (isPieceAndMine(target)) {
+        setSelectedToPos(target);
       }
-    });
+    }
 
-    const selectedIsPiece = ((selected: PieceObj) => {
-      if ((target instanceof EmpObj) || ((target instanceof PieceObj) && (target.whose !== turn))) {
-        // targetが空ます、または、手番ではない側の駒
-        if (selected.canMove(target)) { move(target, selected); }
-      } else if (target instanceof PieceObj) {
-        // targetが手番側の駒
-        targetIsMine(target);
+    function moveIfCanMove(selected: PieceObj, target: PieceObj | EmpObj) {
+      if (selected.canMove(target)) {
+        move(target, selected);
       }
-    });
+    }
 
-    const targetIsMine = ((target: PieceObj) => {
+    function moveOrChangeSelected(selected: PieceObj, target: CellComponent) {
+      if (isEmpOrEnemyPiece(target)) {
+        moveIfCanMove(selected, target);
+      } else if (isPiece(target)) {
+        toggleOrChangeSelected(selected, target);
+      }
+    }
+
+    function toggleOrChangeSelected(selected: PieceObj, target: PieceObj) {
       if (target === selected) {
-        // 同じ駒をクリックしたら選択状態を解除
-        setPos(positions.update());
+        const noSelectedPos = positions.update();
+        setPos(noSelectedPos);
       } else {
-        // 違う駒をクリックしたら選択状態にする
-        target.canMoveTo = movings({ pieceObj: target, positions: positions });
-        setPos(positions.select(target));
+        setSelectedToPos(target);
       }
-    });
+    }
 
     if (!selected) {
-      // 選択されたものがないとき
-      notSelected();
-    } else if ((selected instanceof PromotionConfirmObj) && (target instanceof PieceObj)) {
-      // 成/不成の選択がされたとき(selected: PromotionConfirm, target: PieceObj)
+      select(target);
+    } else if (isPromotionConfirm(selected) && isPiece(target)) {
       move(selected, target);
-    } else if (selected instanceof PieceObj) {
-      // 選択されたものが駒のとき
-      selectedIsPiece(selected);
+    } else if (isPiece(selected)) {
+      moveOrChangeSelected(selected, target);
     }
   }
 
@@ -96,7 +126,7 @@ export default class Game extends React.Component<{ init: Positions }, GameState
     const kif: Kif = this.state.kif.changeIndex(target);
     this.setState({
       positions: kif.getCurrent().positions,
-      kif: kif,
+      kif: kif
     });
   }
 
@@ -113,12 +143,9 @@ export default class Game extends React.Component<{ init: Positions }, GameState
   }
 
   changeKifIndexToEnd(st: 'head' | 'last') {
-    const inline: Array<OneStep> = this.state.kif.getAsInline();
-    if (st === 'head') {
-      this.changeKifIndexByTarget(inline[0]);
-    } else {
-      this.changeKifIndexByTarget(inline[inline.length - 1]);
-    }
+    const inlineKif: Array<OneStep> = this.state.kif.getAsInline();
+    const index = st === 'head' ? 0 : inlineKif.length - 1;
+    this.changeKifIndexByTarget(inlineKif[index]);
   }
 
   upsideDown(): void {
@@ -128,13 +155,22 @@ export default class Game extends React.Component<{ init: Positions }, GameState
   }
 
   copyKif(): void {
-    const inline: Array<OneStep> = this.state.kif.getAsInline();
-    const kifStr: Array<string> = [];
-    inline.forEach((e: OneStep, i: number) => {
-      if (i !== 0) { kifStr.push(i + ' ' + e.str); }
-    });
+    function extractKifString(oneStep: OneStep, index: number) {
+      return index + ' ' + oneStep.str;
+    }
+
+    function removeHead(kifStr: string, index: number) {
+      if (index !== 0) {
+        return kifStr;
+      }
+    }
+
+    const inlineKif: Array<OneStep> = this.state.kif.getAsInline();
+    const kifStr: Array<string> = inlineKif.map(extractKifString).filter(removeHead);
     const tarea = document.createElement('textarea');
     tarea.value = kifStr.join('\n');
+    tarea.style.width = '1px';
+    tarea.style.height = '1px';
     document.body.appendChild(tarea);
     tarea.select();
     document.execCommand('copy');
@@ -144,28 +180,32 @@ export default class Game extends React.Component<{ init: Positions }, GameState
   render() {
     const positions: Positions = this.state.positions;
     const indexes: Array<number> = this.state.indexes;
+    const clickHandlers = {
+      handleClick: (t: CellComponent) => this.handleClick(t),
+      changeIndexByDiff: (diff: number) => this.changeKifIndexByDiff(diff),
+      changeIndexToEnd: (st: 'head' | 'last') => this.changeKifIndexToEnd(st),
+      changeKifIndexByTarget: (om: OneStep) => this.changeKifIndexByTarget(om),
+      upsideDown: () => this.upsideDown(),
+      copyKif: () => this.copyKif()
+    };
     return (
-      <div id='play-area'>
+      <div id="play-area">
         <LeftSide
           positions={positions}
           indexes={indexes}
-          onClick={(t: CellComponent) => this.handleClick(t)}
-          upsideDown={() => this.upsideDown()}
-          changeIndexByDiff={(diff: number) => this.changeKifIndexByDiff(diff)}
-          changeIndexToEnd={(st: 'head' | 'last') => this.changeKifIndexToEnd(st)}
-          copyKif={() => this.copyKif()}
+          onClick={clickHandlers.handleClick}
+          upsideDown={clickHandlers.upsideDown}
+          changeIndexByDiff={clickHandlers.changeIndexByDiff}
+          changeIndexToEnd={clickHandlers.changeIndexToEnd}
+          copyKif={clickHandlers.copyKif}
         />
-        <Board
-          positions={positions}
-          indexes={indexes}
-          onClick={(t: CellComponent) => this.handleClick(t)}
-        />
+        <Board positions={positions} indexes={indexes} onClick={clickHandlers.handleClick} />
         <RightSide
           positions={positions}
           indexes={indexes}
-          onClick={(t: CellComponent) => this.handleClick(t)}
+          onClick={clickHandlers.handleClick}
           kif={this.state.kif}
-          kifClick={(om: OneStep) => this.changeKifIndexByTarget(om)}
+          kifClick={clickHandlers.changeKifIndexByTarget}
         />
       </div>
     );
@@ -178,7 +218,4 @@ export default class Game extends React.Component<{ init: Positions }, GameState
 
 // ============================================
 
-ReactDOM.render(
-  <Game init={init()} />,
-  document.getElementById('app')
-);
+ReactDOM.render(<Game init={init()} />, document.getElementById('app'));

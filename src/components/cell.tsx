@@ -19,16 +19,19 @@ export default class Cell extends React.Component<CellProps, {}> {
     if (p instanceof EmpObj) {
       return <EmpElm onClick={() => this.props.onClick(p)} />;
     } else if (p instanceof PromotionConfirmObj) {
-      return <PromotionConfirmElm
-        pcObj={p}
-        onClick={(p: CellComponent) => this.props.onClick(p)}
-      />;
+      return (
+        <PromotionConfirmElm
+          pcObj={p}
+          onClick={(p: CellComponent) => this.props.onClick(p)}
+        />
+      );
     } else {
       return (
         <PieceElm
           piece={p}
           row={this.props.row}
           col={this.props.col}
+          classStr={'piece'}
           positions={this.props.positions}
           isReversed={this.props.isReversed}
           onClick={() => this.props.onClick(p)}
@@ -43,17 +46,29 @@ export default class Cell extends React.Component<CellProps, {}> {
     const c = this.props.col;
     const rv = this.props.isReversed;
     const piece = this.props.positions.pos[r][c];
-    if ((!rv && r === 8) || (rv && r === 0)) { classNameList.push('cell-bottom'); }
-    if ((!rv && c === 8) || (rv && c === 0)) { classNameList.push('cell-right'); }
-    if ((!rv && ((r === 2 && c === 2) || (r === 2 && c === 5) || (r === 5 && c === 2) || (r === 5 && c === 5)))
-      || (rv && ((r === 6 && c === 6) || (r === 6 && c === 3) || (r === 3 && c === 6) || (r === 3 && c === 3)))) {
+    if ((!rv && r === 8) || (rv && r === 0)) {
+      classNameList.push('cell-bottom');
+    }
+    if ((!rv && c === 8) || (rv && c === 0)) {
+      classNameList.push('cell-right');
+    }
+    if (
+      (!rv &&
+        ((r === 2 && c === 2) ||
+          (r === 2 && c === 5) ||
+          (r === 5 && c === 2) ||
+          (r === 5 && c === 5))) ||
+      (rv &&
+        ((r === 6 && c === 6) ||
+          (r === 6 && c === 3) ||
+          (r === 3 && c === 6) ||
+          (r === 3 && c === 3)))
+    ) {
       classNameList.push('star');
     }
 
     return (
-      <div className={classNameList.join(' ')}>
-        {this.renderChild(piece)}
-      </div>
+      <div className={classNameList.join(' ')}>{this.renderChild(piece)}</div>
     );
   }
 }

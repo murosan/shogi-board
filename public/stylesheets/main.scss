@@ -1,16 +1,17 @@
 @import 'dclrs';
 @import 'pieces';
 @import 'board';
+@import 'capture-piece';
 @import 'capture-stage';
 @import 'info-area';
 
 body {
-	margin: 0;
+  margin: 0;
 }
 
 h1 {
   color: $color-title;
-	background: linear-gradient(to right, $color-gradi-start, $color-gradi-end, $color-gradi-start);
+  background: linear-gradient(to right, $color-gradi-start, $color-gradi-end, $color-gradi-start);
   text-align: center;
   padding: 0;
   margin: 0;
@@ -23,38 +24,40 @@ h1 {
 }
 
 #play-area {
-	@include flex-disp(1);
-	@include backgr;
-	padding: 1em;
-	min-width: 550px; 
-	// background-repeat: repeat;
-	background-image: url($img-path-c + '/tatami.jpg');
+  @include flex-disp(1);
+  @include backgr;
+  padding: 1em;
+  min-width: 550px;
+  // background-repeat: repeat;
+  background-image: url($img-path-c + '/tatami.jpg');
 }
 
 #left-side-part {
-	@include flex-disp(1);
-	flex-direction: column;
-	@include overflow;
-	&:-webkit-scrollbar {
-		display: none;
-	}
+  @include flex-disp(1);
+  flex-direction: column;
+  @include overflow;
+
+  &:-webkit-scrollbar {
+    display: none;
+  }
 }
 
 #right-side-part {
-	@include flex-disp(1);
-	flex-direction: column-reverse;
-	@include overflow;
-	&:-webkit-scrollbar {
-		display: none;
-	}
+  @include flex-disp(1);
+  flex-direction: column-reverse;
+  @include overflow;
+
+  &:-webkit-scrollbar {
+    display: none;
+  }
 }
 
 footer {
-	color: $color-title;
-	text-align: center;
-	margin: .5vw;
+  color: $color-title;
+  text-align: center;
+  margin: .5vw;
 }
 
 a {
-	color: $color-title;
+  color: $color-title;
 }

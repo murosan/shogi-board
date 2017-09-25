@@ -11,7 +11,10 @@ export interface RowContainerProps {
   onClick: (t: CellComponent) => void;
 }
 
-export default class RowContainer extends React.Component<RowContainerProps, {}> {
+export default class RowContainer extends React.Component<
+  RowContainerProps,
+  {}
+> {
   render() {
     const r = this.props.row;
     const rowIsEdge = r === -1 || r === 9;
@@ -27,7 +30,8 @@ export default class RowContainer extends React.Component<RowContainerProps, {}>
         return (
           <Cell
             key={'ce:' + r + c}
-            row={r} col={c}
+            row={r}
+            col={c}
             positions={this.props.positions}
             isReversed={this.props.indexes[0] === -1 ? false : true}
             onClick={this.props.onClick}
@@ -36,6 +40,6 @@ export default class RowContainer extends React.Component<RowContainerProps, {}>
       }
     });
 
-    return <div className='row-container'>{rc}</div>
+    return <div className="row-container">{rc}</div>;
   }
 }

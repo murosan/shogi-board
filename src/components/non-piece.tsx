@@ -9,12 +9,7 @@ interface PCProps {
 
 export class EmpElm extends React.Component<{ onClick: () => void }, {}> {
   render() {
-    return (
-      <div
-        className={'piece'}
-        onClick={this.props.onClick}
-      ></div>
-    );
+    return <div className={'piece'} onClick={this.props.onClick} />;
   }
 }
 
@@ -22,8 +17,12 @@ export class PromotionConfirmElm extends React.Component<PCProps, {}> {
   render() {
     return (
       <div className={'piece'}>
-        <Promote onClick={() => this.props.onClick(this.props.pcObj.promoted)} />
-        <NotPromote onClick={() => this.props.onClick(this.props.pcObj.moved)} />
+        <Promote
+          onClick={() => this.props.onClick(this.props.pcObj.promoted)}
+        />
+        <NotPromote
+          onClick={() => this.props.onClick(this.props.pcObj.moved)}
+        />
       </div>
     );
   }
@@ -36,7 +35,7 @@ class Promote extends React.Component<{ onClick: () => void }, {}> {
         id={'cbtn-promote'}
         className={'confirm-button'}
         onClick={this.props.onClick}
-      ></div>
+      />
     );
   }
 }
@@ -48,7 +47,7 @@ class NotPromote extends React.Component<{ onClick: () => void }, {}> {
         id={'cbtn-not-promote'}
         className={'confirm-button'}
         onClick={this.props.onClick}
-      ></div>
+      />
     );
   }
 }

@@ -12,42 +12,47 @@ interface KifAreaProps {
   inlineKif: Array<OneStep>;
 }
 
-export default class KifArea extends React.Component<KifAreaProps, { current: OneStep }> {
+export default class KifArea extends React.Component<
+  KifAreaProps,
+  { current: OneStep }
+> {
   renderOneStep(o: OneStep, current: OneStep): JSX.Element {
     return (
       <div
         key={crypto.randomBytes(8).toString('hex')}
         onClick={() => this.props.kifClick(o)}
         className={'kif'}
-        id={(o === current) ? 'current-kif' : undefined}
+        id={o === current ? 'current-kif' : undefined}
       >
         <span className={'number'}>
           {`${this.props.inlineKif.indexOf(o) || 0} :`}
         </span>
-        <span>
-          {`${o.str}`}
-        </span>
+        <span>{`${o.str}`}</span>
       </div>
     );
   }
 
   renderHead(kif: Kif, current: OneStep): JSX.Element {
     const head: KifComponent = kif.history[0];
-    return (head instanceof Branch) ? <div key={crypto.randomBytes(8).toString('hex')}></div> :
-      this.renderOneStep(head, current);
+    return head instanceof Branch ? (
+      <div key={crypto.randomBytes(8).toString('hex')} />
+    ) : (
+      this.renderOneStep(head, current)
+    );
   }
 
   renderRest(kifArr: Array<Kif>, branch: Branch): Array<JSX.Element> {
     return kifArr.map((k: Kif, i: number) => {
       const head = k.history[0];
-      return (head instanceof Branch) ? <div key={crypto.randomBytes(8).toString('hex')}></div> :
-        (
-          <div
-            key={crypto.randomBytes(8).toString('hex')}
-            className={'branch'}
-            onClick={() => this.props.kifClick(head)}
-          >{`-- ${head.str}`}</div>
-        );
+      return head instanceof Branch ? (
+        <div key={crypto.randomBytes(8).toString('hex')} />
+      ) : (
+        <div
+          key={crypto.randomBytes(8).toString('hex')}
+          className={'branch'}
+          onClick={() => this.props.kifClick(head)}
+        >{`-- ${head.str}`}</div>
+      );
     });
   }
 
@@ -61,8 +66,11 @@ export default class KifArea extends React.Component<KifAreaProps, { current: On
 
   renderKif(history: History, current: OneStep): Array<JSX.Element> {
     const history_ = history.map((k: KifComponent) => {
-      if (k instanceof Branch) { return this.renderBranch(k, current); }
-      else { return this.renderOneStep(k, current); }
+      if (k instanceof Branch) {
+        return this.renderBranch(k, current);
+      } else {
+        return this.renderOneStep(k, current);
+      }
     });
     return Array.prototype.concat.apply([], history_);
   }
@@ -73,19 +81,23 @@ export default class KifArea extends React.Component<KifAreaProps, { current: On
         <div className={'kif-area'}>
           {this.renderKif(this.props.kif.history, this.props.kif.getCurrent())}
         </div>
-        <div className={'space'}></div>
+        <div className={'space'} />
       </div>
     );
   }
 
   componentDidMount(): void {
     const cur = document.getElementById('current-kif');
-    if (cur) { intoView(cur); }
+    if (cur) {
+      intoView(cur);
+    }
   }
 
   componentDidUpdate(): void {
     const cur = document.getElementById('current-kif');
-    if (cur) { intoView(cur); }
+    if (cur) {
+      intoView(cur);
+    }
   }
 }
 

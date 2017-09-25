@@ -7,20 +7,22 @@ export default class Captures {
   captures: Map<string, Array<PieceObj>>;
   constructor(whose: number, init?: Map<string, Array<PieceObj>>) {
     this.whose = whose;
-    this.captures = init || new Map([
-      ['飛', []],
-      ['角', []],
-      ['金', []],
-      ['銀', []],
-      ['桂', []],
-      ['香', []],
-      ['歩', []]
-    ]);
+    this.captures =
+      init ||
+      new Map([
+        ['飛', []],
+        ['角', []],
+        ['金', []],
+        ['銀', []],
+        ['桂', []],
+        ['香', []],
+        ['歩', []]
+      ]);
   }
 
   nonEmpty(): boolean {
     const capsArr = Array.from(this.captures);
-    return capsArr.every((e) => {
+    return capsArr.every(e => {
       const v: Array<PieceObj> = e[1];
       return v && 0 < v.length;
     });
@@ -33,7 +35,7 @@ export default class Captures {
   inc(pieceObj: PieceObj): Captures {
     const name = pieceObj.name;
     const capsArr: Array<KeyVal> = Array.from(this.captures);
-    const caps = capsArr.map((sep) => {
+    const caps = capsArr.map(sep => {
       const key: string = sep[0];
       const value: Array<PieceObj> = sep[1].map((p: PieceObj) => {
         return p.update();
@@ -49,7 +51,7 @@ export default class Captures {
   dec(pieceObj: PieceObj): Captures {
     const name = pieceObj.name;
     const capsArr: Array<KeyVal> = Array.from(this.captures);
-    const caps = capsArr.map((sep) => {
+    const caps = capsArr.map(sep => {
       const index = sep[1].indexOf(pieceObj);
       const key: string = sep[0];
       const value: Array<PieceObj> = sep[1].map((p: PieceObj) => {
@@ -65,7 +67,7 @@ export default class Captures {
 
   update() {
     const capsArr: Array<KeyVal> = Array.from(this.captures);
-    const caps = capsArr.map((sep) => {
+    const caps = capsArr.map(sep => {
       const key: string = sep[0];
       const value: Array<PieceObj> = sep[1].map((p: PieceObj) => {
         return p.update();
@@ -80,9 +82,9 @@ export default class Captures {
     const cB = Array.from(this.captures);
     const matchCap = cA.every((kvA: KeyVal, i: number) => {
       const kvB = cB[i];
-      return (kvA[0] === kvB[0]) && (kvA[1].length === kvB[1].length);
+      return kvA[0] === kvB[0] && kvA[1].length === kvB[1].length;
     });
 
-    return (c.whose === this.whose) && matchCap;
+    return c.whose === this.whose && matchCap;
   }
 }

@@ -39,10 +39,16 @@ export class Kif {
     if (last === current) {
       // 現在局面が最後なら後ろに追加して返す
       return new Kif(this.history.concat(target), nextIndex);
-    } else if ((!this.history.includes(current)) && (last instanceof Branch)) {
+    } else if (!this.history.includes(current) && last instanceof Branch) {
       // 現在局面が含まれない、かつ最後が分岐
-      const former: Array<KifComponent> = this.history.slice(0, this.displayIndex);
-      return new Kif(former.concat(last.add(target, current)), this.displayIndex);
+      const former: Array<KifComponent> = this.history.slice(
+        0,
+        this.displayIndex
+      );
+      return new Kif(
+        former.concat(last.add(target, current)),
+        this.displayIndex
+      );
     } else {
       // 現在局面が含まれる、かつ最後ではない
       return this.makeBranch(target, nextIndex);
@@ -61,10 +67,12 @@ export class Kif {
     } else {
       // nextが分岐ならそのままincBranch、違ったら分岐作成
       const former: Array<KifComponent> = this.history.slice(0, nextIndex);
-      const br: Branch = (next instanceof Branch) ? next.incBranch(target) :
-        new Branch(
-          [new Kif(this.history.slice(nextIndex, this.history.length))]
-        ).incBranch(target);
+      const br: Branch =
+        next instanceof Branch
+          ? next.incBranch(target)
+          : new Branch([
+              new Kif(this.history.slice(nextIndex, this.history.length))
+            ]).incBranch(target);
       return new Kif(former.concat(br), nextIndex);
     }
   }
@@ -83,7 +91,7 @@ export class Kif {
           return h;
         }
       }),
-      (includeTarget ? this.history.indexOf(target) : (this.history.length - 1))
+      includeTarget ? this.history.indexOf(target) : this.history.length - 1
     );
   }
 
@@ -93,9 +101,14 @@ export class Kif {
   setIndexZero(): Kif {
     return new Kif(
       this.history.map((h: KifComponent) => {
-        if (h instanceof Branch) { return h.setEachIndexZero(); }
-        else { return h; }
-      }), 0);
+        if (h instanceof Branch) {
+          return h.setEachIndexZero();
+        } else {
+          return h;
+        }
+      }),
+      0
+    );
   }
 
   /**
@@ -103,18 +116,25 @@ export class Kif {
    */
   getCurrent(): OneStep {
     const cur: KifComponent = this.history[this.displayIndex];
-    if (cur instanceof Branch) { return cur.getCurrent(); }
-    else { return cur; }
+    if (cur instanceof Branch) {
+      return cur.getCurrent();
+    } else {
+      return cur;
+    }
   }
 
   /**
    * 分岐のない棋譜を配列で返す
    */
   getAsInline(): Array<OneStep> {
-    return Array.prototype.concat.apply([],
+    return Array.prototype.concat.apply(
+      [],
       this.history.map((kc: KifComponent) => {
-        if (kc instanceof Branch) { return kc.getAsInline(); }
-        else { return kc; }
+        if (kc instanceof Branch) {
+          return kc.getAsInline();
+        } else {
+          return kc;
+        }
       })
     );
   }

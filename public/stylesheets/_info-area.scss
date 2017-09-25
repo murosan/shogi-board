@@ -1,27 +1,26 @@
-@import 'dclrs';
-
 @mixin button {
-	margin: 0;
-	flex: 1;
-	display: inline-block;
-	font-size: 1.7vw;
-	text-align: center;
-	font-family: arial, sans-serif;
-	border: 1px solid $color-gr;
-	background-color: white;
-	border-radius: .25vw;
-	outline: 0;
+  margin: 0;
+  flex: 1;
+  display: inline-block;
+  font-size: 1.7vw;
+  text-align: center;
+  font-family: arial, sans-serif;
+  border: 1px solid $color-gr;
+  background-color: white;
+  border-radius: 0.25vw;
+  outline: 0;
 }
 
 .info-area {
-	@include flex-disp(2);
-	flex-direction: column;
-	margin-left: .25vw;
-	margin-right: .25vw;
-	.space {
-		@include flex-disp(1);
-	}
-/* 	
+  @include flex-disp(2);
+  flex-direction: column;
+  margin-left: 0.25vw;
+  margin-right: 0.25vw;
+
+  .space {
+    @include flex-disp(1);
+  }
+  /*
 		.player-info {
 		@include flex-disp(1);
 		border-radius: .25vw;
@@ -40,63 +39,74 @@
 				word-break: break-all;
 			}
 		}
-	} 
+	}
 */
 
-	.kif-area {
-		@include flex-disp(3);
-		@include overflow;
-		flex-direction: column;
-		border-radius: .25vw;
-		border: .25vw solid $color-gr;
-		background-color: $color-gray;
-		margin-bottom: .5vw;
-		padding-top: .5vw;
-		&:-webkit-scrollbar {
-			display: none;
-		}
-		.kif {
-			white-space: nowrap;
-			&:hover {
-				background-color: $color-gray-hv;
-			}
-			span.number {
-				color: gray;
-				margin-right: 1vw;
-				margin-left: 1vw;
-			}
-		}
-		.branch {
-			font-size: 90%;
-			color: $color-branch;
-			margin-left: 3vw;
-		}
-		#current-kif {
-			background-color: $color-gray-hv;
-		}
-	}
-	
-	.btn-area {
-		@include flex-disp(3);
-		flex-direction: column;
-		margin-top: .5vw;
-		resize: none;
-		.btn-row {
-			@include flex-disp(1);
-			.btn {
-				@include button;
-				&:hover {
-					background-color: $color-gr-hv;
-				}
-				&:active{
-					background-color: $color-gr-ac;
-				}
-			}
-			.btn-inactive {
-				@include button;
-				color: $color-bl;
-				background-color: $color-gray;
-			}
-		}
-	}
+  .kif-area {
+    @include flex-disp(3);
+    @include overflow;
+    flex-direction: column;
+    border-radius: 0.25vw;
+    border: 0.25vw solid $color-gr;
+    background-color: $color-gray;
+    margin-bottom: 0.5vw;
+    padding-top: 0.5vw;
+
+    &:-webkit-scrollbar {
+      display: none;
+    }
+
+    .kif {
+      white-space: nowrap;
+
+      &:hover {
+        background-color: $color-gray-hv;
+      }
+
+      span.number {
+        color: gray;
+        margin-right: 1vw;
+        margin-left: 1vw;
+      }
+    }
+
+    .branch {
+      font-size: 90%;
+      color: $color-branch;
+      margin-left: 3vw;
+    }
+
+    #current-kif {
+      background-color: $color-gray-hv;
+    }
+  }
+
+  .btn-area {
+    @include flex-disp(3);
+    flex-direction: column;
+    margin-top: 0.5vw;
+    resize: none;
+
+    .btn-row {
+      @include flex-disp(1);
+
+      .btn {
+        @include button;
+
+        &:hover {
+          background-color: $color-gr-hv;
+        }
+
+        &:active {
+          background-color: $color-gr-ac;
+        }
+      }
+
+      .btn-inactive {
+        @include button;
+        color: $color-bl;
+        background-color: $color-gray;
+      }
+    }
+  }
 }

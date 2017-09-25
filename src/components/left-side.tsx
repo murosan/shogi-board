@@ -16,8 +16,10 @@ export interface LeftSideProps {
 
 export default class LeftSide extends React.Component<LeftSideProps, {}> {
   render() {
-    const isReversed = (this.props.indexes[0] === -1) ? false : true;
-    const caps = isReversed ? this.props.positions.cap0 : this.props.positions.cap1;
+    const isReversed = this.props.indexes[0] === -1 ? false : true;
+    const caps = isReversed
+      ? this.props.positions.cap0
+      : this.props.positions.cap1;
     return (
       <div id={'left-side-part'}>
         <CaptureStage

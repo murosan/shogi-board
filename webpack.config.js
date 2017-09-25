@@ -24,7 +24,8 @@ module.exports = [
         { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
       ]
     }
-  }, {
+  },
+  {
     entry: {
       main: __dirname + '/public/stylesheets/main.scss'
     },
@@ -46,17 +47,16 @@ module.exports = [
                   plugins: [require('autoprefixer')]
                 }
               },
-              { loader: 'sass-loader' },
-            ],
+              { loader: 'sass-loader' }
+            ]
           })
-        }, {
+        },
+        {
           test: /\.(png|jpg)$/,
           use: [{ loader: 'url-loader' }]
         }
       ]
     },
-    plugins: [
-      extractSass
-    ]
+    plugins: [extractSass]
   }
 ];

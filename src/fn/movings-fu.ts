@@ -31,7 +31,9 @@ function notDuplicated(col: number, props: PosTurn): boolean {
       return true;
     } else {
       const target: PorE | PromotionConfirmObj = pos[row][col];
-      if ((target instanceof PieceObj) ? (target.name === '歩' && target.whose === turn) : false) {
+      if (
+        target instanceof PieceObj ? target.name === '歩' && target.whose === turn : false
+      ) {
         return false;
       } else {
         return rowRec(row + 1);
@@ -52,7 +54,10 @@ function movCapture(props: PosTurn): Array<EmpObj> {
         return movs_;
       } else {
         const target: PorE | PromotionConfirmObj = pos[row][col];
-        if ((target instanceof EmpObj) && ((turn === 0 && row !== 0) || (turn === 1 && row !== 8))) {
+        if (
+          target instanceof EmpObj &&
+          ((turn === 0 && row !== 0) || (turn === 1 && row !== 8))
+        ) {
           movs_.push(target);
         }
         return rowRec(row + 1, movs_);
@@ -78,11 +83,14 @@ function movOnBoard(props: PosTurn, pieceObj: PieceObj): Array<PorE> {
   const row = pieceObj.row;
   const col = pieceObj.col;
   const movs = [];
-  const targetRow = (turn === 0) ? (row - 1) : (row + 1);
+  const targetRow = turn === 0 ? row - 1 : row + 1;
 
-  if ((turn === 0) ? (0 <= targetRow) : (targetRow <= 8)) {
+  if (turn === 0 ? 0 <= targetRow : targetRow <= 8) {
     const target = pos[targetRow][col];
-    if (target instanceof EmpObj || (target instanceof PieceObj && (target.whose !== turn))) {
+    if (
+      target instanceof EmpObj ||
+      (target instanceof PieceObj && target.whose !== turn)
+    ) {
       movs.push(target);
     }
   }

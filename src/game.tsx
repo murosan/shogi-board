@@ -8,6 +8,7 @@ import PieceObj from './game-handler/piece';
 import EmpObj from './game-handler/emp';
 import PromotionConfirmObj from './game-handler/promotion-confirm';
 import { Kif, OneStep } from './game-handler/kif';
+import { isPiece, isEmp, isPromotionConfirm } from './fn/type-checker';
 import movings from './fn/movings';
 import init from './fn/init';
 const styleAdjuster = require('../public/stylesheets/style');
@@ -37,18 +38,6 @@ export default class Game extends React.Component<{ init: Positions }, GameState
     const positions: Positions = this.state.positions;
     const turn: number = positions.turn;
 
-    function isPiece(cc: CellComponent): cc is PieceObj {
-      return cc instanceof PieceObj;
-    }
-
-    function isPromotionConfirm(cc: CellComponent): cc is PromotionConfirmObj {
-      return cc instanceof PromotionConfirmObj;
-    }
-
-    function isEmp(cc: CellComponent): cc is EmpObj {
-      return cc instanceof EmpObj;
-    }
-
     function isEmpOrEnemyPiece(cc: CellComponent): cc is EmpObj | PieceObj {
       return isEmp(cc) || (isPiece(cc) && cc.whose !== turn);
     }
@@ -74,7 +63,10 @@ export default class Game extends React.Component<{ init: Positions }, GameState
       const kifStr: string = moved[1] || '';
       const kif = pos.selected
         ? undefined
-        : this.state.kif.add({ positions: pos, str: kifStr }, this.state.kif.getCurrent());
+        : this.state.kif.add(
+            { positions: pos, str: kifStr },
+            this.state.kif.getCurrent()
+          );
       setPos(pos, kif);
     };
 
@@ -199,7 +191,11 @@ export default class Game extends React.Component<{ init: Positions }, GameState
           changeIndexToEnd={clickHandlers.changeIndexToEnd}
           copyKif={clickHandlers.copyKif}
         />
-        <Board positions={positions} indexes={indexes} onClick={clickHandlers.handleClick} />
+        <Board
+          positions={positions}
+          indexes={indexes}
+          onClick={clickHandlers.handleClick}
+        />
         <RightSide
           positions={positions}
           indexes={indexes}

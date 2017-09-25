@@ -40,10 +40,15 @@ export function movOnBoard(props: PosTurnPieceFn): Array<PorE> {
   const piece = props.piece;
   const row = piece.row;
   const col = piece.col;
-  const inRange = (r: number, c: number) => (0 <= r && r <= 8 && 0 <= c && c <= 8);
+  const inRange = (r: number, c: number) => 0 <= r && r <= 8 && 0 <= c && c <= 8;
 
-  function checkRec(movs: Array<PorE>, row: number, col: number,
-    rowFn: Fn, colFn: Fn): Array<PorE> {
+  function checkRec(
+    movs: Array<PorE>,
+    row: number,
+    col: number,
+    rowFn: Fn,
+    colFn: Fn
+  ): Array<PorE> {
     const movs_ = movs.slice();
     const r = rowFn(row);
     const c = colFn(col);
@@ -52,7 +57,7 @@ export function movOnBoard(props: PosTurnPieceFn): Array<PorE> {
       return movs_;
     } else {
       const target: cells = pos[r][c];
-      const whose = (target instanceof PieceObj) ? target.whose : null;
+      const whose = target instanceof PieceObj ? target.whose : null;
       if (whose === turn) {
         return movs_;
       } else if (target instanceof PieceObj) {

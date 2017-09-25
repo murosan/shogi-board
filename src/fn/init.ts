@@ -1,4 +1,4 @@
-import { CellComponent } from '../game'
+import { CellComponent } from '../game';
 import Positions from '../game-handler/positions';
 import PieceObj from '../game-handler/piece';
 import EmpObj from '../game-handler/emp';

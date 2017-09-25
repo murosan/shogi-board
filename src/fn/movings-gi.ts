@@ -15,14 +15,22 @@ export default function movGi(props: MovProps): Array<PieceObj | EmpObj> {
   } else {
     const turn = po.turn;
     const col = pi.col;
-    const targets: Array<Array<number>> = (turn === 0) ?
-      [
-        [row - 1, col - 1], [row - 1, col], [row - 1, col + 1],
-        [row + 1, col - 1], [row + 1, col + 1]
-      ] : [
-        [row - 1, col - 1], [row - 1, col + 1],
-        [row + 1, col - 1], [row + 1, col], [row + 1, col + 1]
-      ];
+    const targets: Array<Array<number>> =
+      turn === 0
+        ? [
+            [row - 1, col - 1],
+            [row - 1, col],
+            [row - 1, col + 1],
+            [row + 1, col - 1],
+            [row + 1, col + 1]
+          ]
+        : [
+            [row - 1, col - 1],
+            [row - 1, col + 1],
+            [row + 1, col - 1],
+            [row + 1, col],
+            [row + 1, col + 1]
+          ];
     return movOnBoard({ pos: pos, turn: turn, targets: targets });
   }
 }

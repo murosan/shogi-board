@@ -43,7 +43,10 @@ function movCapture(props: PosTurn): Array<EmpObj> {
     const movs_ = movs.slice();
     if (row === 9) {
       return movs_;
-    } else if ((turn === 0 && row !== 0 && row !== 1) || (turn === 1 && row !== 7 && row !== 8)) {
+    } else if (
+      (turn === 0 && row !== 0 && row !== 1) ||
+      (turn === 1 && row !== 7 && row !== 8)
+    ) {
       return rowRec(row + 1, colRec(0, movs_));
     } else {
       return rowRec(row + 1, movs_);
@@ -59,21 +62,30 @@ function movOnBoard(props: PosTurn, pieceObj: PieceObj): Array<PorE> {
   const row = pieceObj.row;
   const col = pieceObj.col;
   const movs: Array<PorE> = [];
-  const targetRow = (turn === 0) ? (row - 2) : (row + 2);
+  const targetRow = turn === 0 ? row - 2 : row + 2;
   const targetCol1 = col + 1;
   const targetCol2 = col - 1;
-  const inRange = (x: number) => { return 0 <= x && x <= 8; }
+  const inRange = (x: number) => {
+    return 0 <= x && x <= 8;
+  };
 
   if (inRange(targetRow)) {
     const pusing = (x: number) => {
       const target = pos[targetRow][x];
-      if ((target instanceof EmpObj) || ((target instanceof PieceObj) && (target.whose !== turn))) {
+      if (
+        target instanceof EmpObj ||
+        (target instanceof PieceObj && target.whose !== turn)
+      ) {
         movs.push(target);
       }
-    }
+    };
 
-    if (inRange(targetCol1)) { pusing(targetCol1); }
-    if (inRange(targetCol2)) { pusing(targetCol2); }
+    if (inRange(targetCol1)) {
+      pusing(targetCol1);
+    }
+    if (inRange(targetCol2)) {
+      pusing(targetCol2);
+    }
   }
 
   return movs;

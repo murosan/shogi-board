@@ -29,17 +29,21 @@ function movCapture(props: PosTurn): Array<EmpObj> {
   function rowRec(row: number, movs: Array<EmpObj>): Array<EmpObj> {
     function colRec(col: number, movs: Array<EmpObj>): Array<EmpObj> {
       const movs_ = movs.slice();
-      if (col === 9) { return movs_; }
-      else {
+      if (col === 9) {
+        return movs_;
+      } else {
         const target = pos[row][col];
-        if (target instanceof EmpObj) { movs_.push(target); }
+        if (target instanceof EmpObj) {
+          movs_.push(target);
+        }
         return colRec(col + 1, movs_);
       }
     }
 
     const movs_ = movs.slice();
-    if (row === 9) { return movs_; }
-    else if ((turn === 0 && row !== 0) || (turn === 1 && row !== 8)) {
+    if (row === 9) {
+      return movs_;
+    } else if ((turn === 0 && row !== 0) || (turn === 1 && row !== 8)) {
       return rowRec(row + 1, colRec(0, movs_));
     } else {
       return rowRec(row + 1, movs_);
@@ -57,14 +61,14 @@ function movOnBoard(props: PosTurn, pieceObj: PieceObj): Array<PorE> {
 
   function rowRec(r: number, movs: Array<PieceObj | EmpObj>): Array<PorE> {
     const movs_ = movs.slice();
-    const targetRow = (turn === 0) ? (r - 1) : (r + 1);
+    const targetRow = turn === 0 ? r - 1 : r + 1;
     if (!(0 <= targetRow && targetRow <= 8)) {
       return movs_;
     } else {
       const target: PorE | PromotionConfirmObj = pos[targetRow][col];
       if (target instanceof PieceObj) {
         const whose = target.whose;
-        if (whose === (1 - turn)) {
+        if (whose === 1 - turn) {
           movs_.push(target);
         }
         return movs_;

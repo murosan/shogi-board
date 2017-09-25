@@ -15,7 +15,7 @@ interface KifAreaProps {
 export default class KifArea extends React.Component<
   KifAreaProps,
   { current: OneStep }
-> {
+  > {
   renderOneStep(o: OneStep, current: OneStep): JSX.Element {
     return (
       <div
@@ -37,8 +37,8 @@ export default class KifArea extends React.Component<
     return head instanceof Branch ? (
       <div key={crypto.randomBytes(8).toString('hex')} />
     ) : (
-      this.renderOneStep(head, current)
-    );
+        this.renderOneStep(head, current)
+      );
   }
 
   renderRest(kifArr: Array<Kif>, branch: Branch): Array<JSX.Element> {
@@ -47,12 +47,12 @@ export default class KifArea extends React.Component<
       return head instanceof Branch ? (
         <div key={crypto.randomBytes(8).toString('hex')} />
       ) : (
-        <div
-          key={crypto.randomBytes(8).toString('hex')}
-          className={'branch'}
-          onClick={() => this.props.kifClick(head)}
-        >{`-- ${head.str}`}</div>
-      );
+          <div
+            key={crypto.randomBytes(8).toString('hex')}
+            className={'branch'}
+            onClick={() => this.props.kifClick(head)}
+          >{`-- ${head.str}`}</div>
+        );
     });
   }
 

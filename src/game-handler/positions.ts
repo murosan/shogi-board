@@ -190,11 +190,11 @@ export default class Positions {
   update(): Positions {
     const newPos: Array<
       Array<CellComponent>
-    > = this.pos.map((r: Array<CellComponent>) => {
-      return r.slice().map((c: CellComponent) => {
-        return c.update();
+      > = this.pos.map((r: Array<CellComponent>) => {
+        return r.slice().map((c: CellComponent) => {
+          return c.update();
+        });
       });
-    });
     return new Positions(
       newPos,
       this.cap0.update(),

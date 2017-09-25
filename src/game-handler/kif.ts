@@ -58,7 +58,7 @@ export class Kif {
   /**
    * nextがoneStepと同一局面か判定し、違う場合は分岐を作成後、Kifを返す
    * @param target 追加するOneStep
-   * @param nextIndex 
+   * @param nextIndex
    */
   makeBranch(target: OneStep, nextIndex: number): Kif {
     const next: KifComponent = this.history[nextIndex];
@@ -71,8 +71,8 @@ export class Kif {
         next instanceof Branch
           ? next.incBranch(target)
           : new Branch([
-              new Kif(this.history.slice(nextIndex, this.history.length))
-            ]).incBranch(target);
+            new Kif(this.history.slice(nextIndex, this.history.length))
+          ]).incBranch(target);
       return new Kif(former.concat(br), nextIndex);
     }
   }

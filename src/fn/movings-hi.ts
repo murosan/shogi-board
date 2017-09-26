@@ -4,13 +4,15 @@ import EmpObj from '../game-handler/emp';
 import empLocations from './movings-emp-loc';
 import { movOnBoard } from './movings-ka';
 
-export default function movHi(props: MovProps): Array<PieceObj | EmpObj> {
-  const pi = props.pieceObj;
-  const po = props.positions;
-  const pos = po.pos;
-  const turn = po.turn;
+type PieceOrEmpTargets = Array<PieceObj | EmpObj>;
 
-  if (pi.row === -1) {
+export default function movHi(props: MovProps): PieceOrEmpTargets {
+  const piece = props.pieceObj;
+  const positions = props.positions;
+  const pos = positions.pos;
+  const turn = positions.turn;
+
+  if (isCapturePiece(piece)) {
     return empLocations(pos);
   } else {
     const fncs = [
@@ -19,6 +21,10 @@ export default function movHi(props: MovProps): Array<PieceObj | EmpObj> {
       [(r: number) => r, (c: number) => c - 1],
       [(r: number) => r, (c: number) => c + 1]
     ];
-    return movOnBoard({ pos: pos, turn: turn, piece: pi, fn: fncs });
+    return movOnBoard({ pos: pos, turn: turn, piece: piece, fn: fncs });
   }
+}
+
+function isCapturePiece(piece: PieceObj): boolean {
+  return piece.row === -1;
 }

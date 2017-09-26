@@ -11,12 +11,14 @@ import movKa from './movings-ka';
 import movHi from './movings-hi';
 import movGy from './movings-gy';
 
+type Targets = Array<PieceObj | EmpObj>;
+
 export interface MovProps {
   pieceObj: PieceObj;
   positions: Positions;
 }
 
-export default function movings(props: MovProps): Array<PieceObj | EmpObj> {
+export default function movings(props: MovProps): Targets {
   const name = props.pieceObj.name;
   if (name === '歩') {
     return movFu(props);
@@ -37,7 +39,7 @@ export default function movings(props: MovProps): Array<PieceObj | EmpObj> {
   } else {
     /* name === '馬' || name === '龍' */
     const targets = name === '馬' ? movKa(props) : movHi(props);
-    const movs = movGy(props).concat(targets);
-    return Array.from(new Set(movs));
+    const listCanMoveTo = movGy(props).concat(targets);
+    return Array.from(new Set(listCanMoveTo));
   }
 }

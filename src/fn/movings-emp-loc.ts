@@ -1,31 +1,43 @@
 import PieceObj from '../game-handler/piece';
 import EmpObj from '../game-handler/emp';
 import PromotionConfirm from '../game-handler/promotion-confirm';
+import { isEmp } from './type-checker';
 
-export default function movEmpLocations(
-  pos: Array<Array<PieceObj | EmpObj | PromotionConfirm>>
-): Array<EmpObj> {
-  function rowRec(row: number, movs: Array<PieceObj | EmpObj>): Array<EmpObj> {
-    function colRec(col: number, movs: Array<PieceObj | EmpObj>): Array<EmpObj> {
-      const movs_ = movs.slice();
+type CellComponent = PieceObj | EmpObj | PromotionConfirm;
+type Positions = Array<Array<CellComponent>>;
+type PieceOrEmp = PieceObj | EmpObj;
+type EmpTargets = Array<EmpObj>;
+type PieceOrEmpTargets = Array<PieceOrEmp>;
+
+export default function movEmpLocations(pos: Positions): EmpTargets {
+  return rowRec(0, []);
+
+  function rowRec(row: number, listCanMoveTo: PieceOrEmpTargets): EmpTargets {
+    if (row === 9) {
+      return listCanMoveTo.slice();
+    } else {
+      return rowRec(row + 1, colRec(0, listCanMoveTo));
+    }
+
+    function colRec(col: number, listCanMoveTo: PieceOrEmpTargets): EmpTargets {
       if (col === 9) {
-        return movs_;
+        return listCanMoveTo.slice();
       } else {
-        const target = pos[row][col];
-        if (target instanceof EmpObj) {
-          movs_.push(target);
-        }
-        return colRec(col + 1, movs_);
+        const target: CellComponent = pos[row][col];
+        const list = addTargetIfEmp(target, listCanMoveTo);
+        return colRec(col + 1, list);
       }
     }
 
-    const movs_ = movs.slice();
-    if (row === 9) {
-      return movs_;
-    } else {
-      return rowRec(row + 1, colRec(0, movs_));
+    function addTargetIfEmp(
+      target: CellComponent,
+      listCanMoveTo: PieceOrEmpTargets
+    ): EmpTargets {
+      if (isEmp(target)) {
+        return listCanMoveTo.concat(target);
+      } else {
+        return listCanMoveTo.slice();
+      }
     }
   }
-
-  return rowRec(0, []);
 }

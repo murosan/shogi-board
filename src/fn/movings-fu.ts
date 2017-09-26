@@ -2,98 +2,132 @@ import { MovProps } from './movings';
 import PieceObj from '../game-handler/piece';
 import EmpObj from '../game-handler/emp';
 import PromotionConfirmObj from '../game-handler/promotion-confirm';
+import { isPiece, isEmp } from './type-checker';
 
-type PorE = PieceObj | EmpObj;
+type CellComponent = PieceObj | EmpObj | PromotionConfirmObj;
+type PieceOrEmp = PieceObj | EmpObj;
+type EmpTargets = Array<EmpObj>;
+type PieceOrEmpTargets = Array<PieceOrEmp>;
 
 interface PosTurn {
-  pos: Array<Array<PorE | PromotionConfirmObj>>;
+  pos: Array<Array<CellComponent>>;
   turn: number;
 }
+interface AddTargetProps {
+  target: CellComponent;
+  listCanMoveTo: EmpTargets;
+  turn: number;
+  row: number;
+}
 
-export default function movFu(props: MovProps): Array<PorE> {
-  const pi = props.pieceObj;
-  const po = props.positions;
-  const pos = po.pos;
-  const turn = po.turn;
+export default function movFu(props: MovProps): PieceOrEmpTargets {
+  const piece = props.pieceObj;
+  const positions = props.positions;
+  const pos = positions.pos;
+  const turn = positions.turn;
 
-  if (pi.row === -1) {
+  if (piece.row === -1) {
     return movCapture({ pos: pos, turn: turn });
   } else {
-    return movOnBoard({ pos: pos, turn: turn }, pi);
+    return movOnBoard({ pos: pos, turn: turn }, piece);
   }
 }
 
 function notDuplicated(col: number, props: PosTurn): boolean {
   const pos = props.pos;
   const turn = props.turn;
+  return rowRec(0);
+
   function rowRec(row: number): boolean {
     if (row === 9) {
       return true;
     } else {
-      const target: PorE | PromotionConfirmObj = pos[row][col];
-      if (
-        target instanceof PieceObj ? target.name === '歩' && target.whose === turn : false
-      ) {
-        return false;
-      } else {
-        return rowRec(row + 1);
-      }
+      const target: CellComponent = pos[row][col];
+      return duplicatingCheck(target, row);
     }
   }
 
-  return rowRec(0);
+  function duplicatingCheck(target: CellComponent, row: number): boolean {
+    if (isFuAndMine(target)) {
+      return false;
+    } else {
+      return rowRec(row + 1);
+    }
+  }
+
+  function isFuAndMine(cc: CellComponent): boolean {
+    return isPiece(cc) && cc.name === '歩' && cc.whose === turn;
+  }
 }
 
-function movCapture(props: PosTurn): Array<EmpObj> {
+function movCapture(props: PosTurn): EmpTargets {
   const pos = props.pos;
   const turn = props.turn;
-  function colRec(col: number, movs: Array<EmpObj>): Array<EmpObj> {
-    function rowRec(row: number, movs: Array<EmpObj>): Array<EmpObj> {
-      const movs_ = movs.slice();
+  return colRec(0, []);
+
+  function colRec(col: number, listCanMoveTo: EmpTargets): EmpTargets {
+    if (col === 9) {
+      return listCanMoveTo.slice();
+    } else {
+      return handleRec(listCanMoveTo);
+    }
+
+    function handleRec(listCanMoveTo: EmpTargets) {
+      const isNotDup = notDuplicated(col, props);
+      const list = isNotDup ? rowRec(0, listCanMoveTo) : listCanMoveTo;
+      return colRec(col + 1, list);
+    }
+
+    function rowRec(row: number, listCanMoveTo: EmpTargets): EmpTargets {
       if (row === 9) {
-        return movs_;
+        return listCanMoveTo.slice();
       } else {
-        const target: PorE | PromotionConfirmObj = pos[row][col];
-        if (
-          target instanceof EmpObj &&
-          ((turn === 0 && row !== 0) || (turn === 1 && row !== 8))
-        ) {
-          movs_.push(target);
-        }
+        const target: CellComponent = pos[row][col];
+        const movs_ = addTargetIfEmp({ target, listCanMoveTo, turn, row });
         return rowRec(row + 1, movs_);
       }
     }
 
-    const movs_ = movs.slice();
-    if (col === 9) {
-      return movs_;
-    } else if (notDuplicated(col, props)) {
-      return colRec(col + 1, rowRec(0, movs_));
-    } else {
-      return colRec(col + 1, movs_);
+    function addTargetIfEmp(props: AddTargetProps): EmpTargets {
+      if (isEmp(props.target) && isNotEdge(props.row, turn)) {
+        return props.listCanMoveTo.concat(props.target);
+      } else {
+        return props.listCanMoveTo.slice();
+      }
     }
   }
-
-  return colRec(0, []);
 }
 
-function movOnBoard(props: PosTurn, pieceObj: PieceObj): Array<PorE> {
+function movOnBoard(props: PosTurn, pieceObj: PieceObj): PieceOrEmpTargets {
   const pos = props.pos;
   const turn = props.turn;
   const row = pieceObj.row;
   const col = pieceObj.col;
-  const movs = [];
   const targetRow = turn === 0 ? row - 1 : row + 1;
 
-  if (turn === 0 ? 0 <= targetRow : targetRow <= 8) {
-    const target = pos[targetRow][col];
-    if (
-      target instanceof EmpObj ||
-      (target instanceof PieceObj && target.whose !== turn)
-    ) {
-      movs.push(target);
+  if (isNotEdge(targetRow, turn)) {
+    const target: CellComponent = pos[targetRow][col];
+    return setTargetIfEnemyPieceOrEmp(target, turn);
+  } else {
+    return [];
+  }
+
+  function setTargetIfEnemyPieceOrEmp(
+    target: CellComponent,
+    turn: number
+  ): PieceOrEmpTargets {
+    if (isEmp(target) || isEnemyPiece(target, turn)) {
+      return [target];
+    } else {
+      return [];
     }
   }
 
-  return movs;
+  function isEnemyPiece(target: CellComponent, turn: number): target is PieceObj {
+    return isPiece(target) && target.whose !== turn;
+  }
+}
+
+function isNotEdge(row: number, turn: number): boolean {
+  return turn === 0 ? row !== 0 : row !== 8;
 }

@@ -33,6 +33,6 @@ export default function movKi(props: MovProps): Array<PieceObj | EmpObj> {
             [row + 1, col],
             [row + 1, col + 1]
           ];
-    return movOnBoard({ pos: pos, turn: turn, targets: targets });
+    return movOnBoard({ pos: pos, turn: turn, possibilities: targets });
   }
 }

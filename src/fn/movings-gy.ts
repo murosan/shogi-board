@@ -21,12 +21,12 @@ export default function movGy(props: MovProps): PieceOrEmpTargets {
   const positions = props.positions;
   const pos = positions.pos;
   const turn = positions.turn;
-  const possibilities: TargetPossibilities = getTargetPossibilities(piece.row, piece.col);
+  const possibilities: TargetPossibilities = getPossibilitiesOfTarget(piece.row, piece.col);
 
   return movOnBoard({ pos: pos, turn: turn, possibilities: possibilities });
 }
 
-function getTargetPossibilities(row: number, col: number): TargetPossibilities {
+function getPossibilitiesOfTarget(row: number, col: number): TargetPossibilities {
   return [
     [row - 1, col - 1],
     [row - 1, col],
@@ -42,10 +42,11 @@ function getTargetPossibilities(row: number, col: number): TargetPossibilities {
 export function movOnBoard(props: PosTurn): PieceOrEmpTargets {
   const pos = props.pos;
   const turn = props.turn;
-  const possibilities: Array<Array<number>> = props.possibilities.filter(isOnBoard);
+  const possibilities: Array<Array<number>> = props.possibilities.filter(possibilityIsOnBoard);
   const len = possibilities.length;
-
-  return getIfEmpOrEnemyPieceRec(0, []);
+  const res = getIfEmpOrEnemyPieceRec(0, []);
+  console.log(res);
+  return res;
 
   function getIfEmpOrEnemyPieceRec(
     index: number,
@@ -55,7 +56,8 @@ export function movOnBoard(props: PosTurn): PieceOrEmpTargets {
       return listCanMoveTo.slice();
     } else {
       const target = getIfEmpOrEnemyPiece(possibilities[index]);
-      return target ? listCanMoveTo.concat(target) : listCanMoveTo;
+      const targets = target ? listCanMoveTo.concat(target) : listCanMoveTo;
+      return getIfEmpOrEnemyPieceRec(index + 1, targets);
     }
   }
 
@@ -71,12 +73,16 @@ export function movOnBoard(props: PosTurn): PieceOrEmpTargets {
   }
 }
 
-function isOnBoard(possible: Array<number>, index: number): Array<number> | undefined {
+function possibilityIsOnBoard(possible: Array<number>, index: number): Array<number> | undefined {
   const row = possible[0];
   const col = possible[1];
-  if (0 <= row && row <= 8 && 0 <= col && col <= 8) {
-    return possible;
+  if (isOnBorad(row, col)) {
+    return possible.slice();
   }
+}
+
+function isOnBorad(row: number, col: number): boolean {
+  return 0 <= row && row <= 8 && 0 <= col && col <= 8;
 }
 
 function isEmpOrEnemyPiece(cc: CellComponent, turn: number): cc is EmpObj | PieceObj {

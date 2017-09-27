@@ -71,9 +71,15 @@ export default class Positions {
       targetCol: number,
       source_: PieceObj
     ) => {
-      kif.push(
-        generateKif(targetRow, targetCol, source_.name, source_.row, source_.col, status)
-      );
+      const generateKifProps = {
+        targetRow: targetRow,
+        targetCol: targetCol,
+        name: source_.name,
+        row: source_.row,
+        col: source_.col,
+        status: status
+      };
+      kif.push(generateKif(generateKifProps));
     };
 
     const targetIsConfirm = (

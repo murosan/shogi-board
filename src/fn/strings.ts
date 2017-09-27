@@ -9,11 +9,15 @@ export function colString(c: number): string {
 }
 
 export function locationString(r: number, c: number): string {
-  if (0 <= r && r <= 8 && 0 <= c && c <= 8) {
+  if (isOnBoard(r, c)) {
     return colString(c) + rowString(r);
   } else {
     return '持ち駒';
   }
+}
+
+function isOnBoard(row: number, col: number): boolean {
+  return 0 <= row && row <= 8 && 0 <= col && col <= 8;
 }
 
 export function turnOverPieceName(name: string, opt: 'promote' | 'demote'): string {
@@ -57,59 +61,50 @@ export function pieceId(name: string, w: number, isReversed: boolean): string {
   const whose = isReversed ? 1 - w : w;
   if (name === '玉') {
     return 'gy-' + whose;
-  }
-  if (name === '飛') {
+  } else if (name === '飛') {
     return 'hi-' + whose;
-  }
-  if (name === '角') {
+  } else if (name === '角') {
     return 'ka-' + whose;
-  }
-  if (name === '金') {
+  } else if (name === '金') {
     return 'ki-' + whose;
-  }
-  if (name === '銀') {
+  } else if (name === '銀') {
     return 'gi-' + whose;
-  }
-  if (name === '桂') {
+  } else if (name === '桂') {
     return 'ke-' + whose;
-  }
-  if (name === '香') {
+  } else if (name === '香') {
     return 'ky-' + whose;
-  }
-  if (name === '歩') {
+  } else if (name === '歩') {
     return 'fu-' + whose;
-  }
-  if (name === '龍') {
+  } else if (name === '龍') {
     return 'ry-' + whose;
-  }
-  if (name === '馬') {
+  } else if (name === '馬') {
     return 'um-' + whose;
-  }
-  if (name === '成銀') {
+  } else if (name === '成銀') {
     return 'ng-' + whose;
-  }
-  if (name === '成桂') {
+  } else if (name === '成桂') {
     return 'nk-' + whose;
-  }
-  if (name === '成香') {
+  } else if (name === '成香') {
     return 'ny-' + whose;
+  } else {
+    /* name === 'と' */
+    return 'to-' + whose;
   }
-  /* name === 'と' */
-  return 'to-' + whose;
 }
 
-export function generateKif(
-  targetRow: number,
-  targetCol: number,
-  name: string,
-  row: number,
-  col: number,
-  status: '' | '成' | '不成' | '打'
-): string {
-  const k = locationString(targetRow, targetCol) + name + status;
+interface generateKifProps {
+  targetRow: number;
+  targetCol: number;
+  name: string;
+  row: number;
+  col: number;
+  status: '' | '成' | '不成' | '打';
+}
+
+export function generateKif(props: generateKifProps): string {
+  const k = locationString(props.targetRow, props.targetCol) + name + status;
   if (status === '打') {
     return k;
   } else {
-    return k + '(' + (9 - col) + (row + 1) + ')';
+    return k + '(' + (9 - props.col) + (props.row + 1) + ')';
   }
 }

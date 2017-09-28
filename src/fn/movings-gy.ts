@@ -21,7 +21,10 @@ export default function movGy(props: MovProps): PieceOrEmpTargets {
   const positions = props.positions;
   const pos = positions.pos;
   const turn = positions.turn;
-  const possibilities: TargetPossibilities = getPossibilitiesOfTarget(piece.row, piece.col);
+  const possibilities: TargetPossibilities = getPossibilitiesOfTarget(
+    piece.row,
+    piece.col
+  );
 
   return movOnBoard({ pos: pos, turn: turn, possibilities: possibilities });
 }
@@ -42,10 +45,11 @@ function getPossibilitiesOfTarget(row: number, col: number): TargetPossibilities
 export function movOnBoard(props: PosTurn): PieceOrEmpTargets {
   const pos = props.pos;
   const turn = props.turn;
-  const possibilities: Array<Array<number>> = props.possibilities.filter(possibilityIsOnBoard);
+  const possibilities: Array<Array<number>> = props.possibilities.filter(
+    possibilityIsOnBoard
+  );
   const len = possibilities.length;
   const res = getIfEmpOrEnemyPieceRec(0, []);
-  console.log(res);
   return res;
 
   function getIfEmpOrEnemyPieceRec(
@@ -73,7 +77,10 @@ export function movOnBoard(props: PosTurn): PieceOrEmpTargets {
   }
 }
 
-function possibilityIsOnBoard(possible: Array<number>, index: number): Array<number> | undefined {
+function possibilityIsOnBoard(
+  possible: Array<number>,
+  index: number
+): Array<number> | undefined {
   const row = possible[0];
   const col = possible[1];
   if (isOnBorad(row, col)) {

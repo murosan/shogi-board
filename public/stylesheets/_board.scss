@@ -45,6 +45,12 @@
         }
       }
 
+      .piece-turn {
+        &:hover {
+          background-color: $color-gr-selected;
+        }
+      }
+
       .selected {
         background-color: $color-gr-selected;
       }
@@ -64,8 +70,8 @@
       &:before {
         content: '';
         position: absolute;
-        right: -.57vw;
-        bottom: -.57vw;
+        right: -0.57vw;
+        bottom: -0.57vw;
         height: 1vw;
         width: 1vw;
         border-radius: 50%;

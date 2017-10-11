@@ -9,8 +9,13 @@ body {
   margin: 0;
 }
 
-h1 {
+.header {
+  @include flex-disp(1);
+  @include flex-center;
+  height: 50px;
+  font-size: 25pt;
   color: $color-title;
+  letter-spacing: 10px;
   background: linear-gradient(to right, $color-gradi-start, $color-gradi-end, $color-gradi-start);
   text-align: center;
   padding: 0;

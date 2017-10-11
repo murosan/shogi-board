@@ -1,7 +1,7 @@
-$color-title: rgb(155, 155, 155);
+$color-title: rgb(179, 179, 179);
 $color-title-border: rgba(148, 148, 148, 0.83);
-$color-gradi-start: rgba(180, 180, 180, 0.83);
-$color-gradi-end: rgba(222, 219, 219, 0.63);
+$color-gradi-start: rgba(255, 255, 255, 0.83);
+$color-gradi-end: rgba(248, 248, 248, 0.63);
 $color-gr: rgb(133, 164, 120);
 $color-gr-hv: rgba(189, 227, 172, 0.64);
 $color-gr-ac: rgba(127, 193, 99, 0.64);
@@ -20,6 +20,11 @@ $img-path-c: '../images/components';
 @mixin flex-disp($fl) {
   flex: $fl 0 1px;
   display: flex;
+}
+
+@mixin flex-center {
+  align-items: center;
+  justify-content: center;
 }
 
 @mixin aspect($ratio) {

@@ -3,3 +3,4 @@ npm-debug.log
 .DS_Store
 .idea
 public/dist/*
+!public/dist/.gitkeep

@@ -101,8 +101,8 @@ interface generateKifProps {
 }
 
 export function generateKif(props: generateKifProps): string {
-  const k = locationString(props.targetRow, props.targetCol) + name + status;
-  if (status === '打') {
+  const k = locationString(props.targetRow, props.targetCol) + props.name + props.status;
+  if (props.status === '打') {
     return k;
   } else {
     return k + '(' + (9 - props.col) + (props.row + 1) + ')';

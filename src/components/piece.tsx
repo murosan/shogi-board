@@ -16,18 +16,18 @@ export interface PieceElmProps {
 export default class PieceElm extends React.Component<PieceElmProps, {}> {
   render() {
     const piece = this.props.piece;
+    const turn = this.props.positions.turn;
     const selected = this.props.positions.selected;
     const clsNameList =
       selected && selected === piece
         ? [this.props.classStr, 'selected']
         : [this.props.classStr];
+    if (turn === piece.whose) {
+      clsNameList.push('piece-turn');
+    }
     const elmId = pieceId(piece.name, piece.whose, this.props.isReversed);
     return (
-      <div
-        id={elmId}
-        className={clsNameList.join(' ')}
-        onClick={this.props.onClick}
-      />
+      <div id={elmId} className={clsNameList.join(' ')} onClick={this.props.onClick} />
     );
   }
 }

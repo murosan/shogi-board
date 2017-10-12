@@ -1,5 +1,7 @@
 # 将棋 検討盤
 
+[![CircleCI](https://circleci.com/gh/murosan/shogi-board.svg?style=svg)](https://circleci.com/gh/murosan/shogi-board)
+
 動作例 : https://shogi-board.herokuapp.com/  
 ブラウザで動く将棋検討盤です。  
 駒はルールに則って動きます(王手、詰み判定はありません)。

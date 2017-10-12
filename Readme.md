@@ -1,5 +1,6 @@
 # 将棋 検討盤
 
+[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 [![CircleCI](https://circleci.com/gh/murosan/shogi-board.svg?style=svg)](https://circleci.com/gh/murosan/shogi-board)
 
 動作例 : https://shogi-board.herokuapp.com/  

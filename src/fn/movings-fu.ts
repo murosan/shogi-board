@@ -114,7 +114,7 @@ function movOnBoard(props: PosTurn, pieceObj: PieceObj): PieceOrEmpTargets {
 
   function setTargetIfEnemyPieceOrEmp(
     target: CellComponent,
-    turn: number
+    turn: number,
   ): PieceOrEmpTargets {
     if (isEmp(target) || isEnemyPiece(target, turn)) {
       return [target];
@@ -123,7 +123,10 @@ function movOnBoard(props: PosTurn, pieceObj: PieceObj): PieceOrEmpTargets {
     }
   }
 
-  function isEnemyPiece(target: CellComponent, turn: number): target is PieceObj {
+  function isEnemyPiece(
+    target: CellComponent,
+    turn: number,
+  ): target is PieceObj {
     return isPiece(target) && target.whose !== turn;
   }
 }

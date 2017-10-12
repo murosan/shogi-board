@@ -18,7 +18,7 @@ export default class Positions {
     c0: Captures,
     c1: Captures,
     turn: number,
-    selected?: nonEmpCells
+    selected?: nonEmpCells,
   ) {
     this.pos = pos;
     this.cap0 = c0;
@@ -46,7 +46,7 @@ export default class Positions {
             return false;
           }
         });
-      }
+      },
     );
 
     return matchPos && p.cap0.match(this.cap0) && p.cap1.match(this.cap1);
@@ -57,7 +57,10 @@ export default class Positions {
    * @param target 移動先
    * @param source 移動元
    */
-  move(target: CellComponent, source: PieceObj): [Positions, string | undefined] {
+  move(
+    target: CellComponent,
+    source: PieceObj,
+  ): [Positions, string | undefined] {
     const pos: Array<Array<CellComponent>> = this.pos.slice();
     const cap0: Captures = this.cap0;
     const cap1: Captures = this.cap1;
@@ -69,7 +72,7 @@ export default class Positions {
       status: '' | '成' | '不成' | '打',
       targetRow: number,
       targetCol: number,
-      source_: PieceObj
+      source_: PieceObj,
     ) => {
       const generateKifProps = {
         targetRow: targetRow,
@@ -77,7 +80,7 @@ export default class Positions {
         name: source_.name,
         row: source_.row,
         col: source_.col,
-        status: status
+        status: status,
       };
       kif.push(generateKif(generateKifProps));
     };
@@ -86,7 +89,7 @@ export default class Positions {
       target: PromotionConfirmObj,
       cell: CellComponent,
       row: number,
-      col: number
+      col: number,
     ) => {
       if (target === cell) {
         // 成/不成が選択されたConfirmCell
@@ -104,7 +107,7 @@ export default class Positions {
         const pc = new PromotionConfirmObj(
           source,
           source.move(row, col),
-          source.promote(row, col)
+          source.promote(row, col),
         );
         newSelected.push(pc);
         return pc;
@@ -166,9 +169,9 @@ export default class Positions {
         captures[0],
         captures[1],
         newSelected[0] ? turn : 1 - turn,
-        newSelected[0]
+        newSelected[0],
       ),
-      kif[0]
+      kif[0],
     ];
   }
 
@@ -191,6 +194,11 @@ export default class Positions {
         return c.update();
       });
     });
-    return new Positions(newPos, this.cap0.update(), this.cap1.update(), this.turn);
+    return new Positions(
+      newPos,
+      this.cap0.update(),
+      this.cap1.update(),
+      this.turn,
+    );
   }
 }

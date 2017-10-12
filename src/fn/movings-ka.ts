@@ -42,7 +42,7 @@ export default function movKa(props: MovProps): PieceOrEmpTargets {
       [(r: number) => r - 1, (c: number) => c - 1],
       [(r: number) => r - 1, (c: number) => c + 1],
       [(r: number) => r + 1, (c: number) => c - 1],
-      [(r: number) => r + 1, (c: number) => c + 1]
+      [(r: number) => r + 1, (c: number) => c + 1],
     ];
     return movOnBoard({ pos: pos, turn: turn, piece: piece, fn: fncs });
   }
@@ -66,7 +66,7 @@ export function movOnBoard(props: PosTurnPieceFn): PieceOrEmpTargets {
     r: number,
     c: number,
     rowFn: Fn,
-    colFn: Fn
+    colFn: Fn,
   ): PieceOrEmpTargets {
     const movs_ = movs.slice();
     const row = rowFn(r);
@@ -81,13 +81,15 @@ export function movOnBoard(props: PosTurnPieceFn): PieceOrEmpTargets {
     function handleRec(movs: PieceOrEmpTargets) {
       const target: CellComponent = pos[row][col];
       if (isPiece(target)) {
-        return addTargetIfEnemyPiece({target, movs, turn});
+        return addTargetIfEnemyPiece({ target, movs, turn });
       } else {
-        return addIfEmpAndRec({target, movs,turn, row, col});
+        return addIfEmpAndRec({ target, movs, turn, row, col });
       }
     }
 
-    function addTargetIfEnemyPiece(addProps: AddIfEnemyProps): PieceOrEmpTargets {
+    function addTargetIfEnemyPiece(
+      addProps: AddIfEnemyProps,
+    ): PieceOrEmpTargets {
       if (isMine(addProps.target, turn)) {
         return movs.slice();
       } else {

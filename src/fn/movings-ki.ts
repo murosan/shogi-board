@@ -23,7 +23,7 @@ export default function movKi(props: MovProps): Array<PieceObj | EmpObj> {
             [row - 1, col + 1],
             [row, col - 1],
             [row, col + 1],
-            [row + 1, col]
+            [row + 1, col],
           ]
         : [
             [row - 1, col],
@@ -31,7 +31,7 @@ export default function movKi(props: MovProps): Array<PieceObj | EmpObj> {
             [row, col + 1],
             [row + 1, col - 1],
             [row + 1, col],
-            [row + 1, col + 1]
+            [row + 1, col + 1],
           ];
     return movOnBoard({ pos: pos, turn: turn, possibilities: targets });
   }

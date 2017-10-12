@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "shogi-board for browser",
   "main": "app.js",
-  "keywords": [
-    "shogi",
-    "board"
-  ],
+  "keywords": ["shogi", "board"],
   "author": "murosan",
   "license": "ISC",
   "scripts": {
@@ -16,7 +13,9 @@
     "webpack-w": "webpack -d --watch --color",
     "webpack-p": "webpack -p",
     "test": "jest",
-    "test-coverage": "jest --coverage"
+    "test-coverage": "jest --coverage",
+    "prettier":
+      "prettier --single-quote --trailing-comma all --write 'src/**/*.ts'"
   },
   "dependencies": {
     "@types/jest": "^21.1.2",
@@ -57,12 +56,6 @@
       "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json"
-    ]
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json"]
   }
 }

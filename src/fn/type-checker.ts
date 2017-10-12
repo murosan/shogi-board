@@ -8,7 +8,9 @@ export function isPiece(cc: CellComponent): cc is PieceObj {
   return cc instanceof PieceObj;
 }
 
-export function isPromotionConfirm(cc: CellComponent): cc is PromotionConfirmObj {
+export function isPromotionConfirm(
+  cc: CellComponent,
+): cc is PromotionConfirmObj {
   return cc instanceof PromotionConfirmObj;
 }
 

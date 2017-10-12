@@ -20,7 +20,10 @@ function isOnBoard(row: number, col: number): boolean {
   return 0 <= row && row <= 8 && 0 <= col && col <= 8;
 }
 
-export function turnOverPieceName(name: string, opt: 'promote' | 'demote'): string {
+export function turnOverPieceName(
+  name: string,
+  opt: 'promote' | 'demote',
+): string {
   function isOnBoardAndPromoted(index: number): Boolean {
     return index < 8 && opt === 'promote';
   }
@@ -45,7 +48,7 @@ export function turnOverPieceName(name: string, opt: 'promote' | 'demote'): stri
     '',
     '馬',
     '龍',
-    ''
+    '',
   ];
   const index = names.indexOf(name);
   if (isOnBoardAndPromoted(index)) {
@@ -101,7 +104,10 @@ interface generateKifProps {
 }
 
 export function generateKif(props: generateKifProps): string {
-  const k = locationString(props.targetRow, props.targetCol) + props.name + props.status;
+  const k =
+    locationString(props.targetRow, props.targetCol) +
+    props.name +
+    props.status;
   if (props.status === '打') {
     return k;
   } else {

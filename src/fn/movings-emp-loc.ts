@@ -31,7 +31,7 @@ export default function movEmpLocations(pos: Positions): EmpTargets {
 
     function addTargetIfEmp(
       target: CellComponent,
-      listCanMoveTo: PieceOrEmpTargets
+      listCanMoveTo: PieceOrEmpTargets,
     ): EmpTargets {
       if (isEmp(target)) {
         return listCanMoveTo.concat(target);

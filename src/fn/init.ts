@@ -19,7 +19,7 @@ function hirate(): Array<Array<CellComponent>> {
       new PieceObj('金', 1, 0, 5),
       new PieceObj('銀', 1, 0, 6),
       new PieceObj('桂', 1, 0, 7),
-      new PieceObj('香', 1, 0, 8)
+      new PieceObj('香', 1, 0, 8),
     ],
     [
       new EmpObj(),
@@ -30,7 +30,7 @@ function hirate(): Array<Array<CellComponent>> {
       new EmpObj(),
       new EmpObj(),
       new PieceObj('角', 1, 1, 7),
-      new EmpObj()
+      new EmpObj(),
     ],
     [
       new PieceObj('歩', 1, 2, 0),
@@ -41,7 +41,7 @@ function hirate(): Array<Array<CellComponent>> {
       new PieceObj('歩', 1, 2, 5),
       new PieceObj('歩', 1, 2, 6),
       new PieceObj('歩', 1, 2, 7),
-      new PieceObj('歩', 1, 2, 8)
+      new PieceObj('歩', 1, 2, 8),
     ],
     [
       new EmpObj(),
@@ -52,7 +52,7 @@ function hirate(): Array<Array<CellComponent>> {
       new EmpObj(),
       new EmpObj(),
       new EmpObj(),
-      new EmpObj()
+      new EmpObj(),
     ],
     [
       new EmpObj(),
@@ -63,7 +63,7 @@ function hirate(): Array<Array<CellComponent>> {
       new EmpObj(),
       new EmpObj(),
       new EmpObj(),
-      new EmpObj()
+      new EmpObj(),
     ],
     [
       new EmpObj(),
@@ -74,7 +74,7 @@ function hirate(): Array<Array<CellComponent>> {
       new EmpObj(),
       new EmpObj(),
       new EmpObj(),
-      new EmpObj()
+      new EmpObj(),
     ],
     [
       new PieceObj('歩', 0, 6, 0),
@@ -85,7 +85,7 @@ function hirate(): Array<Array<CellComponent>> {
       new PieceObj('歩', 0, 6, 5),
       new PieceObj('歩', 0, 6, 6),
       new PieceObj('歩', 0, 6, 7),
-      new PieceObj('歩', 0, 6, 8)
+      new PieceObj('歩', 0, 6, 8),
     ],
     [
       new EmpObj(),
@@ -96,7 +96,7 @@ function hirate(): Array<Array<CellComponent>> {
       new EmpObj(),
       new EmpObj(),
       new PieceObj('飛', 0, 7, 7),
-      new EmpObj()
+      new EmpObj(),
     ],
     [
       new PieceObj('香', 0, 8, 0),
@@ -107,7 +107,7 @@ function hirate(): Array<Array<CellComponent>> {
       new PieceObj('金', 0, 8, 5),
       new PieceObj('銀', 0, 8, 6),
       new PieceObj('桂', 0, 8, 7),
-      new PieceObj('香', 0, 8, 8)
-    ]
+      new PieceObj('香', 0, 8, 8),
+    ],
   ];
 }

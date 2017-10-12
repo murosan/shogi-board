@@ -9,7 +9,7 @@ type Possibilities = Array<Array<number>>;
 
 interface PossibilityProps {
   turn: number;
-  piece: PieceObj
+  piece: PieceObj;
 }
 
 export default function movGi(props: MovProps): PieceOrEmpTargets {
@@ -23,9 +23,11 @@ export default function movGi(props: MovProps): PieceOrEmpTargets {
     const turn = positions.turn;
     const possibilityProps = {
       turn: turn,
-      piece: piece
-    }
-    const possibilities: Possibilities = getTargetPossibilities(possibilityProps);
+      piece: piece,
+    };
+    const possibilities: Possibilities = getTargetPossibilities(
+      possibilityProps,
+    );
     return movOnBoard({ pos: pos, turn: turn, possibilities: possibilities });
   }
 }
@@ -43,13 +45,13 @@ function getTargetPossibilities(props: PossibilityProps): Possibilities {
         [row - 1, col],
         [row - 1, col + 1],
         [row + 1, col - 1],
-        [row + 1, col + 1]
+        [row + 1, col + 1],
       ]
     : [
         [row - 1, col - 1],
         [row - 1, col + 1],
         [row + 1, col - 1],
         [row + 1, col],
-        [row + 1, col + 1]
+        [row + 1, col + 1],
       ];
 }

@@ -14,7 +14,7 @@ export default class PieceObj {
     whose: number,
     row: number,
     col: number,
-    _movs?: Array<PorE>
+    _movs?: Array<PorE>,
   ) {
     this.name = name;
     this.whose = whose;
@@ -37,7 +37,8 @@ export default class PieceObj {
     const whose = this.whose;
     const inEnemyArea: () => boolean = () => {
       return (
-        (whose === 0 && (r <= 2 || row <= 2)) || (whose === 1 && (6 <= r || 6 <= row))
+        (whose === 0 && (r <= 2 || row <= 2)) ||
+        (whose === 1 && (6 <= r || 6 <= row))
       );
     };
     if (row === -1) {
@@ -77,7 +78,12 @@ export default class PieceObj {
   }
 
   captured(): PieceObj {
-    return new PieceObj(turnOverPieceName(this.name, 'demote'), 1 - this.whose, -1, -1);
+    return new PieceObj(
+      turnOverPieceName(this.name, 'demote'),
+      1 - this.whose,
+      -1,
+      -1,
+    );
   }
 
   move(r: number, c: number): PieceObj {
@@ -85,7 +91,12 @@ export default class PieceObj {
   }
 
   promote(r: number, c: number): PieceObj {
-    return new PieceObj(turnOverPieceName(this.name, 'promote'), this.whose, r, c);
+    return new PieceObj(
+      turnOverPieceName(this.name, 'promote'),
+      this.whose,
+      r,
+      c,
+    );
   }
 
   update() {

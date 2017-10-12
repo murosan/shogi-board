@@ -23,13 +23,16 @@ export default function movGy(props: MovProps): PieceOrEmpTargets {
   const turn = positions.turn;
   const possibilities: TargetPossibilities = getPossibilitiesOfTarget(
     piece.row,
-    piece.col
+    piece.col,
   );
 
   return movOnBoard({ pos: pos, turn: turn, possibilities: possibilities });
 }
 
-function getPossibilitiesOfTarget(row: number, col: number): TargetPossibilities {
+function getPossibilitiesOfTarget(
+  row: number,
+  col: number,
+): TargetPossibilities {
   return [
     [row - 1, col - 1],
     [row - 1, col],
@@ -38,7 +41,7 @@ function getPossibilitiesOfTarget(row: number, col: number): TargetPossibilities
     [row, col + 1],
     [row + 1, col - 1],
     [row + 1, col],
-    [row + 1, col + 1]
+    [row + 1, col + 1],
   ];
 }
 
@@ -46,7 +49,7 @@ export function movOnBoard(props: PosTurn): PieceOrEmpTargets {
   const pos = props.pos;
   const turn = props.turn;
   const possibilities: Array<Array<number>> = props.possibilities.filter(
-    possibilityIsOnBoard
+    possibilityIsOnBoard,
   );
   const len = possibilities.length;
   const res = getIfEmpOrEnemyPieceRec(0, []);
@@ -54,7 +57,7 @@ export function movOnBoard(props: PosTurn): PieceOrEmpTargets {
 
   function getIfEmpOrEnemyPieceRec(
     index: number,
-    listCanMoveTo: PieceOrEmpTargets
+    listCanMoveTo: PieceOrEmpTargets,
   ): PieceOrEmpTargets {
     if (index === len) {
       return listCanMoveTo.slice();
@@ -79,7 +82,7 @@ export function movOnBoard(props: PosTurn): PieceOrEmpTargets {
 
 function possibilityIsOnBoard(
   possible: Array<number>,
-  index: number
+  index: number,
 ): Array<number> | undefined {
   const row = possible[0];
   const col = possible[1];
@@ -92,10 +95,16 @@ function isOnBorad(row: number, col: number): boolean {
   return 0 <= row && row <= 8 && 0 <= col && col <= 8;
 }
 
-function isEmpOrEnemyPiece(cc: CellComponent, turn: number): cc is EmpObj | PieceObj {
+function isEmpOrEnemyPiece(
+  cc: CellComponent,
+  turn: number,
+): cc is EmpObj | PieceObj {
   return isEmp(cc) || isEnemyPiece(cc, turn);
 }
 
-function isEnemyPiece(piece: PieceOrPromotionConfirm, turn: number): piece is PieceObj {
+function isEnemyPiece(
+  piece: PieceOrPromotionConfirm,
+  turn: number,
+): piece is PieceObj {
   return isPiece(piece) && piece.whose !== turn;
 }

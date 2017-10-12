@@ -41,8 +41,14 @@ export class Kif {
       return new Kif(this.history.concat(target), nextIndex);
     } else if (!this.history.includes(current) && last instanceof Branch) {
       // 現在局面が含まれない、かつ最後が分岐
-      const former: Array<KifComponent> = this.history.slice(0, this.displayIndex);
-      return new Kif(former.concat(last.add(target, current)), this.displayIndex);
+      const former: Array<KifComponent> = this.history.slice(
+        0,
+        this.displayIndex,
+      );
+      return new Kif(
+        former.concat(last.add(target, current)),
+        this.displayIndex,
+      );
     } else {
       // 現在局面が含まれる、かつ最後ではない
       return this.makeBranch(target, nextIndex);
@@ -65,7 +71,7 @@ export class Kif {
         next instanceof Branch
           ? next.incBranch(target)
           : new Branch([
-              new Kif(this.history.slice(nextIndex, this.history.length))
+              new Kif(this.history.slice(nextIndex, this.history.length)),
             ]).incBranch(target);
       return new Kif(former.concat(br), nextIndex);
     }
@@ -85,7 +91,7 @@ export class Kif {
           return h;
         }
       }),
-      includeTarget ? this.history.indexOf(target) : this.history.length - 1
+      includeTarget ? this.history.indexOf(target) : this.history.length - 1,
     );
   }
 
@@ -101,7 +107,7 @@ export class Kif {
           return h;
         }
       }),
-      0
+      0,
     );
   }
 
@@ -129,7 +135,7 @@ export class Kif {
         } else {
           return kc;
         }
-      })
+      }),
     );
   }
 }

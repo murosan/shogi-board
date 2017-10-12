@@ -19,7 +19,7 @@ export default function movHi(props: MovProps): PieceOrEmpTargets {
       [(r: number) => r - 1, (c: number) => c],
       [(r: number) => r + 1, (c: number) => c],
       [(r: number) => r, (c: number) => c - 1],
-      [(r: number) => r, (c: number) => c + 1]
+      [(r: number) => r, (c: number) => c + 1],
     ];
     return movOnBoard({ pos: pos, turn: turn, piece: piece, fn: fncs });
   }

@@ -16,7 +16,12 @@ body {
   font-size: 25pt;
   color: $color-title;
   letter-spacing: 10px;
-  background: linear-gradient(to right, $color-gradi-start, $color-gradi-end, $color-gradi-start);
+  background: linear-gradient(
+    to right,
+    $color-gradi-start,
+    $color-gradi-end,
+    $color-gradi-start
+  );
   text-align: center;
   padding: 0;
   margin: 0;
@@ -60,7 +65,7 @@ body {
 footer {
   color: $color-title;
   text-align: center;
-  margin: .5vw;
+  margin: 0.5vw;
 }
 
 a {

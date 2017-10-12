@@ -15,7 +15,7 @@
     "test": "jest",
     "test-coverage": "jest --coverage",
     "prettier":
-      "prettier --single-quote --trailing-comma all --write 'src/**/*.ts'"
+      "prettier --single-quote --trailing-comma all --write '*.js' '*.json' 'src/*.tsx' 'src/**/*.ts' 'src/**/*.tsx' 'test/**/*.ts' 'test/**/*.tsx' 'public/stylesheets/*.ts' 'public/stylesheets/*.scss'"
   },
   "dependencies": {
     "@types/jest": "^21.1.2",

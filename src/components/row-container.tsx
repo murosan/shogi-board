@@ -14,7 +14,7 @@ export interface RowContainerProps {
 export default class RowContainer extends React.Component<
   RowContainerProps,
   {}
-  > {
+> {
   render() {
     const r = this.props.row;
     const rowIsEdge = r === -1 || r === 9;

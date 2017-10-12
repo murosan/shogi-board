@@ -23,13 +23,16 @@ interface GameState {
   kif: Kif;
 }
 
-export default class Game extends React.Component<{ init: Positions }, GameState> {
+export default class Game extends React.Component<
+  { init: Positions },
+  GameState
+> {
   constructor(props: { init: Positions }) {
     super();
     this.state = {
       positions: props.init,
       indexes: [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      kif: new Kif([{ positions: props.init, str: '開始局面' }])
+      kif: new Kif([{ positions: props.init, str: '開始局面' }]),
     };
   }
 
@@ -55,7 +58,7 @@ export default class Game extends React.Component<{ init: Positions }, GameState
     function moveOrChangeSelected(
       this_: Game,
       selected: PieceObj,
-      target: CellComponent
+      target: CellComponent,
     ) {
       if (isEmpOrEnemyPiece(target)) {
         moveIfCanMove(this_, selected, target);
@@ -64,13 +67,21 @@ export default class Game extends React.Component<{ init: Positions }, GameState
       }
     }
 
-    function moveIfCanMove(this_: Game, selected: PieceObj, target: PieceObj | EmpObj) {
+    function moveIfCanMove(
+      this_: Game,
+      selected: PieceObj,
+      target: PieceObj | EmpObj,
+    ) {
       if (selected.canMove(target)) {
         move(this_, target, selected);
       }
     }
 
-    function toggleOrChangeSelected(this_: Game, selected: PieceObj, target: PieceObj) {
+    function toggleOrChangeSelected(
+      this_: Game,
+      selected: PieceObj,
+      target: PieceObj,
+    ) {
       if (target === selected) {
         const noSelectedPos = positions.update();
         setPos(this_, noSelectedPos);
@@ -105,7 +116,7 @@ export default class Game extends React.Component<{ init: Positions }, GameState
         ? undefined
         : this_.state.kif.add(
             { positions: pos, str: kifStr },
-            this_.state.kif.getCurrent()
+            this_.state.kif.getCurrent(),
           );
       setPos(this_, pos, kif);
     }
@@ -117,7 +128,8 @@ export default class Game extends React.Component<{ init: Positions }, GameState
 
   changeKifIndexByDiff(diff: number): void {
     const inline: Array<OneStep> = this.state.kif.getAsInline();
-    const diffApplied: number = inline.indexOf(this.state.kif.getCurrent()) + diff;
+    const diffApplied: number =
+      inline.indexOf(this.state.kif.getCurrent()) + diff;
     if (diffApplied < 0) {
       this.changeKifIndexByTarget(inline[0]);
     } else if (inline.length <= diffApplied) {
@@ -137,13 +149,13 @@ export default class Game extends React.Component<{ init: Positions }, GameState
     const kif: Kif = this.state.kif.changeIndex(target);
     this.setState({
       positions: kif.getCurrent().positions,
-      kif: kif
+      kif: kif,
     });
   }
 
   upsideDown(): void {
     this.setState({
-      indexes: this.state.indexes.reverse()
+      indexes: this.state.indexes.reverse(),
     });
   }
 
@@ -159,7 +171,9 @@ export default class Game extends React.Component<{ init: Positions }, GameState
     }
 
     const inlineKif: Array<OneStep> = this.state.kif.getAsInline();
-    const kifStr: Array<string> = inlineKif.map(extractKifString).filter(removeHead);
+    const kifStr: Array<string> = inlineKif
+      .map(extractKifString)
+      .filter(removeHead);
     const tarea = document.createElement('textarea');
     tarea.value = kifStr.join('\n');
     tarea.style.width = '1px';
@@ -179,7 +193,7 @@ export default class Game extends React.Component<{ init: Positions }, GameState
       changeIndexToEnd: (st: 'head' | 'last') => this.changeKifIndexToEnd(st),
       changeKifIndexByTarget: (om: OneStep) => this.changeKifIndexByTarget(om),
       upsideDown: () => this.upsideDown(),
-      copyKif: () => this.copyKif()
+      copyKif: () => this.copyKif(),
     };
     return (
       <div id="play-area">

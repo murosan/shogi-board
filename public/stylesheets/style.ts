@@ -28,18 +28,24 @@ function browserCheck() {
 }
 
 function adjustHeight() {
-  $('.corner').each((i: number, e: HTMLElement) => $(e).css('height', $(e).width()));
-  $('.cell').each((i: number, e: HTMLElement) => $(e).css('height', $(e).width() * 1.09));
+  $('.corner').each((i: number, e: HTMLElement) =>
+    $(e).css('height', $(e).width()),
+  );
+  $('.cell').each((i: number, e: HTMLElement) =>
+    $(e).css('height', $(e).width() * 1.09),
+  );
   adjustCapPiece();
 }
 
 function adjustCapPiece() {
   if (!browserCheck()) {
-    $('.cap-piece').each((i: number, e: HTMLElement) => $(e).css('height', $(e).width() * 1.09));
+    $('.cap-piece').each((i: number, e: HTMLElement) =>
+      $(e).css('height', $(e).width() * 1.09),
+    );
   }
 }
 
 module.exports = {
   adjust: adjust,
-  adjustCapPiece: adjustCapPiece
+  adjustCapPiece: adjustCapPiece,
 };

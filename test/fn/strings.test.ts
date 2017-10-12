@@ -3,7 +3,7 @@ import {
   colString,
   locationString,
   turnOverPieceName,
-  pieceId
+  pieceId,
 } from '../../src/fn/strings';
 
 test('行(段)、列(筋)の文字列が取得できる', () => {

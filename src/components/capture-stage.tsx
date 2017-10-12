@@ -15,7 +15,7 @@ export interface CaptureStageProps {
 export default class CaptureStage extends React.Component<
   CaptureStageProps,
   {}
-  > {
+> {
   renderCapPiece(whose: number, name: string, alphabeticalName: string) {
     const elms = [];
     const caps = this.props.caps.captures.get(name);
@@ -35,7 +35,7 @@ export default class CaptureStage extends React.Component<
               positions={this.props.positions}
               isReversed={this.props.isReversed}
               onClick={() => this.props.onClick(piece)}
-            />
+            />,
           );
         }
       }

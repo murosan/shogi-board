@@ -27,7 +27,11 @@ export default class PieceElm extends React.Component<PieceElmProps, {}> {
     }
     const elmId = pieceId(piece.name, piece.whose, this.props.isReversed);
     return (
-      <div id={elmId} className={clsNameList.join(' ')} onClick={this.props.onClick} />
+      <div
+        id={elmId}
+        className={clsNameList.join(' ')}
+        onClick={this.props.onClick}
+      />
     );
   }
 }

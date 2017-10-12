@@ -2,15 +2,7 @@
 // .cap-fu_1_02-01
 // .#cap-#{駒名}-#{whose}-#{総数}-#{番号}
 
-$pieceNameList: (
-  hisha: 2,
-  kaku:2,
-  kin:4,
-  gin: 4,
-  kei: 4,
-  kyou: 4,
-  fu: 18
-);
+$pieceNameList: (hisha: 2, kaku:2, kin:4, gin: 4, kei: 4, kyou: 4, fu: 18);
 
 @mixin capPiece($name, $whose, $totalLength, $nth) {
   $side: left;

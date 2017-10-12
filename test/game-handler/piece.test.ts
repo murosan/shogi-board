@@ -6,9 +6,14 @@ test('駒のインスタンスを作成し更新できる', () => {
 });
 
 test('canPromoteが正しい値を返す', () => {
-  const piece = new PieceObj('歩', 0, 3, 7);
-  expect(piece.canPromote(2)).toBeTruthy();
-  expect(piece.canPromote(4)).toBeFalsy();
+  const fu = new PieceObj('歩', 0, 3, 7);
+  expect(fu.canPromote(2)).toBeTruthy();
+  expect(fu.canPromote(4)).toBeFalsy();
+  expect(new PieceObj('香', 0, 2, 8).canPromote(2)).toBeTruthy();
+  expect(new PieceObj('桂', 0, 2, 4).canPromote(2)).toBeTruthy();
+  expect(new PieceObj('銀', 0, 2, 7).canPromote(2)).toBeTruthy();
+  expect(new PieceObj('飛', 0, 0, 7).canPromote(0)).toBeTruthy();
+  expect(new PieceObj('角', 0, 1, 7).canPromote(1)).toBeTruthy();
 });
 
 test('canMoveNextが正しい値を返す', () => {

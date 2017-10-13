@@ -39,6 +39,8 @@
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.2",
     "css-loader": "^0.28.4",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.1",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "husky": "^0.14.3",

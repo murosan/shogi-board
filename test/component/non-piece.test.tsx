@@ -1,5 +1,10 @@
 import * as React from 'react';
-import renderer from 'react-test-renderer';
+import * as renderer from 'react-test-renderer';
+// import { shallow, configure } from 'enzyme';
+// import * as Adapter from 'enzyme-adapter-react-16';
+
+// configure({ adapter: new Adapter() });
+
 import {
   EmpElm,
   PromotionConfirmElm,
@@ -13,7 +18,7 @@ describe('Emp', async () => {
   test('作れる', () => {
     const emp = renderer.create(
       <EmpElm onClick={() => console.log('onclick')} />,
-    ).toJSON;
+    );
     expect(emp).toMatchSnapshot();
   });
 });
@@ -23,23 +28,27 @@ describe('PromotionConfirm', async () => {
     const piece1 = new PieceObj('と', 0, 2, 7);
     const piece2 = new PieceObj('歩', 0, 2, 7);
     const pc = new PromotionConfirmObj(piece2, piece2, piece1);
-    const elm = (
-      <PromotionConfirmElm pcObj={pc} onClick={t => console.log('onclick')} />
+    const elm = renderer.create(
+      <PromotionConfirmElm pcObj={pc} onClick={t => console.log('onclick')} />,
     );
-    expect(elm).toBeDefined();
+    expect(elm).toMatchSnapshot();
   });
 });
 
 describe('Promote', async () => {
   test('作れる', () => {
-    const elm = <Promote onClick={() => console.log('onclick')} />;
-    expect(elm).toBeDefined();
+    const elm = renderer.create(
+      <Promote onClick={() => console.log('onclick')} />,
+    );
+    expect(elm).toMatchSnapshot();
   });
 });
 
 describe('NotPromote', async () => {
   test('作れる', () => {
-    const elm = <NotPromote onClick={() => console.log('onclick')} />;
-    expect(elm).toBeDefined();
+    const elm = renderer.create(
+      <NotPromote onClick={() => console.log('onclick')} />,
+    );
+    expect(elm).toMatchSnapshot();
   });
 });

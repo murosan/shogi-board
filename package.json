@@ -15,7 +15,7 @@
     "test": "jest",
     "test-coverage": "jest --coverage",
     "prettier":
-      "prettier --single-quote --trailing-comma all --write '*.js' '*.json' 'src/*.tsx' 'src/**/*.ts' 'src/**/*.tsx' 'test/**/*.ts' 'test/**/*.tsx' 'public/stylesheets/*.ts' 'public/stylesheets/*.scss'"
+      "prettier --config prettier.config.js --write '*.{js,json}' 'src/*.tsx' 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}' 'public/stylesheets/*.{ts,scss}'"
   },
   "dependencies": {
     "@types/jest": "^21.1.2",
@@ -25,6 +25,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "express": "~4.15.2",
+    "glob": "^7.1.2",
     "helmet": "^3.8.1",
     "jquery": "^3.2.1",
     "morgan": "~1.8.1",

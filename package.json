@@ -8,12 +8,13 @@
   "license": "ISC",
   "scripts": {
     "start": "node ./bin/www",
-    "start-w": "node-dev ./bin/www",
+    "start:w": "node-dev ./bin/www",
     "webpack": "webpack -d --color",
-    "webpack-w": "webpack -d --watch --color",
-    "webpack-p": "webpack -p",
+    "webpack:w": "webpack -d --watch --color",
+    "webpack:p": "webpack -p",
     "test": "jest",
-    "test-coverage": "jest --coverage",
+    "test:c": "jest --coverage",
+    "test:cw": "jest --coverage --watch",
     "prettier":
       "prettier --config prettier.config.js --write '*.{js,json}' 'src/*.tsx' 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}' 'public/stylesheets/*.{ts,scss}'",
     "precommit": "lint-staged"

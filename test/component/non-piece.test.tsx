@@ -1,4 +1,5 @@
 import * as React from 'react';
+import renderer from 'react-test-renderer';
 import {
   EmpElm,
   PromotionConfirmElm,
@@ -10,8 +11,10 @@ import PromotionConfirmObj from '../../src/game-handler/promotion-confirm';
 
 describe('Emp', async () => {
   test('作れる', () => {
-    const emp = <EmpElm onClick={() => console.log('onclick')} />;
-    expect(emp).toBeDefined();
+    const emp = renderer.create(
+      <EmpElm onClick={() => console.log('onclick')} />,
+    ).toJSON;
+    expect(emp).toMatchSnapshot();
   });
 });
 

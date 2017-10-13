@@ -28,7 +28,7 @@ export class PromotionConfirmElm extends React.Component<PCProps, {}> {
   }
 }
 
-class Promote extends React.Component<{ onClick: () => void }, {}> {
+export class Promote extends React.Component<{ onClick: () => void }, {}> {
   render() {
     return (
       <div
@@ -40,7 +40,7 @@ class Promote extends React.Component<{ onClick: () => void }, {}> {
   }
 }
 
-class NotPromote extends React.Component<{ onClick: () => void }, {}> {
+export class NotPromote extends React.Component<{ onClick: () => void }, {}> {
   render() {
     return (
       <div

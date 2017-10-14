@@ -26,7 +26,7 @@ PCで見てください。
   $ cd shogi-board
   $ yarn
   $ yarn start
-  // yarn run start-w で自動化
+  // yarn run start:w で自動化
   // localhost:3000にアクセス
   ```
 
@@ -34,7 +34,26 @@ PCで見てください。
 
   ```
   $ yarn run webpack
-  // yarn run webpack-w で自動化
+  // 自動化
+  $ yarn run webpack:w
+  // 本番
+  $ yarn run webpack:p
+  ```
+
+- テスト
+
+  ```
+  $ yarn test
+  // カバレッジ
+  $ yarn test:c
+  // 自動化
+  $ yarn test:cw
+  ```
+
+- コード整形
+
+  ```
+  $ yarn prettier
   ```
 
 - 使用した主なライブラリ

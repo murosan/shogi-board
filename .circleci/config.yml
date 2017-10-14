@@ -21,10 +21,12 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Jest Suit
-          command: yarn test --ci --testResultsProcessor="jest-junit"
+          command: |
+            mkdir -p ~/reports
+            yarn test --ci --testResultsProcessor="jest-junit"
           environment:
-            JEST_JUNIT_OUTPUT: "~/reports/junit/test-results.xml"
+            JEST_JUNIT_OUTPUT: "~/reports/test-results.xml"
       - store_test_results:
-          path: ~/reports/junit
+          path: ~/reports
       - store_artifacts:
-          path: ~/reports/junit
+          path: ~/reports

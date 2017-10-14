@@ -1,10 +1,6 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-// import { shallow, configure } from 'enzyme';
-// import * as Adapter from 'enzyme-adapter-react-16';
-
-// configure({ adapter: new Adapter() });
-
+import { shallow } from 'enzyme';
 import {
   EmpElm,
   PromotionConfirmElm,
@@ -16,10 +12,8 @@ import PromotionConfirmObj from '../../src/game-handler/promotion-confirm';
 
 describe('Emp', async () => {
   test('作れる', () => {
-    const emp = renderer.create(
-      <EmpElm onClick={() => console.log('onclick')} />,
-    );
-    expect(emp).toMatchSnapshot();
+    const emp = shallow(<EmpElm onClick={() => console.log('onclick')} />);
+    expect(emp).toHaveLength(1);
   });
 });
 

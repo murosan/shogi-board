@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Emp 作れる 1`] = `
-<div
-  className="piece"
-  onClick={[Function]}
-/>
-`;
-
 exports[`NotPromote 作れる 1`] = `
 <div
   className="confirm-button"

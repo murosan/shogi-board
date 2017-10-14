@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+  setupFiles: ['raf/polyfill', './test/jest.setup.js'],
   transform: {
     '^.+\\.tsx?$': '<rootDir>/node_modules/ts-jest/preprocessor.js',
   },
@@ -11,4 +12,5 @@ module.exports = {
     '<rootDir>/coverage/',
     '<rootDir>/public/dist/',
   ],
+  // unmockedModulePathPatterns: ['node_modules/react/', 'node_modules/enzyme/'],
 };

@@ -16,7 +16,7 @@
     "test:c": "jest --coverage",
     "test:cw": "jest --coverage --watch",
     "prettier":
-      "prettier --config prettier.config.js --write '*.{js,json}' 'src/*.tsx' 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}' 'public/stylesheets/*.{ts,scss}'",
+      "prettier --config prettier.config.js --write '**/*.{js,ts,tsx,json,scss}'",
     "precommit": "lint-staged"
   },
   "dependencies": {
@@ -58,13 +58,6 @@
     "typescript": "^2.4.2",
     "url-loader": "^0.5.9",
     "webpack": "^3.4.1"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json"]
   },
   "lint-staged": {
     "*.{js,ts,tsx,scss,json}": ["prettier --write", "git add"]

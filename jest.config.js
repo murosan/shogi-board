@@ -6,4 +6,9 @@ module.exports = {
   },
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
+  watchPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/coverage/',
+    '<rootDir>/public/dist/',
+  ],
 };

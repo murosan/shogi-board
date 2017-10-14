@@ -5,3 +5,4 @@ npm-debug.log
 public/dist/*
 !public/dist/.gitkeep
 coverage/
+**/__snapshots__/

@@ -12,5 +12,4 @@ module.exports = {
     '<rootDir>/coverage/',
     '<rootDir>/public/dist/',
   ],
-  // unmockedModulePathPatterns: ['node_modules/react/', 'node_modules/enzyme/'],
 };

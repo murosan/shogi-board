@@ -24,7 +24,6 @@ jobs:
           command: yarn test -- --ci --testResultsProcessor="jest-junit"
           environment:
             JEST_JUNIT_OUTPUT: reports/junit/test-results.xml
-      - run: find ~/ -name "test-results.xml" -ls
       - store_test_results:
           path: reports/junit
       - store_artifacts:

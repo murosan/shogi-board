@@ -5,7 +5,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:6.11.1
-    working_directory: ~/workspace
+    working_directory: ~/repo
     steps:
       - checkout
       # Download and cache dependencies
@@ -21,12 +21,11 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Jest Suit
-          command: |
-            mkdir -p ~/reports
-            yarn test --ci --testResultsProcessor="jest-junit"
+          command: yarn test -- --ci --testResultsProcessor="jest-junit"
           environment:
-            JEST_JUNIT_OUTPUT: "~/reports/test-results.xml"
+            JEST_JUNIT_OUTPUT: reports/junit/test-results.xml
+      - run: find ~/ -name "test-results.xml" -ls
       - store_test_results:
-          path: ~/reports
+          path: reports/junit
       - store_artifacts:
-          path: ~/reports
+          path: reports/junit

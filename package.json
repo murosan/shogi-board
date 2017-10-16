@@ -12,9 +12,8 @@
     "webpack": "webpack -d --color",
     "webpack:w": "webpack -d --watch --color",
     "webpack:p": "webpack -p",
-    "test": "jest",
-    "test:c": "jest --coverage",
-    "test:cw": "jest --coverage --watch",
+    "test": "jest --coverage",
+    "test:w": "jest --coverage --watch",
     "prettier":
       "prettier --config prettier.config.js --write '**/*.{js,ts,tsx,json,scss}'",
     "precommit": "lint-staged"
@@ -39,6 +38,7 @@
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.2",
+    "codecov": "^2.3.1",
     "css-loader": "^0.28.4",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",

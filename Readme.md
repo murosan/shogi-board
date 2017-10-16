@@ -44,10 +44,8 @@ PCで見てください。
 
   ```
   $ yarn test
-  // カバレッジ
-  $ yarn test:c
   // 自動化
-  $ yarn test:cw
+  $ yarn test:w
   ```
 
 - コード整形

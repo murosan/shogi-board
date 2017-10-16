@@ -68,7 +68,7 @@ PCで見てください。
 ## ライセンス
 
 - ソースコード  
-  ISC license
+  MIT License
 
 - イメージ・画像
   - pieces, board(adapted)  

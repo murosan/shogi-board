@@ -1,8 +1,9 @@
 # 将棋 検討盤
 
-[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
-[![CircleCI](https://circleci.com/gh/murosan/shogi-board.svg?style=svg)](https://circleci.com/gh/murosan/shogi-board)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
+[![codecov](https://codecov.io/gh/murosan/shogi-board/branch/master/graph/badge.svg)](https://codecov.io/gh/murosan/shogi-board)
+[![CircleCI](https://circleci.com/gh/murosan/shogi-board.svg?style=svg)](https://circleci.com/gh/murosan/shogi-board)
 
 動作例 : https://shogi-board.herokuapp.com/  
 ブラウザで動く将棋検討盤です。  

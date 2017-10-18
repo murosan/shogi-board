@@ -3,7 +3,7 @@
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 [![codecov](https://codecov.io/gh/murosan/shogi-board/branch/master/graph/badge.svg)](https://codecov.io/gh/murosan/shogi-board)
-[![CircleCI](https://circleci.com/gh/murosan/shogi-board.svg?style=svg)](https://circleci.com/gh/murosan/shogi-board)
+[![CircleCI](https://circleci.com/gh/murosan/shogi-board.svg?style=shield&circle-token=6bd215d906d59c7131ea2934670de1df969c96e2)](https://circleci.com/gh/murosan/shogi-board)
 
 動作例 : https://shogi-board.herokuapp.com/  
 ブラウザで動く将棋検討盤です。  

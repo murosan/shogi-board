@@ -2,80 +2,76 @@ import { MovProps } from './movings';
 import PieceObj from '../game-handler/piece';
 import EmpObj from '../game-handler/emp';
 import PromotionConfirmObj from '../game-handler/promotion-confirm';
+import { isPiece, isEmp } from '../fn/type-checker';
 
-type PorE = PieceObj | EmpObj;
+type CellComponent = PieceObj | EmpObj | PromotionConfirmObj;
+type EmpTargets = Array<EmpObj>;
+type PieceOrEmpTargets = Array<PieceObj | EmpObj>;
 
 interface PosTurn {
-  pos: Array<Array<PorE | PromotionConfirmObj>>;
+  pos: Array<Array<CellComponent>>;
   turn: number;
 }
 
-export default function movKe(props: MovProps): Array<PorE> {
-  const pi = props.pieceObj;
-  const po = props.positions;
-  const pos = po.pos;
-  const turn = po.turn;
+export default function movKe(props: MovProps): PieceOrEmpTargets {
+  const piece = props.pieceObj;
+  const positions = props.positions;
+  const pos = positions.pos;
+  const turn = positions.turn;
 
-  if (pi.row === -1) {
+  if (isCapturePiece(piece.row)) {
     return movCapture({ pos: pos, turn: turn });
   } else {
-    return movOnBoard({ pos: pos, turn: turn }, pi);
+    return movOnBoard({ pos: pos, turn: turn }, piece);
   }
 }
 
-function movCapture(props: PosTurn): Array<EmpObj> {
+function movCapture(props: PosTurn): EmpTargets {
   const pos = props.pos;
   const turn = props.turn;
-  function rowRec(row: number, movs: Array<EmpObj>): Array<EmpObj> {
-    function colRec(col: number, movs: Array<EmpObj>): Array<EmpObj> {
-      const movs_ = movs.slice();
+  function rowRec(row: number, movs: EmpTargets): EmpTargets {
+    if (row === 9) {
+      return movs.slice();
+    } else {
+      const movs_ = rowIsInRange(row, turn) ? colRec(0, movs) : movs;
+      return rowRec(row + 1, movs_);
+    }
+
+    function colRec(col: number, movs: EmpTargets): EmpTargets {
       if (col === 9) {
-        return movs_;
+        return movs.slice();
       } else {
         const target = pos[row][col];
-        if (target instanceof EmpObj) {
-          movs_.push(target);
-        }
+        const movs_ = isEmp(target) ? movs.concat(target) : movs;
         return colRec(col + 1, movs_);
       }
     }
 
-    const movs_ = movs.slice();
-    if (row === 9) {
-      return movs_;
-    } else if (
-      (turn === 0 && row !== 0 && row !== 1) ||
-      (turn === 1 && row !== 7 && row !== 8)
-    ) {
-      return rowRec(row + 1, colRec(0, movs_));
-    } else {
-      return rowRec(row + 1, movs_);
+    function rowIsInRange(row: number, turn: number): boolean {
+      return (
+        (turn === 0 && row !== 0 && row !== 1) ||
+        (turn === 1 && row !== 7 && row !== 8)
+      );
     }
   }
 
   return rowRec(0, []);
 }
 
-function movOnBoard(props: PosTurn, pieceObj: PieceObj): Array<PorE> {
+function movOnBoard(props: PosTurn, pieceObj: PieceObj): PieceOrEmpTargets {
   const pos = props.pos;
   const turn = props.turn;
   const row = pieceObj.row;
   const col = pieceObj.col;
-  const movs: Array<PorE> = [];
+  const movs: PieceOrEmpTargets = [];
   const targetRow = turn === 0 ? row - 2 : row + 2;
   const targetCol1 = col + 1;
   const targetCol2 = col - 1;
-  const inRange = (x: number) => {
-    return 0 <= x && x <= 8;
-  };
 
   if (inRange(targetRow)) {
     const pusing = (x: number) => {
-      const target = pos[targetRow][x];
-      if (
-        target instanceof EmpObj ||
-        (target instanceof PieceObj && target.whose !== turn)
-      ) {
+      const target: CellComponent = pos[targetRow][x];
+      if (isEmp(target) || isEnemyPiece(target, turn)) {
         movs.push(target);
       }
     };
@@ -89,4 +85,16 @@ function movOnBoard(props: PosTurn, pieceObj: PieceObj): Array<PorE> {
   }
 
   return movs;
+}
+
+function isCapturePiece(row: number): boolean {
+  return row === -1;
+}
+
+function inRange(i: number): boolean {
+  return 0 <= i && i <= 8;
+}
+
+function isEnemyPiece(target: CellComponent, turn: number): target is PieceObj {
+  return isPiece(target) && target.whose !== turn;
 }

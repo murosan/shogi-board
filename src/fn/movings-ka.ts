@@ -115,5 +115,5 @@ function isCapturePiece(piece: PieceObj): boolean {
 }
 
 function isOutOfBoard(row: number, col: number): boolean {
-  return 0 >= row || row >= 8 || 0 >= col || col >= 8;
+  return 0 > row || row > 8 || 0 > col || col > 8;
 }

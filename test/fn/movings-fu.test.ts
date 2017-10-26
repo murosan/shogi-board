@@ -13,7 +13,7 @@ describe('movings-fu', async () => {
     expect(fuMovings[0]).toEqual(positions.pos[5][7]);
   });
 
-  test('持ち駒の歩の置き場所判定ができる', () => {
+  test('持ち駒の歩の置き場所判定ができる', async () => {
     const positions = initForTest(1);
     const fu = <PieceObj>positions.cap1.captures.get('歩')[0];
     fu.canMoveTo = movings({ pieceObj: fu, positions: positions });

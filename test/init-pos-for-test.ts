@@ -144,7 +144,7 @@ export default function initPositions(turn: number = 0): Positions {
       new EmpObj(),
       new EmpObj(),
       new EmpObj(),
-      new PieceObj('成香', 0, 8, 4),
+      new PieceObj('成香', 1, 8, 4),
       new EmpObj(),
       new EmpObj(),
       new EmpObj(),

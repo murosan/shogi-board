@@ -28,7 +28,13 @@ export default function movings(props: MovProps): Targets {
     return movKe(props);
   } else if (name === '銀') {
     return movGi(props);
-  } else if (name === '金') {
+  } else if (
+    name === '金' ||
+    name === 'と' ||
+    name === '成香' ||
+    name === '成桂' ||
+    name === '成銀'
+  ) {
     return movKi(props);
   } else if (name === '角') {
     return movKa(props);

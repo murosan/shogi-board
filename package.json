@@ -1,6 +1,6 @@
 {
   "name": "shogi-board",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "shogi-board for browser",
   "main": "app.js",
   "keywords": ["shogi", "board"],

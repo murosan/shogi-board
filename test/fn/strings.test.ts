@@ -6,20 +6,20 @@ import {
   pieceId,
 } from '../../src/fn/strings';
 
-test('行(段)、列(筋)の文字列が取得できる', () => {
+test('行(段)、列(筋)の文字列が取得できる', async () => {
   expect(colString(6)).toBe('３');
   expect(rowString(3)).toBe('四');
   expect(locationString(5, 2)).toBe('７六');
   expect(locationString(-1, -1)).toBe('持ち駒');
 });
 
-test('駒名を成ったとき、持ち駒化したとき変えることができる', () => {
+test('駒名を成ったとき、持ち駒化したとき変えることができる', async () => {
   expect(turnOverPieceName('歩', 'promote')).toBe('と');
   expect(turnOverPieceName('歩', 'demote')).toBe('歩');
   expect(turnOverPieceName('と', 'demote')).toBe('歩');
 });
 
-test('駒のIdを取得できる', () => {
+test('駒のIdを取得できる', async () => {
   expect(pieceId('歩', 0, false)).toBe('fu-0');
   expect(pieceId('歩', 0, true)).toBe('fu-1');
   expect(pieceId('歩', 1, false)).toBe('fu-1');

@@ -19,7 +19,7 @@ export default function movKe(props: MovProps): PieceOrEmpTargets {
   const pos = positions.pos;
   const turn = positions.turn;
 
-  if (isCapturePiece(piece.row)) {
+  if (isCapturePiece(piece)) {
     return movCapture({ pos: pos, turn: turn });
   } else {
     return movOnBoard({ pos: pos, turn: turn }, piece);
@@ -87,8 +87,8 @@ function movOnBoard(props: PosTurn, pieceObj: PieceObj): PieceOrEmpTargets {
   return movs;
 }
 
-function isCapturePiece(row: number): boolean {
-  return row === -1;
+function isCapturePiece(piece: PieceObj): boolean {
+  return piece.row === -1;
 }
 
 function inRange(i: number): boolean {

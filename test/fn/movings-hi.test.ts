@@ -2,8 +2,8 @@ import PieceObj from '../../src/game-handler/piece';
 import movings from '../../src/fn/movings';
 import initForTest from '../init-pos-for-test';
 
-describe('movings-hi', () => {
-  test('盤上の動き判定ができる', () => {
+describe('movings-hi', async () => {
+  test('盤上の動き判定ができる', async () => {
     //手番を後手に設定
     const positions = initForTest(1);
     const target1 = positions.pos[3][4];
@@ -17,7 +17,7 @@ describe('movings-hi', () => {
     expect(hisha.canMoveTo.length).toEqual(9);
   });
 
-  test('持ち駒を置ける場所を判定できる', () => {
+  test('持ち駒を置ける場所を判定できる', async () => {
     //手番を後手に設定
     const positions = initForTest(1);
     const hisha = positions.cap1.captures.get('飛')[0];

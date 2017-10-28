@@ -1,19 +1,13 @@
 export function rowString(r: number): string {
-  const row: Array<string> = ['一', '二', '三', '四', '五', '六', '七', '八', '九'];
-  return row[r];
+  return ['一', '二', '三', '四', '五', '六', '七', '八', '九'][r];
 }
 
 export function colString(c: number): string {
-  const col: Array<string> = ['９', '８', '７', '６', '５', '４', '３', '２', '１'];
-  return col[c];
+  return ['９', '８', '７', '６', '５', '４', '３', '２', '１'][c];
 }
 
 export function locationString(r: number, c: number): string {
-  if (isOnBoard(r, c)) {
-    return colString(c) + rowString(r);
-  } else {
-    return '持ち駒';
-  }
+  return isOnBoard(r, c) ? colString(c) + rowString(r) : '持ち駒';
 }
 
 function isOnBoard(row: number, col: number): boolean {
@@ -24,14 +18,6 @@ export function turnOverPieceName(
   name: string,
   opt: 'promote' | 'demote',
 ): string {
-  function isOnBoardAndPromoted(index: number): Boolean {
-    return index < 8 && opt === 'promote';
-  }
-
-  function isCaptured(index: number): Boolean {
-    return 8 <= index && opt === 'demote';
-  }
-
   const names = [
     '歩',
     '香',
@@ -53,10 +39,17 @@ export function turnOverPieceName(
   const index = names.indexOf(name);
   if (isOnBoardAndPromoted(index)) {
     return names[index + 8];
-  } else if (isCaptured(index)) {
-    return names[index - 8];
   } else {
-    return names[index];
+    const i = isCaptured(index) ? index - 8 : index;
+    return names[i];
+  }
+
+  function isOnBoardAndPromoted(index: number): Boolean {
+    return index < 8 && opt === 'promote';
+  }
+
+  function isCaptured(index: number): Boolean {
+    return 8 <= index && opt === 'demote';
   }
 }
 
@@ -88,9 +81,10 @@ export function pieceId(name: string, w: number, isReversed: boolean): string {
     return 'nk-' + whose;
   } else if (name === '成香') {
     return 'ny-' + whose;
-  } else {
-    /* name === 'と' */
+  } else if (name === 'と') {
     return 'to-' + whose;
+  } else {
+    throw new Error(`pieceId error. name: ${name} is incorrect.`);
   }
 }
 
@@ -108,9 +102,8 @@ export function generateKif(props: generateKifProps): string {
     locationString(props.targetRow, props.targetCol) +
     props.name +
     props.status;
-  if (props.status === '打') {
-    return k;
-  } else {
-    return k + '(' + (9 - props.col) + (props.row + 1) + ')';
-  }
+
+  return props.status === '打'
+    ? k
+    : k + '(' + (9 - props.col) + (props.row + 1) + ')';
 }

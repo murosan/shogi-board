@@ -86,7 +86,7 @@ function movOnBoard(props: PosTurn, pieceObj: PieceObj): PieceOrEmpTargets {
   }
 
   function isOutOfBoard(row: number): boolean {
-    return !(0 <= row && row <= 8);
+    return row < 0 || 8 < row;
   }
 
   function isEnemyPiece(piece: PieceObj, turn: number): boolean {

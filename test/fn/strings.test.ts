@@ -76,4 +76,7 @@ test('駒のIdを取得できる', async () => {
   expect(pieceId('馬', 0, true)).toBe('um-1');
   expect(pieceId('馬', 1, false)).toBe('um-1');
   expect(pieceId('馬', 1, true)).toBe('um-0');
+  expect(() => {
+    pieceId('竜', 0, false);
+  }).toThrow('pieceId error. name: 竜 is incorrect.');
 });

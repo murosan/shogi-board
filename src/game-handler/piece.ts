@@ -1,20 +1,21 @@
 import EmpObj from './emp';
 import { turnOverPieceName } from '../fn/strings';
 
-type PorE = PieceObj | EmpObj;
+type PieceOrEmp = PieceObj | EmpObj;
+type PieceOrEmpTargets = Array<PieceOrEmp>;
 
 export default class PieceObj {
   name: string;
   whose: number;
   row: number;
   col: number;
-  _canMoveTo: Array<PorE>;
+  _canMoveTo: PieceOrEmpTargets;
   constructor(
     name: string,
     whose: number,
     row: number,
     col: number,
-    _movs?: Array<PorE>,
+    _movs?: PieceOrEmpTargets,
   ) {
     this.name = name;
     this.whose = whose;
@@ -23,11 +24,11 @@ export default class PieceObj {
     this._canMoveTo = _movs || [];
   }
 
-  set canMoveTo(movs: Array<PorE>) {
+  set canMoveTo(movs: PieceOrEmpTargets) {
     this._canMoveTo = movs;
   }
 
-  get canMoveTo(): Array<PorE> {
+  get canMoveTo(): PieceOrEmpTargets {
     return this._canMoveTo;
   }
 
@@ -35,55 +36,35 @@ export default class PieceObj {
     const name = this.name;
     const row = this.row;
     const whose = this.whose;
-    const inEnemyArea: () => boolean = () => {
-      return (
-        (whose === 0 && (r <= 2 || row <= 2)) ||
-        (whose === 1 && (6 <= r || 6 <= row))
-      );
-    };
+
     if (row === -1) {
       return false;
-    } else if (
-      (name === '飛' ||
-        name === '角' ||
-        name === '銀' ||
-        name === '桂' ||
-        name === '香' ||
-        name === '歩') &&
-      inEnemyArea()
-    ) {
-      return true;
     } else {
-      return false;
+      const rowCheck = whose === 0 ? r <= 2 || row <= 2 : 6 <= r || 6 <= row;
+      const nameCheck = ['飛', '角', '銀', '桂', '香', '歩'].includes(name);
+      return rowCheck && nameCheck;
     }
   }
 
-  canMove(target: PorE): boolean {
+  canMove(target: PieceOrEmp): boolean {
     const movs = this.canMoveTo;
-    if (movs && movs.includes(target)) {
-      return true;
-    } else {
-      return false;
-    }
+    return movs && movs.includes(target);
   }
 
   canMoveNext(turn: number, r: number): boolean {
     const name = this.name;
-    const d: Array<boolean> = turn === 0 ? [r <= 0, r <= 1] : [8 <= r, 7 <= r];
-    if (((name === '歩' || name === '香') && d[0]) || (name === '桂' && d[1])) {
-      return false;
+    if (name === '歩' || name === '香') {
+      return turn === 0 ? 0 < r : r < 8;
+    } else if (name === '桂') {
+      return turn === 0 ? 1 < r : r < 7;
     } else {
       return true;
     }
   }
 
   captured(): PieceObj {
-    return new PieceObj(
-      turnOverPieceName(this.name, 'demote'),
-      1 - this.whose,
-      -1,
-      -1,
-    );
+    const newName = turnOverPieceName(this.name, 'demote');
+    return new PieceObj(newName, 1 - this.whose, -1, -1);
   }
 
   move(r: number, c: number): PieceObj {
@@ -91,12 +72,8 @@ export default class PieceObj {
   }
 
   promote(r: number, c: number): PieceObj {
-    return new PieceObj(
-      turnOverPieceName(this.name, 'promote'),
-      this.whose,
-      r,
-      c,
-    );
+    const newName = turnOverPieceName(this.name, 'promote');
+    return new PieceObj(newName, this.whose, r, c);
   }
 
   update() {

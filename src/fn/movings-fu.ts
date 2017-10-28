@@ -13,12 +13,6 @@ interface PosTurn {
   pos: Array<Array<CellComponent>>;
   turn: number;
 }
-interface AddTargetProps {
-  target: CellComponent;
-  listCanMoveTo: EmpTargets;
-  turn: number;
-  row: number;
-}
 
 export default function movFu(props: MovProps): PieceOrEmpTargets {
   const piece = props.pieceObj;
@@ -72,7 +66,7 @@ function movCapture(props: PosTurn): EmpTargets {
       return handleRec(listCanMoveTo);
     }
 
-    function handleRec(listCanMoveTo: EmpTargets) {
+    function handleRec(listCanMoveTo: EmpTargets): EmpTargets {
       const isNotDup = notDuplicated(col, props);
       const list = isNotDup ? rowRec(0, listCanMoveTo) : listCanMoveTo;
       return colRec(col + 1, list);
@@ -83,16 +77,11 @@ function movCapture(props: PosTurn): EmpTargets {
         return listCanMoveTo.slice();
       } else {
         const target: CellComponent = pos[row][col];
-        const movs_ = addTargetIfEmp({ target, listCanMoveTo, turn, row });
+        const movs_ =
+          isEmp(target) && isNotEdge(row, turn)
+            ? listCanMoveTo.concat(target)
+            : listCanMoveTo;
         return rowRec(row + 1, movs_);
-      }
-    }
-
-    function addTargetIfEmp(props: AddTargetProps): EmpTargets {
-      if (isEmp(props.target) && isNotEdge(props.row, turn)) {
-        return props.listCanMoveTo.concat(props.target);
-      } else {
-        return props.listCanMoveTo.slice();
       }
     }
   }

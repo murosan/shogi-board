@@ -3,7 +3,7 @@ import movings from '../../src/fn/movings';
 import initForTest from '../init-pos-for-test';
 
 describe('movings-hi', async () => {
-  test('盤上の動き判定ができる', async () => {
+  test('盤上の動き判定ができる(飛車)', async () => {
     //手番を後手に設定
     const positions = initForTest(1);
     const target1 = positions.pos[3][4];
@@ -15,6 +15,13 @@ describe('movings-hi', async () => {
     const hisha = <PieceObj>changeTurn.pos[3][4];
     hisha.canMoveTo = movings({ pieceObj: hisha, positions: changeTurn });
     expect(hisha.canMoveTo.length).toEqual(9);
+  });
+
+  test('盤上の動き判定ができる(龍)', async () => {
+    const positions = initForTest(1);
+    const ryu = <PieceObj>positions.pos[7][8];
+    ryu.canMoveTo = movings({ pieceObj: ryu, positions: positions });
+    expect(ryu.canMoveTo.length).toEqual(12);
   });
 
   test('持ち駒を置ける場所を判定できる', async () => {

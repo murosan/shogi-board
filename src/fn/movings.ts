@@ -28,13 +28,7 @@ export default function movings(props: MovProps): Targets {
     return movKe(props);
   } else if (name === '銀') {
     return movGi(props);
-  } else if (
-    name === '金' ||
-    name === 'と' ||
-    name === '成香' ||
-    name === '成桂' ||
-    name === '成銀'
-  ) {
+  } else if (['金', 'と', '成香', '成桂', '成銀'].includes(name)) {
     return movKi(props);
   } else if (name === '角') {
     return movKa(props);
@@ -42,10 +36,11 @@ export default function movings(props: MovProps): Targets {
     return movHi(props);
   } else if (name === '玉') {
     return movGy(props);
+  } else if (name === '馬') {
+    return Array.from(new Set(movGy(props).concat(movKa(props))));
+  } else if (name === '龍') {
+    return Array.from(new Set(movGy(props).concat(movHi(props))));
   } else {
-    /* name === '馬' || name === '龍' */
-    const targets = name === '馬' ? movKa(props) : movHi(props);
-    const listCanMoveTo = movGy(props).concat(targets);
-    return Array.from(new Set(listCanMoveTo));
+    throw new Error('pieceName is incorrect.');
   }
 }

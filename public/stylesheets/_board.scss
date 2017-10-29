@@ -2,71 +2,57 @@
   @include backgr;
   flex: 3;
   background-image: url($img-path-c + '/board.png');
-
   .row-container {
     @include flex-disp(1);
-
     .cell {
       @include flex-disp(3);
       @include aspect(109%);
       border-top: 0.2vw solid;
       border-left: 0.2vw solid;
-
       .piece {
         @include flex-disp(1);
         @include backgr;
         flex-direction: column;
-
         .confirm-button {
           @include flex-disp(1);
           @include backgr;
           font-size: 0.4vw;
           display: block;
         }
-
         #cbtn-promote {
           background-size: 38%;
           background-color: $color-promote;
           background-image: url($img-path-c + '/promote.png');
-
           &:hover {
             background-color: $color-promote-hv;
           }
         }
-
         #cbtn-not-promote {
           background-size: 75%;
           background-color: $color-not-promote;
           background-image: url($img-path-c + '/notpromote.png');
-
           &:hover {
             background-color: $color-not-promote-hv;
           }
         }
       }
-
       .piece-turn {
         &:hover {
           background-color: $color-gr-selected;
         }
       }
-
       .selected {
         background-color: $color-gr-selected;
       }
     }
-
     .cell-bottom {
       border-bottom: 0.2vw solid;
     }
-
     .cell-right {
       border-right: 0.2vw solid;
     }
-
     .star {
       position: relative;
-
       &:before {
         content: '';
         position: absolute;
@@ -78,20 +64,16 @@
         background-color: black;
       }
     }
-
     .corner {
       @include flex-disp(1);
       @include aspect(100%);
     }
-
     .edge-vertical {
       @include edge(1);
     }
-
     .edge-horizontal {
       @include edge(3);
     }
-
     .edge-text {
       font-size: 1.2vw;
     }

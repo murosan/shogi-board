@@ -16,32 +16,9 @@
   flex-direction: column;
   margin-left: 0.25vw;
   margin-right: 0.25vw;
-
   .space {
     @include flex-disp(1);
   }
-  /*
-		.player-info {
-		@include flex-disp(1);
-		border-radius: .25vw;
-		background-color: white;
-		border: .35vw solid #85A478;
-		.info-container {
-			@include flex-disp(1);
-			flex-direction: column;
-			.play-info {
-				flex: 1;
-				overflow: scroll;
-			}
-			.player-info-text {
-				font-size: 1.6vw;
-				overflow: scroll;
-				word-break: break-all;
-			}
-		}
-	}
-*/
-
   .kif-area {
     @include flex-disp(3);
     @include overflow;
@@ -51,57 +28,50 @@
     background-color: $color-gray;
     margin-bottom: 0.5vw;
     padding-top: 0.5vw;
-
     &:-webkit-scrollbar {
       display: none;
     }
-
     .kif {
       white-space: nowrap;
-
-      &:hover {
-        background-color: $color-gray-hv;
-      }
-
       span.number {
         color: gray;
         margin-right: 1vw;
         margin-left: 1vw;
       }
     }
-
     .branch {
       font-size: 90%;
       color: $color-branch;
-      margin-left: 3vw;
+      span {
+        margin-left: 3vw;
+      }
     }
-
+    .kif,
+    .branch {
+      &:hover {
+        background-color: $color-gray-hv;
+      }
+    }
     #current-kif {
       background-color: $color-gray-hv;
     }
   }
-
   .btn-area {
     @include flex-disp(3);
     flex-direction: column;
     margin-top: 0.5vw;
     resize: none;
-
     .btn-row {
       @include flex-disp(1);
-
       .btn {
         @include button;
-
         &:hover {
           background-color: $color-gr-hv;
         }
-
         &:active {
           background-color: $color-gr-ac;
         }
       }
-
       .btn-inactive {
         @include button;
         color: $color-bl;

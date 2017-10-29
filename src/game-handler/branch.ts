@@ -58,19 +58,13 @@ export default class Branch {
    * @param positions 比較する配置
    */
   hasSamePos(positions: Positions): MatchTuple {
-    let index: number | undefined;
-    const result: boolean = !this.branch.every(checkKif);
-    return [result, index];
+    return this.branch.reduce(matchCheck, [false, undefined]);
 
-    function checkKif(k: Kif, i: number): boolean {
-      const head: KifComponent = k.history[0];
-      const match: boolean = isBranch(head)
-        ? false
-        : head.positions.match(positions);
-      if (match) {
-        index = i;
-      }
-      return !match;
+    function matchCheck(previous: MatchTuple, current: Kif, i: number) {
+      const head: KifComponent = current.history[0];
+      const match: boolean = !isBranch(head) && head.positions.match(positions);
+      const result: MatchTuple = match ? [true, i] : previous;
+      return result;
     }
   }
 
@@ -83,22 +77,22 @@ export default class Branch {
     const displayIndex = this.displayIndex;
     const headHasCurrent: MatchTuple = this.hasCurrent(target.positions);
     return headHasCurrent[0]
-      ? new Branch(branch.map(kifRec), headHasCurrent[1])
+      ? new Branch(branch.map(handleIndex), headHasCurrent[1])
       : handleBranch();
 
-    function handleBranch() {
-      const filter = branch.filter(isDispKif);
-      const kifChangedIndex = branch[displayIndex].changeIndex(target);
-      const indexChanged = filter.concat(kifChangedIndex);
-      return new Branch(indexChanged, indexChanged.length - 1);
+    function handleBranch(): Branch {
+      const excluded = branch.filter(excludeDisplayedKif);
+      const indexChanged = branch[displayIndex].changeIndex(target);
+      const combined = excluded.concat(indexChanged);
+      return new Branch(combined, combined.length - 1);
     }
 
-    function kifRec(k: Kif, i: number): Kif {
+    function handleIndex(k: Kif, i: number): Kif {
       return i === headHasCurrent[1] ? k.changeIndex(target) : k.setIndexZero();
     }
 
-    function isDispKif(kif: Kif, i: number): boolean {
-      return kif === branch[displayIndex];
+    function excludeDisplayedKif(kif: Kif): boolean {
+      return kif !== branch[displayIndex];
     }
   }
 
@@ -107,17 +101,14 @@ export default class Branch {
    * @param current 現在局面
    */
   hasCurrent(current: Positions): MatchTuple {
-    const result: boolean = !this.branch.every(checkKif);
-    let index: number | undefined;
-    return [result, index];
+    return this.branch.reduce(check, [false, undefined]);
 
-    function checkKif(k: Kif, i: number): boolean {
-      const h: KifComponent = k.history[0];
-      const res: boolean = !isBranch(h) && h.positions !== current;
-      if (!res) {
-        index = i;
-      }
-      return res;
+    function check(previous: MatchTuple, cur: Kif, i: number): MatchTuple {
+      const head: KifComponent = cur.history[0];
+      const headIsCurrent: boolean =
+        !isBranch(head) && head.positions === current;
+      const result: MatchTuple = headIsCurrent ? [true, i] : previous;
+      return result;
     }
   }
 

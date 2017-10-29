@@ -3,15 +3,12 @@
   @include backgr;
   border-radius: 0.5vw;
   flex-direction: column;
-
   .cap-row {
     @include flex-disp(1);
-
     .cap-sep-area {
       flex: 1;
       padding-top: 0.1em;
       position: relative;
-
       .cap-piece {
         @include backgr;
         @include aspect(109%);
@@ -19,13 +16,11 @@
         display: inline-block;
         vertical-align: bottom;
       }
-
       .selected {
         background-color: $color-gr;
       }
     }
   }
-
   .cap-row-1 {
     flex-direction: row-reverse;
   }

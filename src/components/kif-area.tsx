@@ -51,7 +51,9 @@ export default class KifArea extends React.Component<
           key={crypto.randomBytes(8).toString('hex')}
           className={'branch'}
           onClick={() => this.props.kifClick(head)}
-        >{`-- ${head.str}`}</div>
+        >
+          <span>{`-- ${head.str}`}</span>
+        </div>
       );
     });
   }

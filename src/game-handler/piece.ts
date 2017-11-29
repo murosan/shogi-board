@@ -33,15 +33,13 @@ export default class PieceObj {
   }
 
   canPromote(r: number): boolean {
-    const name = this.name;
     const row = this.row;
-    const whose = this.whose;
+    return row !== -1 && check(this);
 
-    if (row === -1) {
-      return false;
-    } else {
-      const rowCheck = whose === 0 ? r <= 2 || row <= 2 : 6 <= r || 6 <= row;
-      const nameCheck = ['飛', '角', '銀', '桂', '香', '歩'].includes(name);
+    function check(this_: PieceObj): boolean {
+      const rowCheck =
+        this_.whose === 0 ? r <= 2 || row <= 2 : 6 <= r || 6 <= row;
+      const nameCheck = ['飛', '角', '銀', '桂', '香', '歩'].includes(this_.name);
       return rowCheck && nameCheck;
     }
   }
@@ -53,12 +51,18 @@ export default class PieceObj {
 
   canMoveNext(turn: number, r: number): boolean {
     const name = this.name;
-    if (name === '歩' || name === '香') {
-      return turn === 0 ? 0 < r : r < 8;
-    } else if (name === '桂') {
+    return ['歩', '香', '桂'].includes(name) ? check() : true;
+
+    function check() {
+      return name === '桂' ? kei() : fu();
+    }
+
+    function kei(): boolean {
       return turn === 0 ? 1 < r : r < 7;
-    } else {
-      return true;
+    }
+
+    function fu(): boolean {
+      return turn === 0 ? 0 < r : r < 8;
     }
   }
 

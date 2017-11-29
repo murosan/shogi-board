@@ -21,11 +21,12 @@ export default class Captures {
   }
 
   nonEmpty(): boolean {
-    const capsArr = Array.from(this.captures);
-    return capsArr.every(e => {
-      const v: Array<PieceObj> = e[1];
-      return v && 0 < v.length;
-    });
+    return Array.from(this.captures).every(lengthCheck);
+
+    function lengthCheck(e: [string, Array<PieceObj>]): boolean {
+      const val = e[1];
+      return val && 0 < val.length;
+    }
   }
 
   isEmpty(): boolean {
@@ -33,58 +34,57 @@ export default class Captures {
   }
 
   inc(pieceObj: PieceObj): Captures {
-    const name = pieceObj.name;
-    const capsArr: Array<KeyVal> = Array.from(this.captures);
-    const caps = capsArr.map(sep => {
-      const key: string = sep[0];
-      const value: Array<PieceObj> = sep[1].map((p: PieceObj) => {
-        return p.update();
-      });
-      if (key === name) {
-        value.push(pieceObj.update());
-      }
-      return <KeyVal>[key, value];
-    });
+    const caps = Array.from(this.captures).map(handleSep);
     return new Captures(this.whose, new Map(caps));
+
+    function handleSep(
+      sep: [string, Array<PieceObj>],
+    ): [string, Array<PieceObj>] {
+      const value: Array<PieceObj> =
+        sep[0] === pieceObj.name ? sep[1].concat(pieceObj.update()) : sep[1];
+      return [sep[0], value];
+    }
   }
 
   dec(pieceObj: PieceObj): Captures {
-    const name = pieceObj.name;
-    const capsArr: Array<KeyVal> = Array.from(this.captures);
-    const caps = capsArr.map(sep => {
-      const index = sep[1].indexOf(pieceObj);
-      const key: string = sep[0];
-      const value: Array<PieceObj> = sep[1].map((p: PieceObj) => {
-        return p.update();
-      });
-      if (key === name && index !== -1) {
-        value.splice(index, 1);
-      }
-      return <KeyVal>[key, value];
-    });
+    const caps = Array.from(this.captures).map(handleSep);
     return new Captures(this.whose, new Map(caps));
+
+    function handleSep(
+      sep: [string, Array<PieceObj>],
+    ): [string, Array<PieceObj>] {
+      const index = sep[1].indexOf(pieceObj);
+      return <KeyVal>[sep[0], sep[1].filter(excludeTarget)];
+
+      function excludeTarget(p: PieceObj): boolean {
+        return !(sep[0] === pieceObj.name && index !== -1);
+      }
+    }
   }
 
   update() {
-    const capsArr: Array<KeyVal> = Array.from(this.captures);
-    const caps = capsArr.map(sep => {
-      const key: string = sep[0];
-      const value: Array<PieceObj> = sep[1].map((p: PieceObj) => {
-        return p.update();
-      });
-      return <KeyVal>[key, value];
-    });
+    const caps = Array.from(this.captures).map(handleSep);
     return new Captures(this.whose, new Map(caps));
+
+    function handleSep(
+      sep: [string, Array<PieceObj>],
+    ): [string, Array<PieceObj>] {
+      return [sep[0], sep[1].map(updateEach)];
+    }
+
+    function updateEach(p: PieceObj): PieceObj {
+      return p.update();
+    }
   }
 
   match(c: Captures): boolean {
     const cA = Array.from(c.captures);
     const cB = Array.from(this.captures);
-    const matchCap = cA.every((kvA: KeyVal, i: number) => {
-      const kvB = cB[i];
-      return kvA[0] === kvB[0] && kvA[1].length === kvB[1].length;
-    });
+    return c.whose === this.whose && cA.every(check);
 
-    return c.whose === this.whose && matchCap;
+    function check(keyValA: KeyVal, i: number): boolean {
+      const kvB = cB[i];
+      return keyValA[0] === kvB[0] && keyValA[1].length === kvB[1].length;
+    }
   }
 }

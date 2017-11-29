@@ -52,9 +52,9 @@ export default class Positions {
       }
 
       function bothPieceAndSame(a: CellComponent, b: CellComponent): boolean {
-        return isPiece(b) && isPiece(a)
-          ? b.name === a.name && b.whose === a.whose
-          : false;
+        return (
+          isPiece(b) && isPiece(a) && b.name === a.name && b.whose === a.whose
+        );
       }
     }
   }
@@ -126,18 +126,22 @@ export default class Positions {
     }
 
     function referringTarget(row: number, col: number): CellComponent {
-      if (source.canPromote(row)) {
-        return handleCanPromote(row, col);
-      } else {
-        // 成れない駒は自動で'成'(成駒、玉、金)
+      return source.canPromote(row)
+        ? handleCanPromote(row, col)
+        : autoPromote();
+
+      function autoPromote(): CellComponent {
         pushKif(source.row === -1 ? '打' : '', row, col, source);
         return source.move(row, col);
       }
     }
 
     function handleCanPromote(row: number, col: number): CellComponent {
-      if (source.canMoveNext(turn, row)) {
-        // [成/不成]確認cellの作成
+      return source.canMoveNext(turn, row)
+        ? makePromotionConfirm()
+        : autoPromote();
+
+      function makePromotionConfirm(): CellComponent {
         const pc = new PromotionConfirmObj(
           source,
           source.move(row, col),
@@ -145,8 +149,9 @@ export default class Positions {
         );
         newSelected.push(pc);
         return pc;
-      } else {
-        // 不成だと次に動けない駒は自動で'成'(歩、桂、香の反則防止)
+      }
+
+      function autoPromote(): CellComponent {
         pushKif('成', row, col, source);
         return source.promote(row, col);
       }

@@ -13,6 +13,8 @@
 
 ## 対応ブラウザ
 
+*2017年11月 : Chromeで、手番側の駒要素にhover-colorが反映されない状態になってしまっています。  
+
 最新版のChrome、Safari、Opera、Firefox、Edge。
 PCで見てください。  
 
@@ -28,7 +30,7 @@ PCで見てください。
   $ yarn
   $ yarn start
   // yarn run start:w で自動化
-  // localhost:3000にアクセス
+  // localhost:3000
   ```
 
 - ビルド
@@ -55,14 +57,19 @@ PCで見てください。
   $ yarn prettier
   ```
 
-- 使用した主なライブラリ
+### ファイル構成
 
-  - [Express](https://github.com/expressjs/express)
-  - [TypeScript](https://github.com/Microsoft/TypeScript)
-  - [React.js](https://github.com/facebook/react)
-  - [Node-Sass](https://github.com/sass/node-sass)
-  - [Webpack](https://github.com/webpack/webpack)
-
+- src/
+  - components/  
+    Reactコンポーネント(UI部分)
+  - fn/  
+    駒の動き判定、文字列関係の関数
+  - game-handler  
+    駒の配置や持ち駒、棋譜生成などに関するクラスがある  
+    配置(Positions)クラス  
+    持ち駒(Captures)クラス  
+    駒(Piece)クラス  
+    棋譜(Kif / Branch)クラスなど
 
 ## ライセンス
 

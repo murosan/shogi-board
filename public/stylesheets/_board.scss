@@ -40,6 +40,9 @@
         &:hover {
           background-color: $color-gr-selected;
         }
+        &:active {
+          background-color: darken($color-gr-selected, 20%);
+        }
       }
       .selected {
         background-color: $color-gr-selected;

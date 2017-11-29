@@ -67,7 +67,7 @@ PCで見てください。
   - game-handler  
     駒の配置や持ち駒、棋譜生成などに関するクラスがある  
     配置(Positions)クラス  
-    持ち駒(Captures)クラス  
+    持ち駒(Captures)クラス  
     駒(Piece)クラス  
     棋譜(Kif / Branch)クラスなど
 

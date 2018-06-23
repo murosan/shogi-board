@@ -20,3 +20,11 @@ test('持ち駒を減らすことができる', () => {
   const dec = inc.dec(inc.captures.get('歩')[0]);
   expect(dec.captures.get('歩').length).toBe(0);
 });
+
+test('持ち駒を減らすことができる(複数あっても)', () => {
+  const inc = new Captures(0)
+    .inc(new PieceObj('歩', 0, -1, -1))
+    .inc(new PieceObj('歩', 0, -1, -1));
+  const dec = inc.dec(inc.captures.get('歩')[0]);
+  expect(dec.captures.get('歩').length).toBe(1);
+});

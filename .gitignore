@@ -6,3 +6,4 @@ public/dist/*
 !public/dist/.gitkeep
 coverage/
 **/__snapshots__/
+*.log

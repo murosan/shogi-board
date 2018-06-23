@@ -28,7 +28,7 @@ export default class Game extends React.Component<
   GameState
 > {
   constructor(props: { init: Positions }) {
-    super();
+    super(props);
     this.state = {
       positions: props.init,
       indexes: [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9],

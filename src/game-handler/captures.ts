@@ -54,11 +54,10 @@ export default class Captures {
       sep: [string, Array<PieceObj>],
     ): [string, Array<PieceObj>] {
       const index = sep[1].indexOf(pieceObj);
-      return <KeyVal>[sep[0], sep[1].filter(excludeTarget)];
-
-      function excludeTarget(p: PieceObj): boolean {
-        return !(sep[0] === pieceObj.name && index !== -1);
+      if (index !== -1) {
+        sep[1].pop();
       }
+      return <KeyVal>[sep[0], sep[1]];
     }
   }
 

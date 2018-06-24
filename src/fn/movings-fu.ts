@@ -94,11 +94,11 @@ function movOnBoard(props: PosTurn, pieceObj: PieceObj): PieceOrEmpTargets {
   const col = pieceObj.col;
   const targetRow = turn === 0 ? row - 1 : row + 1;
 
-  if (isNotEdge(targetRow, turn)) {
+  if (isOutOfBoard(targetRow)) {
+    return [];
+  } else {
     const target: CellComponent = pos[targetRow][col];
     return setTargetIfEnemyPieceOrEmp(target, turn);
-  } else {
-    return [];
   }
 
   function setTargetIfEnemyPieceOrEmp(
@@ -118,6 +118,10 @@ function movOnBoard(props: PosTurn, pieceObj: PieceObj): PieceOrEmpTargets {
   ): target is PieceObj {
     return isPiece(target) && target.whose !== turn;
   }
+}
+
+function isOutOfBoard(row: number): boolean {
+  return row < 0 || 8 < row;
 }
 
 function isNotEdge(row: number, turn: number): boolean {

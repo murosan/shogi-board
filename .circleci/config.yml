@@ -21,7 +21,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Jest Suit
-          command: yarn test -- --ci --testResultsProcessor="jest-junit" && yarn codecov
+          command: yarn test --coverage --ci --reporters=default --reporters=jest-junit && yarn codecov
           environment:
             JEST_JUNIT_OUTPUT: reports/junit/test-results.xml
       - store_test_results:

@@ -13,55 +13,43 @@
 
 ## 対応ブラウザ
 
-*2017年11月 : Chromeで、手番側の駒要素にhover-colorが反映されない状態になってしまっています。  
-
-最新版のChrome、Safari、Opera、Firefox、Edge。
-PCで見てください。  
+PC 最新版の Chrome のみ
 
 ## 開発
 
 - セットアップ
 
-  Node.js v6.11.1 以上が必要です。また、npmに変えてyarnを使用しています。
+  Node.js `v10.14.1`
 
-  ```
+  ```sh
   $ git clone https://github.com/murosan/shogi-board
   $ cd shogi-board
   $ yarn
-  $ yarn start
-  // yarn run start:w で自動化
-  // localhost:3000
   ```
 
 - ビルド
 
-  ```
-  $ yarn run webpack
-  // 自動化
-  $ yarn run webpack:w
-  // 本番
-  $ yarn run webpack:p
+  ```sh
+  # 本番
+  $ yarn build
+  # 開発
+  $ yarn start
   ```
 
 - テスト
 
-  ```
+  ```sh
+  # watch
   $ yarn test
-  // 自動化
-  $ yarn test:w
-  ```
-
-- コード整形
-
-  ```
-  $ yarn prettier
+  # coverage
+  $ yarn test:c
   ```
 
 ### ファイル構成
 
 - src/
   - components/  
-    Reactコンポーネント(UI部分)
+    React コンポーネント(UI 部分)
   - fn/  
     駒の動き判定、文字列関係の関数
   - game-handler  
@@ -77,6 +65,7 @@ PCで見てください。
   MIT License
 
 - イメージ・画像
+
   - pieces, board(adapted)  
     by [muchonovski](http://mucho.girly.jp/bona)  
     under [Creative Commons 表示-非営利 2.1 日本 License](https://creativecommons.org/licenses/by-nc/2.1/jp/)

@@ -1,0 +1,141 @@
+@import '../../styles/paths';
+@import '../../styles/modules';
+// @import '../../styles/pieces';
+
+$radius: 0.5vw;
+$captureAspectValue: 109%;
+
+.Captures {
+  @include backImgCenter;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    'hisha kaku kin'
+    'gin kei kyou'
+    'fu fu fu';
+  border-radius: $radius;
+  background-image: url($ImgComponentsPath+'/cap_stand.png');
+}
+
+// TODO: 駒の影が逆になってしまった
+.Captures1 {
+  transform: rotate(180deg);
+}
+
+.Captures-Inner {
+  position: relative;
+  padding-top: 0.1em;
+  overflow: hidden;
+
+  div {
+    position: absolute;
+    bottom: 0;
+    @include aspect($captureAspectValue);
+  }
+}
+
+.Captures-Hisha {
+  grid-area: hisha;
+}
+
+.Captures-Kaku {
+  grid-area: kaku;
+}
+
+.Captures-Kin {
+  grid-area: kin;
+}
+
+.Captures-Gin {
+  grid-area: gin;
+}
+
+.Captures-Kei {
+  grid-area: kei;
+}
+
+.Captures-Kyou {
+  grid-area: kyou;
+}
+
+.Captures-Fu {
+  grid-area: fu;
+}
+
+// 持ち駒の細かい position を生成
+
+// pieceId: 最大枚数
+$piecePositionMap: (
+  1: 18,
+  2: 4,
+  3: 4,
+  4: 4,
+  5: 4,
+  6: 2,
+  7: 2,
+);
+
+@function two($count, $nth) {
+  @if $count == 1 {
+    @return 10%;
+  } @else {
+    @return $nth * 20% - 20%;
+  }
+}
+
+@function four($count, $nth) {
+  @if $count == 1 {
+    @return 10%;
+  } @else if $count == 2 {
+    @return $nth * 25% - 25%;
+  } @else {
+    @return $nth * 10% - 15%;
+  }
+}
+
+@function eighteen($count, $nth) {
+  @if $count == 1 {
+    @return 37%;
+  } @else if $count == 2 {
+    @return $nth * 30% - 10%;
+  } @else if $count == 3 {
+    @return $nth * 25% - 14%;
+  } @else if $count == 4 {
+    @return $nth * 20% - 14%;
+  } @else if $count == 5 {
+    @return $nth * 15% - 8%;
+  } @else if $count == 6 {
+    @return $nth * 13% - 8%;
+  } @else if $count == 7 {
+    @return $nth * 11% - 8%;
+  } @else if $count <= 14 {
+    @return $nth * 100% / ($count + 3) - 7%;
+  } @else {
+    @return $nth * 100% / ($count + 4) - 7%;
+  }
+}
+
+@mixin captureStyles($id, $count, $nth) {
+  $baseWidth: 82%;
+  @if $id == 1 {
+    left: eighteen($count, $nth);
+    $baseWidth: 28%;
+  } @else if $id == 2 or $id == 3 or $id == 4 or $id == 5 {
+    left: four($count, $nth);
+  } @else {
+    left: two($count, $nth);
+  }
+  width: $baseWidth;
+}
+
+@each $id, $maxCount in $piecePositionMap {
+  @for $count from 1 through $maxCount {
+    @for $nth from 1 through $maxCount {
+      .Capture-#{$id}#{$count}#{$nth} {
+        @include captureStyles($id, $count, $nth);
+        z-index: $maxCount - $nth;
+      }
+    }
+  }
+}

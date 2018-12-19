@@ -1,0 +1,8 @@
+@import '../../styles/paths';
+@import '../../styles/modules';
+
+.LeftSide {
+  @include overflow;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+}

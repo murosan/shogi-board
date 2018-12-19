@@ -1,0 +1,18 @@
+@import '../styles/paths';
+@import '../styles/modules';
+
+.App {
+  @include backImgCenter;
+  display: grid;
+  padding: 1em;
+  min-width: 650px;
+  background-image: url($ImgComponentsPath+'/tatami.jpg');
+}
+
+.App-BoardOnly {
+  grid-template-columns: 1fr;
+}
+
+.App-SideInfo {
+  grid-template-columns: 5fr 2fr;
+}

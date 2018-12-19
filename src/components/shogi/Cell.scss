@@ -1,0 +1,65 @@
+@import '../../styles/colors';
+@import '../../styles/paths';
+@import '../../styles/modules';
+@import '../../styles/pieces';
+
+$borderColor: rgb(0, 0, 0);
+$borderWidth: 0.15vw;
+$edgeTextSize: 1.2vw;
+
+.Piece {
+  @include backImgCenter;
+}
+
+.Piece-Bordered {
+  border-bottom: $borderWidth solid $borderColor;
+  border-right: $borderWidth solid $borderColor;
+}
+
+.Piece-Turn {
+  &:hover {
+    background-color: $GreenHover;
+  }
+  &:active {
+    background-color: $GreenSelected;
+  }
+}
+
+.Piece-Selected {
+  background-color: $GreenSelected;
+  &:hover {
+    background-color: $GreenSelected;
+  }
+}
+
+.Piece-Left {
+  border-left: $borderWidth solid $borderColor;
+}
+
+.Piece-Top {
+  border-top: $borderWidth solid $borderColor;
+}
+
+.Piece-Star {
+  position: relative;
+  &::before {
+    $pos: $borderWidth * -5;
+    $width: $borderWidth * 10;
+    content: '';
+    position: absolute;
+    right: $pos;
+    bottom: $pos;
+    height: $width;
+    width: $width;
+    @include backgroundCircle;
+  }
+}
+
+.Cell-EdgeText {
+  @include flexCenter;
+  pointer-events: none;
+
+  span {
+    font-size: $edgeTextSize;
+  }
+}

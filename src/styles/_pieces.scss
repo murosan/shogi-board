@@ -1,0 +1,37 @@
+@import './paths';
+$piecesMap: (
+  1: fu0,
+  2: kyou0,
+  3: kei0,
+  4: gin0,
+  5: kin0,
+  6: kaku0,
+  7: hisha0,
+  8: gyoku0,
+  11: to0,
+  12: narikyou0,
+  13: narikei0,
+  14: narigin0,
+  15: uma0,
+  16: ryu0,
+  -1: fu1,
+  -2: kyou1,
+  -3: kei1,
+  -4: gin1,
+  -5: kin1,
+  -6: kaku1,
+  -7: hisha1,
+  -8: gyoku1,
+  -11: to1,
+  -12: narikyou1,
+  -13: narikei1,
+  -14: narigin1,
+  -15: uma1,
+  -16: ryu1,
+);
+
+@each $id, $name in $piecesMap {
+  .Piece-#{$id} {
+    background-image: url($ImgPiecesPath+'/'+$name+'.png');
+  }
+}

@@ -1,0 +1,36 @@
+// 上下中央揃え
+@mixin flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// 背景を中心に
+@mixin backImgCenter {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+// 円の画像
+@mixin backgroundCircle {
+  @include backImgCenter;
+  background-image: url('data:image/svg+xml;base64,PHN2ZwogIHZlcnNpb249IjEuMSIKICB3aWR0aD0iNCIKICBoZWlnaHQ9IjQiCiAgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIKICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiCj4KICA8Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMSI+PC9jaXJjbGU+Cjwvc3ZnPg==');
+}
+
+// 縦横比固定
+@mixin aspect($value) {
+  &::after {
+    content: '';
+    display: block;
+    padding-top: $value;
+  }
+}
+
+@mixin overflow {
+  overflow: auto;
+  -ms-overflow-style: none;
+  &:-webkit-scrollbar {
+    display: none;
+  }
+}

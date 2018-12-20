@@ -1,5 +1,5 @@
 import { newGameState } from '../../../model/shogi/GameStateInit'
-import { Fu0, Gin0, Gin1, Gyoku0, Gyoku1 } from '../../../model/shogi/Piece'
+import { Gin0, Gin1, Gyoku0, Gyoku1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import Position from '../../../model/shogi/Position'
 import emptyPosition from '../../../testutils/emptyPosition'
@@ -178,8 +178,8 @@ describe('玉の動き判定', async () => {
     expect(() => gyoku(pos, { row: -1, column: -1, piece: Gyoku1 })).toThrow()
   })
 
-  it('銀以外の駒を渡すとエラー', async () =>
+  it('玉以外の駒を渡すとエラー', async () =>
     expect(() =>
-      gyoku(emptyPosition(), { row: 4, column: 4, piece: Fu0 })
+      gyoku(emptyPosition(), { row: 4, column: 4, piece: Gin0 })
     ).toThrow())
 })

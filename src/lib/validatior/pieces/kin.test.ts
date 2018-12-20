@@ -176,7 +176,7 @@ describe('金の動き判定', async () => {
     expect(s.size).toEqual(81)
   })
 
-  it('銀以外の駒を渡すとエラー', async () =>
+  it('金以外の駒を渡すとエラー', async () =>
     expect(() =>
       kin(emptyPosition(), { row: 4, column: 4, piece: Fu0 })
     ).toThrow())

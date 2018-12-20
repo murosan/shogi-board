@@ -2,7 +2,7 @@ import { Hisha0, Hisha1, Piece } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import Position from '../../../model/shogi/Position'
 import getEmpties from '../utils/getEmpties'
-import getWithCallbacks from '../utils/getWithCallbacks'
+import getWithNextDiff from '../utils/getWithNextDiff'
 
 export default function(pos: Position, p: Point): Point[] {
   if (!p.piece || (p.piece !== Hisha0 && p.piece !== Hisha1))
@@ -16,7 +16,7 @@ export default function(pos: Position, p: Point): Point[] {
     const points: Point[] = []
 
     for (let i = 0; i < diffList.length; i++) {
-      getWithCallbacks(
+      getWithNextDiff(
         pos.pos,
         p.row + diffList[i][0],
         p.column + diffList[i][1],

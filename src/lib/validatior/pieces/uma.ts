@@ -6,7 +6,7 @@ import getFromNexts from '../utils/getFromNexts'
 import kaku from './kaku'
 
 export default function(pos: Position, p: Point): Point[] {
-  if (!p.piece || (p.piece !== Uma0 || p.piece !== Uma1))
+  if (!p.piece || (p.piece !== Uma0 && p.piece !== Uma1))
     throw new Error('Called validation for uma, but piece id was not uma.')
 
   if (p.row === -1 || p.column === -1)

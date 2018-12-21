@@ -6,7 +6,7 @@ import emptyPosition from '../../../testutils/emptyPosition'
 import kaku from './kaku'
 
 describe('角の動き判定', async () => {
-  it('障害物がないとき、縦横に無限に移動できる', async () => {
+  it('障害物がないとき、斜めに無限に移動できる', async () => {
     const pos: Position = emptyPosition()
     pos.pos[4][4] = Kaku0 // 55
     const expected: Set<Point> = new Set([

@@ -78,21 +78,15 @@ describe('歩の動き判定', async () => {
 
   it('持ち駒を1行目以外の空白マスに置ける(先手)', async () => {
     const pos: Position = emptyPosition() // 初期局面
-    const s: Set<string> = new Set()
     const points: Point[] = fu(pos, { row: -1, column: -1, piece: Fu0 })
-    points.forEach(p => s.add(`${p.row}${p.column}`))
-    expect(points).toHaveLength(72)
-    expect(s.size).toEqual(72)
+    expect(new Set(points).size).toEqual(72)
     expect(points.every(p => p.row !== 0)).toBeTruthy()
   })
 
   it('持ち駒を9行目以外空白マスに置ける(後手)', async () => {
     const pos: Position = emptyPosition()
-    const s: Set<string> = new Set()
     const points: Point[] = fu(pos, { row: -1, column: -1, piece: Fu1 })
-    points.forEach(p => s.add(`${p.row}${p.column}`))
-    expect(points).toHaveLength(72)
-    expect(s.size).toEqual(72)
+    expect(new Set(points).size).toEqual(72)
     expect(points.every(p => p.row !== 8)).toBeTruthy()
   })
 

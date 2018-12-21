@@ -22,11 +22,7 @@ export default function(pos: Position, p: Point): Point[] {
 
   function onBoard(): Point[] {
     const nextRow: number = <Piece>p.piece > 0 ? p.row - 2 : p.row + 2
-    if (nextRow < 0 || nextRow > 8)
-      throw new Error(
-        '[validate kei] Found the piece that can move to nowhere.\n' +
-          'It must be promoted when last moved.'
-      )
+    if (nextRow < 0 || nextRow > 8) return []
 
     const getPoints = (c: number) => {
       if (c < 0 || c > 8) return []

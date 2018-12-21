@@ -1,6 +1,7 @@
 import { Piece, Uma0, Uma1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import Position from '../../../model/shogi/Position'
+import { demote } from '../../handler/piece'
 import getFromNexts from '../utils/getFromNexts'
 import kaku from './kaku'
 
@@ -18,5 +19,7 @@ export default function(pos: Position, p: Point): Point[] {
     [p.row + 1, p.column],
   ]
 
-  return getFromNexts(pos.pos, nexts, <Piece>p.piece).concat(kaku(pos, p))
+  return getFromNexts(pos.pos, nexts, <Piece>p.piece).concat(
+    kaku(pos, { row: p.row, column: p.column, piece: demote(p.piece) })
+  )
 }

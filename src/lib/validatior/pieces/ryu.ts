@@ -1,6 +1,7 @@
 import { Piece, Ryu0, Ryu1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import Position from '../../../model/shogi/Position'
+import { demote } from '../../handler/piece'
 import getFromNexts from '../utils/getFromNexts'
 import hisha from './hisha'
 
@@ -18,5 +19,7 @@ export default function(pos: Position, p: Point): Point[] {
     [p.row + 1, p.column + 1],
   ]
 
-  return getFromNexts(pos.pos, nexts, <Piece>p.piece).concat(hisha(pos, p))
+  return getFromNexts(pos.pos, nexts, <Piece>p.piece).concat(
+    hisha(pos, { row: p.row, column: p.column, piece: demote(p.piece) })
+  )
 }

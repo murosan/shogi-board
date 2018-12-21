@@ -23,11 +23,7 @@ export default function(pos: Position, p: Point): Point[] {
 
   function capture(): Point[] {
     const invalidRow: number = <Piece>p.piece > 0 ? 0 : 8
-    return getEmpties(
-      pos.pos,
-      (r: number, c: number) =>
-        r !== invalidRow && !columnsOfContainingFu.includes(c)
-    )
+    return getEmpties(pos.pos, [invalidRow], columnsOfContainingFu)
   }
 
   function onBoard(): Point[] {

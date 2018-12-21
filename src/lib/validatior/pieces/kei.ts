@@ -14,10 +14,7 @@ export default function(pos: Position, p: Point): Point[] {
     const invalidRow1: number = <Piece>p.piece > 0 ? 0 : 8
     const invalidRow2: number =
       <Piece>p.piece > 0 ? invalidRow1 + 1 : invalidRow1 - 1
-    return getEmpties(
-      pos.pos,
-      (r: number, _: number) => r !== invalidRow1 && r !== invalidRow2
-    )
+    return getEmpties(pos.pos, [invalidRow1, invalidRow2])
   }
 
   function onBoard(): Point[] {

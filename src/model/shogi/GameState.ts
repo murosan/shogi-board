@@ -1,7 +1,6 @@
 import Confirm from './Confirm'
 import Point from './Point'
 import Position from './Position'
-import ValidationInfo from './ValidationInfo'
 
 /**
  * 盤面が今どういう状態かを表す
@@ -29,5 +28,5 @@ export default interface GameState {
   confirm: Confirm | undefined
 
   // 駒を動かせる場所を入れておくもの
-  vi: ValidationInfo
+  moveTargets: Point[]
 }

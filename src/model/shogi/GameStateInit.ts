@@ -1,4 +1,3 @@
-import { newValidationInfo } from '../../lib/handler/validation-info'
 import GameState from './GameState'
 import { hirate } from './PositionInit'
 
@@ -11,6 +10,6 @@ export function newGameState(): GameState {
     indexes: [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     selected: undefined,
     confirm: undefined,
-    vi: newValidationInfo(),
+    moveTargets: [],
   }
 }

@@ -8,6 +8,7 @@ import Point from '../model/shogi/Point'
 import { Turn } from '../model/shogi/Turn'
 import './App.scss'
 import BoardArea from './shogi/BoardArea'
+import getTargets from '../lib/validatior/getTargets'
 
 export interface Props {
   gs: GameState
@@ -50,12 +51,14 @@ export default class App extends Component<Props, State> {
 
     // 手番側の駒なら選択する
     if (isPiece(p.clicked) && ownerIsTurn(p.clicked, turn)) {
-      this.state.gs.selected = {
+      const point: Point = {
         row: p.row,
         column: p.column,
         piece: p.clicked,
         i: p.i || 0,
       }
+      this.state.gs.selected = point
+      this.state.gs.moveTargets = getTargets(this.state.gs.pos, point)
       this.updateState(this.state.gs)
       return
     }
@@ -73,13 +76,18 @@ export default class App extends Component<Props, State> {
         piece: p.promote ? p.clicked.promoted : p.clicked.preserved,
       })
       this.state.gs.selected = undefined
+      this.state.gs.moveTargets = []
       this.updateState(this.state.gs)
       return
     }
 
-    // TODO: バリデーション
-
     // TODO: 成・不成の選択ができるように、必要なら Confirm オブジェクトをセット
+
+    const canMove: boolean = !!this.state.gs.moveTargets.find(
+      t => t.row === p.row && t.column === p.column
+    )
+
+    if (!canMove) return
 
     this.state.gs.pos = move({
       pos: this.state.gs.pos,
@@ -88,6 +96,7 @@ export default class App extends Component<Props, State> {
       piece: sel.piece,
     })
     this.state.gs.selected = undefined
+    this.state.gs.moveTargets = []
     this.updateState(this.state.gs)
   }
 

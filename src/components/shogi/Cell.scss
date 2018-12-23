@@ -9,6 +9,7 @@ $edgeTextSize: 1.2vw;
 
 .Piece {
   @include backImgCenter;
+  position: relative;
 }
 
 .Piece-Bordered {
@@ -41,10 +42,9 @@ $edgeTextSize: 1.2vw;
 }
 
 .Piece-Star {
-  position: relative;
   &::before {
-    $pos: $borderWidth * -5;
-    $width: $borderWidth * 10;
+    $pos: $borderWidth * -3.4;
+    $width: $borderWidth * 7;
     content: '';
     position: absolute;
     right: $pos;
@@ -52,7 +52,38 @@ $edgeTextSize: 1.2vw;
     height: $width;
     width: $width;
     @include backgroundCircle;
+    z-index: 10;
   }
+}
+
+.Piece-Confirm {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  div {
+    @include backImgCenter;
+    background-color: $White;
+    width: 100%;
+    height: 50%;
+    &:hover {
+      background-color: $WhiteHover;
+    }
+  }
+}
+
+.Piece-Confirm-Promote {
+  background-image: url($ImgComponentsPath+'/promote.png');
+  background-size: 38% !important;
+}
+
+.Piece-Confirm-Preserve {
+  background-image: url($ImgComponentsPath+'/preserve.png');
+  background-size: 75% !important;
+}
+
+.Piece-Confirm1 {
+  transform: rotate(180deg);
 }
 
 .Cell-EdgeText {

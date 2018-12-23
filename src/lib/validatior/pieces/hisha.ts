@@ -12,7 +12,7 @@ export default function(pos: Position, p: Point): Point[] {
   return onBoard()
 
   function onBoard(): Point[] {
-    const diffList = [[-1, 0], [1, 0], [0, 1], [0, 1]]
+    const diffList = [[-1, 0], [1, 0], [0, -1], [0, 1]]
     const points: Point[] = []
 
     for (let i = 0; i < diffList.length; i++) {

@@ -12,8 +12,8 @@ $piecesMap: (
   12: narikyou0,
   13: narikei0,
   14: narigin0,
-  15: uma0,
-  16: ryu0,
+  16: uma0,
+  17: ryu0,
   -1: fu1,
   -2: kyou1,
   -3: kei1,
@@ -26,8 +26,8 @@ $piecesMap: (
   -12: narikyou1,
   -13: narikei1,
   -14: narigin1,
-  -15: uma1,
-  -16: ryu1,
+  -16: uma1,
+  -17: ryu1,
 );
 
 @each $id, $name in $piecesMap {

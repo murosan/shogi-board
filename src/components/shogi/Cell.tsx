@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
 import { columnString, rowString } from '../../lib/strings'
 import { ClickFunc, ClickProps } from '../../model/events/ClickFunc'
-import { Piece } from '../../model/shogi/Piece'
+import Confirm from '../../model/shogi/Confirm'
+import { Piece, Empty } from '../../model/shogi/Piece'
 import Point from '../../model/shogi/Point'
 import './Cell.scss'
 
 export interface Props {
   row: number
   column: number
-  piece: Piece | undefined
+  piece?: Piece
   isReversed: boolean
   isTurn: boolean
   selected?: Point
   click: ClickFunc
+  confirm?: Confirm
 }
 
 export default class Cell extends Component<Props, {}> {
@@ -23,12 +25,41 @@ export default class Cell extends Component<Props, {}> {
       this.props.isReversed,
       this.props.isTurn,
       this.props.selected,
-      this.props.piece
+      this.props.piece,
+      this.props.confirm
     )
+
     return (
       <div className={className} onClick={() => this.click()}>
+        {this.renderConfirm(this.props.confirm)}
         {this.renderEdgeTextRow()}
         {this.renderEdgeTextColumn()}
+      </div>
+    )
+  }
+
+  renderConfirm(cf?: Confirm): JSX.Element | undefined {
+    if (!cf || cf.row !== this.props.row || cf.column !== this.props.column)
+      return undefined
+
+    const className =
+      'Piece-Confirm Piece-Confirm' +
+      ((this.props.isReversed && cf.preserved < 0) ||
+      (!this.props.isReversed && cf.preserved > 0)
+        ? '0'
+        : '1')
+
+    // TODO: この方法だと画面幅によって1pxずれる
+    return (
+      <div className={className}>
+        <div
+          className="Piece-Confirm-Promote"
+          onClick={() => this.click(cf, true)}
+        />
+        <div
+          className="Piece-Confirm-Preserve"
+          onClick={() => this.click(cf)}
+        />
       </div>
     )
   }
@@ -49,12 +80,14 @@ export default class Cell extends Component<Props, {}> {
     return <span>{rowString(this.props.row)}</span>
   }
 
-  click() {
+  click(cf?: Confirm, promote?: true) {
+    if (this.props.confirm && !cf) return
     if (this.props.piece !== undefined) {
       const p: ClickProps = {
-        clicked: this.props.piece,
+        clicked: cf || this.props.piece,
         row: this.props.row,
         column: this.props.column,
+        promote: promote,
       }
       this.props.click(p)
     }
@@ -76,8 +109,19 @@ function getClassName(
   rv: boolean,
   isTurn: boolean,
   sel?: Point,
-  p?: Piece
+  p?: Piece,
+  confirm?: Confirm
 ): string {
+  if (
+    confirm &&
+    sel &&
+    ((r === sel.row && c === sel.column) ||
+      (r === confirm.row && c === confirm.column))
+  ) {
+    // TODO: ヒドス。あとで必ず修正すること!!
+    p = Empty
+  }
+
   const rowInRange: boolean = inRange(r)
   const colInRange: boolean = inRange(c)
   const isLeft: boolean = rowInRange && ((!rv && c === 8) || (rv && c === 0))

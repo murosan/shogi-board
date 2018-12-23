@@ -4,6 +4,7 @@ import GameState from '../../model/shogi/GameState'
 import { Piece } from '../../model/shogi/Piece'
 import './Board.scss'
 import Cell from './Cell'
+import Confirm from '../../model/shogi/Confirm'
 
 export interface Props {
   gs: GameState
@@ -32,6 +33,7 @@ export default class Board extends Component<Props, {}> {
               isTurn={isTurn}
               selected={this.props.gs.selected}
               click={this.props.click}
+              confirm={this.props.gs.confirm}
             />
           )
         })

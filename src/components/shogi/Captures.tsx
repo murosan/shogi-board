@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import './Captures.scss'
-import Point from '../../model/shogi/Point'
-import { Turn } from '../../model/shogi/Turn'
 import { ClickFunc } from '../../model/events/ClickFunc'
 import {
   Fu0,
-  Kyou0,
-  Kei0,
   Gin0,
-  Kin0,
-  Kaku0,
   Hisha0,
+  Kaku0,
+  Kei0,
+  Kin0,
+  Kyou0,
   Piece,
 } from '../../model/shogi/Piece'
+import Point from '../../model/shogi/Point'
+import { Turn } from '../../model/shogi/Turn'
+import './Captures.scss'
 
 export interface Props {
   click: ClickFunc
@@ -45,8 +45,10 @@ export default class Captures extends Component<Props, {}> {
         ? getSelectedClass(sel, pieceId, i)
         : ''
       const isTurnClass = this.props.isTurn ? 'Piece-Turn' : ''
-      const captureClass = `Capture-${pieceId}${count}${i + 1}`
-      const className = `Piece Piece-${pieceId} ${isTurnClass} ${selectedClass} ${captureClass}`
+      const piece = this.props.isLeftSide ? -pieceId : pieceId
+      const sideNumber = Number(this.props.isLeftSide)
+      const captureClass = `Capture-${pieceId}${sideNumber}${count}${i + 1}`
+      const className = `Piece Piece-${piece} ${isTurnClass} ${selectedClass} ${captureClass}`
       return (
         <div
           key={`Cap-${this.props.isLeftSide}-${name}-${i}`}
@@ -54,7 +56,7 @@ export default class Captures extends Component<Props, {}> {
           onClick={() => {
             if (this.props.isTurn)
               this.props.click({
-                clicked: this.props.turn * pieceId /* TODO: なんとかする */,
+                clicked: this.props.turn * pieceId,
                 row: -1,
                 column: -1,
                 i: i,

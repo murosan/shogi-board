@@ -10,27 +10,31 @@ $captureAspectValue: 109%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
+  border-radius: $radius;
+}
+
+.Captures0 {
   grid-template-areas:
     'hisha kaku kin'
     'gin kei kyou'
     'fu fu fu';
-  border-radius: $radius;
-  background-image: url($ImgComponentsPath+'/cap_stand.png');
+  background-image: url($ImgComponentsPath+'/cap_stand0.png');
 }
 
-// TODO: 駒の影が逆になってしまった
 .Captures1 {
-  transform: rotate(180deg);
+  grid-template-areas:
+    'fu fu fu'
+    'kyou kei gin'
+    'kin kaku hisha';
+  background-image: url($ImgComponentsPath+'/cap_stand1.png');
 }
 
 .Captures-Inner {
   position: relative;
-  padding-top: 0.1em;
   overflow: hidden;
 
   div {
     position: absolute;
-    bottom: 0;
     @include aspect($captureAspectValue);
   }
 }
@@ -116,25 +120,39 @@ $piecePositionMap: (
   }
 }
 
-@mixin captureStyles($id, $count, $nth) {
+@mixin captureStyles($id, $side, $count, $nth) {
   $baseWidth: 82%;
+  $posSide: left;
+
+  @if $side == 1 {
+    $posSide: right;
+    top: 0;
+    padding-bottom: 0.1em;
+  } @else {
+    bottom: 0;
+    padding-top: 0.1em;
+  }
+
   @if $id == 1 {
-    left: eighteen($count, $nth);
+    #{$posSide}: eighteen($count, $nth);
     $baseWidth: 28%;
   } @else if $id == 2 or $id == 3 or $id == 4 or $id == 5 {
-    left: four($count, $nth);
+    #{$posSide}: four($count, $nth);
   } @else {
-    left: two($count, $nth);
+    #{$posSide}: two($count, $nth);
   }
+
   width: $baseWidth;
 }
 
 @each $id, $maxCount in $piecePositionMap {
-  @for $count from 1 through $maxCount {
-    @for $nth from 1 through $maxCount {
-      .Capture-#{$id}#{$count}#{$nth} {
-        @include captureStyles($id, $count, $nth);
-        z-index: $maxCount - $nth;
+  @for $side from 0 through 1 {
+    @for $count from 1 through $maxCount {
+      @for $nth from 1 through $maxCount {
+        .Capture-#{$id}#{$side}#{$count}#{$nth} {
+          @include captureStyles($id, $side, $count, $nth);
+          z-index: $maxCount - $nth;
+        }
       }
     }
   }

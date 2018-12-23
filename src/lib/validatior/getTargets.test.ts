@@ -65,16 +65,17 @@ const mockPos: Position = {
 
 describe('駒の動き判定の振り分け', async () => {
   beforeEach(async () => {
-    fu.mockClear()
-    kyou.mockClear()
-    kei.mockClear()
-    gin.mockClear()
-    kin.mockClear()
-    kaku.mockClear()
-    hisha.mockClear()
-    gyoku.mockClear()
-    uma.mockClear()
-    ryu.mockClear()
+    // Editor の型チェックでエラーにならないように
+    ;(fu as jest.Mock).mockClear()
+    ;(kyou as jest.Mock).mockClear()
+    ;(kei as jest.Mock).mockClear()
+    ;(gin as jest.Mock).mockClear()
+    ;(kin as jest.Mock).mockClear()
+    ;(kaku as jest.Mock).mockClear()
+    ;(hisha as jest.Mock).mockClear()
+    ;(gyoku as jest.Mock).mockClear()
+    ;(uma as jest.Mock).mockClear()
+    ;(ryu as jest.Mock).mockClear()
   })
 
   it('歩を渡すと、歩の動き判定メソッドが実行される', async () => {

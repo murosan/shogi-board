@@ -12,7 +12,7 @@ export default function(
     if (invalidRows && invalidRows.includes(r)) continue
 
     for (let c = 0; c < 9; c++) {
-      const columnIsInvalid = invalidColumns && invalidColumns.includes(r)
+      const columnIsInvalid = invalidColumns && invalidColumns.includes(c)
       if (columnIsInvalid || pos[r][c] !== Empty) continue
       points.push({ row: r, column: c })
     }

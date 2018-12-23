@@ -9,4 +9,7 @@ export default interface Confirm {
 
   // 不成の場合の駒ID
   preserved: Piece
+
+  row: number
+  column: number
 }

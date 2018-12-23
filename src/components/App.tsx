@@ -3,12 +3,13 @@ import { move } from '../lib/handler/position'
 import { ClickProps } from '../model/events/ClickFunc'
 import Confirm from '../model/shogi/Confirm'
 import GameState from '../model/shogi/GameState'
-import { Piece } from '../model/shogi/Piece'
+import { Piece, Kei0 } from '../model/shogi/Piece'
 import Point from '../model/shogi/Point'
 import { Turn } from '../model/shogi/Turn'
 import './App.scss'
 import BoardArea from './shogi/BoardArea'
 import getTargets from '../lib/validatior/getTargets'
+import { canPromote, promote, mustPromote } from '../lib/handler/piece'
 
 export interface Props {
   gs: GameState
@@ -42,6 +43,9 @@ export default class App extends Component<Props, State> {
     const sel = this.state.gs.selected
     const turn: Turn = this.state.gs.pos.turn
 
+    // Confirm 画面なのに、成・不成以外がクリックされたらなにもしない
+    if (this.props.gs.confirm && isPiece(p.clicked)) return
+
     // 選択された駒をクリックしたら選択解除
     if (sel && isPiece(p.clicked) && selectedAgain(sel, p)) {
       this.state.gs.selected = undefined
@@ -66,38 +70,57 @@ export default class App extends Component<Props, State> {
     // 選択された駒がないとき、手番ではない方の駒or空白マスがクリックされたらなにもしない
     if (!sel || !sel.piece) return
 
-    // Confirm オブジェクトがクリックされたら動かす(成or不成の処理)
-    // Confirm が出てる時はバリデーション済みなはず
-    if (!isPiece(p.clicked)) {
-      this.state.gs.pos = move({
-        pos: this.state.gs.pos,
-        source: { row: sel.row, column: sel.column },
-        dest: { row: p.row, column: p.column },
-        piece: p.promote ? p.clicked.promoted : p.clicked.preserved,
-      })
-      this.state.gs.selected = undefined
-      this.state.gs.moveTargets = []
-      this.updateState(this.state.gs)
-      return
-    }
-
-    // TODO: 成・不成の選択ができるように、必要なら Confirm オブジェクトをセット
-
     const canMove: boolean = !!this.state.gs.moveTargets.find(
       t => t.row === p.row && t.column === p.column
     )
 
+    console.log(canMove)
+
+    // 動けない場所がクリックされたらなにもしない
     if (!canMove) return
 
-    this.state.gs.pos = move({
-      pos: this.state.gs.pos,
-      source: { row: sel.row, column: sel.column },
-      dest: { row: p.row, column: p.column },
+    const moveAndUpdateState = (piece: Piece) => {
+      this.state.gs.pos = move({
+        pos: this.state.gs.pos,
+        source: { row: sel.row, column: sel.column },
+        dest: { row: p.row, column: p.column },
+        piece: piece,
+      })
+      this.state.gs.selected = undefined
+      this.state.gs.confirm = undefined
+      this.state.gs.moveTargets = []
+      this.updateState(this.state.gs)
+    }
+
+    // Confirm オブジェクトがクリックされたら動かす(成or不成の処理)
+    if (!isPiece(p.clicked)) {
+      moveAndUpdateState(p.promote ? p.clicked.promoted : p.clicked.preserved)
+      return
+    }
+
+    // 成を選択できるか
+    const cp: boolean = canPromote({
+      sourceRow: sel.row,
+      destRow: p.row,
       piece: sel.piece,
     })
-    this.state.gs.selected = undefined
-    this.state.gs.moveTargets = []
-    this.updateState(this.state.gs)
+
+    // 強制的に成る必要があるか
+    const mp: boolean = mustPromote(sel.piece, p.row)
+
+    // 成・不成の選択ができるように、Confirm オブジェクトをセット
+    if (cp && !mp) {
+      this.state.gs.confirm = {
+        promoted: promote(sel.piece),
+        preserved: sel.piece,
+        row: p.row,
+        column: p.column,
+      }
+      this.updateState(this.state.gs)
+      return
+    }
+
+    moveAndUpdateState(mp ? promote(sel.piece) : sel.piece)
   }
 
   updateState(gs: GameState): void {

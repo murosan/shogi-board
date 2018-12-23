@@ -43,7 +43,7 @@ $edgeTextSize: 1.2vw;
 
 .Piece-Star {
   &::before {
-    $pos: $borderWidth * -3.4;
+    $pos: $borderWidth * -3.8;
     $width: $borderWidth * 7;
     content: '';
     position: absolute;

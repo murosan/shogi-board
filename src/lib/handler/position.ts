@@ -25,18 +25,6 @@ export interface MoveProps {
 }
 
 export function move(p: MoveProps): Position {
-  const updatedPos: Piece[][] = p.pos.pos.map((row: number[], r: number) =>
-    row.map((piece: Piece, c: number) => {
-      // 移動前の位置なら空マスに
-      if (p.source.row === r && p.source.column === c) return Empty
-
-      // 移動先の位置なら更新
-      if (p.dest.row === r && p.dest.column === c) return p.piece
-
-      return piece
-    })
-  )
-
   // 持ち駒を更新する
   type CaptureHandler = (cap: number[], turn: Turn) => number[]
   const handleCaptures: CaptureHandler = (cap: number[], turn: Turn) => {
@@ -58,10 +46,34 @@ export function move(p: MoveProps): Position {
   const updatedCap1: number[] = handleCaptures(p.pos.cap1, -1)
 
   return {
-    pos: updatedPos,
+    pos: moveOnBoard(p),
     cap0: updatedCap0,
     cap1: updatedCap1,
     turn: <Turn>-p.pos.turn,
     moveCount: p.pos.moveCount + 1,
   }
+}
+
+export function moveBoardOnly(p: MoveProps): Position {
+  return {
+    pos: moveOnBoard(p),
+    cap0: p.pos.cap0.slice(),
+    cap1: p.pos.cap1.slice(),
+    turn: <Turn>-p.pos.turn,
+    moveCount: p.pos.moveCount + 1,
+  }
+}
+
+function moveOnBoard(p: MoveProps): number[][] {
+  return p.pos.pos.map((line, r) =>
+    line.map((piece, c) => {
+      // 移動前の位置なら空マスに
+      if (p.source.row === r && p.source.column === c) return Empty
+
+      // 移動先の位置なら更新
+      if (p.dest.row === r && p.dest.column === c) return p.piece
+
+      return piece
+    })
+  )
 }

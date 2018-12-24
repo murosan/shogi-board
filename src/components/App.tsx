@@ -10,6 +10,7 @@ import './App.scss'
 import BoardArea from './shogi/BoardArea'
 import getTargets from '../lib/validatior/getTargets'
 import { canPromote, promote, mustPromote } from '../lib/handler/piece'
+import filterTargets from '../lib/validatior/utils/filterTargets'
 
 export interface Props {
   gs: GameState
@@ -62,7 +63,9 @@ export default class App extends Component<Props, State> {
         i: p.i || 0,
       }
       this.state.gs.selected = point
-      this.state.gs.moveTargets = getTargets(this.state.gs.pos, point)
+      const targets = getTargets(this.state.gs.pos, point)
+      const filtered = filterTargets(this.state.gs.pos, point, targets)
+      this.state.gs.moveTargets = filtered
       this.updateState(this.state.gs)
       return
     }
@@ -70,11 +73,12 @@ export default class App extends Component<Props, State> {
     // 選択された駒がないとき、手番ではない方の駒or空白マスがクリックされたらなにもしない
     if (!sel || !sel.piece) return
 
-    const canMove: boolean = !!this.state.gs.moveTargets.find(
+    const canMove: boolean = !!this.state.gs.moveTargets.some(
       t => t.row === p.row && t.column === p.column
     )
 
-    console.log(canMove)
+    // TODO: 消す
+    console.log(canMove, this.state.gs.moveTargets)
 
     // 動けない場所がクリックされたらなにもしない
     if (!canMove) return

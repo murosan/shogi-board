@@ -75,5 +75,5 @@ export default function(pos: Position, point: Point): Point[] {
   if (piece === Uma0 || piece === Uma1) return uma(pos, point)
   if (piece === Ryu0 || piece === Ryu1) return ryu(pos, point)
 
-  throw new Error('Could get targets to move. Got invalid piece ID')
+  throw new Error('Could not get targets to move. Got invalid piece ID')
 }

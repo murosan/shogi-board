@@ -5,7 +5,7 @@ import { Gyoku0, Piece } from '../../../model/shogi/Piece'
 /**
  * 玉の位置を探す
  * @param pos number[][] 盤上の配置
- * @param turn Turn どっちの玉を探すか
+ * @param turn Turn どっちの玉を探すか。先手玉を探したいときは Sente を渡す
  * @returns 見つかった場合 Point
  *          見つからなかった場合 undefined
  */

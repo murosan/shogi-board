@@ -24,7 +24,10 @@ import { Sente } from './Turn'
  * 初期局を返す
  * column は reverse() されているので、
  * 飛車と角の位置が逆に見える
- * 棋譜との互換性を保つため。３三角 → pos[2][2] という感じで変換が楽
+ * 棋譜との互換性を保つため。
+ * ３三角 → pos[2][2]、
+ * ３四飛 → pos[3][2]、
+ * ７六歩 → pos[5][6] という感じで変換が楽
  */
 export function hirate(): Position {
   return {

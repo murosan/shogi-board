@@ -26,8 +26,28 @@ import {
   To1,
   Uma0,
   Uma1,
+  Gyoku0,
+  Gyoku1,
 } from '../../model/shogi/Piece'
-import { demote, canPromote } from './piece'
+import { demote, canPromote, promote, mustPromote } from './piece'
+
+describe('promote', async () => {
+  it('駒を成れる', async () => {
+    expect(promote(Fu0)).toEqual(To0)
+    expect(promote(Kyou0)).toEqual(NariKyou0)
+    expect(promote(Kei0)).toEqual(NariKei0)
+    expect(promote(Gin0)).toEqual(NariGin0)
+    expect(promote(Kaku0)).toEqual(Uma0)
+    expect(promote(Hisha0)).toEqual(Ryu0)
+
+    expect(promote(Fu1)).toEqual(To1)
+    expect(promote(Kyou1)).toEqual(NariKyou1)
+    expect(promote(Kei1)).toEqual(NariKei1)
+    expect(promote(Gin1)).toEqual(NariGin1)
+    expect(promote(Kaku1)).toEqual(Uma1)
+    expect(promote(Hisha1)).toEqual(Ryu1)
+  })
+})
 
 describe('demote', async () => {
   it('成駒を元に戻せる', async () => {
@@ -134,5 +154,59 @@ describe('canPromote', async () => {
   it('敵陣にいないとき false', async () => {
     expect(canPromote({ sourceRow: 6, destRow: 5, piece: Fu0 })).toBeFalsy()
     expect(canPromote({ sourceRow: 2, destRow: 3, piece: Fu1 })).toBeFalsy()
+  })
+
+  it('持ち駒は false', async () =>
+    expect(canPromote({ sourceRow: -1, destRow: 5, piece: Fu0 })).toBeFalsy())
+})
+
+describe('mustPromote', async () => {
+  it('歩が敵陣最奥に行くと true', async () => {
+    expect(mustPromote(Fu0, 0)).toBeTruthy()
+    expect(mustPromote(Fu0, 1)).toBeFalsy()
+    expect(mustPromote(Fu1, 8)).toBeTruthy()
+    expect(mustPromote(Fu1, 7)).toBeFalsy()
+  })
+
+  it('香が敵陣最奥に行くと true', async () => {
+    expect(mustPromote(Kyou0, 0)).toBeTruthy()
+    expect(mustPromote(Kyou0, 1)).toBeFalsy()
+    expect(mustPromote(Kyou1, 8)).toBeTruthy()
+    expect(mustPromote(Kyou1, 7)).toBeFalsy()
+  })
+
+  it('桂が敵陣2段目以降に行くと true', async () => {
+    expect(mustPromote(Kei0, 0)).toBeTruthy()
+    expect(mustPromote(Kei0, 1)).toBeTruthy
+    expect(mustPromote(Kei0, 2)).toBeFalsy()
+    expect(mustPromote(Kei1, 8)).toBeTruthy()
+    expect(mustPromote(Kei1, 7)).toBeTruthy()
+    expect(mustPromote(Kei1, 6)).toBeFalsy()
+  })
+
+  it('それ以外の駒は全部 false', async () => {
+    expect(mustPromote(Gin0, 0)).toBeFalsy()
+    expect(mustPromote(Kin0, 0)).toBeFalsy()
+    expect(mustPromote(Kaku0, 0)).toBeFalsy()
+    expect(mustPromote(Hisha0, 0)).toBeFalsy()
+    expect(mustPromote(Gyoku0, 0)).toBeFalsy()
+    expect(mustPromote(To0, 0)).toBeFalsy()
+    expect(mustPromote(NariKyou0, 0)).toBeFalsy()
+    expect(mustPromote(NariKei0, 0)).toBeFalsy()
+    expect(mustPromote(NariGin0, 0)).toBeFalsy()
+    expect(mustPromote(Uma0, 0)).toBeFalsy()
+    expect(mustPromote(Ryu0, 0)).toBeFalsy()
+
+    expect(mustPromote(Gin1, 8)).toBeFalsy()
+    expect(mustPromote(Kin1, 8)).toBeFalsy()
+    expect(mustPromote(Kaku1, 8)).toBeFalsy()
+    expect(mustPromote(Hisha1, 8)).toBeFalsy()
+    expect(mustPromote(Gyoku1, 8)).toBeFalsy()
+    expect(mustPromote(To1, 8)).toBeFalsy()
+    expect(mustPromote(NariKyou1, 8)).toBeFalsy()
+    expect(mustPromote(NariKei1, 8)).toBeFalsy()
+    expect(mustPromote(NariGin1, 8)).toBeFalsy()
+    expect(mustPromote(Uma1, 8)).toBeFalsy()
+    expect(mustPromote(Ryu1, 8)).toBeFalsy()
   })
 })

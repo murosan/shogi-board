@@ -1,8 +1,9 @@
-import { Piece } from '../../../model/shogi/Piece'
+import { Gyoku0, Piece } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import Position from '../../../model/shogi/Position'
 import { Turn } from '../../../model/shogi/Turn'
 import getTargets from '../getTargets'
+import { moveBoardOnly } from '../../handler/position'
 
 /**
  * points が attacker の駒の効きに入っているか
@@ -17,29 +18,49 @@ import getTargets from '../getTargets'
  * を渡し、false が返る
  *
  * @param pos Position 配置
- * @param points Point[] 調べたい位置のリスト
+ * @param points Point 調べたい位置
  * @param attacker Turn 攻め手番
+ * @param ignoreCheckLeaving boolean | undefined 王手放置チェックを無視するか
+ *                           無視する(チェックしない): true
+ *                           無視しない(チェックする): false | undefined
  */
-export default function(
+export default function isPointed(
   pos: Position,
-  points: Point[],
-  attacker: Turn
+  point: Point,
+  attacker: Turn,
+  ignoreCheckLeaving?: boolean
 ): boolean {
   for (let row = 0; row < pos.pos.length; row++) {
     for (let column = 0; column < pos.pos.length; column++) {
       const piece: Piece = pos.pos[row][column]
-      // 受け側の駒か空マスならスキップ
+      // 受け側の駒か、空マスならスキップ
       if (piece * attacker <= 0) continue
 
       const targets: Point[] = getTargets(pos, { row, column, piece })
       for (let i = 0; i < targets.length; i++) {
-        for (let j = 0; j < points.length; j++) {
-          if (
-            targets[i].row === points[j].row &&
-            targets[i].column === points[j].column
-          )
-            return true
-        }
+        const locationMatches: boolean =
+          targets[i].row === point.row && targets[i].column === point.column
+        if (!locationMatches) continue
+
+        // 王手放置チェックをしないとき、攻撃してる駒が玉じゃないとき、
+        // 受け側の駒が玉の時は場所が合っていればOK
+        if (
+          ignoreCheckLeaving ||
+          Math.abs(piece) !== Gyoku0 ||
+          (point.piece && Math.abs(point.piece) === Gyoku0)
+        )
+          return true
+        const moved = moveBoardOnly({
+          pos,
+          source: { row, column },
+          dest: { row: point.row, column: point.column },
+          piece,
+        })
+        if (
+          ignoreCheckLeaving &&
+          !isPointed(moved, point, <Turn>-attacker, true)
+        )
+          return true
       }
     }
   }

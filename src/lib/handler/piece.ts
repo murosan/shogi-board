@@ -13,6 +13,7 @@ import {
 
 /**
  * 駒を成る
+ * canPromote を通っている前提
  * @param p Piece 成る前の駒
  */
 export function promote(p: Piece): Piece {

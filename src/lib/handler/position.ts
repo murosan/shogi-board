@@ -1,6 +1,6 @@
 import { Empty, Piece } from '../../model/shogi/Piece'
 import Position from '../../model/shogi/Position'
-import { Turn } from '../../model/shogi/Turn'
+import { Turn, Sente, Gote } from '../../model/shogi/Turn'
 import { decreaseCaptures, increaseCaptures } from './captures'
 import { demote } from './piece'
 
@@ -33,17 +33,17 @@ export function move(p: MoveProps): Position {
 
     // 移動先が相手の駒なら持ち駒を増やす
     const d: Piece = p.pos.pos[p.dest.row][p.dest.column]
-    if (d * turn < 0) return increaseCaptures(cap, Math.abs(demote(d)))
+    if (d * turn < 0) return increaseCaptures(cap, demote(d))
 
     // 移動元が持ち駒なら減らす
     if (p.source.row === -1 && p.source.column === -1)
-      return decreaseCaptures(cap, Math.abs(p.piece))
+      return decreaseCaptures(cap, p.piece)
 
     return cap.slice()
   }
 
-  const updatedCap0: number[] = handleCaptures(p.pos.cap0, 1)
-  const updatedCap1: number[] = handleCaptures(p.pos.cap1, -1)
+  const updatedCap0: number[] = handleCaptures(p.pos.cap0, Sente)
+  const updatedCap1: number[] = handleCaptures(p.pos.cap1, Gote)
 
   return {
     pos: moveOnBoard(p),

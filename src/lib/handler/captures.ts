@@ -6,7 +6,7 @@ import { Gyoku0, Gyoku1, Piece } from '../../model/shogi/Piece'
  * @param p Piece 増やしたい駒
  */
 export function increaseCaptures(cap: number[], p: Piece): number[] {
-  return handle(cap, p, i => i + 1)
+  return handle(cap, Math.abs(p), i => i + 1)
 }
 
 /**
@@ -15,17 +15,17 @@ export function increaseCaptures(cap: number[], p: Piece): number[] {
  * @param p Piece 減らしたい駒
  */
 export function decreaseCaptures(cap: number[], p: Piece): number[] {
-  return handle(cap, p, i => i - 1)
+  return handle(cap, Math.abs(p), i => i - 1)
 }
 
 function handle(cap: number[], p: Piece, f: (i: number) => number): number[] {
-  if (p < 0) throw new Error('Piece ID of Captures must be positive value.')
   if (p === Gyoku0 || p === Gyoku1 || p > 10)
     throw new Error('Piece ID of Captures must not be Gyoku or over 10.')
 
   return cap.map((count, index) => {
     // 駒IDが一致しなければそのまま
-    if (index !== Math.abs(p - 1)) return count
+    // p は Math.abs() を通っている
+    if (index !== p - 1) return count
 
     const v = f(count)
     if (v < 0)

@@ -13,17 +13,21 @@ PC 最新版の Chrome のみ
 
 ## ライセンス
 
-- ソースコード  
+- ソースコード
+
   MIT License
 
 - イメージ・画像
 
-  - pieces, board(adapted)  
+  - pieces, board(adapted)
+
     by [muchonovski](http://mucho.girly.jp/bona)  
     under [Creative Commons 表示-非営利 2.1 日本 License](https://creativecommons.org/licenses/by-nc/2.1/jp/)
 
-  - tatami  
+  - tatami
+
     [フリーテクスチャ素材館](https://free-texture.net/seamless-pattern/tatami01.html)
 
-  - other  
+  - other
+
     free material

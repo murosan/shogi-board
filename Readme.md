@@ -1,63 +1,15 @@
 # 将棋 検討盤
 
-[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
-[![codecov](https://codecov.io/gh/murosan/shogi-board/branch/master/graph/badge.svg)](https://codecov.io/gh/murosan/shogi-board)
-[![CircleCI](https://circleci.com/gh/murosan/shogi-board.svg?style=shield&circle-token=6bd215d906d59c7131ea2934670de1df969c96e2)](https://circleci.com/gh/murosan/shogi-board)
-
-動作例 : https://shogi-board.herokuapp.com/  
-ブラウザで動く将棋検討盤です。  
-駒はルールに則って動きます(王手、詰み判定はありません)。
-
-<img src="https://github.com/murosan/pictures-for-readme/blob/master/shogi_board_20171028.png" width="75%;">
+[![build](https://img.shields.io/circleci/project/github/murosan/shogi-board.svg?style=flat-square)](https://circleci.com/gh/murosan/shogi-board)
+[![coverage](https://img.shields.io/codecov/c/github/murosan/shogi-board.svg?style=flat-square)](https://codecov.io/gh/murosan/shogi-board)
+[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg?style=flat-square)](https://github.com/facebook/jest)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![tag](https://img.shields.io/github/tag/murosan/shogi-board.svg?style=flat-square)](https://github.com/murosan/shogi-board/releases)
+[![node](https://img.shields.io/badge/node->%3D%2010.14.1-brightgreen.svg?style=flat-square)](https://nodejs.org/ja/)
 
 ## 対応ブラウザ
 
 PC 最新版の Chrome のみ
-
-## 開発
-
-- セットアップ
-
-  Node.js `v10.14.1`
-
-  ```sh
-  $ git clone https://github.com/murosan/shogi-board
-  $ cd shogi-board
-  $ yarn
-  ```
-
-- ビルド
-
-  ```sh
-  # 本番
-  $ yarn build
-  # 開発
-  $ yarn start
-  ```
-
-- テスト
-
-  ```sh
-  # watch
-  $ yarn test
-  # coverage
-  $ yarn test:c
-  ```
-
-### ファイル構成
-
-- src/
-  - components/  
-    React コンポーネント(UI 部分)
-  - fn/  
-    駒の動き判定、文字列関係の関数
-  - game-handler  
-    駒の配置や持ち駒、棋譜生成などに関するクラスがある  
-    配置(Positions)クラス  
-    持ち駒(Captures)クラス  
-    駒(Piece)クラス  
-    棋譜(Kif / Branch)クラスなど
 
 ## ライセンス
 

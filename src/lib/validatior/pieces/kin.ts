@@ -7,7 +7,6 @@ import {
   NariKei1,
   NariKyou0,
   NariKyou1,
-  Piece,
   To0,
   To1,
 } from '../../../model/shogi/Piece'
@@ -35,28 +34,25 @@ export default function(pos: Position, p: Point): Point[] {
     )
 
   if (p.row === -1 && p.column === -1) return getEmpties(pos.pos)
-  return onBoard()
 
-  function onBoard(): Point[] {
-    const nexts: number[][] =
-      <Piece>p.piece > 0
-        ? [
-            [p.row - 1, p.column - 1],
-            [p.row - 1, p.column],
-            [p.row - 1, p.column + 1],
-            [p.row, p.column - 1],
-            [p.row, p.column + 1],
-            [p.row + 1, p.column],
-          ]
-        : [
-            [p.row - 1, p.column],
-            [p.row, p.column - 1],
-            [p.row, p.column + 1],
-            [p.row + 1, p.column - 1],
-            [p.row + 1, p.column],
-            [p.row + 1, p.column + 1],
-          ]
+  const nexts: number[][] =
+    p.piece > 0
+      ? [
+          [p.row - 1, p.column - 1],
+          [p.row - 1, p.column],
+          [p.row - 1, p.column + 1],
+          [p.row, p.column - 1],
+          [p.row, p.column + 1],
+          [p.row + 1, p.column],
+        ]
+      : [
+          [p.row - 1, p.column],
+          [p.row, p.column - 1],
+          [p.row, p.column + 1],
+          [p.row + 1, p.column - 1],
+          [p.row + 1, p.column],
+          [p.row + 1, p.column + 1],
+        ]
 
-    return getFromNexts(pos.pos, nexts, <Piece>p.piece)
-  }
+  return getFromNexts(pos.pos, nexts, p.piece)
 }

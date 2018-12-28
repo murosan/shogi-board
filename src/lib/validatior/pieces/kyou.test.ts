@@ -8,20 +8,20 @@ describe('香の動き判定', async () => {
   it('障害物がない場合、縦に好きなだけ移動できる(先手)', async () => {
     const pos: Position = emptyPosition()
     const expected1: Point[] = [
-      { row: 3, column: 4 },
-      { row: 2, column: 4 },
-      { row: 1, column: 4 },
       { row: 0, column: 4 },
+      { row: 1, column: 4 },
+      { row: 2, column: 4 },
+      { row: 3, column: 4 },
     ]
     const expected2: Point[] = [
-      { row: 7, column: 0 },
-      { row: 6, column: 0 },
-      { row: 5, column: 0 },
-      { row: 4, column: 0 },
-      { row: 3, column: 0 },
-      { row: 2, column: 0 },
-      { row: 1, column: 0 },
       { row: 0, column: 0 },
+      { row: 1, column: 0 },
+      { row: 2, column: 0 },
+      { row: 3, column: 0 },
+      { row: 4, column: 0 },
+      { row: 5, column: 0 },
+      { row: 6, column: 0 },
+      { row: 7, column: 0 },
     ]
     expect(kyou(pos, { row: 4, column: 4, piece: Kyou0 })).toEqual(expected1)
     expect(kyou(pos, { row: 8, column: 0, piece: Kyou0 })).toEqual(expected2)
@@ -54,7 +54,7 @@ describe('香の動き判定', async () => {
   it('味方の駒があるところには移動できない(先手)', async () => {
     const pos: Position = emptyPosition()
     pos.pos[1][4] = Kyou0 // 52
-    const expected: Point[] = [{ row: 3, column: 4 }, { row: 2, column: 4 }]
+    const expected: Point[] = [{ row: 2, column: 4 }, { row: 3, column: 4 }]
     expect(kyou(pos, { row: 4, column: 4, piece: Kyou0 })).toEqual(expected)
   })
 
@@ -68,7 +68,7 @@ describe('香の動き判定', async () => {
   it('相手の駒があるところまで移動できる(先手)', async () => {
     const pos: Position = emptyPosition()
     pos.pos[2][4] = Kyou1 // 53
-    const expected: Point[] = [{ row: 3, column: 4 }, { row: 2, column: 4 }]
+    const expected: Point[] = [{ row: 2, column: 4 }, { row: 3, column: 4 }]
     expect(kyou(pos, { row: 4, column: 4, piece: Kyou0 })).toEqual(expected)
   })
 

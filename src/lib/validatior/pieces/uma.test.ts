@@ -9,25 +9,25 @@ describe('馬の動き判定', async () => {
     const pos: Position = emptyPosition()
     pos.pos[4][4] = Uma0 // 55
     const expected: Point[] = [
+      { row: 0, column: 0 },
+      { row: 0, column: 8 },
+      { row: 1, column: 1 },
+      { row: 1, column: 7 },
+      { row: 2, column: 2 },
+      { row: 2, column: 6 },
+      { row: 3, column: 3 },
       { row: 3, column: 4 },
+      { row: 3, column: 5 },
       { row: 4, column: 3 },
       { row: 4, column: 5 },
-      { row: 5, column: 4 },
-      { row: 3, column: 3 },
-      { row: 2, column: 2 },
-      { row: 1, column: 1 },
-      { row: 0, column: 0 },
-      { row: 3, column: 5 },
-      { row: 2, column: 6 },
-      { row: 1, column: 7 },
-      { row: 0, column: 8 },
       { row: 5, column: 3 },
-      { row: 6, column: 2 },
-      { row: 7, column: 1 },
-      { row: 8, column: 0 },
+      { row: 5, column: 4 },
       { row: 5, column: 5 },
+      { row: 6, column: 2 },
       { row: 6, column: 6 },
+      { row: 7, column: 1 },
       { row: 7, column: 7 },
+      { row: 8, column: 0 },
       { row: 8, column: 8 },
     ]
     expect(uma(pos, { row: 4, column: 4, piece: Uma0 })).toEqual(expected)
@@ -42,12 +42,12 @@ describe('馬の動き判定', async () => {
     pos.pos[6][6] = Kin0 // 77
     pos.pos[3][4] = Kin0 // 54
     const expected: Point[] = [
-      { row: 4, column: 3 },
-      { row: 4, column: 5 },
-      { row: 5, column: 4 },
       { row: 3, column: 3 },
       { row: 3, column: 5 },
+      { row: 4, column: 3 },
+      { row: 4, column: 5 },
       { row: 5, column: 3 },
+      { row: 5, column: 4 },
       { row: 5, column: 5 },
     ]
     expect(uma(pos, { row: 4, column: 4, piece: Uma0 })).toEqual(expected)
@@ -61,12 +61,12 @@ describe('馬の動き判定', async () => {
     pos.pos[6][6] = Kin1 // 77
     pos.pos[3][4] = Kin1 // 54
     const expected: Point[] = [
-      { row: 4, column: 3 },
-      { row: 4, column: 5 },
-      { row: 5, column: 4 },
       { row: 3, column: 3 },
       { row: 3, column: 5 },
+      { row: 4, column: 3 },
+      { row: 4, column: 5 },
       { row: 5, column: 3 },
+      { row: 5, column: 4 },
       { row: 5, column: 5 },
     ]
     expect(uma(pos, { row: 4, column: 4, piece: Uma1 })).toEqual(expected)
@@ -80,17 +80,17 @@ describe('馬の動き判定', async () => {
     pos.pos[6][6] = Kin1 // 77
     pos.pos[3][4] = Kin1 // 54
     const expected: Point[] = [
+      { row: 2, column: 2 },
+      { row: 2, column: 6 },
+      { row: 3, column: 3 },
       { row: 3, column: 4 },
+      { row: 3, column: 5 },
       { row: 4, column: 3 },
       { row: 4, column: 5 },
-      { row: 5, column: 4 },
-      { row: 3, column: 3 },
-      { row: 2, column: 2 },
-      { row: 3, column: 5 },
-      { row: 2, column: 6 },
       { row: 5, column: 3 },
-      { row: 6, column: 2 },
+      { row: 5, column: 4 },
       { row: 5, column: 5 },
+      { row: 6, column: 2 },
       { row: 6, column: 6 },
     ]
     expect(uma(pos, { row: 4, column: 4, piece: Uma0 })).toEqual(expected)
@@ -104,17 +104,17 @@ describe('馬の動き判定', async () => {
     pos.pos[6][6] = Kin0 // 77
     pos.pos[3][4] = Kin0 // 54
     const expected: Point[] = [
+      { row: 2, column: 2 },
+      { row: 2, column: 6 },
+      { row: 3, column: 3 },
       { row: 3, column: 4 },
+      { row: 3, column: 5 },
       { row: 4, column: 3 },
       { row: 4, column: 5 },
-      { row: 5, column: 4 },
-      { row: 3, column: 3 },
-      { row: 2, column: 2 },
-      { row: 3, column: 5 },
-      { row: 2, column: 6 },
       { row: 5, column: 3 },
-      { row: 6, column: 2 },
+      { row: 5, column: 4 },
       { row: 5, column: 5 },
+      { row: 6, column: 2 },
       { row: 6, column: 6 },
     ]
     expect(uma(pos, { row: 4, column: 4, piece: Uma1 })).toEqual(expected)

@@ -8,26 +8,26 @@ describe('龍の動き判定', async () => {
   it('障害物がないとき、飛車と玉を合わせた動きができる', async () => {
     const pos: Position = emptyPosition()
     const expected: Point[] = [
-      { row: 3, column: 3 },
-      { row: 3, column: 5 },
-      { row: 5, column: 3 },
-      { row: 5, column: 5 },
-      { row: 3, column: 4 },
-      { row: 2, column: 4 },
-      { row: 1, column: 4 },
       { row: 0, column: 4 },
-      { row: 5, column: 4 },
-      { row: 6, column: 4 },
-      { row: 7, column: 4 },
-      { row: 8, column: 4 },
-      { row: 4, column: 3 },
-      { row: 4, column: 2 },
-      { row: 4, column: 1 },
+      { row: 1, column: 4 },
+      { row: 2, column: 4 },
+      { row: 3, column: 3 },
+      { row: 3, column: 4 },
+      { row: 3, column: 5 },
       { row: 4, column: 0 },
+      { row: 4, column: 1 },
+      { row: 4, column: 2 },
+      { row: 4, column: 3 },
       { row: 4, column: 5 },
       { row: 4, column: 6 },
       { row: 4, column: 7 },
       { row: 4, column: 8 },
+      { row: 5, column: 3 },
+      { row: 5, column: 4 },
+      { row: 5, column: 5 },
+      { row: 6, column: 4 },
+      { row: 7, column: 4 },
+      { row: 8, column: 4 },
     ]
     expect(ryu(pos, { row: 4, column: 4, piece: Ryu0 })).toEqual(expected)
     expect(ryu(pos, { row: 4, column: 4, piece: Ryu1 })).toEqual(expected)
@@ -41,13 +41,13 @@ describe('龍の動き判定', async () => {
     pos.pos[4][6] = Kin0 // 75
     pos.pos[3][3] = Kin0 // 44
     const expected: Point[] = [
-      { row: 3, column: 5 },
-      { row: 5, column: 3 },
-      { row: 5, column: 5 },
       { row: 3, column: 4 },
-      { row: 5, column: 4 },
+      { row: 3, column: 5 },
       { row: 4, column: 3 },
       { row: 4, column: 5 },
+      { row: 5, column: 3 },
+      { row: 5, column: 4 },
+      { row: 5, column: 5 },
     ]
     expect(ryu(pos, { row: 4, column: 4, piece: Ryu0 })).toEqual(expected)
   })
@@ -60,13 +60,13 @@ describe('龍の動き判定', async () => {
     pos.pos[4][6] = Kin1 // 75
     pos.pos[3][3] = Kin1 // 44
     const expected: Point[] = [
-      { row: 3, column: 5 },
-      { row: 5, column: 3 },
-      { row: 5, column: 5 },
       { row: 3, column: 4 },
-      { row: 5, column: 4 },
+      { row: 3, column: 5 },
       { row: 4, column: 3 },
       { row: 4, column: 5 },
+      { row: 5, column: 3 },
+      { row: 5, column: 4 },
+      { row: 5, column: 5 },
     ]
     expect(ryu(pos, { row: 4, column: 4, piece: Ryu1 })).toEqual(expected)
   })
@@ -79,18 +79,18 @@ describe('龍の動き判定', async () => {
     pos.pos[4][6] = Kin1 // 75
     pos.pos[3][3] = Kin1 // 44
     const expected: Point[] = [
-      { row: 3, column: 3 },
-      { row: 3, column: 5 },
-      { row: 5, column: 3 },
-      { row: 5, column: 5 },
-      { row: 3, column: 4 },
       { row: 2, column: 4 },
-      { row: 5, column: 4 },
-      { row: 6, column: 4 },
-      { row: 4, column: 3 },
+      { row: 3, column: 3 },
+      { row: 3, column: 4 },
+      { row: 3, column: 5 },
       { row: 4, column: 2 },
+      { row: 4, column: 3 },
       { row: 4, column: 5 },
       { row: 4, column: 6 },
+      { row: 5, column: 3 },
+      { row: 5, column: 4 },
+      { row: 5, column: 5 },
+      { row: 6, column: 4 },
     ]
     expect(ryu(pos, { row: 4, column: 4, piece: Ryu0 })).toEqual(expected)
   })
@@ -103,18 +103,18 @@ describe('龍の動き判定', async () => {
     pos.pos[4][6] = Kin0 // 75
     pos.pos[3][3] = Kin0 // 44
     const expected: Point[] = [
-      { row: 3, column: 3 },
-      { row: 3, column: 5 },
-      { row: 5, column: 3 },
-      { row: 5, column: 5 },
-      { row: 3, column: 4 },
       { row: 2, column: 4 },
-      { row: 5, column: 4 },
-      { row: 6, column: 4 },
-      { row: 4, column: 3 },
+      { row: 3, column: 3 },
+      { row: 3, column: 4 },
+      { row: 3, column: 5 },
       { row: 4, column: 2 },
+      { row: 4, column: 3 },
       { row: 4, column: 5 },
       { row: 4, column: 6 },
+      { row: 5, column: 3 },
+      { row: 5, column: 4 },
+      { row: 5, column: 5 },
+      { row: 6, column: 4 },
     ]
     expect(ryu(pos, { row: 4, column: 4, piece: Ryu1 })).toEqual(expected)
   })

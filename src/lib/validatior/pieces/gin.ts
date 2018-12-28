@@ -9,26 +9,23 @@ export default function(pos: Position, p: Point): Point[] {
     throw new Error('Called validation for gin, but piece id was not gin.')
 
   if (p.row === -1 && p.column === -1) return getEmpties(pos.pos)
-  return onBoard()
 
-  function onBoard(): Point[] {
-    const nexts: number[][] =
-      <Piece>p.piece > 0
-        ? [
-            [p.row - 1, p.column - 1],
-            [p.row - 1, p.column],
-            [p.row - 1, p.column + 1],
-            [p.row + 1, p.column - 1],
-            [p.row + 1, p.column + 1],
-          ]
-        : [
-            [p.row - 1, p.column - 1],
-            [p.row - 1, p.column + 1],
-            [p.row + 1, p.column - 1],
-            [p.row + 1, p.column],
-            [p.row + 1, p.column + 1],
-          ]
+  const nexts: number[][] =
+    p.piece > 0
+      ? [
+          [p.row - 1, p.column - 1],
+          [p.row - 1, p.column],
+          [p.row - 1, p.column + 1],
+          [p.row + 1, p.column - 1],
+          [p.row + 1, p.column + 1],
+        ]
+      : [
+          [p.row - 1, p.column - 1],
+          [p.row - 1, p.column + 1],
+          [p.row + 1, p.column - 1],
+          [p.row + 1, p.column],
+          [p.row + 1, p.column + 1],
+        ]
 
-    return getFromNexts(pos.pos, nexts, <Piece>p.piece)
-  }
+  return getFromNexts(pos.pos, nexts, p.piece)
 }

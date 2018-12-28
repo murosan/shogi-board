@@ -9,21 +9,21 @@ describe('角の動き判定', async () => {
   it('障害物がないとき、斜めに無限に移動できる', async () => {
     const pos: Position = emptyPosition()
     const expected: Point[] = [
-      { row: 3, column: 3 },
-      { row: 2, column: 2 },
-      { row: 1, column: 1 },
       { row: 0, column: 0 },
-      { row: 3, column: 5 },
-      { row: 2, column: 6 },
-      { row: 1, column: 7 },
       { row: 0, column: 8 },
+      { row: 1, column: 1 },
+      { row: 1, column: 7 },
+      { row: 2, column: 2 },
+      { row: 2, column: 6 },
+      { row: 3, column: 3 },
+      { row: 3, column: 5 },
       { row: 5, column: 3 },
-      { row: 6, column: 2 },
-      { row: 7, column: 1 },
-      { row: 8, column: 0 },
       { row: 5, column: 5 },
+      { row: 6, column: 2 },
       { row: 6, column: 6 },
+      { row: 7, column: 1 },
       { row: 7, column: 7 },
+      { row: 8, column: 0 },
       { row: 8, column: 8 },
     ]
     expect(kaku(pos, { row: 4, column: 4, piece: Kaku0 })).toEqual(expected)
@@ -67,13 +67,13 @@ describe('角の動き判定', async () => {
     pos.pos[6][2] = Fu1 // 37
     pos.pos[6][6] = Fu1 // 77
     const expected: Point[] = [
-      { row: 3, column: 3 },
       { row: 2, column: 2 },
-      { row: 3, column: 5 },
       { row: 2, column: 6 },
+      { row: 3, column: 3 },
+      { row: 3, column: 5 },
       { row: 5, column: 3 },
-      { row: 6, column: 2 },
       { row: 5, column: 5 },
+      { row: 6, column: 2 },
       { row: 6, column: 6 },
     ]
     expect(kaku(pos, { row: 4, column: 4, piece: Kaku0 })).toEqual(expected)
@@ -86,13 +86,13 @@ describe('角の動き判定', async () => {
     pos.pos[6][2] = Fu0 // 37
     pos.pos[6][6] = Fu0 // 77
     const expected: Point[] = [
-      { row: 3, column: 3 },
       { row: 2, column: 2 },
-      { row: 3, column: 5 },
       { row: 2, column: 6 },
+      { row: 3, column: 3 },
+      { row: 3, column: 5 },
       { row: 5, column: 3 },
-      { row: 6, column: 2 },
       { row: 5, column: 5 },
+      { row: 6, column: 2 },
       { row: 6, column: 6 },
     ]
     expect(kaku(pos, { row: 4, column: 4, piece: Kaku1 })).toEqual(expected)

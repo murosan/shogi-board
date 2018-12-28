@@ -50,14 +50,8 @@ export default class GameStateStore implements GameState {
     // 選択された駒がないとき、手番ではない方の駒or空白マスがクリックされたらなにもしない
     if (!sel || !sel.piece) return
 
-    const canMove: boolean = !!this.moveTargets.some(
-      t => t.row === p.row && t.column === p.column
-    )
-
-    // TODO: 消す
-    console.log(canMove, this.moveTargets)
-
     // 動けない場所がクリックされたらなにもしない
+    const canMove: boolean = exists(this.moveTargets, p)
     if (!canMove) return
 
     const moveAndUpdateState = (piece: Piece) => {
@@ -118,4 +112,21 @@ function selectedAgain(sel: Point, cp: ClickProps): boolean {
     sel.piece === cp.clicked &&
     sel.i === cp.i
   )
+}
+
+function exists(pts: Point[], p: Point): boolean {
+  let i = pts.length >> 1
+  let l = 0
+  let r = pts.length - 1
+
+  while (l <= r) {
+    if (pts[i].row === p.row && pts[i].column === p.column) return true
+    if (pts[i].row < p.row) l = i + 1
+    else if (pts[i].row > p.row) r = i - 1
+    else if (pts[i].column < p.column) l = i + 1
+    else r = i - 1
+    i = l + ((r - l) >> 1)
+  }
+
+  return false
 }

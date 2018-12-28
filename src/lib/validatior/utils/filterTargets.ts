@@ -53,7 +53,7 @@ export default function filter(
       // 打った歩が次に取られるか
       const fuIsPointed = isPointed(moved, targets[i], <Turn>-turn)
 
-      // 相手玉が逃げられば場所があるか
+      // 相手玉が逃げられる場所があるか
       const enemyGyokuTargets = getTargets(moved, enemyGyoku)
       const filteredEnemyGyokuTargets = filter(
         moved,

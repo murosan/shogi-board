@@ -34,6 +34,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.2",
+    "source-map-explorer": "^1.6.0",
     "ts-jest": "^23.10.5",
     "typescript": "3.2.2"
   },
@@ -42,7 +43,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:c": "react-scripts test --coverage",
-    "lint": "prettier --write '**/*.{js,jsx,ts,tsx,json,yml,css,scss,md,html}'"
+    "lint": "prettier --write '**/*.{js,jsx,ts,tsx,json,yml,css,scss,md,html}'",
+    "analyze": "source-map-explorer build/static/js/main.*"
   },
   "browserslist": [
     ">0.2%",

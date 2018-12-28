@@ -1,8 +1,8 @@
-import { newGameState } from '../../../model/shogi/GameStateInit'
 import { Fu0, Gin0, Gin1, Kin0, Kin1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import Position from '../../../model/shogi/Position'
 import emptyPosition from '../../../testutils/emptyPosition'
+import newGameState from '../../../testutils/newGameState'
 import gin from './gin'
 
 describe('銀の動き判定', async () => {

@@ -1,8 +1,8 @@
-import { newGameState } from '../../../model/shogi/GameStateInit'
 import { Fu0, Fu1, Hisha0, Hisha1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import Position from '../../../model/shogi/Position'
 import emptyPosition from '../../../testutils/emptyPosition'
+import newGameState from '../../../testutils/newGameState'
 import hisha from './hisha'
 
 describe('飛車の動き判定', async () => {

@@ -1,8 +1,8 @@
-import { newGameState } from '../../../model/shogi/GameStateInit'
 import { Fu0, Fu1, Kaku0, Kaku1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import Position from '../../../model/shogi/Position'
 import emptyPosition from '../../../testutils/emptyPosition'
+import newGameState from '../../../testutils/newGameState'
 import kaku from './kaku'
 
 describe('角の動き判定', async () => {

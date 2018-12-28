@@ -1,4 +1,4 @@
-import { Gyoku0, Gyoku1, Piece } from '../../../model/shogi/Piece'
+import { Gyoku0, Gyoku1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import Position from '../../../model/shogi/Position'
 import getFromNexts from '../utils/getFromNexts'
@@ -21,5 +21,5 @@ export default function(pos: Position, p: Point): Point[] {
     [p.row + 1, p.column + 1],
   ]
 
-  return getFromNexts(pos.pos, nexts, <Piece>p.piece)
+  return getFromNexts(pos.pos, nexts, p.piece)
 }

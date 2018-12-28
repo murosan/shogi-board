@@ -18,26 +18,17 @@ export default function(pos: Position, p: Point): Point[] {
     }
   }
 
-  if (p.row === -1 && p.column === -1) return capture()
-  return onBoard()
-
-  function capture(): Point[] {
-    const invalidRow: number = <Piece>p.piece > 0 ? 0 : 8
+  if (p.row === -1 && p.column === -1) {
+    const invalidRow: number = p.piece > 0 ? 0 : 8
     return getEmpties(pos.pos, [invalidRow], columnsOfContainingFu)
   }
 
-  function onBoard(): Point[] {
-    const nextRow: number = <Piece>p.piece > 0 ? p.row - 1 : p.row + 1
+  const nextRow: number = p.piece > 0 ? p.row - 1 : p.row + 1
 
-    // 盤外か味方の駒ならなし
-    if (
-      nextRow < 0 ||
-      nextRow > 8 ||
-      pos.pos[nextRow][p.column] * <Piece>p.piece > 0
-    )
-      return []
+  // 盤外か味方の駒ならなし
+  if (nextRow < 0 || nextRow > 8 || pos.pos[nextRow][p.column] * p.piece > 0)
+    return []
 
-    // 空マスか、相手の駒ならOK
-    return [{ row: nextRow, column: p.column }]
-  }
+  // 空マスか、相手の駒ならOK
+  return [{ row: nextRow, column: p.column }]
 }

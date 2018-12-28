@@ -9,22 +9,22 @@ describe('飛車の動き判定', async () => {
   it('障害物がないとき、縦横に無限に移動できる', async () => {
     const pos: Position = emptyPosition()
     const expected: Point[] = [
-      { row: 3, column: 4 },
-      { row: 2, column: 4 },
-      { row: 1, column: 4 },
       { row: 0, column: 4 },
-      { row: 5, column: 4 },
-      { row: 6, column: 4 },
-      { row: 7, column: 4 },
-      { row: 8, column: 4 },
-      { row: 4, column: 3 },
-      { row: 4, column: 2 },
-      { row: 4, column: 1 },
+      { row: 1, column: 4 },
+      { row: 2, column: 4 },
+      { row: 3, column: 4 },
       { row: 4, column: 0 },
+      { row: 4, column: 1 },
+      { row: 4, column: 2 },
+      { row: 4, column: 3 },
       { row: 4, column: 5 },
       { row: 4, column: 6 },
       { row: 4, column: 7 },
       { row: 4, column: 8 },
+      { row: 5, column: 4 },
+      { row: 6, column: 4 },
+      { row: 7, column: 4 },
+      { row: 8, column: 4 },
     ]
     expect(hisha(pos, { row: 4, column: 4, piece: Hisha0 })).toEqual(expected)
     expect(hisha(pos, { row: 4, column: 4, piece: Hisha1 })).toEqual(expected)
@@ -39,9 +39,9 @@ describe('飛車の動き判定', async () => {
     pos.pos[4][6] = Fu0 // 75
     const expected: Point[] = [
       { row: 3, column: 4 },
-      { row: 5, column: 4 },
       { row: 4, column: 3 },
       { row: 4, column: 5 },
+      { row: 5, column: 4 },
     ]
     expect(hisha(pos, { row: 4, column: 4, piece: Hisha0 })).toEqual(expected)
   })
@@ -55,9 +55,9 @@ describe('飛車の動き判定', async () => {
     pos.pos[4][6] = Fu1 // 75
     const expected: Point[] = [
       { row: 3, column: 4 },
-      { row: 5, column: 4 },
       { row: 4, column: 3 },
       { row: 4, column: 5 },
+      { row: 5, column: 4 },
     ]
     expect(hisha(pos, { row: 4, column: 4, piece: Hisha1 })).toEqual(expected)
   })
@@ -70,14 +70,14 @@ describe('飛車の動き判定', async () => {
     pos.pos[4][2] = Fu1 // 35
     pos.pos[4][6] = Fu1 // 75
     const expected: Point[] = [
-      { row: 3, column: 4 },
       { row: 2, column: 4 },
-      { row: 5, column: 4 },
-      { row: 6, column: 4 },
-      { row: 4, column: 3 },
+      { row: 3, column: 4 },
       { row: 4, column: 2 },
+      { row: 4, column: 3 },
       { row: 4, column: 5 },
       { row: 4, column: 6 },
+      { row: 5, column: 4 },
+      { row: 6, column: 4 },
     ]
     expect(hisha(pos, { row: 4, column: 4, piece: Hisha0 })).toEqual(expected)
   })
@@ -90,14 +90,14 @@ describe('飛車の動き判定', async () => {
     pos.pos[4][2] = Fu0 // 35
     pos.pos[4][6] = Fu0 // 75
     const expected: Point[] = [
-      { row: 3, column: 4 },
       { row: 2, column: 4 },
-      { row: 5, column: 4 },
-      { row: 6, column: 4 },
-      { row: 4, column: 3 },
+      { row: 3, column: 4 },
       { row: 4, column: 2 },
+      { row: 4, column: 3 },
       { row: 4, column: 5 },
       { row: 4, column: 6 },
+      { row: 5, column: 4 },
+      { row: 6, column: 4 },
     ]
     expect(hisha(pos, { row: 4, column: 4, piece: Hisha1 })).toEqual(expected)
   })

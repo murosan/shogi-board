@@ -1,5 +1,5 @@
+import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { ClickFunc } from '../../model/events/ClickFunc'
 import {
   Fu0,
   Gin0,
@@ -11,19 +11,19 @@ import {
   Piece,
 } from '../../model/shogi/Piece'
 import Point from '../../model/shogi/Point'
-import { Turn } from '../../model/shogi/Turn'
+import GameStateStore from '../../store/game-state.store'
 import './Captures.scss'
 
 export interface Props {
-  click: ClickFunc
+  gs?: GameStateStore
   isLeftSide: boolean
   captures: number[]
   isTurn: boolean
-  turn: Turn
-  selected?: Point
 }
 
-export default class Captures extends Component<Props, {}> {
+@inject('gs')
+@observer
+export default class Captures extends Component<Props> {
   render(): JSX.Element {
     return (
       <div className={'Captures Captures' + Number(this.props.isLeftSide)}>
@@ -39,7 +39,7 @@ export default class Captures extends Component<Props, {}> {
   }
 
   cells(name: string, pieceId: Piece, count: number): JSX.Element {
-    const sel = this.props.selected
+    const sel = this.props.gs!.selected
     const children = Array.from(Array(count).keys()).map(i => {
       const selectedClass = this.props.isTurn
         ? getSelectedClass(sel, pieceId, i)
@@ -55,8 +55,8 @@ export default class Captures extends Component<Props, {}> {
           className={className}
           onClick={() => {
             if (this.props.isTurn)
-              this.props.click({
-                clicked: this.props.turn * pieceId,
+              this.props.gs!.clickPiece({
+                clicked: this.props.gs!.pos.turn * pieceId,
                 row: -1,
                 column: -1,
                 i: i,

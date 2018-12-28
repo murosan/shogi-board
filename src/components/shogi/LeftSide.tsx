@@ -1,30 +1,31 @@
+import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { ClickFunc } from '../../model/events/ClickFunc'
-import Point from '../../model/shogi/Point'
-import { Turn } from '../../model/shogi/Turn'
+import { Gote, Sente } from '../../model/shogi/Turn'
+import GameStateStore from '../../store/game-state.store'
 import Captures from './Captures'
 import './LeftSide.scss'
 
 export interface Props {
-  click: ClickFunc
-  captures: number[]
-  isTurn: boolean
-  turn: Turn
-  selected?: Point
+  gs?: GameStateStore
 }
 
-export default class LeftSide extends Component<Props, {}> {
+@inject('gs')
+@observer
+export default class LeftSide extends Component<Props> {
   render() {
+    const caps: number[] =
+      this.props.gs!.indexes[0] === -1
+        ? this.props.gs!.pos.cap1
+        : this.props.gs!.pos.cap0
+
+    const isTurn: boolean =
+      this.props.gs!.indexes[0] === -1
+        ? this.props.gs!.pos.turn === Gote
+        : this.props.gs!.pos.turn === Sente
+
     return (
       <div className="LeftSide">
-        <Captures
-          click={this.props.click}
-          isLeftSide={true}
-          captures={this.props.captures}
-          isTurn={this.props.isTurn}
-          turn={this.props.turn}
-          selected={this.props.selected}
-        />
+        <Captures isLeftSide={true} captures={caps} isTurn={isTurn} />
         <div />
       </div>
     )

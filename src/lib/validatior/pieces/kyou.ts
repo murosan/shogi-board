@@ -2,8 +2,7 @@ import { Kyou0, Kyou1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import Position from '../../../model/shogi/Position'
 import getEmpties from '../utils/getEmpties'
-import getWithNextDiff from '../utils/getWithNextDiff'
-import { comp } from '../utils/algorithm'
+import getWithDiff from '../utils/getWithDiff'
 
 export default function(pos: Position, p: Point): Point[] {
   if (!p.piece || (p.piece !== Kyou0 && p.piece !== Kyou1))
@@ -16,7 +15,7 @@ export default function(pos: Position, p: Point): Point[] {
 
   const diff = p.piece > 0 ? -1 : 1
   const points: Point[] = []
-  getWithNextDiff(pos.pos, p.row + diff, p.column, p.piece, points, diff, 0)
+  getWithDiff(pos.pos, p.row + diff, p.column, p.piece, points, diff, 0)
   if (p.piece > 0) points.reverse()
   return points
 }

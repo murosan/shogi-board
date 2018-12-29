@@ -64,5 +64,11 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/src/index.tsx"
+    ]
   }
 }

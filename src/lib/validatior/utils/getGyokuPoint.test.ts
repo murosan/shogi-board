@@ -1,4 +1,4 @@
-import { Gyoku0, Gyoku1, Empty } from '../../../model/shogi/Piece'
+import { Empty, Gyoku0, Gyoku1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import { hirate } from '../../../model/shogi/PositionInit'
 import { Gote, Sente } from '../../../model/shogi/Turn'

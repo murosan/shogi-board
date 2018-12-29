@@ -4,7 +4,7 @@ import Position from '../../../model/shogi/Position'
 import { Turn } from '../../../model/shogi/Turn'
 import { moveBoardOnly } from '../../handler/position'
 import getTargets from '../getTargets'
-import { exists } from './algorithm'
+import { find } from './algorithm'
 
 /**
  * points が attacker の駒の効きに入っているか
@@ -40,7 +40,7 @@ export default function isPointed(
 
       // 攻め側の駒の targets に point が含まれていなかったらスキップ
       const targets: Point[] = getTargets(pos, { row, column, piece })
-      const foundIndex: number = exists(targets, point)
+      const foundIndex: number = find(targets, point)
       if (foundIndex === -1) continue
 
       // 王手放置チェックをしないとき、

@@ -4,7 +4,7 @@ export function comp(a: Point, b: Point): number {
   return a.row - b.row || a.column - b.column
 }
 
-export function exists(pts: Point[], p: Point): number {
+export function find(pts: Point[], p: Point): number {
   let i = pts.length >> 1
   let l = 0
   let r = pts.length - 1

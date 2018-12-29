@@ -11,6 +11,7 @@ import getTargets from '../lib/validatior/getTargets'
 import filterTargets from '../lib/validatior/utils/filterTargets'
 import { move } from '../lib/handler/position'
 import { canPromote, mustPromote, promote } from '../lib/handler/piece'
+import { exists } from '../lib/validatior/utils/algorithm'
 
 export default class GameStateStore implements GameState {
   @observable pos: Position = hirate()
@@ -112,21 +113,4 @@ function selectedAgain(sel: Point, cp: ClickProps): boolean {
     sel.piece === cp.clicked &&
     sel.i === cp.i
   )
-}
-
-function exists(pts: Point[], p: Point): boolean {
-  let i = pts.length >> 1
-  let l = 0
-  let r = pts.length - 1
-
-  while (l <= r) {
-    if (pts[i].row === p.row && pts[i].column === p.column) return true
-    if (pts[i].row < p.row) l = i + 1
-    else if (pts[i].row > p.row) r = i - 1
-    else if (pts[i].column < p.column) l = i + 1
-    else r = i - 1
-    i = l + ((r - l) >> 1)
-  }
-
-  return false
 }

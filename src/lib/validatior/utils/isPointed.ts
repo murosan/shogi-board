@@ -36,6 +36,7 @@ export default function isPointed(
       // 受け側の駒か、空マスならスキップ
       if (piece * attacker <= 0) continue
 
+      // TODO: 二分木探索
       const targets: Point[] = getTargets(pos, { row, column, piece })
       for (let i = 0; i < targets.length; i++) {
         const locationMatches: boolean =

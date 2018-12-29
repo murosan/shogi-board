@@ -14,17 +14,17 @@ import { find } from './algorithm'
  *
  * 例. 初期局面で先手の59玉に、後手の駒の効きがあるかを調べるとき
  * pos は初期局面
- * points は、[{ row: 8, column: 4 }]
+ * point は、{ row: 8, column: 4 }
  * attacker は Gote(-1)
  * を渡し、false が返る
  *
  * @param pos Position 配置
- * @param points Point 調べたい位置
+ * @param point Point 調べたい位置
  * @param attacker Turn 攻め手番
  * @param ignoreCheckLeaving boolean | undefined 王手放置チェックを無視するか
  *                           無視する(チェックしない): true
  *                           無視しない(チェックする): false | undefined
- *                           基本的に外から呼ぶ時は false
+ *                           基本的に外から呼ぶ時は undefined で
  */
 export default function isPointed(
   pos: Position,
@@ -45,7 +45,7 @@ export default function isPointed(
 
       // 王手放置チェックをしないとき、
       // 攻め側の駒が玉じゃないとき、
-      // 受け側の駒が玉の時はは
+      // 受け側の駒が玉の時は
       // 次に動けるので true
       if (
         ignoreCheckLeaving ||

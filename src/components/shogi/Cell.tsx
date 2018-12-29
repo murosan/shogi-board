@@ -6,7 +6,7 @@ import Confirm from '../../model/shogi/Confirm'
 import { Empty, Piece } from '../../model/shogi/Piece'
 import Point from '../../model/shogi/Point'
 import { Gote, Sente } from '../../model/shogi/Turn'
-import GameStateStore from '../../store/game-state.store'
+import GameStateStore from '../../store/GameStateStore'
 import './Cell.scss'
 
 export interface Props {

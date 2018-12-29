@@ -1,6 +1,6 @@
 import { Provider } from 'mobx-react'
 import React, { Component } from 'react'
-import GameStateStore from '../store/game-state.store'
+import GameStateStore from '../store/GameStateStore'
 import './App.scss'
 import BoardArea from './shogi/BoardArea'
 

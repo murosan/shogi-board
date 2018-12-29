@@ -1,6 +1,6 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import GameStateStore from '../../store/game-state.store'
+import GameStateStore from '../../store/GameStateStore'
 import './Board.scss'
 import Cell from './Cell'
 

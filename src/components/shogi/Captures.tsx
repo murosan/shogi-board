@@ -11,7 +11,7 @@ import {
   Piece,
 } from '../../model/shogi/Piece'
 import Point from '../../model/shogi/Point'
-import GameStateStore from '../../store/game-state.store'
+import GameStateStore from '../../store/GameStateStore'
 import './Captures.scss'
 
 export interface Props {

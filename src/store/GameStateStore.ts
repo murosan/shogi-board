@@ -1,4 +1,9 @@
 import { action, observable } from 'mobx'
+import { canPromote, mustPromote, promote } from '../lib/handler/piece'
+import { move } from '../lib/handler/position'
+import getTargets from '../lib/validatior/getTargets'
+import { find } from '../lib/validatior/utils/algorithm'
+import filterTargets from '../lib/validatior/utils/filterTargets'
 import { ClickProps } from '../model/events/ClickFunc'
 import Confirm from '../model/shogi/Confirm'
 import GameState from '../model/shogi/GameState'
@@ -7,11 +12,6 @@ import Point from '../model/shogi/Point'
 import Position from '../model/shogi/Position'
 import { hirate } from '../model/shogi/PositionInit'
 import { Turn } from '../model/shogi/Turn'
-import getTargets from '../lib/validatior/getTargets'
-import filterTargets from '../lib/validatior/utils/filterTargets'
-import { move } from '../lib/handler/position'
-import { canPromote, mustPromote, promote } from '../lib/handler/piece'
-import { find } from '../lib/validatior/utils/algorithm'
 
 export default class GameStateStore implements GameState {
   @observable pos: Position = hirate()

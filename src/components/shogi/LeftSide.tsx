@@ -1,7 +1,7 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { Gote, Sente } from '../../model/shogi/Turn'
-import GameStateStore from '../../store/game-state.store'
+import GameStateStore from '../../store/GameStateStore'
 import Captures from './Captures'
 import './LeftSide.scss'
 

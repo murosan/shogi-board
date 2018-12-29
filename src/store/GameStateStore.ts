@@ -12,6 +12,7 @@ import Point from '../model/shogi/Point'
 import Position from '../model/shogi/Position'
 import { hirate } from '../model/shogi/PositionInit'
 import { Turn } from '../model/shogi/Turn'
+import { reverse } from 'dns'
 
 export default class GameStateStore implements GameState {
   @observable pos: Position = hirate()
@@ -98,6 +99,10 @@ export default class GameStateStore implements GameState {
     }
 
     moveAndUpdateState(mp ? promote(sel.piece) : sel.piece)
+  }
+
+  @action reverse(): void {
+    this.indexes = this.indexes.slice().reverse()
   }
 }
 

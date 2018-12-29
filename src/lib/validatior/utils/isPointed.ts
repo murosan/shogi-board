@@ -61,7 +61,7 @@ export default function isPointed(
         dest: { row: point.row, column: point.column },
         piece,
       })
-      return !isPointed(moved, point, <Turn>-attacker, true)
+      if (isPointed(moved, point, <Turn>-attacker, true)) continue
     }
   }
 

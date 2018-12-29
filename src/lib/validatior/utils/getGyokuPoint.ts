@@ -1,6 +1,6 @@
+import { Gyoku0, Piece } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import { Turn } from '../../../model/shogi/Turn'
-import { Gyoku0, Piece } from '../../../model/shogi/Piece'
 
 /**
  * 玉の位置を探す

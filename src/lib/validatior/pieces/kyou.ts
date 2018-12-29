@@ -3,7 +3,7 @@ import Point from '../../../model/shogi/Point'
 import Position from '../../../model/shogi/Position'
 import getEmpties from '../utils/getEmpties'
 import getWithNextDiff from '../utils/getWithNextDiff'
-import comp from '../utils/comp'
+import { comp } from '../utils/algorithm'
 
 export default function(pos: Position, p: Point): Point[] {
   if (!p.piece || (p.piece !== Kyou0 && p.piece !== Kyou1))

@@ -25,10 +25,10 @@ export default class GameStateStore implements GameState {
     const turn = this.pos.turn
 
     // Confirm 画面なのに、成・不成以外がクリックされたらなにもしない
-    if (this.confirm && isPiece(p.clicked)) return
+    if (this.confirm !== undefined && isPiece(p.clicked)) return
 
     // 選択された駒をクリックしたら選択解除
-    if (sel && isPiece(p.clicked) && selectedAgain(sel, p)) {
+    if (sel !== undefined && isPiece(p.clicked) && selectedAgain(sel, p)) {
       this.selected = undefined
       return
     }
@@ -39,7 +39,7 @@ export default class GameStateStore implements GameState {
         row: p.row,
         column: p.column,
         piece: p.clicked,
-        i: p.i || 0,
+        i: p.i,
       }
       this.selected = point
       const targets = getTargets(this.pos, point)
@@ -48,8 +48,11 @@ export default class GameStateStore implements GameState {
       return
     }
 
-    // 選択された駒がないとき、手番ではない方の駒or空白マスがクリックされたらなにもしない
-    if (!sel || !sel.piece) return
+    // 選択された駒がない場合は、手番ではない方の駒or空白マスがクリックされた
+    // ということなので何もしない
+    // `|| sel.piece === undefined` の部分は
+    // この後のコードで TypeScript のチェックを楽にするため
+    if (sel === undefined || sel.piece === undefined) return
 
     // 動けない場所がクリックされたらなにもしない
     const foundIndex: number = find(this.moveTargets, p)
@@ -67,7 +70,7 @@ export default class GameStateStore implements GameState {
       this.moveTargets = []
     }
 
-    // Confirm オブジェクトがクリックされたら動かす(成or不成の処理)
+    // Confirm オブジェクトがクリックされたら動かす(成 or 不成の処理)
     if (!isPiece(p.clicked)) {
       moveAndUpdateState(p.promote ? p.clicked.promoted : p.clicked.preserved)
       return

@@ -1,11 +1,11 @@
-import { Gyoku0, Piece, Fu0, Gyoku1, Fu1 } from '../../../model/shogi/Piece'
+import { Gyoku0, Piece } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import Position from '../../../model/shogi/Position'
 import { Gote, Sente, Turn } from '../../../model/shogi/Turn'
-import { moveBoardOnly, move } from '../../handler/position'
+import { moveBoardOnly } from '../../handler/position'
+import getTargets from '../getTargets'
 import getGyokuPoint from './getGyokuPoint'
 import isPointed from './isPointed'
-import getTargets from '../getTargets'
 
 /**
  * 王手放置か打ち歩詰めだったら弾く
@@ -48,7 +48,7 @@ export default function filter(
 
     // 打ち歩詰めチェック
     const enemyGyoku = getGyokuPoint(moved.pos, <Turn>-turn)
-    // 相手玉が打った歩による王手である
+    // 打った歩による王手である
     if (enemyGyoku && isPointed(moved, enemyGyoku, turn)) {
       // 打った歩が次に取られるか
       const fuIsPointed = isPointed(moved, targets[i], <Turn>-turn)

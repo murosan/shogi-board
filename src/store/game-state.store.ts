@@ -11,7 +11,7 @@ import getTargets from '../lib/validatior/getTargets'
 import filterTargets from '../lib/validatior/utils/filterTargets'
 import { move } from '../lib/handler/position'
 import { canPromote, mustPromote, promote } from '../lib/handler/piece'
-import { exists } from '../lib/validatior/utils/algorithm'
+import { find } from '../lib/validatior/utils/algorithm'
 
 export default class GameStateStore implements GameState {
   @observable pos: Position = hirate()
@@ -52,7 +52,7 @@ export default class GameStateStore implements GameState {
     if (!sel || !sel.piece) return
 
     // 動けない場所がクリックされたらなにもしない
-    const foundIndex: number = exists(this.moveTargets, p)
+    const foundIndex: number = find(this.moveTargets, p)
     if (foundIndex === -1) return
 
     const moveAndUpdateState = (piece: Piece) => {

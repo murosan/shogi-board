@@ -7,6 +7,8 @@ import {
   Gyoku1,
   Hisha0,
   Hisha1,
+  Kin1,
+  Kin0,
 } from '../../../model/shogi/Piece'
 import { Gote, Sente } from '../../../model/shogi/Turn'
 import emptyPosition from '../../../testutils/emptyPosition'
@@ -78,6 +80,24 @@ describe('isPointed', async () => {
     pos.pos[8][4] = Hisha0
     pos.pos[7][7] = Gyoku1
     const point = { row: 8, column: 8, piece: Gyoku0 }
+    expect(isPointed(pos, point, Gote)).toBeTruthy()
+  })
+
+  it('(attacker=先手)玉を動かすと王手放置になるが、別の駒で取れる場合 true', async () => {
+    const pos = emptyPosition()
+    pos.pos[8][0] = Gyoku0
+    pos.pos[8][1] = Kin0
+    pos.pos[7][0] = Kin1
+    const point = { row: 7, column: 0, piece: Kin1 }
+    expect(isPointed(pos, point, Sente)).toBeTruthy()
+  })
+
+  it('(attacker=後手)玉を動かすと王手放置になるが、別の駒で取れる場合 true', async () => {
+    const pos = emptyPosition()
+    pos.pos[0][0] = Gyoku1
+    pos.pos[0][1] = Kin1
+    pos.pos[1][0] = Kin0
+    const point = { row: 1, column: 0, piece: Kin0 }
     expect(isPointed(pos, point, Gote)).toBeTruthy()
   })
 })

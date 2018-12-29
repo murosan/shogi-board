@@ -15,7 +15,7 @@ import getTargets from '../getTargets'
 import filterTargets from './filterTargets'
 
 describe('filterTargets', async () => {
-  it('王手放置でも打ち歩詰めでもなければ減らない(先手)', async () => {
+  it('王手放置でも打ち歩詰めでもなければ弾かれない(先手)', async () => {
     const pos = emptyPosition()
     pos.pos[4][4] = Hisha0
     const point = { row: 4, column: 4, piece: Hisha0 }
@@ -23,7 +23,7 @@ describe('filterTargets', async () => {
     expect(filterTargets(pos, point, targets)).toEqual(targets)
   })
 
-  it('王手放置でも打ち歩詰めでもなければ減らない(後手)', async () => {
+  it('王手放置でも打ち歩詰めでもなければ弾かれない(後手)', async () => {
     const pos = emptyPosition()
     pos.pos[4][4] = Hisha1
     const point = { row: 4, column: 4, piece: Hisha1 }
@@ -53,7 +53,7 @@ describe('filterTargets', async () => {
     expect(filterTargets(pos, point, targets)).toEqual(expected)
   })
 
-  it('玉自身が動いて王手放になる場所は弾かれる(先手)', async () => {
+  it('玉自身が動いて王手放置になる場所は弾かれる(先手)', async () => {
     const pos = emptyPosition()
     pos.pos[8][8] = Gyoku0
     pos.pos[0][7] = Hisha1
@@ -63,7 +63,7 @@ describe('filterTargets', async () => {
     expect(filterTargets(pos, point, targets)).toEqual(expected)
   })
 
-  it('玉自身が動いて王手放になる場所は弾かれる(後手)', async () => {
+  it('玉自身が動いて王手放置になる場所は弾かれる(後手)', async () => {
     const pos = emptyPosition()
     pos.pos[0][8] = Gyoku1
     pos.pos[8][7] = Hisha0
@@ -113,7 +113,7 @@ describe('filterTargets', async () => {
     expect(filterTargets(pos, point, targets)).toEqual(targets)
   })
 
-  it('持ち駒の歩を打っても玉の打った歩が取られる位置ならば弾かれない(先手)', async () => {
+  it('持ち駒の歩を打って王手でも打った歩が取られる位置ならば弾かれない(先手)', async () => {
     const pos = emptyPosition()
     pos.pos[0][0] = Gyoku1
     pos.pos[0][1] = Kin1
@@ -123,7 +123,7 @@ describe('filterTargets', async () => {
     expect(filterTargets(pos, point, targets)).toEqual(targets)
   })
 
-  it('持ち駒の歩を打っても玉の打った歩が取られる位置ならば弾かれない(後手)', async () => {
+  it('持ち駒の歩を打って王手でも打った歩が取られる位置ならば弾かれない(後手)', async () => {
     const pos = emptyPosition()
     pos.pos[8][8] = Gyoku0
     pos.pos[8][7] = Kin0

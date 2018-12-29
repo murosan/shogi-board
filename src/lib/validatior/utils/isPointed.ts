@@ -62,6 +62,7 @@ export default function isPointed(
         piece,
       })
       if (isPointed(moved, point, <Turn>-attacker, true)) continue
+      return true
     }
   }
 

@@ -52,8 +52,8 @@ export default class GameStateStore implements GameState {
     if (!sel || !sel.piece) return
 
     // 動けない場所がクリックされたらなにもしない
-    const canMove: boolean = exists(this.moveTargets, p)
-    if (!canMove) return
+    const foundIndex: number = exists(this.moveTargets, p)
+    if (foundIndex === -1) return
 
     const moveAndUpdateState = (piece: Piece) => {
       this.pos = move({

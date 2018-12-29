@@ -4,13 +4,13 @@ export function comp(a: Point, b: Point): number {
   return a.row - b.row || a.column - b.column
 }
 
-export function exists(pts: Point[], p: Point): boolean {
+export function exists(pts: Point[], p: Point): number {
   let i = pts.length >> 1
   let l = 0
   let r = pts.length - 1
 
   while (l <= r) {
-    if (pts[i].row === p.row && pts[i].column === p.column) return true
+    if (pts[i].row === p.row && pts[i].column === p.column) return i
     if (pts[i].row < p.row) l = i + 1
     else if (pts[i].row > p.row) r = i - 1
     else if (pts[i].column < p.column) l = i + 1
@@ -18,5 +18,5 @@ export function exists(pts: Point[], p: Point): boolean {
     i = l + ((r - l) >> 1)
   }
 
-  return false
+  return -1
 }

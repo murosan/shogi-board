@@ -9,7 +9,10 @@
     "shogi",
     "board",
     "japanese chess",
-    "将棋"
+    "将棋",
+    "検討",
+    "ブラウザ",
+    "動かせる"
   ],
   "repository": {
     "type": "git",

@@ -5,7 +5,7 @@ import GameStateStore from '../../store/GameStateStore'
 import { Props as CapProps } from './Captures'
 import LeftSide from './LeftSide'
 
-it('レンダリングできる', () => {
+it('レンダリングできる', async () => {
   const gs: GameStateStore = new GameStateStore()
   const wrapper = mount(
     <Provider gs={gs}>
@@ -19,7 +19,7 @@ it('レンダリングできる', () => {
   expect(capProps.captures).toEqual([0, 0, 0, 0, 0, 0, 0])
 })
 
-it('反転していてもレンダリングできる', () => {
+it('反転していてもレンダリングできる', async () => {
   const gs: GameStateStore = new GameStateStore()
   gs.reverse()
   const wrapper = mount(

@@ -17,6 +17,7 @@ it('レンダリングできる', async () => {
   expect(capProps.isLeftSide).toBeFalsy()
   expect(capProps.isTurn).toBeTruthy()
   expect(capProps.captures).toEqual([0, 0, 0, 0, 0, 0, 0])
+  wrapper.unmount()
 })
 
 it('反転していてもレンダリングできる', async () => {
@@ -32,4 +33,5 @@ it('反転していてもレンダリングできる', async () => {
   expect(capProps.isLeftSide).toBeFalsy()
   expect(capProps.isTurn).toBeFalsy()
   expect(capProps.captures).toEqual([0, 0, 0, 0, 0, 0, 0])
+  wrapper.unmount()
 })

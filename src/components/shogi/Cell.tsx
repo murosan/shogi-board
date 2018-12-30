@@ -51,10 +51,10 @@ export default class Cell extends Component<Props> {
       return undefined
 
     const isReversed: boolean = this.props.gs!.indexes[0] === 9
-    const isSente =
-      (isReversed && cf.preserved < 0) || (!isReversed && cf.preserved > 0)
+    const isGote =
+      (isReversed && cf.preserved > 0) || (!isReversed && cf.preserved < 0)
 
-    const className = 'Piece-Confirm Piece-Confirm' + Number(!isSente)
+    const className = 'Piece-Confirm Piece-Confirm' + Number(isGote)
 
     // TODO: この方法だと画面幅によって1pxずれる
     return (

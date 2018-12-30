@@ -5,4 +5,7 @@ import BoardArea from './BoardArea'
 it('レンダリングできる', () => {
   const wrapper = shallow(<BoardArea />)
   expect(wrapper.find('.BoardArea')).toHaveLength(1)
+  expect(wrapper.find('inject-LeftSide-with-gs')).toHaveLength(1)
+  expect(wrapper.find('inject-Board-with-gs')).toHaveLength(1)
+  expect(wrapper.find('inject-RightSide-with-gs')).toHaveLength(1)
 })

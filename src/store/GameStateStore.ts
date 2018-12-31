@@ -1,10 +1,12 @@
-import { action, observable } from 'mobx'
+import { action, computed, observable } from 'mobx'
 import { canPromote, mustPromote, promote } from '../lib/handler/piece'
 import { move } from '../lib/handler/position'
+import getCurrentIndex from '../lib/kif-handler/getCurrentIndex'
 import getTargets from '../lib/validatior/getTargets'
 import { find } from '../lib/validatior/utils/algorithm'
 import filterTargets from '../lib/validatior/utils/filterTargets'
 import { ClickProps } from '../model/events/ClickFunc'
+import Kif, { newKif } from '../model/kif/Kif'
 import Confirm from '../model/shogi/Confirm'
 import GameState from '../model/shogi/GameState'
 import { Piece } from '../model/shogi/Piece'
@@ -12,16 +14,25 @@ import Point from '../model/shogi/Point'
 import Position from '../model/shogi/Position'
 import { hirate } from '../model/shogi/PositionInit'
 import { Turn } from '../model/shogi/Turn'
-import { reverse } from 'dns'
 
-export default class GameStateStore implements GameState {
+export interface Store extends GameState {
+  currentKifIndex: number
+  clickPiece(p: ClickProps): void
+}
+
+export default class GameStateStore implements Store {
   @observable pos: Position = hirate()
   @observable indexes: number[] = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   @observable selected: Point | undefined = undefined
   @observable confirm: Confirm | undefined = undefined
   @observable moveTargets: Point[] = []
+  @observable kif: Kif = newKif()
 
-  @action clickPiece(p: ClickProps) {
+  @computed get currentKifIndex(): number {
+    return getCurrentIndex(this.kif)
+  }
+
+  @action clickPiece(p: ClickProps): void {
     const sel = this.selected
     const turn = this.pos.turn
 

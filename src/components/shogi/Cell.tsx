@@ -6,21 +6,21 @@ import Confirm from '../../model/shogi/Confirm'
 import { Empty, Piece } from '../../model/shogi/Piece'
 import Point from '../../model/shogi/Point'
 import { Gote, Sente } from '../../model/shogi/Turn'
-import GameStateStore from '../../store/GameStateStore'
+import { Store } from '../../store/GameStateStore'
 import './Cell.scss'
 
 export interface Props {
-  gs?: GameStateStore
+  store?: Store
   row: number
   column: number
 }
 
-@inject('gs')
+@inject('store')
 @observer
 export default class Cell extends Component<Props> {
   getPiece = () =>
     inRange(this.props.row) && inRange(this.props.column)
-      ? this.props.gs!.pos.pos[this.props.row][this.props.column]
+      ? this.props.store!.pos.pos[this.props.row][this.props.column]
       : Empty
 
   render(): JSX.Element | undefined {
@@ -28,18 +28,18 @@ export default class Cell extends Component<Props> {
     const className: string = getClassName({
       r: this.props.row,
       c: this.props.column,
-      rv: this.props.gs!.indexes[0] === 9,
+      rv: this.props.store!.indexes[0] === 9,
       p: piece,
-      sel: this.props.gs!.selected,
-      confirm: this.props.gs!.confirm,
+      sel: this.props.store!.selected,
+      confirm: this.props.store!.confirm,
       isTurn:
-        (piece > 0 && this.props.gs!.pos.turn === Sente) ||
-        (piece < 0 && this.props.gs!.pos.turn === Gote),
+        (piece > 0 && this.props.store!.pos.turn === Sente) ||
+        (piece < 0 && this.props.store!.pos.turn === Gote),
     })
 
     return (
       <div className={className} onClick={() => this.click()}>
-        {this.renderConfirm(this.props.gs!.confirm)}
+        {this.renderConfirm(this.props.store!.confirm)}
         {this.renderEdgeTextRow()}
         {this.renderEdgeTextColumn()}
       </div>
@@ -50,7 +50,7 @@ export default class Cell extends Component<Props> {
     if (!cf || cf.row !== this.props.row || cf.column !== this.props.column)
       return undefined
 
-    const isReversed: boolean = this.props.gs!.indexes[0] === 9
+    const isReversed: boolean = this.props.store!.indexes[0] === 9
     const isGote =
       (isReversed && cf.preserved > 0) || (!isReversed && cf.preserved < 0)
 
@@ -88,14 +88,14 @@ export default class Cell extends Component<Props> {
   }
 
   click(cf?: Confirm, promote?: true) {
-    if (this.props.gs!.confirm && !cf) return
+    if (this.props.store!.confirm && !cf) return
     const p: ClickProps = {
       clicked: cf || this.getPiece(),
       row: this.props.row,
       column: this.props.column,
       promote: promote,
     }
-    this.props.gs!.clickPiece(p)
+    this.props.store!.clickPiece(p)
   }
 }
 

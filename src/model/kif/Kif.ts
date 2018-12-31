@@ -1,4 +1,6 @@
-import { History } from './History'
+import Position from '../shogi/Position'
+import { hirate } from '../shogi/PositionInit'
+import History from './History'
 import Meta from './Meta'
 
 export default interface Kif {
@@ -6,9 +8,21 @@ export default interface Kif {
   meta: Meta
 
   // 棋譜
-  history: History[]
+  history: History
+}
 
-  // history のインデックス
-  // ブラウザで表示するときに現在局面がどこか探せるように
-  index: number
+export function newKif(): Kif {
+  const initPos: Position = hirate()
+  return {
+    meta: {
+      version: '1',
+      player: { sente: '', gote: '' },
+      handicap: '平手',
+      initPos,
+    },
+    history: {
+      moves: [{ str: '開始局面', pos: initPos }],
+      index: 0,
+    },
+  }
 }

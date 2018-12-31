@@ -1,4 +1,4 @@
-import { History } from './History'
+import History from './History'
 
 export default interface Branch {
   branches: History[]

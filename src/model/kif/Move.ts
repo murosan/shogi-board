@@ -4,18 +4,20 @@ import { Piece } from '../shogi/Piece'
 
 export default interface Move {
   // 棋譜の文字列
-  // TODO: できれば無くしたい。
   str: string
 
   // 移動元
   // 持ち駒なら { -1, -1 }
-  source: Point
+  // 初期局面は undefined 許容
+  source?: Point
 
   // 移動先
-  dest: Point
+  // 初期局面は undefined 許容
+  dest?: Point
 
   // 駒ID
-  piece: Piece
+  // 初期局面は undefined 許容
+  piece?: Piece
 
   // 成 or 不成
   // そもそも成も不成も選択できない時は undefined
@@ -25,10 +27,8 @@ export default interface Move {
   time?: number
 
   // 配置
-  // 入れておくとサイズはでかくなるが、色々楽なので
-  // 問題が出たら考える
   pos: Position
 
   // コメント
-  comment: string
+  comment?: string
 }

@@ -13,30 +13,30 @@ import GameStateStore from '../../store/GameStateStore'
 import Cell from './Cell'
 
 it('正しいクラス名を付けられる', async () => {
-  const gs: GameStateStore = new GameStateStore()
+  const store: GameStateStore = new GameStateStore()
   // 先手の駒
-  const wrapper1 = shallow(<Cell gs={gs} row={6} column={1} />).dive()
-  const wrapper2 = shallow(<Cell gs={gs} row={7} column={7} />).dive()
+  const wrapper1 = shallow(<Cell store={store} row={6} column={1} />).dive()
+  const wrapper2 = shallow(<Cell store={store} row={7} column={7} />).dive()
   const className1 = `Cell Piece Piece-Bordered Piece-${Fu0} Piece-Turn`
   const className2 = `Cell Piece Piece-Bordered Piece-${Kaku0} Piece-Turn`
   // 後手の駒
-  const wrapper3 = shallow(<Cell gs={gs} row={2} column={7} />).dive()
-  const wrapper4 = shallow(<Cell gs={gs} row={1} column={1} />).dive()
+  const wrapper3 = shallow(<Cell store={store} row={2} column={7} />).dive()
+  const wrapper4 = shallow(<Cell store={store} row={1} column={1} />).dive()
   const className3 = `Cell Piece Piece-Bordered Piece-${Fu1}`
   const className4 = `Cell Piece Piece-Bordered Piece-${Kaku1}`
   // 星
-  const wrapper5 = shallow(<Cell gs={gs} row={2} column={6} />).dive()
-  const wrapper6 = shallow(<Cell gs={gs} row={2} column={3} />).dive()
-  const wrapper7 = shallow(<Cell gs={gs} row={5} column={6} />).dive()
-  const wrapper8 = shallow(<Cell gs={gs} row={5} column={3} />).dive()
+  const wrapper5 = shallow(<Cell store={store} row={2} column={6} />).dive()
+  const wrapper6 = shallow(<Cell store={store} row={2} column={3} />).dive()
+  const wrapper7 = shallow(<Cell store={store} row={5} column={6} />).dive()
+  const wrapper8 = shallow(<Cell store={store} row={5} column={3} />).dive()
   const className5 = `Cell Piece Piece-Bordered Piece-${Fu1} Piece-Star`
   const className7 = `Cell Piece Piece-Bordered Piece-Star`
   // 駒の中で、最上段・一番左
-  const wrapper9 = shallow(<Cell gs={gs} row={0} column={8} />).dive()
+  const wrapper9 = shallow(<Cell store={store} row={0} column={8} />).dive()
   const className9 = `Cell Piece Piece-Bordered Piece-${Kyou1} Piece-Left Piece-Top`
   // EdgeText
-  const wrapper10 = shallow(<Cell gs={gs} row={-1} column={0} />).dive()
-  const wrapper11 = shallow(<Cell gs={gs} row={0} column={-1} />).dive()
+  const wrapper10 = shallow(<Cell store={store} row={-1} column={0} />).dive()
+  const wrapper11 = shallow(<Cell store={store} row={0} column={-1} />).dive()
   const className10 = `Cell Cell-EdgeText`
 
   expect(wrapper1.hasClass(className1)).toBeTruthy()
@@ -53,31 +53,31 @@ it('正しいクラス名を付けられる', async () => {
 })
 
 it('反転してる場合でも正しいクラス名を付けられる', async () => {
-  const gs: GameStateStore = new GameStateStore()
-  gs.reverse()
+  const store: GameStateStore = new GameStateStore()
+  store.reverse()
   // 先手の駒
-  const wrapper1 = shallow(<Cell gs={gs} row={6} column={1} />).dive()
-  const wrapper2 = shallow(<Cell gs={gs} row={7} column={7} />).dive()
+  const wrapper1 = shallow(<Cell store={store} row={6} column={1} />).dive()
+  const wrapper2 = shallow(<Cell store={store} row={7} column={7} />).dive()
   const className1 = `Cell Piece Piece-Bordered Piece-${Fu1} Piece-Turn`
   const className2 = `Cell Piece Piece-Bordered Piece-${Kaku1} Piece-Turn`
   // 後手の駒
-  const wrapper3 = shallow(<Cell gs={gs} row={2} column={7} />).dive()
-  const wrapper4 = shallow(<Cell gs={gs} row={1} column={1} />).dive()
+  const wrapper3 = shallow(<Cell store={store} row={2} column={7} />).dive()
+  const wrapper4 = shallow(<Cell store={store} row={1} column={1} />).dive()
   const className3 = `Cell Piece Piece-Bordered Piece-${Fu0}`
   const className4 = `Cell Piece Piece-Bordered Piece-${Kaku0}`
   // 星
-  const wrapper5 = shallow(<Cell gs={gs} row={6} column={2} />).dive()
-  const wrapper6 = shallow(<Cell gs={gs} row={6} column={5} />).dive()
-  const wrapper7 = shallow(<Cell gs={gs} row={3} column={2} />).dive()
-  const wrapper8 = shallow(<Cell gs={gs} row={3} column={5} />).dive()
+  const wrapper5 = shallow(<Cell store={store} row={6} column={2} />).dive()
+  const wrapper6 = shallow(<Cell store={store} row={6} column={5} />).dive()
+  const wrapper7 = shallow(<Cell store={store} row={3} column={2} />).dive()
+  const wrapper8 = shallow(<Cell store={store} row={3} column={5} />).dive()
   const className5 = `Cell Piece Piece-Bordered Piece-${Fu1} Piece-Turn Piece-Star`
   const className7 = `Cell Piece Piece-Bordered Piece-Star`
   // 駒の中で、最上段・一番左
-  const wrapper9 = shallow(<Cell gs={gs} row={8} column={0} />).dive()
+  const wrapper9 = shallow(<Cell store={store} row={8} column={0} />).dive()
   const className9 = `Cell Piece Piece-Bordered Piece-${Kyou1} Piece-Turn Piece-Left Piece-Top`
   // EdgeText
-  const wrapper10 = shallow(<Cell gs={gs} row={-1} column={0} />).dive()
-  const wrapper11 = shallow(<Cell gs={gs} row={0} column={-1} />).dive()
+  const wrapper10 = shallow(<Cell store={store} row={-1} column={0} />).dive()
+  const wrapper11 = shallow(<Cell store={store} row={0} column={-1} />).dive()
   const className10 = `Cell Cell-EdgeText`
 
   expect(wrapper1.hasClass(className1)).toBeTruthy()
@@ -94,20 +94,20 @@ it('反転してる場合でも正しいクラス名を付けられる', async (
 })
 
 it('手番の駒をクリックすると選択でき、Selectedクラスが付く', async () => {
-  const gs: GameStateStore = new GameStateStore()
-  const wrapper = shallow(<Cell gs={gs} row={6} column={1} />).dive()
+  const store: GameStateStore = new GameStateStore()
+  const wrapper = shallow(<Cell store={store} row={6} column={1} />).dive()
   wrapper.simulate('click')
   const className = `Cell Piece Piece-Bordered Piece-${Fu0} Piece-Turn Piece-Selected`
   expect(wrapper.hasClass(className)).toBeTruthy()
 })
 
 it('Confirm 周り一連をちゃんとできる', async () => {
-  const gs: GameStateStore = new GameStateStore()
-  gs.pos.pos[3][1] = Fu0
-  gs.pos.pos[6][1] = Empty
-  const wrapper1 = shallow(<Cell gs={gs} row={3} column={1} />).dive()
-  const wrapper2 = shallow(<Cell gs={gs} row={2} column={1} />).dive()
-  const wrapper3 = shallow(<Cell gs={gs} row={4} column={4} />).dive()
+  const store: GameStateStore = new GameStateStore()
+  store.pos.pos[3][1] = Fu0
+  store.pos.pos[6][1] = Empty
+  const wrapper1 = shallow(<Cell store={store} row={3} column={1} />).dive()
+  const wrapper2 = shallow(<Cell store={store} row={2} column={1} />).dive()
+  const wrapper3 = shallow(<Cell store={store} row={4} column={4} />).dive()
   wrapper1.simulate('click')
   wrapper2.simulate('click')
   const className1 = `Cell Piece Piece-Bordered Piece-Turn Piece-Selected`
@@ -127,11 +127,11 @@ it('Confirm 周り一連をちゃんとできる', async () => {
 })
 
 it('成れる', async () => {
-  const gs: GameStateStore = new GameStateStore()
-  gs.pos.pos[3][1] = Fu0
-  gs.pos.pos[6][1] = Empty
-  const wrapper1 = shallow(<Cell gs={gs} row={3} column={1} />).dive()
-  const wrapper2 = shallow(<Cell gs={gs} row={2} column={1} />).dive()
+  const store: GameStateStore = new GameStateStore()
+  store.pos.pos[3][1] = Fu0
+  store.pos.pos[6][1] = Empty
+  const wrapper1 = shallow(<Cell store={store} row={3} column={1} />).dive()
+  const wrapper2 = shallow(<Cell store={store} row={2} column={1} />).dive()
   wrapper1.simulate('click')
   wrapper2.simulate('click')
   wrapper2
@@ -144,11 +144,11 @@ it('成れる', async () => {
 })
 
 it('不成もできる', async () => {
-  const gs: GameStateStore = new GameStateStore()
-  gs.pos.pos[3][1] = Fu0
-  gs.pos.pos[6][1] = Empty
-  const wrapper1 = shallow(<Cell gs={gs} row={3} column={1} />).dive()
-  const wrapper2 = shallow(<Cell gs={gs} row={2} column={1} />).dive()
+  const store: GameStateStore = new GameStateStore()
+  store.pos.pos[3][1] = Fu0
+  store.pos.pos[6][1] = Empty
+  const wrapper1 = shallow(<Cell store={store} row={3} column={1} />).dive()
+  const wrapper2 = shallow(<Cell store={store} row={2} column={1} />).dive()
   wrapper1.simulate('click')
   wrapper2.simulate('click')
   wrapper2
@@ -161,12 +161,12 @@ it('不成もできる', async () => {
 })
 
 it('反転していても Confirm オブジェクトを表示できる', async () => {
-  const gs: GameStateStore = new GameStateStore()
-  gs.reverse()
-  gs.pos.pos[3][1] = Fu0
-  gs.pos.pos[6][1] = Empty
-  const wrapper1 = shallow(<Cell gs={gs} row={3} column={1} />).dive()
-  const wrapper2 = shallow(<Cell gs={gs} row={2} column={1} />).dive()
+  const store: GameStateStore = new GameStateStore()
+  store.reverse()
+  store.pos.pos[3][1] = Fu0
+  store.pos.pos[6][1] = Empty
+  const wrapper1 = shallow(<Cell store={store} row={3} column={1} />).dive()
+  const wrapper2 = shallow(<Cell store={store} row={2} column={1} />).dive()
   wrapper1.simulate('click')
   wrapper2.simulate('click')
   const className1 = `Cell Piece Piece-Bordered Piece-Turn Piece-Selected`

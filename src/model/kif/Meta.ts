@@ -4,7 +4,7 @@ export default interface Meta {
   // 棋譜のバージョン
   version: string
 
-  date: {
+  date?: {
     // 開始日時
     start: Date
     // 終了日時
@@ -12,10 +12,10 @@ export default interface Meta {
   }
 
   // 表題とか棋戦名とか
-  title: string
+  title?: string
 
   // 対局場所
-  place: string
+  place?: string
 
   // 対局者
   player: {
@@ -41,5 +41,5 @@ export default interface Meta {
   handicap: string
 
   // 初期局面の情報
-  pos: Position
+  initPos: Position
 }

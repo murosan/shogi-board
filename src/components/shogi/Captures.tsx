@@ -11,17 +11,17 @@ import {
   Piece,
 } from '../../model/shogi/Piece'
 import Point from '../../model/shogi/Point'
-import GameStateStore from '../../store/GameStateStore'
+import { Store } from '../../store/GameStateStore'
 import './Captures.scss'
 
 export interface Props {
-  gs?: GameStateStore
+  store?: Store
   isLeftSide: boolean
   captures: number[]
   isTurn: boolean
 }
 
-@inject('gs')
+@inject('store')
 @observer
 export default class Captures extends Component<Props> {
   render(): JSX.Element {
@@ -39,7 +39,7 @@ export default class Captures extends Component<Props> {
   }
 
   cells(name: string, pieceId: Piece, count: number): JSX.Element {
-    const sel = this.props.gs!.selected
+    const sel = this.props.store!.selected
     const children = Array.from(Array(count).keys()).map(i => {
       const selectedClass = this.props.isTurn
         ? getSelectedClass(sel, pieceId, i)
@@ -55,8 +55,8 @@ export default class Captures extends Component<Props> {
           className={className}
           onClick={() => {
             if (this.props.isTurn)
-              this.props.gs!.clickPiece({
-                clicked: this.props.gs!.pos.turn * pieceId,
+              this.props.store!.clickPiece({
+                clicked: this.props.store!.pos.turn * pieceId,
                 row: -1,
                 column: -1,
                 i: i,

@@ -5,10 +5,10 @@ import Board from './Board'
 import { Props as CellProps } from './Cell'
 
 it('レンダリングできる', async () => {
-  const gs: GameStateStore = new GameStateStore()
-  const wrapper = shallow(<Board gs={gs} />).dive()
+  const store: GameStateStore = new GameStateStore()
+  const wrapper = shallow(<Board store={store} />).dive()
   expect(wrapper.find('.Board')).toHaveLength(1)
-  const cells = wrapper.find('inject-Cell-with-gs')
+  const cells = wrapper.find('inject-Cell-with-store')
   expect(cells).toHaveLength(121)
   const cellProps = cells.first().props() as CellProps
   expect(cellProps.row).toEqual(-1)
@@ -16,11 +16,11 @@ it('レンダリングできる', async () => {
 })
 
 it('反転されていてもレンダリングできる', async () => {
-  const gs: GameStateStore = new GameStateStore()
-  gs.reverse()
-  const wrapper = shallow(<Board gs={gs} />).dive()
+  const store: GameStateStore = new GameStateStore()
+  store.reverse()
+  const wrapper = shallow(<Board store={store} />).dive()
   expect(wrapper.find('.Board')).toHaveLength(1)
-  const cells = wrapper.find('inject-Cell-with-gs')
+  const cells = wrapper.find('inject-Cell-with-store')
   expect(cells).toHaveLength(121)
   const cellProps = cells.first().props() as CellProps
   expect(cellProps.row).toEqual(9)

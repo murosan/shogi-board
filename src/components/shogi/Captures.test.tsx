@@ -20,10 +20,10 @@ import GameStateStore from '../../store/GameStateStore'
 import Captures from './Captures'
 
 it('(RightSide)持ち駒のラッパー要素を正しくレンダリングできる', async () => {
-  const gs: GameStateStore = new GameStateStore()
+  const store: GameStateStore = new GameStateStore()
   const wrapper = shallow(
     <Captures
-      gs={gs}
+      store={store}
       isLeftSide={false}
       isTurn={true}
       captures={[1, 1, 1, 1, 1, 1, 1]}
@@ -50,10 +50,10 @@ it('(RightSide)持ち駒のラッパー要素を正しくレンダリングで�
 })
 
 it('(LefttSide)持ち駒のラッパー要素を正しくレンダリングできる', async () => {
-  const gs: GameStateStore = new GameStateStore()
+  const store: GameStateStore = new GameStateStore()
   const wrapper = shallow(
     <Captures
-      gs={gs}
+      store={store}
       isLeftSide={true}
       isTurn={true}
       captures={[1, 1, 1, 1, 1, 1, 1]}
@@ -80,10 +80,10 @@ it('(LefttSide)持ち駒のラッパー要素を正しくレンダリングで�
 })
 
 it('(RightSide)持ち駒の枚数に応じて正しいクラス名が付く', async () => {
-  const gs: GameStateStore = new GameStateStore()
+  const store: GameStateStore = new GameStateStore()
   const wrapper = shallow(
     <Captures
-      gs={gs}
+      store={store}
       isLeftSide={false}
       isTurn={true}
       captures={[10, 4, 2, 1, 1, 2, 1]}
@@ -123,10 +123,10 @@ it('(RightSide)持ち駒の枚数に応じて正しいクラス名が付く', as
 })
 
 it('(LeftSide)持ち駒の枚数に応じて正しいクラス名が付く', async () => {
-  const gs: GameStateStore = new GameStateStore()
+  const store: GameStateStore = new GameStateStore()
   const wrapper = shallow(
     <Captures
-      gs={gs}
+      store={store}
       isLeftSide={true}
       isTurn={false}
       captures={[10, 4, 2, 1, 1, 2, 1]}
@@ -166,10 +166,10 @@ it('(LeftSide)持ち駒の枚数に応じて正しいクラス名が付く', asy
 })
 
 it('持ち駒を選択できる', async () => {
-  const gs: GameStateStore = new GameStateStore()
+  const store: GameStateStore = new GameStateStore()
   const wrapper = shallow(
     <Captures
-      gs={gs}
+      store={store}
       isLeftSide={false}
       isTurn={true}
       captures={[10, 4, 2, 1, 1, 2, 1]}
@@ -184,10 +184,10 @@ it('持ち駒を選択できる', async () => {
 })
 
 it('手番ではない方の駒をクリックしても選択できない', async () => {
-  const gs: GameStateStore = new GameStateStore()
+  const store: GameStateStore = new GameStateStore()
   const wrapper = shallow(
     <Captures
-      gs={gs}
+      store={store}
       isLeftSide={false}
       isTurn={false}
       captures={[10, 4, 2, 1, 1, 2, 1]}

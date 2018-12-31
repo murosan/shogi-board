@@ -1,6 +1,7 @@
 import Confirm from './Confirm'
 import Point from './Point'
 import Position from './Position'
+import Kif from '../kif/Kif'
 
 /**
  * 盤面が今どういう状態かを表す
@@ -29,4 +30,7 @@ export default interface GameState {
 
   // 駒を動かせる場所を入れておくもの
   moveTargets: Point[]
+
+  // 棋譜
+  kif: Kif
 }

@@ -1,0 +1,39 @@
+@import '../../styles/colors';
+@import '../../styles/modules';
+
+.KifContainer {
+  @include overflow;
+  grid-area: kif;
+  margin: 0 0.1em;
+  border: 0.25vw solid $GreenBase;
+  background-color: $GrayTransParent;
+}
+
+.Move {
+  padding: 0.2em 0;
+  white-space: normal;
+  span.Number {
+    color: $GrayBase;
+    margin-right: 1vw;
+    margin-left: 1vw;
+  }
+}
+
+.Branch {
+  font-size: 90%;
+  color: $GreenBranch;
+  span {
+    margin-left: 3vw;
+  }
+}
+
+.Move,
+.Branch {
+  &:hover {
+    background-color: $GrayHover;
+  }
+}
+
+.Move-Current {
+  background-color: $GrayHover;
+}

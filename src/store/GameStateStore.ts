@@ -1,12 +1,16 @@
 import { action, computed, observable } from 'mobx'
 import { canPromote, mustPromote, promote } from '../lib/handler/piece'
 import { move } from '../lib/handler/position'
+import { genKifString } from '../lib/kif-handler/genKifString'
 import getCurrentIndex from '../lib/kif-handler/getCurrentIndex'
+import pushMove from '../lib/kif-handler/pushMove'
 import getTargets from '../lib/validatior/getTargets'
 import { find } from '../lib/validatior/utils/algorithm'
 import filterTargets from '../lib/validatior/utils/filterTargets'
 import { ClickProps } from '../model/events/ClickFunc'
+import MoveProps from '../model/events/MoveProps'
 import Kif, { newKif } from '../model/kif/Kif'
+import Move from '../model/kif/Move'
 import Confirm from '../model/shogi/Confirm'
 import GameState from '../model/shogi/GameState'
 import { Piece } from '../model/shogi/Piece'
@@ -70,21 +74,38 @@ export default class GameStateStore implements Store {
     const foundIndex: number = find(this.moveTargets, p)
     if (foundIndex === -1) return
 
-    const moveAndUpdateState = (piece: Piece) => {
-      this.pos = move({
+    const source: Point = { row: sel.row, column: sel.column }
+    const dest: Point = { row: p.row, column: p.column }
+
+    const moveAndUpdateState = (piece: Piece, promote?: boolean) => {
+      const moveProps: MoveProps = {
         pos: this.pos,
-        source: { row: sel.row, column: sel.column },
-        dest: { row: p.row, column: p.column },
-        piece: piece,
-      })
+        source,
+        dest,
+        piece,
+        promote,
+      }
+      const pos: Position = move(moveProps)
+      const kifStr: string = genKifString(moveProps)
+      const moveForKif: Move = {
+        str: kifStr,
+        pos,
+        source,
+        dest,
+        piece,
+        promote,
+      }
+      this.pos = pos
       this.selected = undefined
       this.confirm = undefined
       this.moveTargets = []
+      this.kif = pushMove(this.kif, moveForKif)
     }
 
     // Confirm オブジェクトがクリックされたら動かす(成 or 不成の処理)
     if (!isPiece(p.clicked)) {
-      moveAndUpdateState(p.promote ? p.clicked.promoted : p.clicked.preserved)
+      const piece: Piece = p.promote ? p.clicked.promoted : p.clicked.preserved
+      moveAndUpdateState(piece, p.promote === true)
       return
     }
 
@@ -109,7 +130,8 @@ export default class GameStateStore implements Store {
       return
     }
 
-    moveAndUpdateState(mp ? promote(sel.piece) : sel.piece)
+    const piece: Piece = mp ? promote(sel.piece) : sel.piece
+    moveAndUpdateState(piece, mp || undefined)
   }
 
   @action reverse(): void {

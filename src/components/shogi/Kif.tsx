@@ -1,5 +1,6 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
+import { intoView } from '../../lib/dom-handler/intoView'
 import Branch from '../../model/kif/Branch'
 import History, { isBranch, KifComponent } from '../../model/kif/History'
 import Move from '../../model/kif/Move'
@@ -9,6 +10,8 @@ import './Kif.scss'
 interface Props {
   store?: Store
 }
+
+const CURRENT_KIF_ID = 'Move-Current'
 
 @inject('store')
 @observer
@@ -52,14 +55,21 @@ export default class Kif extends Component<Props> {
 
   renderMove(m: Move, n: number): JSX.Element {
     const curNum: number = this.props.store!.currentKifIndex
-    const classCurrent = curNum === n ? ' Move-Current' : ''
-    const className = `Move${classCurrent}`
 
     return (
-      <div key={n} className={className}>
+      <div
+        key={n}
+        className="Move"
+        id={curNum === n ? CURRENT_KIF_ID : undefined}
+      >
         <span className={'Number'}>{n + '.'}</span>
         <span>{m.str}</span>
       </div>
     )
+  }
+
+  // 自動スクロール
+  componentDidUpdate() {
+    intoView(CURRENT_KIF_ID)
   }
 }

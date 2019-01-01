@@ -1,4 +1,4 @@
-import * as PositionHandler from '../lib/handler/position'
+import * as PositionHandler from '../lib/game-handler/position'
 import * as KifHandler from '../lib/kif-handler/genKifString'
 import { Empty, Fu0, Fu1, Kei1, To0 } from '../model/shogi/Piece'
 import { mockKif } from '../testutils/mockKif'

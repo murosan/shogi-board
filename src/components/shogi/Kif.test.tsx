@@ -1,5 +1,7 @@
-import { shallow } from 'enzyme'
+import { mount, shallow } from 'enzyme'
 import React from 'react'
+import pushMove from '../../lib/kif-handler/pushMove'
+import { hirate } from '../../model/shogi/PositionInit'
 import GameStateStore, { Store } from '../../store/GameStateStore'
 import { mockKif, mockKif2 } from '../../testutils/mockKif'
 import Kif from './Kif'
@@ -20,4 +22,21 @@ it('分岐で先頭の Move しかなくてもクラッシュしない', async (
   expect(wrapper.find('.KifContainer')).toHaveLength(1)
   expect(wrapper.find('.Move')).toHaveLength(4)
   expect(wrapper.find('.Branch')).toHaveLength(1)
+})
+
+// FIXME: カバレッジの変化で呼ばれたことを確認しただけ
+it('更新が入ると componentDidUpdate が呼ばれる', async () => {
+  const store: Store = new GameStateStore()
+  const wrapper = mount(<Kif store={store} />)
+  expect(wrapper.find('.Move')).toHaveLength(1)
+  store.kif = pushMove(store.kif, {
+    str: 'mock',
+    pos: hirate(),
+    piece: 0,
+    source: { row: 0, column: 0 },
+    dest: { row: 0, column: 0 },
+  })
+  wrapper.update() // なんかうまく更新されなかったので、強制更新
+  expect(wrapper.find('.KifContainer')).toHaveLength(1)
+  expect(wrapper.find('.Move')).toHaveLength(2) // 棋譜は増えている
 })

@@ -2,11 +2,18 @@
 @import '../../styles/modules';
 
 .KifContainer {
-  @include overflow;
+  position: relative;
   grid-area: kif;
-  margin: 0 0.1em;
+  margin: 0 0 0 0.1em;
   border: 0.25vw solid $GreenBase;
   background-color: $GrayTransParent;
+  overflow: auto;
+}
+
+.Kif-Inner {
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 .Move {

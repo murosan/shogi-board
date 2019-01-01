@@ -15,7 +15,11 @@ interface Props {
 export default class Kif extends Component<Props> {
   render() {
     const moves = this.props.store!.kif.history.moves
-    return <div className="KifContainer">{this.renderKif(moves, 0)}</div>
+    return (
+      <div className="KifContainer">
+        <div className="Kif-Inner">{this.renderKif(moves, 0)}</div>
+      </div>
+    )
   }
 
   renderKif(moves: KifComponent[], n: number): JSX.Element[] {

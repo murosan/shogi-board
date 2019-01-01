@@ -1,6 +1,6 @@
 import { action, computed, observable } from 'mobx'
-import { canPromote, mustPromote, promote } from '../lib/handler/piece'
-import { move } from '../lib/handler/position'
+import { canPromote, mustPromote, promote } from '../lib/game-handler/piece'
+import { move } from '../lib/game-handler/position'
 import { genKifString } from '../lib/kif-handler/genKifString'
 import getCurrentIndex from '../lib/kif-handler/getCurrentIndex'
 import pushMove from '../lib/kif-handler/pushMove'

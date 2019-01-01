@@ -16,7 +16,7 @@ export default function(k: Kif): number {
   while (isBranch(moveOrBranch)) {
     history = moveOrBranch.branches[moveOrBranch.index]
     moveOrBranch = history.moves[history.index]
-    result += history.index + 1
+    result += history.index
   }
 
   return result

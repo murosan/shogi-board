@@ -1,5 +1,6 @@
 import * as PositionHandler from '../lib/handler/position'
-import { Empty, Fu0, Fu1, To0, Kei1 } from '../model/shogi/Piece'
+import { Empty, Fu0, Fu1, Kei1, To0 } from '../model/shogi/Piece'
+import { mockKif } from '../testutils/mockKif'
 import GameStateStore from './GameStateStore'
 
 describe('GameStateStore', async () => {
@@ -156,5 +157,19 @@ describe('GameStateStore', async () => {
     expect(s.pos.pos[1][1]).toEqual(Empty)
     expect(s.pos.pos[0][1]).toEqual(To0)
     spy.mockRestore()
+  })
+
+  it('indexes を反転できる', async () => {
+    const s = new GameStateStore()
+    expect(s.indexes).toEqual([-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+    s.reverse()
+    expect(s.indexes).toEqual([9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1])
+  })
+
+  it('棋譜の表示局面のインデックスを取得できる', async () => {
+    const s = new GameStateStore()
+    expect(s.currentKifIndex).toEqual(0)
+    s.kif = mockKif()
+    expect(s.currentKifIndex).toEqual(5)
   })
 })

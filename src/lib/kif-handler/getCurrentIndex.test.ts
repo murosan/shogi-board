@@ -17,4 +17,4 @@ it('分岐のない棋譜で index を取得できる', async () => {
 })
 
 it('分岐のある棋譜で index を取得できる', async () =>
-  expect(getCurrentIndex(mockKif())).toEqual(6))
+  expect(getCurrentIndex(mockKif())).toEqual(5))

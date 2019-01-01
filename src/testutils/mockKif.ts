@@ -1,7 +1,12 @@
+import Kif from '../model/kif/Kif'
+import Move from '../model/kif/Move'
+import { Empty } from '../model/shogi/Piece'
+import Point from '../model/shogi/Point'
 import Position from '../model/shogi/Position'
 import { hirate } from '../model/shogi/PositionInit'
+import { Sente } from '../model/shogi/Turn'
 
-export function mockKif() {
+export function mockKif(): Kif {
   const mockPos: Position = hirate()
   return {
     meta: {
@@ -12,31 +17,24 @@ export function mockKif() {
     },
     history: {
       moves: [
-        { str: 'mock0', pos: mockPos },
-        { str: 'mock1', pos: mockPos },
-        { str: 'mock2', pos: mockPos },
+        mockMove('mock0'),
+        mockMove('mock1'),
+        mockMove('mock2'),
         {
           branches: [
             {
-              moves: [
-                { str: 'mock_0', pos: mockPos },
-                { str: 'mock_1', pos: mockPos },
-              ],
+              moves: [mockMove('mock_0'), mockMove('mock_1')],
               index: 0,
             },
             {
-              moves: [
-                { str: 'mock3', pos: mockPos },
-                { str: 'mock4', pos: mockPos },
-                { str: 'mock5', pos: mockPos },
-              ],
+              moves: [mockMove('mock3'), mockMove('mock4'), mockMove('mock5')],
               index: 2,
             },
             {
               moves: [
-                { str: 'mock_2', pos: mockPos },
-                { str: 'mock_3', pos: mockPos },
-                { str: 'mock_4', pos: mockPos },
+                mockMove('mock_2'),
+                mockMove('mock_3'),
+                mockMove('mock_4'),
               ],
               index: 2,
             },
@@ -50,7 +48,7 @@ export function mockKif() {
 }
 
 // 分岐で先頭しかないやつ
-export function mockKif2() {
+export function mockKif2(): Kif {
   const mockPos: Position = hirate()
   return {
     meta: {
@@ -61,20 +59,17 @@ export function mockKif2() {
     },
     history: {
       moves: [
-        { str: 'mock0', pos: mockPos },
-        { str: 'mock1', pos: mockPos },
-        { str: 'mock2', pos: mockPos },
+        mockMove('mock0'),
+        mockMove('mock1'),
+        mockMove('mock2'),
         {
           branches: [
             {
-              moves: [
-                { str: 'mock_0', pos: mockPos },
-                { str: 'mock_1', pos: mockPos },
-              ],
+              moves: [mockMove('mock_0'), mockMove('mock_1')],
               index: 0,
             },
             {
-              moves: [{ str: 'mock3', pos: mockPos }],
+              moves: [mockMove('mock3')],
               index: 0,
             },
           ],
@@ -83,5 +78,16 @@ export function mockKif2() {
       ],
       index: 3,
     },
+  }
+}
+
+export function mockMove(str: string): Move {
+  const mockPoint: Point = { row: 0, column: 0 }
+  return {
+    str,
+    source: mockPoint,
+    dest: mockPoint,
+    piece: Empty,
+    pos: { pos: [], cap0: [], cap1: [], turn: Sente, moveCount: 1 },
   }
 }

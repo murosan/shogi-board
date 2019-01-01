@@ -21,7 +21,16 @@ export function newKif(): Kif {
       initPos,
     },
     history: {
-      moves: [{ str: '開始局面', pos: initPos }],
+      // TODO: 持ち方考える
+      moves: [
+        {
+          str: '開始局面',
+          pos: initPos,
+          source: { row: 0, column: 0 },
+          dest: { row: 0, column: 0 },
+          piece: 0,
+        },
+      ],
       index: 0,
     },
   }

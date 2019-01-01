@@ -1,4 +1,5 @@
 import * as PositionHandler from '../lib/handler/position'
+import * as KifHandler from '../lib/kif-handler/genKifString'
 import { Empty, Fu0, Fu1, Kei1, To0 } from '../model/shogi/Piece'
 import { mockKif } from '../testutils/mockKif'
 import GameStateStore from './GameStateStore'
@@ -37,7 +38,8 @@ describe('GameStateStore', async () => {
   })
 
   it('選択ありで、動けない場所をクリックしたら何もしない', async () => {
-    const spy = jest.spyOn(PositionHandler, 'move')
+    const phSpy = jest.spyOn(PositionHandler, 'move')
+    const khSpy = jest.spyOn(KifHandler, 'genKifString')
     const s = new GameStateStore()
     expect(s.selected).toBeUndefined()
     s.clickPiece({ clicked: Fu0, row: 6, column: 1 })
@@ -46,23 +48,29 @@ describe('GameStateStore', async () => {
     expect(s.selected!!.row).toEqual(6)
     expect(s.selected!!.column).toEqual(1)
     expect(s.selected!!.piece).toEqual(Fu0)
-    expect(spy).toBeCalledTimes(0)
-    spy.mockRestore()
+    expect(phSpy).toBeCalledTimes(0)
+    expect(khSpy).toBeCalledTimes(0)
+    phSpy.mockRestore()
+    khSpy.mockRestore()
   })
 
   it('選択ありで、動ける場所がクリックされたら配置を更新できる', async () => {
-    const spy = jest.spyOn(PositionHandler, 'move')
+    const phSpy = jest.spyOn(PositionHandler, 'move')
+    const khSpy = jest.spyOn(KifHandler, 'genKifString')
     const s = new GameStateStore()
     expect(s.selected).toBeUndefined()
     s.clickPiece({ clicked: Fu0, row: 6, column: 1 })
     s.clickPiece({ clicked: Empty, row: 5, column: 1 })
     expect(s.selected).toBeUndefined()
-    expect(spy).toBeCalledTimes(1)
-    spy.mockRestore()
+    expect(phSpy).toBeCalledTimes(1)
+    expect(khSpy).toBeCalledTimes(1)
+    phSpy.mockRestore()
+    khSpy.mockRestore()
   })
 
   it('選択ありで、成・不成を選択できる場所がクリックされたら Confirm オブジェクトがセットされる', async () => {
-    const spy = jest.spyOn(PositionHandler, 'move')
+    const phSpy = jest.spyOn(PositionHandler, 'move')
+    const khSpy = jest.spyOn(KifHandler, 'genKifString')
     const s = new GameStateStore()
     expect(s.selected).toBeUndefined()
     s.pos.pos[6][1] = Empty
@@ -78,12 +86,15 @@ describe('GameStateStore', async () => {
     expect(s.confirm!!.column).toEqual(1)
     expect(s.confirm!!.preserved).toEqual(Fu0)
     expect(s.confirm!!.promoted).toEqual(To0)
-    expect(spy).toBeCalledTimes(0)
-    spy.mockRestore()
+    expect(phSpy).toBeCalledTimes(0)
+    expect(khSpy).toBeCalledTimes(0)
+    phSpy.mockRestore()
+    khSpy.mockRestore()
   })
 
   it('成・不成を選択できる画面で、Confirm オブジェクト以外がクリックされたら何もしない', async () => {
-    const spy = jest.spyOn(PositionHandler, 'move')
+    const phSpy = jest.spyOn(PositionHandler, 'move')
+    const khSpy = jest.spyOn(KifHandler, 'genKifString')
     const s = new GameStateStore()
     expect(s.selected).toBeUndefined()
     s.pos.pos[6][1] = Empty
@@ -100,12 +111,15 @@ describe('GameStateStore', async () => {
     expect(s.confirm!!.column).toEqual(1)
     expect(s.confirm!!.preserved).toEqual(Fu0)
     expect(s.confirm!!.promoted).toEqual(To0)
-    expect(spy).toBeCalledTimes(0)
-    spy.mockRestore()
+    expect(phSpy).toBeCalledTimes(0)
+    expect(khSpy).toBeCalledTimes(0)
+    phSpy.mockRestore()
+    khSpy.mockRestore()
   })
 
   it('成・不成を選択できる画面で、成ボタンがクリックされたら成れる', async () => {
-    const spy = jest.spyOn(PositionHandler, 'move')
+    const phSpy = jest.spyOn(PositionHandler, 'move')
+    const khSpy = jest.spyOn(KifHandler, 'genKifString')
     const s = new GameStateStore()
     expect(s.selected).toBeUndefined()
     s.pos.pos[6][1] = Empty
@@ -118,14 +132,17 @@ describe('GameStateStore', async () => {
       column: 1,
       promote: true,
     })
-    expect(spy).toBeCalledTimes(1)
+    expect(phSpy).toBeCalledTimes(1)
+    expect(khSpy).toBeCalledTimes(1)
     expect(s.pos.pos[3][1]).toEqual(Empty)
     expect(s.pos.pos[2][1]).toEqual(To0)
-    spy.mockRestore()
+    phSpy.mockRestore()
+    khSpy.mockRestore()
   })
 
   it('成・不成を選択できる画面で、不成ボタンがクリックされたらそのまま', async () => {
-    const spy = jest.spyOn(PositionHandler, 'move')
+    const phSpy = jest.spyOn(PositionHandler, 'move')
+    const khSpy = jest.spyOn(KifHandler, 'genKifString')
     const s = new GameStateStore()
     expect(s.selected).toBeUndefined()
     s.pos.pos[6][1] = Empty
@@ -137,14 +154,17 @@ describe('GameStateStore', async () => {
       row: 2,
       column: 1,
     })
-    expect(spy).toBeCalledTimes(1)
+    expect(phSpy).toBeCalledTimes(1)
+    expect(khSpy).toBeCalledTimes(1)
     expect(s.pos.pos[3][1]).toEqual(Empty)
     expect(s.pos.pos[2][1]).toEqual(Fu0)
-    spy.mockRestore()
+    phSpy.mockRestore()
+    khSpy.mockRestore()
   })
 
   it('選択ありで、強制的に成必要があれば Confirm オブジェクトは出ず自動で移動される', async () => {
-    const spy = jest.spyOn(PositionHandler, 'move')
+    const phSpy = jest.spyOn(PositionHandler, 'move')
+    const khSpy = jest.spyOn(KifHandler, 'genKifString')
     const s = new GameStateStore()
     expect(s.selected).toBeUndefined()
     s.pos.pos[6][1] = Empty
@@ -153,10 +173,12 @@ describe('GameStateStore', async () => {
     s.clickPiece({ clicked: Kei1, row: 0, column: 1 })
     expect(s.selected).toBeUndefined()
     expect(s.confirm).toBeUndefined()
-    expect(spy).toBeCalledTimes(1)
+    expect(phSpy).toBeCalledTimes(1)
+    expect(khSpy).toBeCalledTimes(1)
     expect(s.pos.pos[1][1]).toEqual(Empty)
     expect(s.pos.pos[0][1]).toEqual(To0)
-    spy.mockRestore()
+    phSpy.mockRestore()
+    khSpy.mockRestore()
   })
 
   it('indexes を反転できる', async () => {

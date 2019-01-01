@@ -1,28 +1,9 @@
+import MoveProps from '../../model/events/MoveProps'
 import { Empty, Piece } from '../../model/shogi/Piece'
 import Position from '../../model/shogi/Position'
-import { Turn, Sente, Gote } from '../../model/shogi/Turn'
+import { Gote, Sente, Turn } from '../../model/shogi/Turn'
 import { decreaseCaptures, increaseCaptures } from './captures'
 import { demote } from './piece'
-
-export interface MoveProps {
-  // 駒を動かす前の Position
-  pos: Position
-
-  // 移動前の位置
-  source: {
-    row: number
-    column: number
-  }
-
-  // 移動後の位置
-  dest: {
-    row: number
-    column: number
-  }
-
-  // 移動する駒
-  piece: Piece
-}
 
 export function move(p: MoveProps): Position {
   // 持ち駒を更新する

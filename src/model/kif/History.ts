@@ -3,6 +3,14 @@ import Move from './Move'
 
 export type KifComponent = Move | Branch
 
+// TODO: もうちょい持ち方考える
+// 理想は
+// {
+//   head: Move,
+//   next: History,
+//   isCurrent: boolean
+// }
+// だが、JSON互換的に苦しい感じ
 export default interface History {
   moves: KifComponent[]
 

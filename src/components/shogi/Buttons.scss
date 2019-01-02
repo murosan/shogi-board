@@ -1,0 +1,60 @@
+@import '../../styles/colors';
+
+.ButtonsContainer {
+  margin: 0 0.2em 0 0;
+  grid-area: buttons;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    'prevOne nextOne'
+    'prevFive nextFive'
+    'toHead toLast'
+    'rev rev'
+    'cp cp';
+
+  button {
+    font: inherit;
+    font-size: 1.9vw;
+    background-color: $White;
+    border: 1px solid $GreenBase;
+    border-radius: 0.25vw;
+    outline: 0;
+
+    &:hover {
+      background-color: $GreenHover;
+    }
+  }
+}
+
+.PrevOne {
+  grid-area: prevOne;
+}
+
+.NextOne {
+  grid-area: nextOne;
+}
+
+.PrevFive {
+  grid-area: prevFive;
+}
+
+.NextFive {
+  grid-area: nextFive;
+}
+
+.ToHead {
+  grid-area: toHead;
+}
+
+.ToLast {
+  grid-area: toLast;
+}
+
+.Reverse {
+  grid-area: rev;
+}
+
+.Copy {
+  grid-area: cp;
+}

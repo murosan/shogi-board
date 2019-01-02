@@ -2,6 +2,7 @@ import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { Gote, Sente } from '../../model/shogi/Turn'
 import { Store } from '../../store/GameStateStore'
+import Buttons from './Buttons'
 import Captures from './Captures'
 import './LeftSide.scss'
 
@@ -26,7 +27,10 @@ export default class LeftSide extends Component<Props> {
     return (
       <div className="LeftSide">
         <Captures isLeftSide={true} captures={caps} isTurn={isTurn} />
-        <div />
+        <div className="LeftInfo">
+          <div />
+          <Buttons />
+        </div>
       </div>
     )
   }

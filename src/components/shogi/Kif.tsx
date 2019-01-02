@@ -38,29 +38,38 @@ export default class Kif extends Component<Props> {
   renderBranch(b: Branch, n: number): JSX.Element[] {
     const main: History = b.branches[b.index]
     const [head, ...rest] = main.moves // head は必ず Move
-    const otherHeads: Move[] = b.branches
-      .filter((_, i) => i !== b.index)
-      .map((b: History) => b.moves[0] as Move) // head は必ず Move
 
-    const headDom = this.renderMove(head as Move, n)
-    const otherHeadsDom = otherHeads.map((m: Move, i: number) => (
-      <div key={`${n}${i}`} className="Branch">
-        <span>{`-- ${m.str}`}</span>
-      </div>
-    ))
+    const otherHeadsDom: JSX.Element[] = []
+    for (let i = 0; i < b.branches.length; i++) {
+      if (i === b.index) continue
+      const m: Move = b.branches[i].moves[0] as Move // head は必ず Move
+      otherHeadsDom.push(
+        <div
+          key={`${n}${i}`}
+          className="Branch"
+          onClick={() => this.props.store!!.clickKif(n, i)}
+        >
+          <span>{`-- ${m.str}`}</span>
+        </div>
+      )
+    }
+
     const restDom = rest.length !== 0 ? this.renderKif(rest, n + 1) : []
 
-    return [headDom].concat(otherHeadsDom).concat(restDom)
+    return [this.renderMove(head as Move, n)]
+      .concat(otherHeadsDom)
+      .concat(restDom)
   }
 
   renderMove(m: Move, n: number): JSX.Element {
-    const curNum: number = this.props.store!.currentKifIndex
+    const curNum: number = this.props.store!.currentMove.index
 
     return (
       <div
         key={n}
         className="Move"
         id={curNum === n ? CURRENT_KIF_ID : undefined}
+        onClick={() => this.props.store!!.clickKif(n)}
       >
         <span className={'Number'}>{n + '.'}</span>
         <span>{m.str}</span>

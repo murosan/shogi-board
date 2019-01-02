@@ -18,5 +18,3 @@ export type ClickProps = {
   // 不成は指定なし(undefined)で良いÏ
   promote?: true
 }
-
-export type ClickFunc = (p: ClickProps) => void

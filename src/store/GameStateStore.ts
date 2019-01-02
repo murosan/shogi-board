@@ -1,13 +1,14 @@
 import { action, computed, observable } from 'mobx'
 import { canPromote, mustPromote, promote } from '../lib/game-handler/piece'
 import { move } from '../lib/game-handler/position'
+import { changeIndex } from '../lib/kif-handler/changeIndex'
 import { genKifString } from '../lib/kif-handler/genKifString'
-import getCurrentIndex from '../lib/kif-handler/getCurrentIndex'
+import getCurrent from '../lib/kif-handler/getCurrent'
 import pushMove from '../lib/kif-handler/pushMove'
 import getTargets from '../lib/validatior/getTargets'
 import { find } from '../lib/validatior/utils/algorithm'
 import filterTargets from '../lib/validatior/utils/filterTargets'
-import { ClickProps } from '../model/events/ClickFunc'
+import { ClickProps } from '../model/events/ClickProps'
 import MoveProps from '../model/events/MoveProps'
 import Kif, { newKif } from '../model/kif/Kif'
 import Move from '../model/kif/Move'
@@ -20,25 +21,37 @@ import { hirate } from '../model/shogi/PositionInit'
 import { Turn } from '../model/shogi/Turn'
 
 export interface Store extends GameState {
-  currentKifIndex: number
+  // 棋譜の現在表示局面を返す
+  currentMove: Move
+
+  // 盤面反転
+  reverse(): void
+
+  // 駒をクリックして動かしたりする
   clickPiece(p: ClickProps): void
+
+  // 棋譜をクリックして表示局面を変える
+  clickKif(moveCount: number, branchIndex?: number): void
 }
 
 export default class GameStateStore implements Store {
-  @observable pos: Position = hirate()
   @observable indexes: number[] = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   @observable selected: Point | undefined = undefined
   @observable confirm: Confirm | undefined = undefined
   @observable moveTargets: Point[] = []
   @observable kif: Kif = newKif()
 
-  @computed get currentKifIndex(): number {
-    return getCurrentIndex(this.kif)
+  @computed get currentMove(): Move {
+    return getCurrent(this.kif)
+  }
+
+  @action reverse(): void {
+    this.indexes = this.indexes.slice().reverse()
   }
 
   @action clickPiece(p: ClickProps): void {
     const sel = this.selected
-    const turn = this.pos.turn
+    const turn = this.currentMove.pos.turn
 
     // Confirm 画面なのに、成・不成以外がクリックされたらなにもしない
     if (this.confirm !== undefined && isPiece(p.clicked)) return
@@ -58,8 +71,8 @@ export default class GameStateStore implements Store {
         i: p.i,
       }
       this.selected = point
-      const targets = getTargets(this.pos, point)
-      const filtered = filterTargets(this.pos, point, targets)
+      const targets = getTargets(this.currentMove.pos, point)
+      const filtered = filterTargets(this.currentMove.pos, point, targets)
       this.moveTargets = filtered
       return
     }
@@ -79,7 +92,7 @@ export default class GameStateStore implements Store {
 
     const moveAndUpdateState = (piece: Piece, promote?: boolean) => {
       const moveProps: MoveProps = {
-        pos: this.pos,
+        pos: this.currentMove.pos,
         source,
         dest,
         piece,
@@ -88,6 +101,7 @@ export default class GameStateStore implements Store {
       const pos: Position = move(moveProps)
       const kifStr: string = genKifString(moveProps)
       const moveForKif: Move = {
+        index: this.currentMove.index + 1,
         str: kifStr,
         pos,
         source,
@@ -95,7 +109,6 @@ export default class GameStateStore implements Store {
         piece,
         promote,
       }
-      this.pos = pos
       this.selected = undefined
       this.confirm = undefined
       this.moveTargets = []
@@ -134,8 +147,10 @@ export default class GameStateStore implements Store {
     moveAndUpdateState(piece, mp || undefined)
   }
 
-  @action reverse(): void {
-    this.indexes = this.indexes.slice().reverse()
+  @action clickKif(moveCount: number, branchIndex?: number): void {
+    if (this.confirm) return
+    this.kif = changeIndex(this.kif, moveCount, branchIndex)
+    this.selected = undefined
   }
 }
 

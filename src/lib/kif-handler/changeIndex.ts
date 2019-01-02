@@ -15,6 +15,7 @@ export function changeIndex(k: Kif, x: number, y?: number): Kif {
   }
 }
 
+// TODO: Move にインデックスを入れたので、少しシンプルにできる
 function changeHistory(h: History, x: number, y?: number): History {
   const lastIndex: number = h.moves.length - 1
   const last: KifComponent = h.moves[lastIndex]

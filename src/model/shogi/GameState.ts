@@ -7,8 +7,6 @@ import Kif from '../kif/Kif'
  * 盤面が今どういう状態かを表す
  */
 export default interface GameState {
-  pos: Position
-
   // 盤面描画用インデックスの配列
   // [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   // or

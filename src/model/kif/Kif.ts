@@ -24,6 +24,7 @@ export function newKif(): Kif {
       // TODO: 持ち方考える
       moves: [
         {
+          index: 0,
           str: '開始局面',
           pos: initPos,
           source: { row: 0, column: 0 },

@@ -1,7 +1,7 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { columnString, rowString } from '../../lib/strings'
-import { ClickProps } from '../../model/events/ClickFunc'
+import { ClickProps } from '../../model/events/ClickProps'
 import Confirm from '../../model/shogi/Confirm'
 import { Empty, Piece } from '../../model/shogi/Piece'
 import Point from '../../model/shogi/Point'
@@ -20,7 +20,7 @@ export interface Props {
 export default class Cell extends Component<Props> {
   getPiece = () =>
     inRange(this.props.row) && inRange(this.props.column)
-      ? this.props.store!.pos.pos[this.props.row][this.props.column]
+      ? this.props.store!.currentMove.pos.pos[this.props.row][this.props.column]
       : Empty
 
   render(): JSX.Element | undefined {
@@ -33,8 +33,8 @@ export default class Cell extends Component<Props> {
       sel: this.props.store!.selected,
       confirm: this.props.store!.confirm,
       isTurn:
-        (piece > 0 && this.props.store!.pos.turn === Sente) ||
-        (piece < 0 && this.props.store!.pos.turn === Gote),
+        (piece > 0 && this.props.store!.currentMove.pos.turn === Sente) ||
+        (piece < 0 && this.props.store!.currentMove.pos.turn === Gote),
     })
 
     return (

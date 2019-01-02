@@ -21,16 +21,15 @@ function changeHistory(h: History, x: number, y?: number): History {
   const last: KifComponent = h.moves[lastIndex]
   const init: KifComponent[] = h.moves.slice(0, lastIndex)
 
-  if (x <= lastIndex)
-    return {
-      moves: isBranch(last) ? init.concat(changeBranch(last, 0, y)) : h.moves,
-      index: x,
-    }
+  const xPassesIfBranch: number = x <= lastIndex ? 0 : x - lastIndex
 
-  return {
-    moves: init.concat(changeBranch(<Branch>last, x - lastIndex, y)),
-    index: lastIndex,
-  }
+  const moves: KifComponent[] = isBranch(last)
+    ? init.concat(changeBranch(last, xPassesIfBranch, y))
+    : h.moves.slice()
+
+  const index: number = x <= lastIndex ? x : lastIndex
+
+  return { moves, index }
 }
 
 function changeBranch(b: Branch, x: number, y?: number): Branch {

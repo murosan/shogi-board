@@ -47,7 +47,7 @@ export default class Kif extends Component<Props> {
         <div
           key={`${n}${i}`}
           className="Branch"
-          onClick={() => this.props.store!!.clickKif(n, i)}
+          onClick={() => this.props.store!.clickKif(n, i)}
         >
           <span>{`-- ${m.str}`}</span>
         </div>
@@ -69,7 +69,7 @@ export default class Kif extends Component<Props> {
         key={n}
         className="Move"
         id={curNum === n ? CURRENT_KIF_ID : undefined}
-        onClick={() => this.props.store!!.clickKif(n)}
+        onClick={() => this.props.store!.clickKif(n)}
       >
         <span className={'Number'}>{n + '.'}</span>
         <span>{m.str}</span>

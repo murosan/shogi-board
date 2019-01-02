@@ -17,7 +17,6 @@ import GameState from '../model/shogi/GameState'
 import { Piece } from '../model/shogi/Piece'
 import Point from '../model/shogi/Point'
 import Position from '../model/shogi/Position'
-import { hirate } from '../model/shogi/PositionInit'
 import { Turn } from '../model/shogi/Turn'
 
 export interface Store extends GameState {

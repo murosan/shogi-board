@@ -19,7 +19,7 @@ const mockMeta: Meta = {
   handicap: '平手',
   initPos: mockPos,
 }
-const moveMock: Move = mockMove('mock0')
+const moveMock: Move = mockMove('mock0', 0)
 
 it('棋譜のインデックスを更新できる', async () => {
   const kif: Kif = {
@@ -55,6 +55,24 @@ it('棋譜のインデックスを更新できる2', async () => {
     },
   }
   expect(changeIndex(kif, 5)).toEqual(expected)
+})
+
+it('インデックスが最大値を超えていても最後に設定できる', async () => {
+  const kif: Kif = {
+    meta: mockMeta,
+    history: {
+      moves: [moveMock, moveMock, moveMock, moveMock, moveMock, moveMock],
+      index: 0,
+    },
+  }
+  const expected: Kif = {
+    meta: mockMeta,
+    history: {
+      moves: [moveMock, moveMock, moveMock, moveMock, moveMock, moveMock],
+      index: 5,
+    },
+  }
+  expect(changeIndex(kif, 100)).toEqual(expected)
 })
 
 it('分岐が入っていても更新できる', async () => {

@@ -1,5 +1,6 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
+import { getAsString } from '../../lib/kif-handler/getAsString'
 import { Store } from '../../store/GameStateStore'
 import './Buttons.scss'
 
@@ -11,19 +12,66 @@ export interface Props {
 @observer
 export default class Buttons extends Component<Props> {
   render(): JSX.Element {
+    const i: number = this.props.store!.currentMove.index
     return (
       <div className="ButtonsContainer">
-        <button className="PrevOne">＜</button>
-        <button className="NextOne">＞</button>
-        <button className="PrevFive">＜ 5</button>
-        <button className="NextFive">5 ＞</button>
-        <button className="ToHead">｜＜＜</button>
-        <button className="ToLast">＞＞｜</button>
+        <button
+          className="PrevOne"
+          onClick={() => this.props.store!.clickKif(i - 1 < 0 ? 0 : i - 1)}
+        >
+          ＜
+        </button>
+        <button
+          className="NextOne"
+          onClick={() => this.props.store!.clickKif(i + 1)}
+        >
+          ＞
+        </button>
+        <button
+          className="PrevFive"
+          onClick={() => this.props.store!.clickKif(i - 5 < 0 ? 0 : i - 5)}
+        >
+          ＜ 5
+        </button>
+        <button
+          className="NextFive"
+          onClick={() => this.props.store!.clickKif(i + 5)}
+        >
+          5 ＞
+        </button>
+        <button
+          className="ToHead"
+          onClick={() => this.props.store!.clickKif(0)}
+        >
+          ｜＜＜
+        </button>
+        <button
+          className="ToLast"
+          onClick={() => this.props.store!.clickKif(100000)}
+        >
+          ＞＞｜
+        </button>
         <button className="Reverse" onClick={() => this.props.store!.reverse()}>
           盤面反転
         </button>
-        <button className="Copy">棋譜コピー</button>
+        <button
+          className="Copy"
+          onClick={() => copyToClipboard(getAsString(this.props.store!.kif))}
+        >
+          棋譜コピー
+        </button>
       </div>
     )
   }
+}
+
+function copyToClipboard(s: string): void {
+  const tarea = document.createElement('textarea')
+  tarea.value = s
+  tarea.style.width = '1px'
+  tarea.style.height = '1px'
+  document.body.appendChild(tarea)
+  tarea.select()
+  document.execCommand('copy')
+  document.body.removeChild(tarea)
 }

@@ -56,7 +56,7 @@ export default class Captures extends Component<Props> {
           onClick={() => {
             if (this.props.isTurn)
               this.props.store!.clickPiece({
-                clicked: this.props.store!.pos.turn * pieceId,
+                clicked: this.props.store!.currentMove.pos.turn * pieceId,
                 row: -1,
                 column: -1,
                 i: i,

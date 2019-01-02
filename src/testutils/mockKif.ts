@@ -17,26 +17,30 @@ export function mockKif(): Kif {
     },
     history: {
       moves: [
-        mockMove('mock0'),
-        mockMove('mock1'),
-        mockMove('mock2'),
+        mockMove('mock0', 0),
+        mockMove('mock1', 1),
+        mockMove('mock2', 2),
         {
           branches: [
             {
-              moves: [mockMove('mock_0'), mockMove('mock_1')],
+              moves: [mockMove('mock_0', 3), mockMove('mock_1', 4)],
               index: 0,
             },
             {
-              moves: [mockMove('mock3'), mockMove('mock4'), mockMove('mock5')],
+              moves: [
+                mockMove('mock3', 3),
+                mockMove('mock4', 4),
+                mockMove('mock5', 5),
+              ],
               index: 2,
             },
             {
               moves: [
-                mockMove('mock_2'),
-                mockMove('mock_3'),
-                mockMove('mock_4'),
+                mockMove('mock_2', 3),
+                mockMove('mock_3', 4),
+                mockMove('mock_4', 5),
               ],
-              index: 2,
+              index: 0,
             },
           ],
           index: 1,
@@ -59,17 +63,17 @@ export function mockKif2(): Kif {
     },
     history: {
       moves: [
-        mockMove('mock0'),
-        mockMove('mock1'),
-        mockMove('mock2'),
+        mockMove('mock0', 0),
+        mockMove('mock1', 1),
+        mockMove('mock2', 2),
         {
           branches: [
             {
-              moves: [mockMove('mock_0'), mockMove('mock_1')],
+              moves: [mockMove('mock_0', 3), mockMove('mock_1', 4)],
               index: 0,
             },
             {
-              moves: [mockMove('mock3')],
+              moves: [mockMove('mock3', 3)],
               index: 0,
             },
           ],
@@ -81,9 +85,10 @@ export function mockKif2(): Kif {
   }
 }
 
-export function mockMove(str: string): Move {
+export function mockMove(str: string, index: number): Move {
   const mockPoint: Point = { row: 0, column: 0 }
   return {
+    index,
     str,
     source: mockPoint,
     dest: mockPoint,

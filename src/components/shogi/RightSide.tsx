@@ -16,13 +16,13 @@ export default class RightSide extends Component<Props> {
   render() {
     const caps: number[] =
       this.props.store!.indexes[0] === 9
-        ? this.props.store!.pos.cap1
-        : this.props.store!.pos.cap0
+        ? this.props.store!.currentMove.pos.cap1
+        : this.props.store!.currentMove.pos.cap0
 
     const isTurn: boolean =
       this.props.store!.indexes[0] === 9
-        ? this.props.store!.pos.turn === Gote
-        : this.props.store!.pos.turn === Sente
+        ? this.props.store!.currentMove.pos.turn === Gote
+        : this.props.store!.currentMove.pos.turn === Sente
 
     return (
       <div className="RightSide">

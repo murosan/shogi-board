@@ -19,7 +19,9 @@ export default class Buttons extends Component<Props> {
         <button className="NextFive">5 ＞</button>
         <button className="ToHead">｜＜＜</button>
         <button className="ToLast">＞＞｜</button>
-        <button className="Reverse">盤面反転</button>
+        <button className="Reverse" onClick={() => this.props.store!.reverse()}>
+          盤面反転
+        </button>
         <button className="Copy">棋譜コピー</button>
       </div>
     )

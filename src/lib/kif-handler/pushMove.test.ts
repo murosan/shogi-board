@@ -20,6 +20,7 @@ const mockMeta: Meta = {
   initPos: mockPos,
 }
 const head: Move = mockMove('mock0')
+
 it('分岐なしの棋譜に新しい一手を追加できる', async () => {
   const kif: Kif = {
     meta: mockMeta,

@@ -24,6 +24,7 @@ jobs:
           command: yarn test:ci && yarn codecov
           environment:
             JEST_JUNIT_OUTPUT: reports/junit/test-results.xml
+            CI: true
       - store_test_results:
           path: reports/junit
       - store_artifacts:

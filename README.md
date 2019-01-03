@@ -8,6 +8,10 @@
 [![tag](https://img.shields.io/github/tag/murosan/shogi-board.svg?style=flat-square)](https://github.com/murosan/shogi-board/releases)
 [![node](https://img.shields.io/badge/node->%3D%2010.14.1-brightgreen.svg?style=flat-square)](https://nodejs.org/ja/)
 
+<div style="width: 100%; display: flex; justify-content: center; align-items: center;">
+  <img src="https://github.com/murosan/pictures-for-readme/blob/master/shogi-board-example.jpg" alt="shogi-board sample image">
+</div>
+
 ## 対応ブラウザ
 
 PC 最新版の Chrome のみ

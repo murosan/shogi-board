@@ -12,9 +12,31 @@
   <img src="https://github.com/murosan/pictures-for-readme/blob/master/shogi-board-example.jpg" alt="shogi-board sample image">
 </div>
 
+## できること
+
+- ブラウザ上で駒を動かして将棋の検討ができる
+
 ## 対応ブラウザ
 
 PC 最新版の Chrome のみ
+
+## 使い方
+
+ソースコードと、依存ライブラリのダウンロード
+
+```sh
+git clone git@github.com:murosan/shogi-board.git
+cd shogi-board
+yarn
+```
+
+開発サーバーを立ち上げる
+
+```sh
+yarn start
+# chrome で
+# http://localhost:3000/ にアクセス
+```
 
 ## ライセンス
 

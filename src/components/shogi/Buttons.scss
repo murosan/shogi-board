@@ -24,6 +24,9 @@
     &:hover {
       background-color: $GreenHover;
     }
+    &:active {
+      background-color: $GreenBase;
+    }
   }
 }
 

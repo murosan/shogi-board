@@ -113,11 +113,9 @@ it('最後に変更ボタンを押すと store の clickKif が実行される',
   expect(store.clickKif).toBeCalledWith(100000)
 })
 
-it('棋譜コピーボタンを押すと文字列をコピーできる', async () => {
-  document.execCommand = jest.fn()
+// clipboard.js の仕事なのでカバーだけしておく
+it('棋譜コピーボタンを押せる', async () => {
   const store: GameStateStore = new GameStateStore()
   const wrapper = shallow(<Buttons store={store} />).dive()
   wrapper.find('.Copy').simulate('click')
-  expect(document.execCommand).toBeCalledTimes(1)
-  ;(document.execCommand as jest.Mock).mockClear()
 })

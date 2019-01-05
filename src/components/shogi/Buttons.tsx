@@ -56,22 +56,11 @@ export default class Buttons extends Component<Props> {
         </button>
         <button
           className="Copy"
-          onClick={() => copyToClipboard(getAsString(this.props.store!.kif))}
+          data-clipboard-text={getAsString(this.props.store!.kif)}
         >
           棋譜コピー
         </button>
       </div>
     )
   }
-}
-
-function copyToClipboard(s: string): void {
-  const tarea = document.createElement('textarea')
-  tarea.value = s
-  tarea.style.width = '1px'
-  tarea.style.height = '1px'
-  document.body.appendChild(tarea)
-  tarea.select()
-  document.execCommand('copy')
-  document.body.removeChild(tarea)
 }

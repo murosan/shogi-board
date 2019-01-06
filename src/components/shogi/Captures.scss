@@ -1,6 +1,7 @@
-@import '../../styles/paths';
 @import '../../styles/modules';
-// @import '../../styles/pieces';
+
+$ImgComponentsPath: '../../img/components';
+$ImgPiecesPath: '../../img/pieces';
 
 $radius: 0.5vw;
 $captureAspectValue: 109%;

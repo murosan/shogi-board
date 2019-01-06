@@ -89,30 +89,6 @@ it('五手後に変更ボタンを押すと store の clickKif が実行され�
   expect(store.clickKif).toBeCalledWith(10)
 })
 
-it('先頭に変更ボタンを押すと store の clickKif が実行される', async () => {
-  const store: GameStateStore = new GameStateStore()
-  store.kif = mockKif()
-  store.clickKif = jest.fn()
-  const wrapper = shallow(<Buttons store={store} />).dive()
-
-  expect(store.clickKif).toBeCalledTimes(0)
-  wrapper.find('.ToHead').simulate('click')
-  expect(store.clickKif).toBeCalledTimes(1)
-  expect(store.clickKif).toBeCalledWith(0)
-})
-
-it('最後に変更ボタンを押すと store の clickKif が実行される', async () => {
-  const store: GameStateStore = new GameStateStore()
-  store.kif = mockKif()
-  store.clickKif = jest.fn()
-  const wrapper = shallow(<Buttons store={store} />).dive()
-
-  expect(store.clickKif).toBeCalledTimes(0)
-  wrapper.find('.ToLast').simulate('click')
-  expect(store.clickKif).toBeCalledTimes(1)
-  expect(store.clickKif).toBeCalledWith(100000)
-})
-
 // clipboard.js の仕事なのでカバーだけしておく
 it('棋譜コピーボタンを押せる', async () => {
   const store: GameStateStore = new GameStateStore()

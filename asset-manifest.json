@@ -1,13 +1,16 @@
 {
-  "main.css": "/shogi-board/static/css/main.5d9454aa.chunk.css",
-  "main.js": "/shogi-board/static/js/main.38ae521d.chunk.js",
-  "main.js.map": "/shogi-board/static/js/main.38ae521d.chunk.js.map",
+  "main.css": "/shogi-board/static/css/main.322e9d05.chunk.css",
+  "main.js": "/shogi-board/static/js/main.33369f1d.chunk.js",
+  "main.js.map": "/shogi-board/static/js/main.33369f1d.chunk.js.map",
   "static/js/1.76a321c1.chunk.js": "/shogi-board/static/js/1.76a321c1.chunk.js",
   "static/js/1.76a321c1.chunk.js.map": "/shogi-board/static/js/1.76a321c1.chunk.js.map",
   "runtime~main.js": "/shogi-board/static/js/runtime~main.d625dae0.js",
   "runtime~main.js.map": "/shogi-board/static/js/runtime~main.d625dae0.js.map",
-  "static/css/main.5d9454aa.chunk.css.map": "/shogi-board/static/css/main.5d9454aa.chunk.css.map",
+  "static/media/App.scss": "/shogi-board/static/media/tatami.0baeb848.jpg",
+  "static/media/Captures.scss": "/shogi-board/static/media/cap_stand0.40b0fd2c.png",
+  "static/media/Board.scss": "/shogi-board/static/media/board.cdea8584.png",
+  "static/css/main.322e9d05.chunk.css.map": "/shogi-board/static/css/main.322e9d05.chunk.css.map",
   "index.html": "/shogi-board/index.html",
-  "precache-manifest.50fc42ab21b4de706eaf1950faccde51.js": "/shogi-board/precache-manifest.50fc42ab21b4de706eaf1950faccde51.js",
+  "precache-manifest.70178c26e6c4e044e6e18e09ad877877.js": "/shogi-board/precache-manifest.70178c26e6c4e044e6e18e09ad877877.js",
   "service-worker.js": "/shogi-board/service-worker.js"
 }

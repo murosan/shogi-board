@@ -4,14 +4,14 @@
   margin: 0 0.2em 0 0;
   grid-area: buttons;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
-    'prevOne nextOne'
-    'prevFive nextFive'
-    'toHead toLast'
-    'rev rev'
-    'cp cp';
+    'tmp tmp tmp tmp'
+    'prevOne prevOne nextOne nextOne'
+    'prevFive prevFive nextFive nextFive'
+    'rev rev rev rev'
+    'cp cp cp cp';
 
   button {
     font: inherit;

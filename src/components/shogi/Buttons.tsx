@@ -39,18 +39,6 @@ export default class Buttons extends Component<Props> {
         >
           5 ＞
         </button>
-        <button
-          className="ToHead"
-          onClick={() => this.props.store!.clickKif(0)}
-        >
-          ｜＜＜
-        </button>
-        <button
-          className="ToLast"
-          onClick={() => this.props.store!.clickKif(100000)}
-        >
-          ＞＞｜
-        </button>
         <button className="Reverse" onClick={() => this.props.store!.reverse()}>
           盤面反転
         </button>

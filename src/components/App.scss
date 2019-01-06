@@ -1,5 +1,7 @@
-@import '../styles/paths';
 @import '../styles/modules';
+
+$ImgComponentsPath: '../img/components';
+$ImgPiecesPath: '../img/img/pieces';
 
 .App {
   @include backImgCenter;

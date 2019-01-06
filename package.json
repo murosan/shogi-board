@@ -61,7 +61,7 @@
     "deploy": "gh-pages -m '[ci skip] Updates' -d build",
     "test": "react-scripts test",
     "test:c": "react-scripts test --coverage",
-    "test:ci": "CI=true yarn test --coverage --reporters=default --reporters=jest-junit",
+    "test:ci": "CI=true node --max_old_space_size=1024 --trace-gc ./node_modules/react-scripts/bin/react-scripts.js test --maxWorkers=2 --coverage --reporters=default --reporters=jest-junit",
     "lint": "prettier --write '**/*.{js,jsx,ts,tsx,json,yml,css,scss,md,html}'",
     "analyze": "source-map-explorer build/static/js/main.*"
   },

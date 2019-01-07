@@ -1,4 +1,4 @@
-import { Gyoku0, Piece } from '../../../model/shogi/Piece'
+import { Fu0, Gyoku0, Piece } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import Position from '../../../model/shogi/Position'
 import { Gote, Sente, Turn } from '../../../model/shogi/Turn'
@@ -47,9 +47,16 @@ export default function filter(
     if (isOute) continue
 
     // 打ち歩詰めチェック
+    const isFu: boolean = Math.abs(point.piece) === Fu0
+    const isFromCapture: boolean = point.row === -1
     const enemyGyoku = getGyokuPoint(moved.pos, <Turn>-turn)
     // 打った歩による王手である
-    if (enemyGyoku && isPointed(moved, enemyGyoku, turn)) {
+    if (
+      isFu &&
+      isFromCapture &&
+      enemyGyoku !== undefined &&
+      isPointed(moved, enemyGyoku, turn)
+    ) {
       // 打った歩が次に取られるか
       const fuIsPointed = isPointed(moved, targets[i], <Turn>-turn)
 

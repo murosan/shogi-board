@@ -133,6 +133,27 @@ describe('filterTargets', async () => {
     expect(filterTargets(pos, point, targets)).toEqual(targets)
   })
 
+  it('歩じゃない場合は打ち歩詰めで弾かれない', async () => {
+    const pos = emptyPosition()
+    pos.pos[0][8] = Gyoku1
+    pos.pos[2][7] = Kin0
+    pos.pos[2][8] = Kin0
+    const point = { row: 2, column: 8, piece: Kin0 }
+    const targets = getTargets(pos, point)
+    expect(filterTargets(pos, point, targets)).toEqual(targets)
+  })
+
+  it('持ち駒の歩じゃない場合は打ち歩詰めで弾かれない', async () => {
+    const pos = emptyPosition()
+    pos.pos[0][8] = Gyoku1
+    pos.pos[0][7] = Kei1
+    pos.pos[2][7] = Kin0
+    pos.pos[2][8] = Fu0
+    const point = { row: 2, column: 8, piece: Fu0 }
+    const targets = getTargets(pos, point)
+    expect(filterTargets(pos, point, targets)).toEqual(targets)
+  })
+
   it('駒IDがない時エラー', async () => {
     const pos = emptyPosition()
     pos.pos[4][4] = Hisha0

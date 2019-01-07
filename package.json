@@ -36,7 +36,6 @@
     "enzyme-adapter-react-16": "^1.7.1",
     "husky": "1.3.1",
     "jest": "^23.6.0",
-    "jest-junit": "^5.2.0",
     "lint-staged": "^8.1.0",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
@@ -61,7 +60,7 @@
     "deploy": "gh-pages -m '[ci skip] Updates' -d build",
     "test": "react-scripts test",
     "test:c": "react-scripts test --coverage",
-    "test:ci": "CI=true node --max_old_space_size=1024 --trace-gc ./node_modules/react-scripts/bin/react-scripts.js test --maxWorkers=2 --coverage --reporters=default --reporters=jest-junit",
+    "test:ci": "CI=true node --max_old_space_size=1024 --trace-gc ./node_modules/react-scripts/bin/react-scripts.js test --maxWorkers=2 --coverage --reporters=default",
     "lint": "prettier --write '**/*.{js,jsx,ts,tsx,json,yml,css,scss,md,html}'",
     "analyze": "source-map-explorer build/static/js/main.*"
   },

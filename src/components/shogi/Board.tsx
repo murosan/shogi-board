@@ -21,7 +21,9 @@ export default class Board extends Component<Props> {
     )
     return (
       <div className="BoardContainer">
-        <div className="Board">{rows}</div>
+        <div className="ResetPseudo">
+          <div className="Board">{rows}</div>
+        </div>
       </div>
     )
   }

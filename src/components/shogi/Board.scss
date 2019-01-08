@@ -1,8 +1,6 @@
 @import '../../styles/modules';
 
 $ImgComponentsPath: '../../img/components';
-$ImgPiecesPath: '../../img/pieces';
-
 $boardAspectValue: 109%;
 
 .BoardContainer {
@@ -10,11 +8,17 @@ $boardAspectValue: 109%;
   position: relative;
 }
 
-.Board {
-  @include backImgCenter;
+.ResetPseudo {
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.Board {
+  @include backImgCenter;
   width: 100%;
   height: 100%;
   display: grid;

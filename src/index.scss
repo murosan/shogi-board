@@ -12,6 +12,11 @@ body {
   box-sizing: border-box;
 }
 
+code,
+.code {
+  font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+}
+
 #root {
   width: 100%;
 }

@@ -5,8 +5,8 @@ const MOCK_ID = 'mockId'
 it('scrollIntoView を実行できる', async () => {
   let result: boolean = false
 
-  const mockDiv = document.createElement('div')
-  mockDiv.scrollIntoView = () => (result = true)
+  const mockDiv: any = document.createElement('div')
+  mockDiv.scrollIntoViewIfNeeded = () => (result = true)
 
   document.getElementById = () => mockDiv
 
@@ -17,8 +17,8 @@ it('scrollIntoView を実行できる', async () => {
 it('DOMを取得できなかったら scrollIntoView は実行されない', async () => {
   let result: boolean = false
 
-  const mockDiv = document.createElement('div')
-  mockDiv.scrollIntoView = () => (result = true)
+  const mockDiv: any = document.createElement('div')
+  mockDiv.scrollIntoViewIfNeeded = () => (result = true)
 
   document.getElementById = () => null
 

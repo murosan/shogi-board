@@ -71,7 +71,7 @@ export default class Kif extends Component<Props> {
         id={curNum === n ? CURRENT_KIF_ID : undefined}
         onClick={() => this.props.store!.clickKif(n)}
       >
-        <span className={'Number'}>{n + '.'}</span>
+        <span className={'Number code'}>{n + '.'}</span>
         <span>{m.str}</span>
       </div>
     )

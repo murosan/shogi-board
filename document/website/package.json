@@ -10,5 +10,10 @@
   },
   "devDependencies": {
     "docusaurus": "^1.6.2"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not ie > 0",
+    "not op_mini all"
+  ]
 }

@@ -7,10 +7,11 @@ const org = 'murosan'
 const repositoryName = 'shogi-board'
 const repositoryUrl = `https://github.com/${org}/${repositoryName}`
 const githubio = `https://${org}.github.io`
+const playgroundUrl = `/${repositoryName}/playground`
 
 const siteConfig = {
-  title: 'ブラウザ将棋盤',
-  tagline: repositoryName,
+  title: 'Shogi Board',
+  tagline: 'ブラウザで棋譜並べや検討ができる将棋盤',
   url: githubio,
   baseUrl: `/${repositoryName}/`,
 
@@ -18,25 +19,25 @@ const siteConfig = {
   organizationName: org,
 
   headerLinks: [
+    { href: playgroundUrl, label: 'Playground' }, // デプロイ前にビルドする
     { doc: 'doc1', label: 'Docs' },
-    { doc: 'doc4', label: 'API' },
-    { page: 'help', label: 'Help' },
+    { href: repositoryUrl, label: 'GitHub' },
     { blog: true, label: 'Blog' },
   ],
 
-  headerIcon: 'img/docusaurus.svg',
-  footerIcon: 'img/docusaurus.svg',
-  favicon: 'img/favicon.png',
+  headerIcon: 'img/icon.svg',
+  footerIcon: 'img/icon.svg',
+  favicon: 'img/favicon.ico',
 
   colors: {
-    primaryColor: 'rgb(32, 35, 41)',
+    primaryColor: 'rgb(49, 53, 61)',
     secondaryColor: 'rgb(67, 75, 90)',
   },
 
   copyright: `Copyright © ${new Date().getFullYear()} ${org}`,
 
   highlight: {
-    theme: 'default',
+    theme: 'atom-one-dark',
   },
 
   // Add custom scripts here that would be placed in <script> tags.
@@ -48,8 +49,8 @@ const siteConfig = {
   cleanUrl: true,
 
   // Open Graph and Twitter card images.
-  ogImage: 'img/docusaurus.png',
-  twitterImage: 'img/docusaurus.png',
+  ogImage: 'img/shogi-board.png',
+  twitterImage: 'img/shogi-board.png',
 
   // Show documentation's last contributor's name.
   enableUpdateBy: true,
@@ -58,6 +59,7 @@ const siteConfig = {
   enableUpdateTime: true,
 
   repoUrl: repositoryUrl,
+  playgroundUrl,
 }
 
 module.exports = siteConfig

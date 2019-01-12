@@ -1,4 +1,16 @@
-/* your custom css */
+.homeContainer {
+  background-color: rgb(65, 65, 65);
+}
+
+.homeContainer .button {
+  width: 150px;
+  color: rgb(226, 226, 226);
+  border-color: rgb(226, 226, 226);
+}
+
+.projectTitle {
+  color: rgb(226, 226, 226);
+}
 
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }

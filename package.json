@@ -56,8 +56,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -m '[ci skip] Updates' -d build",
+    "deploy": "./scripts/deploy.sh",
     "test": "react-scripts test",
     "test:c": "react-scripts test --coverage",
     "test:ci": "CI=true node --max_old_space_size=1024 --trace-gc ./node_modules/react-scripts/bin/react-scripts.js test --maxWorkers=2 --coverage --reporters=default",

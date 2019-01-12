@@ -3,7 +3,7 @@ id: install
 title: インストール
 ---
 
-インストールせずに試すには [Playground](/shogi-board/playground) から
+インストールせずに試すには [Playground](/shogi-board/playground/index.html) から
 
 ## Option 1. Clone して使う
 

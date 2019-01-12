@@ -7,7 +7,7 @@ const org = 'murosan'
 const repositoryName = 'shogi-board'
 const repositoryUrl = `https://github.com/${org}/${repositoryName}`
 const githubio = `https://${org}.github.io`
-const playgroundUrl = `/${repositoryName}/playground`
+const playgroundUrl = `/${repositoryName}/playground/index.html`
 
 const siteConfig = {
   title: 'Shogi Board',

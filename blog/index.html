@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="ja"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Blog · Shogi Board</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="ブラウザで棋譜並べや検討ができる将棋盤"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Blog · Shogi Board"/><meta property="og:type" content="website"/><meta property="og:url" content="https://murosan.github.io/shogi-board/index.html"/><meta property="og:description" content="ブラウザで棋譜並べや検討ができる将棋盤"/><meta property="og:image" content="https://murosan.github.io/shogi-board/img/shogi-board.jpg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://murosan.github.io/shogi-board/img/shogi-board.jpg"/><link rel="shortcut icon" href="/shogi-board/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs2015.min.css"/><link rel="alternate" type="application/atom+xml" href="https://murosan.github.io/shogi-board/blog/atom.xml" title="Shogi Board Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://murosan.github.io/shogi-board/blog/feed.xml" title="Shogi Board Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/shogi-board/css/main.css"/></head><body class="blog"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/shogi-board/"><img class="logo" src="/shogi-board/img/icon.svg" alt="Shogi Board"/><h2 class="headerTitleWithLogo">Shogi Board</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/shogi-board/playground/index.html" target="_self">Playground</a></li><li class=""><a href="/shogi-board/docs/features" target="_self">Docs</a></li><li class=""><a href="https://github.com/murosan/shogi-board" target="_self">GitHub</a></li><li class="siteNavGroupActive siteNavItemActive"><a href="/shogi-board/blog/" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul><li class="navListItem"><a class="navItem" href="/shogi-board/blog/2019/01/12">shogi-board 2.0.1・ドキュメントページを作成</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/shogi-board/blog/2019/01/12">shogi-board 2.0.1・ドキュメントページを作成</a></h1><p class="post-meta">January 12, 2019</p><div class="authorBlock"><p class="post-authorName"><a target="_blank" rel="noreferrer noopener">murosan</a></p></div></header><article class="post-content"><div><span><p>2019 年 1 月 12 日・
+ドキュメントページを作成しました。</p>
+<p>バグ・質問・要望などは、<a href="https://github.com/murosan/shogi-board/issues">issue</a> へ
+お気軽にどうぞ！。<br>
+ドキュメント、Shogi Board の機能は今後も改善していきます。よろしくお願いします。</p>
+</span></div></article></div><div class="docs-prevnext"></div></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/shogi-board/" class="nav-home"><img src="/shogi-board/img/icon.svg" alt="Shogi Board" width="66" height="58"/></a><div><h5>Docs</h5><a href="/shogi-board/docs/en/features.html">Getting Started</a></div><div><h5>More</h5><a href="/shogi-board/blog">Blog</a><a href="https://github.com/murosan/shogi-board">GitHub</a><a href="https://github.com/murosan/shogi-board/issues">Issues</a><a class="github-button" href="https://github.com/murosan/shogi-board" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 murosan</section></footer></div></body></html>

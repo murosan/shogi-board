@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Shogi Board Blog</title>
+        <link>https://murosan.github.io/shogi-board/blog</link>
+        <description>The best place to stay up-to-date with the latest Shogi Board news and events.</description>
+        <lastBuildDate>Sat, 12 Jan 2019 06:00:00 GMT</lastBuildDate>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        <generator>Feed for Node.js</generator>
+        <image>
+            <title>Shogi Board Blog</title>
+            <url>https://murosan.github.io/shogi-board/img/icon.svg</url>
+            <link>https://murosan.github.io/shogi-board/blog</link>
+        </image>
+        <copyright>Copyright © 2019 murosan</copyright>
+        <item>
+            <title><![CDATA[shogi-board 2.0.1・ドキュメントページを作成]]></title>
+            <link>https://murosan.github.io/shogi-board/blog/2019/01/12.html</link>
+            <guid>https://murosan.github.io/shogi-board/blog/2019/01/12.html</guid>
+            <pubDate>Sat, 12 Jan 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>2019 年 1 月 12 日・ ドキュメントページを作成しました。</p> <p>バグ・質問・要望などは、<a href="https://github.com/murosan/shogi-board/issues">issue</a> へ お気軽にどうぞ！。<br> ドキュメント、Shogi Board の機能は今後も改善していきます。よろしくお願いします。</p> ]]></description>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://murosan.github.io/shogi-board/blog</id>
+    <title>Shogi Board Blog</title>
+    <updated>2019-01-12T06:00:00Z</updated>
+    <generator>Feed for Node.js</generator>
+    <link rel="alternate" href="https://murosan.github.io/shogi-board/blog"/>
+    <subtitle>The best place to stay up-to-date with the latest Shogi Board news and events.</subtitle>
+    <logo>https://murosan.github.io/shogi-board/img/icon.svg</logo>
+    <rights>Copyright © 2019 murosan</rights>
+    <entry>
+        <title type="html"><![CDATA[shogi-board 2.0.1・ドキュメントページを作成]]></title>
+        <id>https://murosan.github.io/shogi-board/blog/2019/01/12.html</id>
+        <link href="https://murosan.github.io/shogi-board/blog/2019/01/12.html">
+        </link>
+        <updated>2019-01-12T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p>2019 年 1 月 12 日・ ドキュメントページを作成しました。</p> <p>バグ・質問・要望などは、<a href="https://github.com/murosan/shogi-board/issues">issue</a> へ お気軽にどうぞ！。<br> ドキュメント、Shogi Board の機能は今後も改善していきます。よろしくお願いします。</p> ]]></summary>
+        <author>
+            <name>murosan</name>
+        </author>
+    </entry>
+</feed>

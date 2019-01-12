@@ -20,7 +20,7 @@ const siteConfig = {
 
   headerLinks: [
     { href: playgroundUrl, label: 'Playground' }, // デプロイ前にビルドする
-    { doc: 'doc1', label: 'Docs' },
+    { doc: 'features', label: 'Docs' },
     { href: repositoryUrl, label: 'GitHub' },
     { blog: true, label: 'Blog' },
   ],

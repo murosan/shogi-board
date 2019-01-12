@@ -4,7 +4,6 @@ const React = require('react')
 
 const CompLibrary = require('../../core/CompLibrary.js')
 
-const MarkdownBlock = CompLibrary.MarkdownBlock
 const Container = CompLibrary.Container
 const GridBlock = CompLibrary.GridBlock
 
@@ -60,7 +59,7 @@ class HomeSplash extends React.Component {
           <ProjectTitle siteConfig={siteConfig} />
           <PromoSection>
             <Button href={playgroundUrl}>Try It Out</Button>
-            <Button href={docUrl('doc1.html')}>Usage</Button>
+            <Button href={docUrl('features')}>Usage</Button>
           </PromoSection>
         </div>
       </SplashContainer>
@@ -71,7 +70,7 @@ class HomeSplash extends React.Component {
 class Index extends React.Component {
   render() {
     const { config: siteConfig, language = '' } = this.props
-    const { baseUrl } = siteConfig
+    const { baseUrl, playgroundUrl } = siteConfig
 
     const Block = props => (
       <Container
@@ -93,24 +92,29 @@ class Index extends React.Component {
           {
             title: 'Getting Started',
             content: `
+ダウンロード不要で試すには [Playground](${playgroundUrl}) から  
+Git・Node.js を扱える方は以下のように始めることができます  
+
 \`\`\`sh
-git clone https://github.com/murosan/shogi-board.git
-cd shogi-board
-yarn
-yarn start
+$ git clone https://github.com/murosan/shogi-board.git
+$ cd shogi-board
+$ yarn
+$ yarn start
 \`\`\`
 `,
           },
           {
+            title: '',
+            imageAlt: 'image',
             image: `${baseUrl}img/shogi-board.jpg`,
-            imageAlign: 'right',
+            imageAlign: 'left',
           },
         ]}
       </Block>
     )
 
     const Features = () => (
-      <Block layout="fourColumn">
+      <Block layout="twoColumn">
         {[
           {
             content: 'The content of my first feature',
@@ -135,5 +139,8 @@ yarn start
     )
   }
 }
+
+Index.description =
+  'ブラウザで動く将棋盤！将棋の検討、棋譜並べができる、軽量・無料・オープンソースな将棋盤Webアプリケーションです。'
 
 module.exports = Index

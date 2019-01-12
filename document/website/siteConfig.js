@@ -36,8 +36,9 @@ const siteConfig = {
 
   copyright: `Copyright © ${new Date().getFullYear()} ${org}`,
 
+  // https://cdnjs.com/libraries/highlight.js/
   highlight: {
-    theme: 'atom-one-dark',
+    theme: 'vs2015',
   },
 
   // Add custom scripts here that would be placed in <script> tags.
@@ -49,8 +50,8 @@ const siteConfig = {
   cleanUrl: true,
 
   // Open Graph and Twitter card images.
-  ogImage: 'img/shogi-board.png',
-  twitterImage: 'img/shogi-board.png',
+  ogImage: 'img/shogi-board.jpg',
+  twitterImage: 'img/shogi-board.jpg',
 
   // Show documentation's last contributor's name.
   enableUpdateBy: true,

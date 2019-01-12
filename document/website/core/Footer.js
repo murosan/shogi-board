@@ -45,13 +45,11 @@ class Footer extends React.Component {
           <div>
             <h5>More</h5>
             <a href={`${this.props.config.baseUrl}blog`}>Blog</a>
-            <a href={this.props.config.repoUrl} target="_blank">
-              GitHub
-            </a>
+            <a href={this.props.config.repoUrl}>GitHub</a>
+            <a href={`${this.props.config.repoUrl}/issues`}>Issues</a>
             <a
               className="github-button"
               href={this.props.config.repoUrl}
-              target="_blank"
               data-icon="octicon-star"
               data-count-href="/facebook/docusaurus/stargazers"
               data-show-count="true"
@@ -62,20 +60,6 @@ class Footer extends React.Component {
             </a>
           </div>
         </section>
-
-        <a
-          href="https://code.facebook.com/projects/"
-          target="_blank"
-          rel="noreferrer noopener"
-          className="fbOpenSource"
-        >
-          <img
-            src={`${this.props.config.baseUrl}img/oss_logo.png`}
-            alt="Facebook Open Source"
-            width="170"
-            height="45"
-          />
-        </a>
         <section className="copyright">{this.props.config.copyright}</section>
       </footer>
     )

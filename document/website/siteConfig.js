@@ -9,6 +9,8 @@ const repositoryUrl = `https://github.com/${org}/${repositoryName}`
 const githubio = `https://${org}.github.io`
 const playgroundUrl = `/${repositoryName}/playground/index.html`
 
+const isProd = process.env.NODE_ENV === 'production'
+
 const siteConfig = {
   title: 'Shogi Board',
   tagline: 'ブラウザで棋譜並べや検討ができる将棋盤',
@@ -35,6 +37,9 @@ const siteConfig = {
   },
 
   copyright: `Copyright © ${new Date().getFullYear()} ${org}`,
+
+  gaTrackingId: isProd ? 'UA-104937240-2' : undefined,
+  gaGtag: isProd || undefined,
 
   // https://cdnjs.com/libraries/highlight.js/
   highlight: {

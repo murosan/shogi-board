@@ -10,6 +10,9 @@ cd $PROJECT_ROOT
 
 yarn test:c
 
+# insert Google Analytics to index.html
+node $PROJECT_ROOT/scripts/ga.js insert
+
 # build app
 yarn build
 
@@ -35,6 +38,9 @@ xargs -0 sed -i '' -e 's/html lang="en"/html lang="ja"/g'
 # copy application to playground directory
 mkdir playground
 cp -r $PROJECT_ROOT/build/* ./playground/
+
+# restore index.html
+node $PROJECT_ROOT/scripts/ga.js remove
 
 # deploy
 gh-pages -m '[ci skip] Updates' -d .

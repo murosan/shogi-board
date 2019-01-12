@@ -7,10 +7,10 @@
   "runtime~main.js": "/shogi-board/playground/static/js/runtime~main.b940b8ac.js",
   "runtime~main.js.map": "/shogi-board/playground/static/js/runtime~main.b940b8ac.js.map",
   "static/media/App.scss": "/shogi-board/playground/static/media/tatami.0baeb848.jpg",
-  "static/media/Captures.scss": "/shogi-board/playground/static/media/cap_stand0.40b0fd2c.png",
+  "static/media/Captures.scss": "/shogi-board/playground/static/media/cap_stand1.14e95738.png",
   "static/media/Board.scss": "/shogi-board/playground/static/media/board.cdea8584.png",
   "static/css/main.36ab5668.chunk.css.map": "/shogi-board/playground/static/css/main.36ab5668.chunk.css.map",
   "index.html": "/shogi-board/playground/index.html",
-  "precache-manifest.737fb4c03ee626755b320856cb21aa9d.js": "/shogi-board/playground/precache-manifest.737fb4c03ee626755b320856cb21aa9d.js",
+  "precache-manifest.30f1d108226d6d0c674f5fc55bf8d2eb.js": "/shogi-board/playground/precache-manifest.30f1d108226d6d0c674f5fc55bf8d2eb.js",
   "service-worker.js": "/shogi-board/playground/service-worker.js"
 }

@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/shogi-board/playground/static/css/main.36ab5668.chunk.css"
   },
   {
-    "revision": "494199d0a4584be6eb2b91fa4bbb35fb",
+    "revision": "236fc371ce0e0e9a3d6a383d190cc955",
     "url": "/shogi-board/playground/index.html"
   }
 ];

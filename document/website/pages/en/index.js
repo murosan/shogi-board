@@ -87,7 +87,7 @@ class Index extends React.Component {
     )
 
     const TryOut = () => (
-      <Block layout="twoColumn" background="light">
+      <Block layout="twoColumn" background="dark">
         {[
           {
             title: 'Getting Started',
@@ -114,15 +114,23 @@ $ yarn start
     )
 
     const Features = () => (
-      <Block layout="twoColumn">
+      <Block layout="twoColumn" background="light">
         {[
           {
-            content: 'The content of my first feature',
-            title: 'Feature One',
+            content:
+              'PC と最新版 GoogleChrome だけあれば動作する、' +
+              'とても軽量な Web アプリケーションです。' +
+              'macOS を完全にサポートし、' +
+              '将棋ソフトを扱う機能も開発中です。',
+            title: 'ブラウザで動作',
           },
           {
-            content: 'The content of my second feature',
-            title: 'Feature Two',
+            content:
+              'ルール通りに駒を動かすことができます。' +
+              '王手放置・打ち歩詰めも防止します。' +
+              '分岐の作成も可能。' +
+              '棋譜の保存・取り込み機能などは今年中にリリースします。',
+            title: '検討・棋譜並べに最適',
           },
         ]}
       </Block>
@@ -131,7 +139,7 @@ $ yarn start
     return (
       <div>
         <HomeSplash siteConfig={siteConfig} language={language} />
-        <div className="mainContainer">
+        <div className="mainContainer noPadding">
           <Features />
           <TryOut />
         </div>

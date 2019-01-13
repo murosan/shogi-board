@@ -1,4 +1,4 @@
-# 将棋 検討盤
+# Shogi Board・ブラウザ将棋盤
 
 [![build](https://img.shields.io/circleci/project/github/murosan/shogi-board.svg?style=flat-square)](https://circleci.com/gh/murosan/shogi-board)
 [![coverage](https://img.shields.io/codecov/c/github/murosan/shogi-board.svg?style=flat-square)](https://codecov.io/gh/murosan/shogi-board)
@@ -8,13 +8,19 @@
 [![tag](https://img.shields.io/github/tag/murosan/shogi-board.svg?style=flat-square)](https://github.com/murosan/shogi-board/releases)
 [![node](https://img.shields.io/badge/node->%3D%2010.14.1-brightgreen.svg?style=flat-square)](https://nodejs.org/ja/)
 
+まずは Playground でお試しください  
+<https://murosan.github.io/shogi-board/playground/>
+
+ドキュメントはこちら  
+<https://murosan.github.io/shogi-board/>
+
 <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
   <img src="https://github.com/murosan/pictures-for-readme/blob/master/shogi-board-example.jpg" alt="shogi-board sample image">
 </div>
 
 ## できること
 
-- ブラウザ上で駒を動かして将棋の検討ができる
+- ブラウザ上で駒を動かして将棋の検討や棋譜並べができる
 
 ## 対応ブラウザ
 

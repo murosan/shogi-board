@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /shogi-board/en
+
+Sitemap: https://murosan.github.io/shogi-board/sitemap.xml

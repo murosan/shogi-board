@@ -35,6 +35,13 @@ xargs -0 sed -i '' -e 's/html lang=""/html lang="ja"/g'
 find . -type f -name "*.html" -print0 | \
 xargs -0 sed -i '' -e 's/html lang="en"/html lang="ja"/g'
 
+cat<<EOM > robots.txt
+User-agent: *
+Disallow: /shogi-board/en
+
+Sitemap: https://murosan.github.io/shogi-board/sitemap.xml
+EOM
+
 # copy application to playground directory
 mkdir playground
 cp -r $PROJECT_ROOT/build/* ./playground/
@@ -43,4 +50,6 @@ cp -r $PROJECT_ROOT/build/* ./playground/
 node $PROJECT_ROOT/scripts/ga.js remove
 
 # deploy
+read -p "Are you sure to deploy? [y/n]" CONFIRM
+if [[ $CONFIRM != "y" ]]; then exit 1; fi
 gh-pages -m '[ci skip] Updates' -d .

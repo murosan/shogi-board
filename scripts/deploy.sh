@@ -37,7 +37,7 @@ xargs -0 sed -i '' -e 's/html lang="en"/html lang="ja"/g'
 
 cat<<EOM > robots.txt
 User-agent: *
-Disallow: /shogi-board/en
+Disallow: /shogi-board/en/
 
 Sitemap: https://murosan.github.io/shogi-board/sitemap.xml
 EOM

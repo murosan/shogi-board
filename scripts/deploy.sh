@@ -29,18 +29,13 @@ sed -i '' -e 's/hreflang="en"/hreflang="ja"/g' ./sitemap.xml
 sed -i '' -e 's/shogi-board\/en\//shogi-board\//g' ./sitemap.xml
 
 # html files
-find . -type f -name "*.html" -print0 | \
-xargs -0 sed -i '' -e 's/html lang=""/html lang="ja"/g'
+function replace() {
+  find . -type f -name "*.html" -print0 | \
+  xargs -0 sed -i '' -e "s/$1/$2/g"
+}
 
-find . -type f -name "*.html" -print0 | \
-xargs -0 sed -i '' -e 's/html lang="en"/html lang="ja"/g'
-
-cat<<EOM > robots.txt
-User-agent: *
-Disallow: /shogi-board/en/
-
-Sitemap: https://murosan.github.io/shogi-board/sitemap.xml
-EOM
+replace 'html lang=""' 'html lang="ja"'
+replace 'html lang="en"' 'html lang="ja"'
 
 # copy application to playground directory
 mkdir playground

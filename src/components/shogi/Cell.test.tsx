@@ -96,9 +96,13 @@ it('反転してる場合でも正しいクラス名を付けられる', async (
 it('手番の駒をクリックすると選択でき、Selectedクラスが付く', async () => {
   const store: GameStateStore = new GameStateStore()
   const wrapper = shallow(<Cell store={store} row={6} column={1} />).dive()
+  const targeted = shallow(<Cell store={store} row={5} column={1} />).dive()
   wrapper.simulate('click')
   const className = `Cell Piece Piece-Bordered Piece-${Fu0} Piece-Turn Piece-Selected`
   expect(wrapper.hasClass(className)).toBeTruthy()
+  // 移動先も着色される
+  const classNameTargeted = `Cell Piece Piece-Bordered Piece-Targeted`
+  expect(targeted.hasClass(classNameTargeted)).toBeTruthy()
 })
 
 it('Confirm 周り一連をちゃんとできる', async () => {

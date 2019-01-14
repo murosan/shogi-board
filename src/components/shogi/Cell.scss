@@ -34,6 +34,10 @@ $edgeTextSize: 1.2vw;
   }
 }
 
+.Piece-Targeted {
+  background-color: $GreenHover;
+}
+
 .Piece-Left {
   border-left: $borderWidth solid $borderColor;
 }

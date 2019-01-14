@@ -1,6 +1,7 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { columnString, rowString } from '../../lib/strings'
+import { find } from '../../lib/validatior/utils/algorithm'
 import { ClickProps } from '../../model/events/ClickProps'
 import Confirm from '../../model/shogi/Confirm'
 import { Empty, Piece } from '../../model/shogi/Piece'
@@ -24,22 +25,35 @@ export default class Cell extends Component<Props> {
       : Empty
 
   render(): JSX.Element | undefined {
+    const {
+      indexes,
+      selected,
+      confirm,
+      currentMove,
+      moveTargets,
+    } = this.props.store!
     const piece: Piece = this.getPiece()
+    const row: number = this.props.row
+    const column: number = this.props.column
+
+    const isTurn: boolean =
+      (piece > 0 && currentMove.pos.turn === Sente) ||
+      (piece < 0 && currentMove.pos.turn === Gote)
+
     const className: string = getClassName({
-      r: this.props.row,
-      c: this.props.column,
-      rv: this.props.store!.indexes[0] === 9,
+      r: row,
+      c: column,
+      rv: indexes[0] === 9,
       p: piece,
-      sel: this.props.store!.selected,
-      confirm: this.props.store!.confirm,
-      isTurn:
-        (piece > 0 && this.props.store!.currentMove.pos.turn === Sente) ||
-        (piece < 0 && this.props.store!.currentMove.pos.turn === Gote),
+      sel: selected,
+      confirm: confirm,
+      isTurn,
+      isTargeted: find(moveTargets, { row, column }) !== -1,
     })
 
     return (
       <div className={className} onClick={() => this.click()}>
-        {this.renderConfirm(this.props.store!.confirm)}
+        {this.renderConfirm(confirm)}
         {this.renderEdgeTextRow()}
         {this.renderEdgeTextColumn()}
       </div>
@@ -47,8 +61,9 @@ export default class Cell extends Component<Props> {
   }
 
   renderConfirm(cf?: Confirm): JSX.Element | undefined {
-    if (!cf || cf.row !== this.props.row || cf.column !== this.props.column)
-      return undefined
+    const row: number = this.props.row
+    const column: number = this.props.column
+    if (!cf || cf.row !== row || cf.column !== column) return undefined
 
     const isReversed: boolean = this.props.store!.indexes[0] === 9
     const isGote =
@@ -73,17 +88,15 @@ export default class Cell extends Component<Props> {
 
   renderEdgeTextRow(): JSX.Element | undefined {
     const needText = inRange(this.props.column) && this.props.row === -1
-    if (!needText) {
-      return undefined
-    }
+    if (!needText) return undefined
+
     return <span>{columnString(this.props.column)}</span>
   }
 
   renderEdgeTextColumn(): JSX.Element | undefined {
     const needText = inRange(this.props.row) && this.props.column === -1
-    if (!needText) {
-      return undefined
-    }
+    if (!needText) return undefined
+
     return <span>{rowString(this.props.row)}</span>
   }
 
@@ -107,6 +120,7 @@ interface GetClassNameProps {
   sel?: Point // selected
   confirm?: Confirm
   isTurn: boolean
+  isTargeted: boolean
 }
 
 // つらい感じ
@@ -150,15 +164,16 @@ function getClassName(p: GetClassNameProps): string {
   const pieceImg: string = rvp ? `Piece-${rvp} ` : ''
   const pieceTurn: string = p.isTurn ? 'Piece-Turn ' : ''
   const pieceSelected: string = isSelected ? 'Piece-Selected ' : ''
+  const pieceTargeted: string = p.isTargeted ? 'Piece-Targeted ' : ''
   const left: string = isLeft ? 'Piece-Left ' : ''
   const top: string = isTop ? 'Piece-Top ' : ''
   const edgeText: string =
     (p.c === -1 && rowInRange) || (p.r === -1 && colInRange)
       ? 'Cell-EdgeText '
       : ''
-  const star: string = isStar ? 'Piece-Star ' : ''
+  const star: string = isStar ? 'Piece-Star' : ''
 
-  return `Cell ${piece}${pieceImg}${pieceTurn}${pieceSelected}${left}${top}${edgeText}${star}`.trim()
+  return `Cell ${piece}${pieceImg}${pieceTurn}${pieceSelected}${pieceTargeted}${left}${top}${edgeText}${star}`
 }
 
 function inRange(n: number): boolean {

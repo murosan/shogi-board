@@ -58,6 +58,7 @@ export default class GameStateStore implements Store {
     // 選択された駒をクリックしたら選択解除
     if (sel !== undefined && isPiece(p.clicked) && selectedAgain(sel, p)) {
       this.selected = undefined
+      this.moveTargets = []
       return
     }
 

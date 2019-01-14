@@ -1,16 +1,14 @@
 {
-  "main.css": "/shogi-board/playground/static/css/main.f337cf0f.chunk.css",
-  "main.js": "/shogi-board/playground/static/js/main.5649f47f.chunk.js",
-  "main.js.map": "/shogi-board/playground/static/js/main.5649f47f.chunk.js.map",
+  "main.css": "/shogi-board/playground/static/css/main.ce7a9279.chunk.css",
+  "main.js": "/shogi-board/playground/static/js/main.2c5139cd.chunk.js",
+  "main.js.map": "/shogi-board/playground/static/js/main.2c5139cd.chunk.js.map",
   "static/js/1.2a72fb21.chunk.js": "/shogi-board/playground/static/js/1.2a72fb21.chunk.js",
   "static/js/1.2a72fb21.chunk.js.map": "/shogi-board/playground/static/js/1.2a72fb21.chunk.js.map",
   "runtime~main.js": "/shogi-board/playground/static/js/runtime~main.b940b8ac.js",
   "runtime~main.js.map": "/shogi-board/playground/static/js/runtime~main.b940b8ac.js.map",
-  "static/media/App.scss": "/shogi-board/playground/static/media/tatami.0baeb848.jpg",
-  "static/media/Captures.scss": "/shogi-board/playground/static/media/cap_stand0.40b0fd2c.png",
-  "static/media/Board.scss": "/shogi-board/playground/static/media/board.cdea8584.png",
-  "static/css/main.f337cf0f.chunk.css.map": "/shogi-board/playground/static/css/main.f337cf0f.chunk.css.map",
+  "static/media/App.scss": "/shogi-board/playground/static/media/tatami.8d2b7da0.jpg",
+  "static/css/main.ce7a9279.chunk.css.map": "/shogi-board/playground/static/css/main.ce7a9279.chunk.css.map",
   "index.html": "/shogi-board/playground/index.html",
-  "precache-manifest.0755f1f31fa9fcc51f61ca5d506c85e2.js": "/shogi-board/playground/precache-manifest.0755f1f31fa9fcc51f61ca5d506c85e2.js",
+  "precache-manifest.2002d660bd2d81917011f5f2193385fb.js": "/shogi-board/playground/precache-manifest.2002d660bd2d81917011f5f2193385fb.js",
   "service-worker.js": "/shogi-board/playground/service-worker.js"
 }

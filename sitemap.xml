@@ -4,6 +4,6 @@
 <url> <loc>https://murosan.github.io/shogi-board/blog/2019/01/12</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://murosan.github.io/shogi-board/docs/features</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="ja" href="https://murosan.github.io/shogi-board/docs/features" /> </url>
 <url> <loc>https://murosan.github.io/shogi-board/docs/help</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="ja" href="https://murosan.github.io/shogi-board/docs/help" /> </url>
+<url> <loc>https://murosan.github.io/shogi-board/docs/install_tools</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="ja" href="https://murosan.github.io/shogi-board/docs/install_tools" /> </url>
 <url> <loc>https://murosan.github.io/shogi-board/docs/install</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="ja" href="https://murosan.github.io/shogi-board/docs/install" /> </url>
-<url> <loc>https://murosan.github.io/shogi-board/docs/preinstall</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="ja" href="https://murosan.github.io/shogi-board/docs/preinstall" /> </url>
 </urlset>

@@ -10,7 +10,7 @@ title: インストール
 #### 必要なもの
 
 Git・Node.js・Yarn  
-インストール方法は [こちら](preinstall.md)
+↑ のインストール方法は [こちら](install_tools.md)
 
 #### 手順
 

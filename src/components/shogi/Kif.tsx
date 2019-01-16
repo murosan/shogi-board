@@ -45,7 +45,7 @@ export default class Kif extends Component<Props> {
       const m: Move = b.branches[i].moves[0] as Move // head は必ず Move
       otherHeadsDom.push(
         <div
-          key={`${n}${i}`}
+          key={`${n}-${i}`}
           className="Branch"
           onClick={() => this.props.store!.clickKif(n, i)}
         >

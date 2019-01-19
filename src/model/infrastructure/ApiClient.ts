@@ -1,5 +1,8 @@
 import Position from '../shogi/Position'
+import Result from '../engine/Result'
 
+// gRPC とか迷っている
+// docker 周り整備したら移行すると思う
 export default interface ApiClient {
   connect(): Promise<void>
   close(): Promise<void>
@@ -7,5 +10,5 @@ export default interface ApiClient {
   setOption<T>(option: T): Promise<void>
   start(): Promise<void>
   setPosition(pos: Position): Promise<void>
-  fetchValues<T>(): Promise<T> // TODO: result type の作成
+  fetchResult(): Promise<Result>
 }

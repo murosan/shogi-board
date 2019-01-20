@@ -1,6 +1,6 @@
 {
   "name": "shogi-board",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "private": true,
   "author": "murosan",
   "description": "shogi board on browser",

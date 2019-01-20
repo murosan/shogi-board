@@ -16,6 +16,7 @@ junit.xml
 
 # app
 /config/*.js
+!/config/default.js
 !/config/test.js
 /temp
 

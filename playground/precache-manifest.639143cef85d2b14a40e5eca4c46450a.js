@@ -8,19 +8,19 @@ self.__precacheManifest = [
     "url": "/shogi-board/playground/static/js/runtime~main.b940b8ac.js"
   },
   {
-    "revision": "2c5139cd54ae165f4747",
-    "url": "/shogi-board/playground/static/js/main.2c5139cd.chunk.js"
+    "revision": "21f3d0ae4b0e6e6db890",
+    "url": "/shogi-board/playground/static/js/main.21f3d0ae.chunk.js"
   },
   {
     "revision": "2a72fb21616626f1fde8",
     "url": "/shogi-board/playground/static/js/1.2a72fb21.chunk.js"
   },
   {
-    "revision": "2c5139cd54ae165f4747",
+    "revision": "21f3d0ae4b0e6e6db890",
     "url": "/shogi-board/playground/static/css/main.ce7a9279.chunk.css"
   },
   {
-    "revision": "ce2ace9aea7ca1e03de7981fbca8fcb2",
+    "revision": "e09c2bae7220b150c553ea0c4dc762aa",
     "url": "/shogi-board/playground/index.html"
   }
 ];

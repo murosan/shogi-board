@@ -4,7 +4,7 @@
         <title>Shogi Board Blog</title>
         <link>https://murosan.github.io/shogi-board/blog</link>
         <description>The best place to stay up-to-date with the latest Shogi Board news and events.</description>
-        <lastBuildDate>Sat, 12 Jan 2019 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 20 Jan 2019 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -13,6 +13,13 @@
             <link>https://murosan.github.io/shogi-board/blog</link>
         </image>
         <copyright>Copyright © 2019 murosan</copyright>
+        <item>
+            <title><![CDATA[shogi-board 2.1.0・駒ガイド機能を追加しました]]></title>
+            <link>https://murosan.github.io/shogi-board/blog/2019/01/20.html</link>
+            <guid>https://murosan.github.io/shogi-board/blog/2019/01/20.html</guid>
+            <pubDate>Sun, 20 Jan 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<h4><a class="anchor" aria-hidden="true" id="release-note-v210"></a><a href="#release-note-v210" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>Release Note v2.1.0</h4> <ul> <li>駒ガイド機能を追加</li> </ul> <p>将棋の初心者の方でも駒を動かしやすいように、 駒をクリックすると、移動できる場所に色が付く機能を追加しました。<br> 今は設定機能がないのでオフにはできません。 近いうちに設定で切り替えられるようにしたいと思っています。<br> 設定ファイル自体は持てるようになっています(まだ使ってない)。</p> <ul> <li>バグ修正</li> </ul> <p>棋譜の分岐を作成すると、React.js の要素配列のキーがぶつかる可能性があったので修正しました。</p> <h4><a class="anchor" aria-hidden="true" id="working-in-progress"></a><a href="#working-in-progress" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>Working in progress</h4> ...]]></description>
+        </item>
         <item>
             <title><![CDATA[shogi-board 2.0.1・ドキュメントページを作成]]></title>
             <link>https://murosan.github.io/shogi-board/blog/2019/01/12.html</link>

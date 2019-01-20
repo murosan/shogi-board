@@ -1,5 +1,11 @@
 import Config from '../model/config/Config'
 
-// TODO: もう少しちゃんとする
+// 初期設定を読み込む
+const defaultValues: Config = require('../../config/default')
+
+// 環境別の設定ファイルを読み込む
 const env = process.env.NODE_ENV
-export const config: Config = require(`../../config/${env}`)
+const userDefined: Config = require(`../../config/${env}`)
+
+// 合成
+export const config: Config = Object.assign({}, defaultValues, userDefined)

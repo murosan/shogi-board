@@ -1,5 +1,9 @@
 'use strict'
 
 module.exports = {
-  paintTargets: true,
+  server: {
+    protocol: 'http',
+    host: 'localhost',
+    port: 8080,
+  },
 }

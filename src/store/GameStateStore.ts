@@ -151,6 +151,7 @@ export default class GameStateStore implements Store {
     if (this.confirm) return
     this.kif = changeIndex(this.kif, moveCount, branchIndex)
     this.selected = undefined
+    this.moveTargets = []
   }
 }
 

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/shogi-board/playground/precache-manifest.639143cef85d2b14a40e5eca4c46450a.js"
+  "/shogi-board/playground/precache-manifest.a1c7ce675fe5efa0616b570af8ac7b3e.js"
 );
 
 workbox.clientsClaim();

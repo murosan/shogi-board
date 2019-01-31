@@ -48,6 +48,7 @@ export default class Buttons extends Component<Props> {
         >
           棋譜コピー
         </button>
+        <button className="ConnectToEngine">将棋ソフトに接続</button>
       </div>
     )
   }

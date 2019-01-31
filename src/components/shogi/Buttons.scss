@@ -7,11 +7,11 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
-    'tmp tmp tmp tmp'
     'prevOne prevOne nextOne nextOne'
     'prevFive prevFive nextFive nextFive'
     'rev rev rev rev'
-    'cp cp cp cp';
+    'cp cp cp cp'
+    'engine engine engine engine';
 
   button {
     margin: 0;
@@ -31,6 +31,10 @@
   }
 }
 
+.ConnectToEngine {
+  grid-area: engine;
+}
+
 .PrevOne {
   grid-area: prevOne;
 }
@@ -45,14 +49,6 @@
 
 .NextFive {
   grid-area: nextFive;
-}
-
-.ToHead {
-  grid-area: toHead;
-}
-
-.ToLast {
-  grid-area: toLast;
 }
 
 .Reverse {

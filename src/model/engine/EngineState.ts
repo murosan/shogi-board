@@ -1,21 +1,27 @@
-import EngineMove from './EngineMove'
+import { Result } from '../../proto/v1_pb'
 
-export type EngineState = number
+export type State = number
 
-export const NotConnected: EngineState = 0
-export const Connected: EngineState = 1
-export const StandBy: EngineState = 2
-export const Thinking: EngineState = 3
+export const NotConnected: State = 0
+export const Connected: State = 1
+export const StandBy: State = 2
+export const Thinking: State = 3
 
-export type EngineName = string
-
-export default interface EngineConnection {
+export default interface EngineState {
   // 将棋エンジン一覧
-  names: EngineName[]
+  names: string[]
   // 接続中のエンジン
-  current?: EngineName
+  current?: string
 
-  state: EngineState
+  state: State
 
-  results: Map<number, EngineMove>
+  result: Result
+}
+
+export function newEngineState(): EngineState {
+  return {
+    names: [],
+    state: NotConnected,
+    result: new Result(),
+  }
 }

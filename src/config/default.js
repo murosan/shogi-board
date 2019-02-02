@@ -1,5 +1,3 @@
-'use strict'
-
 // 各設定のデフォルト値
 // 設定を上書きするには、 development.js や production.js という名前でファイルを作成し、
 // 上書きしたい項目を記入する。
@@ -13,11 +11,7 @@ module.exports = {
   // shogi-board-server 用の設定
   // undefined は使わない設定
   // github.io にデプロイするときは undefined
-  server: undefined,
+  serverURL: undefined,
   // 使う場合は以下のように、 development.js や production.js に記入する
-  // server: {
-  //   protocol: 'http',
-  //   host: 'localhost',
-  //   port: 8080,
-  // },
+  // serverURL: 'http://localhost:8080'
 }

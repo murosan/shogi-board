@@ -8,6 +8,7 @@ import pushMove from '../lib/kif-handler/pushMove'
 import getTargets from '../lib/validatior/getTargets'
 import { find } from '../lib/validatior/utils/algorithm'
 import filterTargets from '../lib/validatior/utils/filterTargets'
+import EngineState, { newEngineState } from '../model/engine/EngineState'
 import { ClickProps } from '../model/events/ClickProps'
 import MoveProps from '../model/events/MoveProps'
 import Kif, { newKif } from '../model/kif/Kif'
@@ -31,6 +32,9 @@ export interface Store extends GameState {
 
   // 棋譜をクリックして表示局面を変える
   clickKif(moveCount: number, branchIndex?: number): void
+
+  // alert の代わり。パネルが表示される
+  messages: string[]
 }
 
 export default class GameStateStore implements Store {
@@ -39,6 +43,8 @@ export default class GameStateStore implements Store {
   @observable confirm: Confirm | undefined = undefined
   @observable moveTargets: Point[] = []
   @observable kif: Kif = newKif()
+  @observable engineState: EngineState = newEngineState()
+  @observable messages: string[] = []
 
   @computed get currentMove(): Move {
     return getCurrent(this.kif)
@@ -152,6 +158,14 @@ export default class GameStateStore implements Store {
     this.kif = changeIndex(this.kif, moveCount, branchIndex)
     this.selected = undefined
     this.moveTargets = []
+  }
+
+  @action pushMessages(msgs: string[]): void {
+    this.messages = msgs
+  }
+
+  @action clearMessages(): void {
+    this.messages = []
   }
 }
 

@@ -1,5 +1,7 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
+import { config } from '../../config/Config'
+import { getHostname } from '../../lib/dom-handler/url'
 import { getAsString } from '../../lib/kif-handler/getAsString'
 import { Store } from '../../store/GameStateStore'
 import './Buttons.scss'
@@ -48,8 +50,19 @@ export default class Buttons extends Component<Props> {
         >
           棋譜コピー
         </button>
-        <button className="ConnectToEngine">将棋ソフトに接続</button>
+        <button className="ConnectToEngine">将棋エンジン</button>
       </div>
     )
+  }
+
+  connectToEngine(): void {
+    if (getHostname() === 'murosan.github.io') {
+      alert(
+        'Playground では使用できません。各自PCにダウンロードしてご利用ください。ドキュメントは'
+      )
+    }
+    if (!config.server) {
+      alert('サーバーの設定がありません')
+    }
   }
 }

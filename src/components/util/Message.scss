@@ -1,0 +1,30 @@
+@import '../../styles/colors';
+@import '../../styles/modules';
+
+$baseZIndex: 1000;
+
+.MessageContainer {
+  @include flexCenter;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: $baseZIndex;
+  overflow: hidden;
+}
+
+.MessageBoard {
+  @include flexCenter;
+  flex-direction: column;
+  width: 50vw;
+  height: 50vh;
+  background-color: $FontColor;
+  opacity: 0.95;
+  overflow: auto;
+}
+
+.Message {
+  color: $White;
+  font-size: 1.2em;
+}

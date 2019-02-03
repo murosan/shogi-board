@@ -64,20 +64,23 @@ export default class Buttons extends Component<Props> {
     const docsURL = 'https://murosan.github.io/shogi-board/'
     const docsIsHere = `ドキュメントはこちら`
     if (getHostname() === 'murosan.github.io') {
-      this.props.store!.pushMessages([
+      this.props.store!.setMessages([
         'Playground では使用できません。各自PCにダウンロードしてご利用ください。',
         docsIsHere,
         docsURL,
       ])
       return
     }
-    if (!config.server) {
-      this.props.store!.pushMessages([
+
+    if (!config.serverURL) {
+      this.props.store!.setMessages([
         'serverURL を設定してください。',
         docsIsHere,
         docsURL,
       ])
       return
     }
+
+    this.props.store!.connectEngine()
   }
 }

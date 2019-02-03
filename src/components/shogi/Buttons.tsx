@@ -50,19 +50,34 @@ export default class Buttons extends Component<Props> {
         >
           棋譜コピー
         </button>
-        <button className="ConnectToEngine">将棋エンジン</button>
+        <button
+          className="ConnectToEngine"
+          onClick={() => this.connectToEngine()}
+        >
+          将棋エンジン
+        </button>
       </div>
     )
   }
 
   connectToEngine(): void {
+    const docsURL = 'https://murosan.github.io/shogi-board/'
+    const docsIsHere = `ドキュメントはこちら`
     if (getHostname() === 'murosan.github.io') {
-      alert(
-        'Playground では使用できません。各自PCにダウンロードしてご利用ください。ドキュメントは'
-      )
+      this.props.store!.pushMessages([
+        'Playground では使用できません。各自PCにダウンロードしてご利用ください。',
+        docsIsHere,
+        docsURL,
+      ])
+      return
     }
     if (!config.server) {
-      alert('サーバーの設定がありません')
+      this.props.store!.pushMessages([
+        'serverURL を設定してください。',
+        docsIsHere,
+        docsURL,
+      ])
+      return
     }
   }
 }

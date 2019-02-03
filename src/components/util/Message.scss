@@ -15,7 +15,6 @@ $baseZIndex: 1000;
 }
 
 .MessageBoard {
-  @include flexCenter;
   padding: 2em;
   flex-direction: column;
   background-color: $FontColor;
@@ -25,7 +24,8 @@ $baseZIndex: 1000;
 
 .Message {
   color: $White;
-  font-size: 1.2em;
+  font-size: 1.1em;
+  margin: 0.7em;
 }
 
 .MessageBoard input {

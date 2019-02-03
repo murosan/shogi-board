@@ -35,6 +35,8 @@ export interface Store extends GameState {
 
   // alert の代わり。パネルが表示される
   messages: string[]
+  pushMessages(msgs: string[]): void
+  clearMessages(): void
 }
 
 export default class GameStateStore implements Store {

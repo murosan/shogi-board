@@ -8,17 +8,16 @@ $baseZIndex: 1000;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: $baseZIndex;
   overflow: hidden;
 }
 
 .MessageBoard {
   @include flexCenter;
+  padding: 2em;
   flex-direction: column;
-  width: 50vw;
-  height: 50vh;
   background-color: $FontColor;
   opacity: 0.95;
   overflow: auto;
@@ -27,4 +26,14 @@ $baseZIndex: 1000;
 .Message {
   color: $White;
   font-size: 1.2em;
+}
+
+.MessageBoard input {
+  width: 100%;
+  height: 2em;
+  border: none;
+  margin-top: 1em;
+  border-radius: 0px;
+  opacity: 1;
+  outline: none;
 }

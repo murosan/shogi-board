@@ -19,6 +19,7 @@ junit.xml
 !/src/config/default.js
 !/src/config/test.js
 /src/proto
+!/src/proto/factory.ts
 
 # misc
 .DS_Store

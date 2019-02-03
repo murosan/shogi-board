@@ -12,6 +12,6 @@ module.exports = {
   // undefined は使わない設定
   // github.io にデプロイするときは undefined
   serverURL: undefined,
-  // 使う場合は以下のように、 development.js や production.js に記入する
+  // 使う場合は以下のような設定を、 development.js や production.js に記入する
   // serverURL: 'http://localhost:8080'
 }

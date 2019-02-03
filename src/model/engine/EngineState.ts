@@ -3,9 +3,10 @@ import { Result } from '../../proto/v1_pb'
 export type State = number
 
 export const NotConnected: State = 0
-export const Connected: State = 1
-export const StandBy: State = 2
-export const Thinking: State = 3
+export const Connecting: State = 1
+export const Connected: State = 2
+export const StandBy: State = 3
+export const Thinking: State = 4
 
 export default interface EngineState {
   // 将棋エンジン一覧

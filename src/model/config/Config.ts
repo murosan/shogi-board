@@ -3,9 +3,5 @@ export default interface Config {
   paintTargets: boolean
 
   // shogi-board-server 用の設定
-  server?: {
-    protocol: 'http' | 'https'
-    host: string
-    port: number
-  }
+  serverURL?: string
 }

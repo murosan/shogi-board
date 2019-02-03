@@ -1,9 +1,11 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
+import { Connecting } from '../../model/engine/EngineState'
 import { Store } from '../../store/GameStateStore'
+import Connector from '../engine/Connector'
+import Message from '../util/Message'
 import './Board.scss'
 import Cell from './Cell'
-import Message from '../util/Message'
 
 export interface Props {
   store?: Store
@@ -20,16 +22,27 @@ export default class Board extends Component<Props> {
         .reverse()
         .map(c => <Cell key={r * 10 + c} row={r} column={c} />)
     )
-    const msg = this.props.store!.messages
-    const alert = msg.length === 0 ? undefined : <Message messages={msg} />
 
     return (
       <div className="BoardContainer">
         <div className="ResetPseudo">
           <div className="Board">{rows}</div>
+          {this.renderAlert()}
+          {this.renderConnector()}
         </div>
-        {alert}
       </div>
     )
+  }
+
+  renderAlert() {
+    const msg = this.props.store!.messages
+    if (msg.length === 0) return undefined
+    return <Message messages={msg} />
+  }
+
+  renderConnector() {
+    const shouldRender = this.props.store!.engineState.state === Connecting
+    if (!shouldRender) return undefined
+    return <Connector />
   }
 }

@@ -8,7 +8,11 @@ import pushMove from '../lib/kif-handler/pushMove'
 import getTargets from '../lib/validatior/getTargets'
 import { find } from '../lib/validatior/utils/algorithm'
 import filterTargets from '../lib/validatior/utils/filterTargets'
-import EngineState, { newEngineState } from '../model/engine/EngineState'
+import EngineState, {
+  Connecting,
+  newEngineState,
+  NotConnected,
+} from '../model/engine/EngineState'
 import { ClickProps } from '../model/events/ClickProps'
 import MoveProps from '../model/events/MoveProps'
 import Kif, { newKif } from '../model/kif/Kif'
@@ -35,8 +39,14 @@ export interface Store extends GameState {
 
   // alert の代わり。パネルが表示される
   messages: string[]
-  pushMessages(msgs: string[]): void
+  setMessages(msgs: string[]): void
   clearMessages(): void
+
+  engineState: EngineState
+
+  connectEngine(): void
+  disconnectEngine(): void
+  setEngineNames(names: string[]): void
 }
 
 export default class GameStateStore implements Store {
@@ -162,12 +172,24 @@ export default class GameStateStore implements Store {
     this.moveTargets = []
   }
 
-  @action pushMessages(msgs: string[]): void {
+  @action setMessages(msgs: string[]): void {
     this.messages = msgs
   }
 
   @action clearMessages(): void {
     this.messages = []
+  }
+
+  @action connectEngine(): void {
+    this.engineState.state = Connecting
+  }
+
+  @action disconnectEngine(): void {
+    this.engineState.state = NotConnected
+  }
+
+  @action setEngineNames(names: string[]): void {
+    this.engineState.names = name
   }
 }
 

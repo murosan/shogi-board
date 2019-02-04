@@ -15,7 +15,6 @@ export interface Props {
 @observer
 export default class Connector extends Component<Props> {
   render() {
-    this.setNames()
     const state: EngineState = this.props.store!.engineState
     const names = state.names.map((n, i) => (
       <div className="EngineName" key={i}>
@@ -25,7 +24,7 @@ export default class Connector extends Component<Props> {
     return <div className="ConnectorBoard">{names}</div>
   }
 
-  setNames() {
+  componentWillMount() {
     const req = newRequest()
     client().getEngineNames(req, {}, (err: Error, res: EngineNames) => {
       if (err) {

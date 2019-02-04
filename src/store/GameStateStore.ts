@@ -189,7 +189,7 @@ export default class GameStateStore implements Store {
   }
 
   @action setEngineNames(names: string[]): void {
-    this.engineState.names = name
+    this.engineState.names = names
   }
 }
 

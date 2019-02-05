@@ -1,0 +1,10 @@
+version: '3'
+services:
+  front:
+    build: .
+    volumes:
+      - ./:/src/shogi-board/
+      - /src/shogi-board/node_modules
+    ports:
+      - '3000:3000'
+    container_name: 'shogi-board-front'

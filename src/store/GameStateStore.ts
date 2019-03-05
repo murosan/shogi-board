@@ -8,11 +8,7 @@ import pushMove from '../lib/kif-handler/pushMove'
 import getTargets from '../lib/validatior/getTargets'
 import { find } from '../lib/validatior/utils/algorithm'
 import filterTargets from '../lib/validatior/utils/filterTargets'
-import EngineState, {
-  Connecting,
-  newEngineState,
-  NotConnected,
-} from '../model/engine/EngineState'
+import EngineState, { newEngineState } from '../model/engine/EngineState'
 import { ClickProps } from '../model/events/ClickProps'
 import MoveProps from '../model/events/MoveProps'
 import Kif, { newKif } from '../model/kif/Kif'
@@ -23,6 +19,8 @@ import { Piece } from '../model/shogi/Piece'
 import Point from '../model/shogi/Point'
 import Position from '../model/shogi/Position'
 import { Turn } from '../model/shogi/Turn'
+import { PbClient } from '../proto/factory'
+import { Options } from '../proto/v1_pb'
 
 export interface Store extends GameState {
   // 棋譜の現在表示局面を返す
@@ -44,9 +42,13 @@ export interface Store extends GameState {
 
   engineState: EngineState
 
-  connectEngine(): void
-  disconnectEngine(): void
-  setEngineNames(names: string[]): void
+  engineControllerIsVisible: boolean
+  showEngineController(): Promise<void>
+  closeEngineController(): Promise<void>
+
+  setEngineNames(names: string[]): Promise<void>
+  setCurrentEngine(name: string): Promise<void>
+  unsetCurrentEngine(): Promise<void>
 }
 
 export default class GameStateStore implements Store {
@@ -56,6 +58,7 @@ export default class GameStateStore implements Store {
   @observable moveTargets: Point[] = []
   @observable kif: Kif = newKif()
   @observable engineState: EngineState = newEngineState()
+  @observable engineControllerIsVisible: boolean = false
   @observable messages: string[] = []
 
   @computed get currentMove(): Move {
@@ -180,16 +183,34 @@ export default class GameStateStore implements Store {
     this.messages = []
   }
 
-  @action connectEngine(): void {
-    this.engineState.state = Connecting
+  @action async showEngineController(): Promise<void> {
+    this.engineControllerIsVisible = true
   }
 
-  @action disconnectEngine(): void {
-    this.engineState.state = NotConnected
+  @action async closeEngineController(): Promise<void> {
+    this.engineControllerIsVisible = false
   }
 
-  @action setEngineNames(names: string[]): void {
+  @action async setEngineNames(names: string[]): Promise<void> {
     this.engineState.names = names
+  }
+
+  @action async setCurrentEngine(name: string): Promise<void> {
+    const client: PbClient = new PbClient(name)
+    try {
+      await client.connect()
+      const options: Options = await client.getOptions()
+      this.engineState.current = name
+      // this.engineState.options = options
+    } catch (e) {
+      console.error('Failed to connect', e)
+      alert('接続に失敗しました') // TODO
+    }
+  }
+
+  @action async unsetCurrentEngine(): Promise<void> {
+    this.engineState.current = undefined
+    this.engineState.options = undefined
   }
 }
 

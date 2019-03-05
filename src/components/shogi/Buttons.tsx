@@ -81,6 +81,6 @@ export default class Buttons extends Component<Props> {
       return
     }
 
-    this.props.store!.connectEngine()
+    this.props.store!.showEngineController()
   }
 }

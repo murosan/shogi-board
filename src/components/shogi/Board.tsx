@@ -1,8 +1,7 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { Connecting } from '../../model/engine/EngineState'
 import { Store } from '../../store/GameStateStore'
-import Connector from '../engine/Connector'
+import Controller from '../engine/Controller'
 import Message from '../util/Message'
 import './Board.scss'
 import Cell from './Cell'
@@ -35,14 +34,13 @@ export default class Board extends Component<Props> {
   }
 
   renderAlert() {
+    // TODO: なくす
     const msg = this.props.store!.messages
-    if (msg.length === 0) return undefined
-    return <Message messages={msg} />
+    if (msg.length !== 0) return <Message messages={msg} />
   }
 
   renderConnector() {
-    const shouldRender = this.props.store!.engineState.state === Connecting
-    if (!shouldRender) return undefined
-    return <Connector />
+    const shouldRender = this.props.store!.engineControllerIsVisible
+    if (shouldRender) return <Controller />
   }
 }

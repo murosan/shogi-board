@@ -1,4 +1,4 @@
-import { Result } from '../../proto/v1_pb'
+import { Result, Options } from '../../proto/v1_pb'
 
 export type State = number
 
@@ -13,6 +13,8 @@ export default interface EngineState {
   names: string[]
   // 接続中のエンジン
   current?: string
+
+  options?: Options
 
   state: State
 

@@ -1,0 +1,10 @@
+@import '../../../styles/colors';
+@import '../../../styles/modules';
+
+.EngineName {
+  @include flexCenter;
+  background-color: aliceblue;
+  width: 100%;
+  height: 3em;
+  margin: 2px;
+}

@@ -8,7 +8,8 @@ import pushMove from '../lib/kif-handler/pushMove'
 import getTargets from '../lib/validatior/getTargets'
 import { find } from '../lib/validatior/utils/algorithm'
 import filterTargets from '../lib/validatior/utils/filterTargets'
-import EngineState, { newEngineState } from '../model/engine/EngineState'
+import { EngineState } from '../model/engine/EngineState'
+import { Options } from '../model/engine/Optoin'
 import { ClickProps } from '../model/events/ClickProps'
 import MoveProps from '../model/events/MoveProps'
 import Kif, { newKif } from '../model/kif/Kif'
@@ -19,8 +20,7 @@ import { Piece } from '../model/shogi/Piece'
 import Point from '../model/shogi/Point'
 import Position from '../model/shogi/Position'
 import { Turn } from '../model/shogi/Turn'
-import { PbClient } from '../proto/factory'
-import { Options } from '../proto/v1_pb'
+import { ShogiBoardClient } from '../proto/factory'
 
 export interface Store extends GameState {
   // 棋譜の現在表示局面を返す
@@ -57,7 +57,7 @@ export default class GameStateStore implements Store {
   @observable confirm: Confirm | undefined = undefined
   @observable moveTargets: Point[] = []
   @observable kif: Kif = newKif()
-  @observable engineState: EngineState = newEngineState()
+  @observable engineState: EngineState = new EngineState()
   @observable engineControllerIsVisible: boolean = false
   @observable messages: string[] = []
 
@@ -196,12 +196,12 @@ export default class GameStateStore implements Store {
   }
 
   @action async setCurrentEngine(name: string): Promise<void> {
-    const client: PbClient = new PbClient(name)
+    const client: ShogiBoardClient = new ShogiBoardClient(name)
     try {
       await client.connect()
       const options: Options = await client.getOptions()
       this.engineState.current = name
-      // this.engineState.options = options
+      this.engineState.options = options
     } catch (e) {
       console.error('Failed to connect', e)
       alert('接続に失敗しました') // TODO

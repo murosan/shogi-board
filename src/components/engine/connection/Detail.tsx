@@ -1,6 +1,6 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import EngineState from '../../../model/engine/EngineState'
+import { EngineState } from '../../../model/engine/EngineState'
 import { Store } from '../../../store/GameStateStore'
 import './Detail.scss'
 
@@ -17,7 +17,7 @@ export default class Detail extends Component<Props> {
     return (
       <div className="DetailContainer">
         <div>{es.current}</div>
-        <div>{es.options}</div>
+        <div>{JSON.stringify(es.options)}</div>
       </div>
     )
   }

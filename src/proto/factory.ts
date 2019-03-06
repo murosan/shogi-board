@@ -1,12 +1,21 @@
 import { Error } from 'grpc-web'
 import { config } from '../config/Config'
-import * as Pos from '../model/shogi/Position'
-import { ShogiBoardClient } from './V1ServiceClientPb'
+import {
+  Options,
+  Button,
+  Check,
+  Spin,
+  Select,
+  String,
+  Filename,
+} from '../model/engine/Optoin'
+import Position from '../model/shogi/Position'
+import { ShogiBoardClient as PbClient } from './V1ServiceClientPb'
 import {
   EngineName,
   EngineNames,
-  Options,
-  Position,
+  Options as PbOptions,
+  Position as PbPosition,
   Request,
   Response,
   Result,
@@ -17,12 +26,12 @@ import {
 /**
  * ShogiBoardClient の非同期ラッパー
  */
-export class PbClient {
+export class ShogiBoardClient {
   _engineName?: string
-  client: ShogiBoardClient
+  client: PbClient
   constructor(engineName?: string) {
     this._engineName = engineName
-    this.client = new ShogiBoardClient(serverURL(), {}, {})
+    this.client = new PbClient(serverURL(), {}, {})
   }
 
   set engineName(name: string) {
@@ -50,9 +59,65 @@ export class PbClient {
   async getOptions(): Promise<Options> {
     const en: EngineName = await this.getEngineName()
     return new Promise((resolve, reject) => {
-      this.client.getOptions(en, {}, (err: Error, res: Options) => {
+      this.client.getOptions(en, {}, (err: Error, res: PbOptions) => {
         if (err) reject(err)
-        resolve(res)
+        const buttons: Map<string, Button> = new Map()
+        const checks: Map<string, Check> = new Map()
+        const spins: Map<string, Spin> = new Map()
+        const selects: Map<string, Select> = new Map()
+        const strings: Map<string, String> = new Map()
+        const filenames: Map<string, Filename> = new Map()
+        const obj: any = res.toObject()
+        // FIXME: なぜか、.d.ts を見ると buttonsMap が buttonsList になってるっぽい..
+        obj.buttonsMap.forEach((b: any) =>
+          buttons.set(b[0], new Button(b[1].name))
+        )
+        obj.checksMap.forEach((v: any) => {
+          const props = v[1]
+          const c = new Check(props.name, props.val, props.pb_default)
+          checks.set(props.name, c)
+        })
+        obj.spinsMap.forEach((v: any) => {
+          const props = v[1]
+          const s = new Spin(
+            props.name,
+            props.val,
+            props.pb_default,
+            props.min,
+            props.max
+          )
+          spins.set(props.name, s)
+        })
+        obj.selectsMap.forEach((v: any) => {
+          const props = v[1]
+          const s = new Select(
+            props.name,
+            props.val,
+            props.pb_default,
+            props.vars
+          )
+          selects.set(props.name, s)
+        })
+        obj.stringsMap.forEach((v: any) => {
+          const props = v[1]
+          const s = new String(props.name, props.val, props.pb_default)
+          strings.set(props.name, s)
+        })
+        obj.filenamesMap.forEach((v: any) => {
+          const props = v[1]
+          const f = new Filename(props.name, props.val, props.pb_default)
+          strings.set(props.name, f)
+        })
+
+        const opts: Options = {
+          buttons,
+          checks,
+          spins,
+          selects,
+          strings,
+          filenames,
+        }
+        resolve(opts)
       })
     })
   }
@@ -97,9 +162,9 @@ export class PbClient {
     })
   }
 
-  async setPosition(pos: Pos.default): Promise<void> {
+  async setPosition(pos: Position): Promise<void> {
     const en: EngineName = await this.getEngineName()
-    const p: Position = new Position()
+    const p: PbPosition = new PbPosition()
     p.setTurn(pos.turn)
     p.setMovecount(pos.moveCount)
     p.setCap0List(pos.cap0)

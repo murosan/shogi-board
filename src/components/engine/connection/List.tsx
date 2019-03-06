@@ -1,6 +1,6 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { PbClient } from '../../../proto/factory'
+import { ShogiBoardClient } from '../../../proto/factory'
 import { Store } from '../../../store/GameStateStore'
 import './List.scss'
 
@@ -28,7 +28,7 @@ export default class List extends Component<Props> {
   }
 
   componentWillMount() {
-    new PbClient()
+    new ShogiBoardClient()
       .initialize()
       .then((list: string[]) => this.props.store!.setEngineNames(list))
       .catch(err => {

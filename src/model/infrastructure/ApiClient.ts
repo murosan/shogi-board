@@ -1,5 +1,5 @@
 import Position from '../shogi/Position'
-import Result from '../engine/Result'
+import { Result } from '../engine/Result'
 
 // gRPC とか迷っている
 // docker 周り整備したら移行すると思う

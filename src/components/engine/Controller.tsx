@@ -1,10 +1,10 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import EngineState from '../../model/engine/EngineState'
+import { EngineState } from '../../model/engine/EngineState'
 import { Store } from '../../store/GameStateStore'
+import Detail from './connection/Detail'
 import List from './connection/List'
 import './Controller.scss'
-import Detail from './connection/Detail'
 
 export interface Props {
   store?: Store

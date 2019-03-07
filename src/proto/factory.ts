@@ -69,44 +69,31 @@ export class ShogiBoardClient {
         const filenames: Map<string, Filename> = new Map()
         const obj: any = res.toObject()
         // FIXME: なぜか、.d.ts を見ると buttonsMap が buttonsList になってるっぽい..
-        obj.buttonsMap.forEach((b: any) =>
-          buttons.set(b[0], new Button(b[1].name))
-        )
+        obj.buttonsMap.forEach((b: any) => buttons.set(b[0], new Button(b[0])))
         obj.checksMap.forEach((v: any) => {
-          const props = v[1]
-          const c = new Check(props.name, props.val, props.pb_default)
-          checks.set(props.name, c)
+          const { name, val, pb_default } = v[1]
+          const c = new Check(name, val, pb_default)
+          checks.set(name, c)
         })
         obj.spinsMap.forEach((v: any) => {
-          const props = v[1]
-          const s = new Spin(
-            props.name,
-            props.val,
-            props.pb_default,
-            props.min,
-            props.max
-          )
-          spins.set(props.name, s)
+          const { name, val, pb_default, min, max } = v[1]
+          const s = new Spin(name, val, pb_default, min, max)
+          spins.set(name, s)
         })
         obj.selectsMap.forEach((v: any) => {
-          const props = v[1]
-          const s = new Select(
-            props.name,
-            props.val,
-            props.pb_default,
-            props.vars
-          )
-          selects.set(props.name, s)
+          const { name, val, pb_default, vars } = v[1]
+          const s = new Select(name, val, pb_default, vars)
+          selects.set(name, s)
         })
         obj.stringsMap.forEach((v: any) => {
-          const props = v[1]
-          const s = new String(props.name, props.val, props.pb_default)
-          strings.set(props.name, s)
+          const { name, val, pb_default } = v[1]
+          const s = new String(name, val, pb_default)
+          strings.set(name, s)
         })
         obj.filenamesMap.forEach((v: any) => {
-          const props = v[1]
-          const f = new Filename(props.name, props.val, props.pb_default)
-          strings.set(props.name, f)
+          const { name, val, pb_default } = v[1]
+          const f = new Filename(name, val, pb_default)
+          filenames.set(name, f)
         })
 
         const opts: Options = {

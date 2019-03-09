@@ -27,38 +27,38 @@
     "@types/clipboard": "^2.0.1",
     "@types/enzyme": "^3.1.15",
     "@types/enzyme-adapter-react-16": "^1.0.3",
-    "@types/jest": "23.3.11",
-    "@types/node": "10.12.18",
-    "@types/react": "16.7.18",
-    "@types/react-dom": "16.0.11",
+    "@types/jest": "^23.3.14",
+    "@types/node": "^11.10.5",
+    "@types/react": "^16.8.7",
+    "@types/react-dom": "^16.8.2",
     "clipboard": "^2.0.4",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
-    "google-protobuf": "^3.7.0-rc.2",
+    "google-protobuf": "3.7.0",
     "grpc-web": "1.0.3",
     "husky": "1.3.1",
-    "jest": "^23.6.0",
+    "jest": "23.6.0",
     "lint-staged": "^8.1.0",
-    "mobx": "^5.8.0",
-    "mobx-react": "^5.4.3",
-    "node-sass": "^4.11.0",
-    "prettier": "^1.15.3",
-    "react": "16.6.3",
-    "react-dom": "16.6.3",
-    "react-scripts": "2.1.3",
+    "mobx": "5.9.0",
+    "mobx-react": "5.4.3",
+    "node-sass": "4.11.0",
+    "prettier": "1.16.4",
+    "react": "16.8.4",
+    "react-dom": "16.8.4",
+    "react-scripts": "2.1.8",
     "react-test-renderer": "^16.7.0",
-    "source-map-explorer": "^1.6.0",
     "ts-jest": "^23.10.5",
-    "typescript": "3.2.2"
+    "typescript": "3.3.3333"
   },
   "devDependencies": {
     "codecov": "^3.1.0",
-    "gh-pages": "^2.0.1"
+    "gh-pages": "^2.0.1",
+    "source-map-explorer": "1.7.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "./scripts/deploy.sh",
+    "deploy": "scripts/deploy.sh",
     "test": "react-scripts test",
     "test:c": "react-scripts test --coverage",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
@@ -87,6 +87,7 @@
     "collectCoverageFrom": [
       "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
       "!<rootDir>/src/index.tsx",
+      "!<rootDir>/src/config/*.js",
       "!<rootDir>/src/serviceWorker.ts"
     ]
   }

@@ -4,15 +4,17 @@
 $baseZIndex: 1000;
 
 .ControllerBoard {
-  display: flex;
-  flex-direction: column;
+  margin: auto;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+  background-color: #f4f7f8; // TODO 色
+  overflow: auto;
+  z-index: $baseZIndex;
+
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
   width: 90%;
-  height: 90%;
-  background-color: $FontColor;
-  z-index: $baseZIndex;
-  overflow: hidden;
+  height: 92%;
   padding: 5%;
 }

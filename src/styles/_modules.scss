@@ -34,3 +34,22 @@
     display: none;
   }
 }
+
+@mixin button($color) {
+  display: block;
+  height: 35px;
+  color: $color;
+  padding: 0.2em 1em;
+  text-decoration: none;
+  border: solid 1px $color;
+  border-radius: 3px;
+  transition: 0.2s;
+  font-size: 0.9em;
+  font-family: inherit;
+  outline: 0;
+  background-color: white;
+  &:hover {
+    background: $color;
+    color: white;
+  }
+}

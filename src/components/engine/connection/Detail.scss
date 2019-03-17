@@ -2,5 +2,24 @@
 @import '../../../styles/modules';
 
 .DetailContainer {
-  color: $White;
+  color: $FontColor;
+}
+
+.DetailContainer .EngineName {
+  height: 1.7em;
+  font-size: 1.5em;
+}
+
+.DetailContainer .OptionType {
+  line-height: 1.5;
+  font-size: 1.2em;
+  margin: {
+    top: 2em;
+    bottom: 1em;
+  }
+  &::before {
+    content: '●';
+    color: $GreenSelected;
+    margin-right: 8px;
+  }
 }

@@ -1,0 +1,22 @@
+@import '../../../../styles/colors';
+@import '../../../../styles/modules';
+
+.OptionButton button {
+  width: 100%;
+  overflow: hidden;
+}
+
+.OptionButton .ButtonApply {
+  @include button(darken($GreenSelected, 10%)); // #1abc9c
+  margin-bottom: 0.5em;
+  height: 35px;
+
+  &:active {
+    background-color: $White;
+  }
+}
+
+.ButtonDisconnect {
+  @include button(#ff4242);
+  width: 8em;
+}

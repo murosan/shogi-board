@@ -14,7 +14,7 @@ export default class List extends Component<Props> {
   render() {
     return this.props.store!.engineState.names.map((n, i) => (
       <div
-        className="EngineName"
+        className="ListEngineName"
         key={i}
         onClick={() => this.setCurrentEngine(n)}
       >

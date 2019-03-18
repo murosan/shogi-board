@@ -4,6 +4,7 @@ import { EngineState } from '../../../model/engine/EngineState'
 import { Store } from '../../../store/GameStateStore'
 import './Detail.scss'
 import Buttons from './form/Buttons'
+import Checks from './form/Checks'
 
 export interface Props {
   store?: Store
@@ -38,6 +39,12 @@ export default class Detail extends Component<Props> {
         </div>
         <div className="OptionContainer">
           <h3 className="OptionType">Check</h3>
+          <Checks
+            checks={checks}
+            onClick={(name: string, val: boolean) =>
+              this.updateCheck(name, val)
+            }
+          />
         </div>
         <div className="OptionContainer">
           <h3 className="OptionType">Range</h3>
@@ -58,5 +65,9 @@ export default class Detail extends Component<Props> {
 
   updateButton(name: string) {
     console.log('update button', name)
+  }
+
+  updateCheck(name: string, val: boolean) {
+    console.log('update check', name, val)
   }
 }

@@ -7,7 +7,7 @@ export interface Props {
   onChange: (name: string, val: number) => void
 }
 
-export default class Buttons extends Component<Props> {
+export default class Ranges extends Component<Props> {
   render() {
     return <div>{this.renderRanges()}</div>
   }

@@ -4,17 +4,17 @@
 $baseZIndex: 1000;
 
 .ControllerBoard {
-  margin: auto;
-  box-shadow: 0 0 100px rgba(0, 0, 0, 0.3);
-  background-color: #f4f7f8; // TODO 色
-  overflow: auto;
-  z-index: $baseZIndex;
-
   display: block;
   position: absolute;
   top: 0;
   left: 0;
   width: 90%;
-  height: 92%;
+  height: 91%;
   padding: 5%;
+  margin: auto;
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.3);
+  background-color: #f4f7f8; // TODO 色
+  border-radius: 0.25vw;
+  overflow: auto;
+  z-index: $baseZIndex;
 }

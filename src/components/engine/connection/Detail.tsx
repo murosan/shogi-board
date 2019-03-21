@@ -5,6 +5,7 @@ import { Store } from '../../../store/GameStateStore'
 import './Detail.scss'
 import Buttons from './form/Buttons'
 import Checks from './form/Checks'
+import Ranges from './form/Ranges'
 
 export interface Props {
   store?: Store
@@ -48,6 +49,12 @@ export default class Detail extends Component<Props> {
         </div>
         <div className="OptionContainer">
           <h3 className="OptionType">Range</h3>
+          <Ranges
+            ranges={spins}
+            onChange={(name: string, val: number) =>
+              this.updateRange(name, val)
+            }
+          />
         </div>
         <div className="OptionContainer">
           <h3 className="OptionType">Select</h3>
@@ -69,5 +76,17 @@ export default class Detail extends Component<Props> {
 
   updateCheck(name: string, val: boolean) {
     console.log('update check', name, val)
+  }
+
+  updateRange(name: string, val: number) {
+    console.log('update range', name, val)
+  }
+
+  updateString(name: string, val: string) {
+    console.log('update string', name, val)
+  }
+
+  updateFilename(name: string, val: string) {
+    console.log('update filename', name, val)
   }
 }

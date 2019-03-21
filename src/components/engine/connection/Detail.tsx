@@ -6,6 +6,7 @@ import './Detail.scss'
 import Buttons from './form/Buttons'
 import Checks from './form/Checks'
 import Ranges from './form/Ranges'
+import Selects from './form/Selects'
 
 export interface Props {
   store?: Store
@@ -58,6 +59,12 @@ export default class Detail extends Component<Props> {
         </div>
         <div className="OptionContainer">
           <h3 className="OptionType">Select</h3>
+          <Selects
+            selects={selects}
+            onChange={(name: string, val: string) =>
+              this.updateSelect(name, val)
+            }
+          />
         </div>
         <div className="OptionContainer">
           <h3 className="OptionType">String</h3>
@@ -80,6 +87,10 @@ export default class Detail extends Component<Props> {
 
   updateRange(name: string, val: number) {
     console.log('update range', name, val)
+  }
+
+  updateSelect(name: string, val: string) {
+    console.log('update select', name, val)
   }
 
   updateString(name: string, val: string) {

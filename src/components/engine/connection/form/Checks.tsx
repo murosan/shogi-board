@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { Check as OptionCheck } from '../../../../model/engine/Optoin'
 import './Checks.scss'
@@ -7,47 +8,42 @@ export interface Props {
   onClick: (name: string, val: boolean) => void
 }
 
+@observer
 export default class Checks extends Component<Props> {
   render() {
-    return <div>{this.renderButtons()}</div>
+    return <div>{this.renderChecks()}</div>
   }
 
-  renderButtons() {
-    const elms: JSX.Element[] = []
+  private renderChecks(): JSX.Element[] {
     const values = this.props.checks.values()
+    return Array.from(values).map((option: OptionCheck, i: number) => {
+      const id: string = `OptionCheck${option.name}`
+      return this.renderCheck(i, id, option)
+    })
+  }
 
-    let { value } = values.next()
-    let i = 0
-    while (value) {
-      const name: string = value.name
-      const val: boolean = value.val
-      const id: string = `OptionCheck${name}`
-
-      elms.push(
-        <div key={i} className="OptionCheck">
-          <span>{name}</span>
-          <div className="OptionCheckToggle">
-            <input
-              id={id}
-              type="checkbox"
-              onChange={e => this.props.onClick(name, e.target.checked)}
-              checked={val}
+  private renderCheck(i: number, id: string, option: OptionCheck): JSX.Element {
+    const { name, val } = option
+    return (
+      <div key={i} className="OptionCheck">
+        <span>{name}</span>
+        <div className="OptionCheckToggle">
+          <input
+            id={id}
+            name={id}
+            type="checkbox"
+            onChange={e => option.setValue(e.target.checked)}
+            checked={val}
+          />
+          <label htmlFor={id}>
+            <div
+              className="ToggleSwitch"
+              data-checked="ON"
+              data-unchecked="OFF"
             />
-            <label htmlFor={id}>
-              <div
-                className="ToggleSwitch"
-                data-checked="On"
-                data-unchecked="Off"
-              />
-            </label>
-          </div>
+          </label>
         </div>
-      )
-
-      i++
-      value = values.next().value
-    }
-
-    return elms
+      </div>
+    )
   }
 }

@@ -1,9 +1,9 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
 import {
+  Connecting,
   EngineState,
   NotConnected,
-  Connecting,
 } from '../../model/engine/EngineState'
 import { Store } from '../../store/GameStateStore'
 import Detail from './connection/Detail'

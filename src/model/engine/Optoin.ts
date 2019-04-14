@@ -1,30 +1,38 @@
-import { observable } from 'mobx'
+import { observable, action } from 'mobx'
 
-class Option {
+interface Option<T> {
+  readonly name: string
+  setValue(value: T): void
+}
+
+export class Button implements Option<any> {
   readonly name: string
   constructor(name: string) {
     this.name = name
   }
+
+  setValue(_: any): void {}
 }
 
-export class Button extends Option {
-  constructor(name: string) {
-    super(name)
-  }
-}
-
-export class Check extends Option {
+export class Check implements Option<boolean> {
   @observable val: boolean
+  readonly name: string
   readonly default: boolean
   constructor(name: string, val: boolean, initial: boolean) {
-    super(name)
+    this.name = name
     this.val = val
     this.default = initial
   }
+
+  @action setValue(value: boolean): void {
+    this.val = value
+  }
 }
 
-export class Spin extends Option {
+export class Spin implements Option<string> {
   @observable val: number
+  @observable inputValue: string
+  readonly name: string
   readonly default: number
   readonly min: number
   readonly max: number
@@ -35,33 +43,51 @@ export class Spin extends Option {
     min: number,
     max: number
   ) {
-    super(name)
+    this.name = name
     this.val = val
+    this.inputValue = val.toString()
     this.default = initial
     this.min = min
     this.max = max
   }
+
+  @action setValue(value: string): void {
+    this.inputValue = value
+    const n: number = Number(this.inputValue)
+    if (Number.isNaN(n) || n < this.min || n > this.max) return
+    this.val = n
+  }
 }
 
-export class Select extends Option {
+export class Select implements Option<string> {
   @observable val: string
+  readonly name: string
   readonly default: string
   readonly vars: string[]
   constructor(name: string, val: string, initial: string, vars: string[]) {
-    super(name)
+    this.name = name
     this.val = val
     this.default = initial
     this.vars = vars
   }
+
+  @action setValue(value: string) {
+    this.val = value
+  }
 }
 
-class Str extends Option {
+class Str implements Option<string> {
   @observable val: string
+  readonly name: string
   readonly default: string
   constructor(name: string, val: string, initial: string) {
-    super(name)
+    this.name = name
     this.val = val
     this.default = initial
+  }
+
+  @action setValue(value: string) {
+    this.val = value
   }
 }
 

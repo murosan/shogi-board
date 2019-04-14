@@ -1,5 +1,6 @@
 .SelectContainer {
   color: rgba(0, 0, 0, 0.67);
+  letter-spacing: 0.05em;
 }
 
 .OptionSelect {
@@ -11,6 +12,7 @@
     width: 100%;
     padding-right: 1em;
     font-size: 1em;
+    letter-spacing: 0.05em;
     text-indent: 0.01px;
     text-overflow: ellipsis;
     border: none;

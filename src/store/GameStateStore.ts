@@ -8,7 +8,12 @@ import pushMove from '../lib/kif-handler/pushMove'
 import getTargets from '../lib/validatior/getTargets'
 import { find } from '../lib/validatior/utils/algorithm'
 import filterTargets from '../lib/validatior/utils/filterTargets'
-import { EngineState } from '../model/engine/EngineState'
+import {
+  Connected,
+  Connecting,
+  EngineState,
+  NotConnected,
+} from '../model/engine/EngineState'
 import { Options } from '../model/engine/Optoin'
 import { ClickProps } from '../model/events/ClickProps'
 import MoveProps from '../model/events/MoveProps'
@@ -197,20 +202,31 @@ export default class GameStateStore implements Store {
 
   @action async setCurrentEngine(name: string): Promise<void> {
     const client: ShogiBoardClient = new ShogiBoardClient(name)
+    const setToConnecting = () => {
+      this.engineState.state = Connecting
+      this.engineState.current = name
+    }
+    const setToConnected = (options: Options) => {
+      this.engineState.options = options
+      this.engineState.state = Connected
+    }
+
     try {
+      setToConnecting()
       await client.connect()
       const options: Options = await client.getOptions()
-      this.engineState.current = name
-      this.engineState.options = options
+      setToConnected(options)
     } catch (e) {
       console.error('Failed to connect', e)
       alert('接続に失敗しました') // TODO
+      this.unsetCurrentEngine()
     }
   }
 
   @action async unsetCurrentEngine(): Promise<void> {
     this.engineState.current = undefined
     this.engineState.options = undefined
+    this.engineState.state = NotConnected
   }
 }
 

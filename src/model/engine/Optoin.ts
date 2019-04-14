@@ -1,7 +1,7 @@
 import { observable } from 'mobx'
 
 class Option {
-  name: string
+  readonly name: string
   constructor(name: string) {
     this.name = name
   }
@@ -15,7 +15,7 @@ export class Button extends Option {
 
 export class Check extends Option {
   @observable val: boolean
-  default: boolean
+  readonly default: boolean
   constructor(name: string, val: boolean, initial: boolean) {
     super(name)
     this.val = val
@@ -25,9 +25,9 @@ export class Check extends Option {
 
 export class Spin extends Option {
   @observable val: number
-  default: number
-  min: number
-  max: number
+  readonly default: number
+  readonly min: number
+  readonly max: number
   constructor(
     name: string,
     val: number,
@@ -45,8 +45,8 @@ export class Spin extends Option {
 
 export class Select extends Option {
   @observable val: string
-  default: string
-  vars: string[]
+  readonly default: string
+  readonly vars: string[]
   constructor(name: string, val: string, initial: string, vars: string[]) {
     super(name)
     this.val = val
@@ -57,7 +57,7 @@ export class Select extends Option {
 
 class Str extends Option {
   @observable val: string
-  default: string
+  readonly default: string
   constructor(name: string, val: string, initial: string) {
     super(name)
     this.val = val

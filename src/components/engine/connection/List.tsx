@@ -3,6 +3,12 @@ import React, { Component } from 'react'
 import { ShogiBoardClient } from '../../../proto/factory'
 import { Store } from '../../../store/GameStateStore'
 import './List.scss'
+import {
+  Connecting,
+  State,
+  NotConnected,
+} from '../../../model/engine/EngineState'
+import Loader from '../../util/Loader'
 
 export interface Props {
   store?: Store
@@ -12,18 +18,26 @@ export interface Props {
 @observer
 export default class List extends Component<Props> {
   render() {
-    return this.props.store!.engineState.names.map((n, i) => (
-      <div
-        className="ListEngineName"
-        key={i}
-        onClick={() => this.setCurrentEngine(n)}
-      >
-        {n}
-      </div>
-    ))
+    const { names, current, state } = this.props.store!.engineState
+    return names.map((name, i) => {
+      const isCurrent: boolean = name === current
+      const loading: boolean = isCurrent && state === Connecting
+      const loader = loading ? <Loader /> : undefined
+      return (
+        <div
+          className="ListEngineName"
+          key={i}
+          onClick={() => this.setCurrentEngine(name, state)}
+        >
+          {loader}
+          <span>{name}</span>
+        </div>
+      )
+    })
   }
 
-  async setCurrentEngine(name: string): Promise<void> {
+  async setCurrentEngine(name: string, state: State): Promise<void> {
+    if (state !== NotConnected) return
     this.props.store!.setCurrentEngine(name)
   }
 

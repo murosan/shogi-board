@@ -4,10 +4,15 @@ import { Result } from './Result'
 
 export type State = number
 
+// 接続前
 export const NotConnected: State = 0
+// 接続中・ローディング中のComponentを表示するため
 export const Connecting: State = 1
+// 接続済
 export const Connected: State = 2
+// 将棋エンジン、待機中(思考中ではない)
 export const StandBy: State = 3
+// 将棋エンジン思考中
 export const Thinking: State = 4
 
 export class EngineState {

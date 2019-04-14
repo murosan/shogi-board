@@ -1,6 +1,10 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { EngineState } from '../../model/engine/EngineState'
+import {
+  EngineState,
+  NotConnected,
+  Connecting,
+} from '../../model/engine/EngineState'
 import { Store } from '../../store/GameStateStore'
 import Detail from './connection/Detail'
 import List from './connection/List'
@@ -24,7 +28,7 @@ export default class Controller extends Component<Props> {
   }
 
   renderChildPanel(s: EngineState) {
-    if (s.current === undefined) return <List />
+    if (s.state === NotConnected || s.state === Connecting) return <List />
     return <Detail />
   }
 }

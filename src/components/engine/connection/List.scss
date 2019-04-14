@@ -4,6 +4,7 @@
 .ListEngineName {
   @include flexCenter;
   color: $FontColor;
+  position: relative;
   width: 100%;
   height: 3em;
   margin: 2px;
@@ -12,4 +13,12 @@
   &:hover {
     background-color: $GrayHover;
   }
+}
+
+.ListEngineName .Loader {
+  position: absolute;
+  top: 0.2em;
+  left: 15px;
+  margin: 0;
+  padding: 0;
 }

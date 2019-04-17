@@ -7,6 +7,7 @@ import Buttons from './form/Buttons'
 import Checks from './form/Checks'
 import Ranges from './form/Ranges'
 import Selects from './form/Selects'
+import Text from './form/Text'
 
 export interface Props {
   store?: Store
@@ -20,7 +21,6 @@ export default class Detail extends Component<Props> {
     if (!current || !options) return <div />
 
     const { buttons, checks, spins, selects, strings, filenames } = options
-    // TODO
     return (
       <div className="DetailContainer">
         <h1 className="EngineName">{current}</h1>
@@ -34,40 +34,23 @@ export default class Detail extends Component<Props> {
         </div>
         <div className="OptionContainer">
           <h3 className="OptionType">Button</h3>
-          <Buttons
-            buttons={buttons}
-            onClick={name => this.updateButton(name)}
-          />
+          <Buttons buttons={buttons} />
         </div>
         <div className="OptionContainer">
           <h3 className="OptionType">Check</h3>
-          <Checks
-            checks={checks}
-            onClick={(name: string, val: boolean) =>
-              this.updateCheck(name, val)
-            }
-          />
+          <Checks checks={checks} />
         </div>
         <div className="OptionContainer">
           <h3 className="OptionType">Range</h3>
-          <Ranges
-            ranges={spins}
-            onChange={(name: string, val: number) =>
-              this.updateRange(name, val)
-            }
-          />
+          <Ranges ranges={spins} />
         </div>
         <div className="OptionContainer">
           <h3 className="OptionType">Select</h3>
-          <Selects
-            selects={selects}
-            onChange={(name: string, val: string) =>
-              this.updateSelect(name, val)
-            }
-          />
+          <Selects selects={selects} />
         </div>
         <div className="OptionContainer">
-          <h3 className="OptionType">String</h3>
+          <h3 className="OptionType">String・Filename</h3>
+          <Text strings={strings} filenames={filenames} />
         </div>
       </div>
     )
@@ -75,29 +58,5 @@ export default class Detail extends Component<Props> {
 
   disconnect() {
     console.log('disconnect')
-  }
-
-  updateButton(name: string) {
-    console.log('update button', name)
-  }
-
-  updateCheck(name: string, val: boolean) {
-    console.log('update check', name, val)
-  }
-
-  updateRange(name: string, val: number) {
-    console.log('update range', name, val)
-  }
-
-  updateSelect(name: string, val: string) {
-    console.log('update select', name, val)
-  }
-
-  updateString(name: string, val: string) {
-    console.log('update string', name, val)
-  }
-
-  updateFilename(name: string, val: string) {
-    console.log('update filename', name, val)
   }
 }

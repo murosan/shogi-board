@@ -1,12 +1,10 @@
+import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { Select as OptionSelect } from '../../../../model/engine/Optoin'
 import './Selects.scss'
-import { observer } from 'mobx-react'
-import { string } from 'prop-types'
 
 export interface Props {
   selects: Map<string, OptionSelect>
-  onChange: (name: string, val: string) => void
 }
 
 @observer
@@ -17,12 +15,10 @@ export default class Selects extends Component<Props> {
 
   private renderSelects(): JSX.Element[] {
     const values = this.props.selects.values()
-    return Array.from(values).map((option: OptionSelect, i: number) =>
-      this.renderSelect(i, option)
-    )
+    return Array.from(values).map(this.renderSelect)
   }
 
-  private renderSelect(key: number, option: OptionSelect): JSX.Element {
+  private renderSelect(option: OptionSelect, key: number): JSX.Element {
     const { name, val, vars } = option
     return (
       <div className="SelectContainer" key={key}>

@@ -76,7 +76,7 @@ export class Select implements Option<string> {
   }
 }
 
-class Str implements Option<string> {
+export class Str implements Option<string> {
   @observable val: string
   readonly name: string
   readonly default: string

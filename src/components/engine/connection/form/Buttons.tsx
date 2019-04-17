@@ -5,7 +5,6 @@ import './Buttons.scss'
 
 export interface Props {
   buttons: Map<string, OptionButton>
-  onClick: (name: string) => void
 }
 
 @observer
@@ -16,12 +15,10 @@ export default class Buttons extends Component<Props> {
 
   private renderButtons(): JSX.Element[] {
     const values = this.props.buttons.values()
-    return Array.from(values).map((option: OptionButton, i: number) =>
-      this.renderButton(i, option)
-    )
+    return Array.from(values).map(this.renderButton)
   }
 
-  private renderButton(key: number, option: OptionButton): JSX.Element {
+  private renderButton(option: OptionButton, key: number): JSX.Element {
     const name: string = option.name
     return (
       <button

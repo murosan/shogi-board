@@ -5,7 +5,6 @@ import './Text.scss'
 
 export interface Props {
   ranges: Map<string, OptionRange>
-  onChange: (name: string, val: number) => void
 }
 
 @observer
@@ -16,12 +15,10 @@ export default class Ranges extends Component<Props> {
 
   private renderRanges(): JSX.Element[] {
     const values = this.props.ranges.values()
-    return Array.from(values).map((option: OptionRange, i: number) =>
-      this.renderRange(i, option)
-    )
+    return Array.from(values).map(this.renderRange)
   }
 
-  private renderRange(key: number, option: OptionRange): JSX.Element {
+  private renderRange(option: OptionRange, key: number): JSX.Element {
     const { name, val, inputValue, min, max } = option
     // inputValue が Number && inRange のとき、 val に値をセットするようにしているため
     // val と inputValue が一致していれば正しい値

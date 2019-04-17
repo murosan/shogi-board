@@ -5,7 +5,6 @@ import './Checks.scss'
 
 export interface Props {
   checks: Map<string, OptionCheck>
-  onClick: (name: string, val: boolean) => void
 }
 
 @observer
@@ -16,16 +15,14 @@ export default class Checks extends Component<Props> {
 
   private renderChecks(): JSX.Element[] {
     const values = this.props.checks.values()
-    return Array.from(values).map((option: OptionCheck, i: number) => {
-      const id: string = `OptionCheck${option.name}`
-      return this.renderCheck(i, id, option)
-    })
+    return Array.from(values).map(this.renderCheck)
   }
 
-  private renderCheck(i: number, id: string, option: OptionCheck): JSX.Element {
+  private renderCheck(option: OptionCheck, key: number): JSX.Element {
     const { name, val } = option
+    const id: string = `OptionCheck${name}`
     return (
-      <div key={i} className="OptionCheck">
+      <div key={key} className="OptionCheck">
         <span>{name}</span>
         <div className="OptionCheckToggle">
           <input

@@ -1,14 +1,14 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { ShogiBoardClient } from '../../../proto/factory'
-import { Store } from '../../../store/GameStateStore'
-import './List.scss'
 import {
   Connecting,
-  State,
   NotConnected,
+  State,
 } from '../../../model/engine/EngineState'
+import { ShogiBoardClient } from '../../../proto/factory'
+import { Store } from '../../../store/GameStateStore'
 import Loader from '../../util/Loader'
+import './List.scss'
 
 export interface Props {
   store?: Store

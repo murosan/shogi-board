@@ -1,27 +1,42 @@
 import { Error } from 'grpc-web'
 import { config } from '../config/Config'
 import {
-  Options,
   Button,
   Check,
-  Spin,
-  Select,
-  String,
   Filename,
+  Options,
+  Select,
+  Spin,
+  String,
 } from '../model/engine/Optoin'
 import Position from '../model/shogi/Position'
 import { ShogiBoardClient as PbClient } from './V1ServiceClientPb'
 import {
+  Button as PbButton,
+  Check as PbCheck,
   EngineName,
   EngineNames,
+  Filename as PbFilename,
   Options as PbOptions,
   Position as PbPosition,
   Request,
   Response,
   Result,
   Row,
+  Select as PbSelect,
   SetPositionRequest,
+  Spin as PbSpin,
+  String as PbString,
+  UpdateButtonRequest,
+  UpdateCheckRequest,
+  UpdateFilenameRequest,
+  UpdateSelectRequest,
+  UpdateSpinRequest,
+  UpdateStringRequest,
 } from './v1_pb'
+import debounce from 'lodash.debounce'
+
+const DEBOUNCE_MILLIS = 1000
 
 /**
  * ShogiBoardClient の非同期ラッパー
@@ -29,9 +44,18 @@ import {
 export class ShogiBoardClient {
   _engineName?: string
   client: PbClient
+
+  updateSpin: (s: Spin) => Promise<void>
+  updateString: (s: String) => Promise<void>
+  updateFilename: (f: Filename) => Promise<void>
+
   constructor(engineName?: string) {
     this._engineName = engineName
     this.client = new PbClient(serverURL(), {}, {})
+
+    this.updateSpin = debounce(this.updateSpinImpl, DEBOUNCE_MILLIS)
+    this.updateString = debounce(this.updateStringImpl, DEBOUNCE_MILLIS)
+    this.updateFilename = debounce(this.updateFilenameImpl, DEBOUNCE_MILLIS)
   }
 
   set engineName(name: string) {
@@ -184,13 +208,92 @@ export class ShogiBoardClient {
     })
   }
 
-  // TODO
-  async updateButton(): Promise<void> {}
-  async updateCheck(): Promise<void> {}
-  async updateSpin(): Promise<void> {}
-  async updateSelect(): Promise<void> {}
-  async updateString(): Promise<void> {}
-  async updateFilename(): Promise<void> {}
+  async updateButton(b: Button): Promise<void> {
+    console.log('update button')
+    const en: EngineName = await this.getEngineName()
+    const btn: PbButton = new PbButton()
+    btn.setName(b.name)
+    const req: UpdateButtonRequest = new UpdateButtonRequest()
+    req.setEngine(en)
+    req.setButton(btn)
+    this.client.updateButton(req, {}, (err: Error, res: Response) => {
+      if (err) console.error(err)
+    })
+  }
+  async updateCheck(c: Check): Promise<void> {
+    console.log('update check', c.val)
+    const en: EngineName = await this.getEngineName()
+    const chk: PbCheck = new PbCheck()
+    chk.setName(c.name)
+    chk.setDefault(c.default)
+    chk.setVal(c.val)
+    const req: UpdateCheckRequest = new UpdateCheckRequest()
+    req.setEngine(en)
+    req.setCheck(chk)
+    this.client.updateCheck(req, {}, (err: Error, res: Response) => {
+      if (err) console.error(err)
+    })
+  }
+
+  private async updateSpinImpl(s: Spin): Promise<void> {
+    console.log('update spin', s.val)
+    const en: EngineName = await this.getEngineName()
+    const spn: PbSpin = new PbSpin()
+    spn.setName(s.name)
+    spn.setDefault(s.default)
+    spn.setMin(s.min)
+    spn.setMax(s.max)
+    spn.setVal(s.val)
+    const req: UpdateSpinRequest = new UpdateSpinRequest()
+    req.setEngine(en)
+    req.setSpin(spn)
+    this.client.updateSpin(req, {}, (err: Error, res: Response) => {
+      if (err) console.error(err)
+    })
+  }
+  async updateSelect(s: Select): Promise<void> {
+    console.log('update spin', s.val)
+    const en: EngineName = await this.getEngineName()
+    const sel: PbSelect = new PbSelect()
+    sel.setName(s.name)
+    sel.setDefault(s.default)
+    sel.setVarsList(s.vars)
+    sel.setVal(s.val)
+    const req: UpdateSelectRequest = new UpdateSelectRequest()
+    req.setEngine(en)
+    req.setSelect(sel)
+    this.client.updateSelect(req, {}, (err: Error, res: Response) => {
+      if (err) console.error(err)
+    })
+  }
+  private async updateStringImpl(s: String): Promise<void> {
+    console.log('update spin', s.val)
+    const en: EngineName = await this.getEngineName()
+    const str: PbString = new PbString()
+    str.setName(s.name)
+    str.setDefault(s.default)
+    str.setVal(s.val)
+    const req: UpdateStringRequest = new UpdateStringRequest()
+    req.setEngine(en)
+    req.setString(str)
+    this.client.updateString(req, {}, (err: Error, res: Response) => {
+      if (err) console.error(err)
+    })
+  }
+  private async updateFilenameImpl(f: Filename): Promise<void> {
+    console.log('update spin', f.val)
+    const en: EngineName = await this.getEngineName()
+    const fil: PbFilename = new PbFilename()
+    fil.setName(f.name)
+    fil.setDefault(f.default)
+    fil.setVal(f.val)
+    const req: UpdateFilenameRequest = new UpdateFilenameRequest()
+    req.setEngine(en)
+    req.setFilename(fil)
+    this.client.updateFilename(req, {}, (err: Error, res: Response) => {
+      if (err) console.error(err)
+    })
+  }
 
   private async getEngineName(): Promise<EngineName> {
     const en: EngineName = new EngineName()

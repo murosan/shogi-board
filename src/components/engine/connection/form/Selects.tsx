@@ -1,46 +1,22 @@
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { Select as OptionSelect } from '../../../../model/engine/Optoin'
+import { ShogiBoardClient } from '../../../../proto/factory'
+import Select from './Select'
 import './Selects.scss'
 
 export interface Props {
   selects: Map<string, OptionSelect>
+  sbclient: ShogiBoardClient
 }
 
 @observer
 export default class Selects extends Component<Props> {
   render() {
-    return <div>{this.renderSelects()}</div>
-  }
-
-  private renderSelects(): JSX.Element[] {
-    const values = this.props.selects.values()
-    return Array.from(values).map(this.renderSelect)
-  }
-
-  private renderSelect(option: OptionSelect, key: number): JSX.Element {
-    const { name, val, vars } = option
-    return (
-      <div className="SelectContainer" key={key}>
-        <label>{name}</label>
-        <div className="OptionSelect SelectTriangle">
-          <select
-            onChange={e => option.setValue(e.target.value)}
-            value={val}
-            required
-          >
-            {this.renderOptions(vars)}
-          </select>
-        </div>
-      </div>
-    )
-  }
-
-  private renderOptions(vars: string[]): JSX.Element[] {
-    return vars.map((value: string, i: number) => (
-      <option key={i} value={value}>
-        {value}
-      </option>
+    const values: OptionSelect[] = Array.from(this.props.selects.values())
+    const selects: JSX.Element[] = values.map((option, key) => (
+      <Select key={key} option={option} sbclient={this.props.sbclient} />
     ))
+    return <div>{selects}</div>
   }
 }

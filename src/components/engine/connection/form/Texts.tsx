@@ -2,12 +2,11 @@ import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 import {
   Filename as OptionFilename,
-  Str,
   String as OptionString,
 } from '../../../../model/engine/Optoin'
 import { ShogiBoardClient } from '../../../../proto/factory'
-import './Text.scss'
 import Text from './Text'
+import './Text.scss'
 
 export interface Props {
   strings: Map<string, OptionString>
@@ -32,8 +31,14 @@ export default class Texts extends Component<Props> {
 
     return (
       <div>
-        {strings}
-        {filenames}
+        <div className="OptionContainer">
+          <h3 className="OptionType">String</h3>
+          {strings}
+        </div>
+        <div className="OptionContainer">
+          <h3 className="OptionType">Filename</h3>
+          {filenames}
+        </div>
       </div>
     )
   }

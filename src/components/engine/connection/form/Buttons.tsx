@@ -18,6 +18,11 @@ export default class Buttons extends Component<Props> {
       <Button key={key} option={option} sbclient={this.props.sbclient} />
     ))
 
-    return <div className="OptionButton">{buttons}</div>
+    return (
+      <div className="OptionContainer">
+        <h3 className="OptionType">Button</h3>
+        <div className="OptionButton">{buttons}</div>
+      </div>
+    )
   }
 }

@@ -1,40 +1,43 @@
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
-import {
-  Filename as OptionFilename,
-  Str as OptionStr,
-  String as OptionString,
-} from '../../../../model/engine/Optoin'
+import { Spin as OptionRange } from '../../../../model/engine/Optoin'
 import { ShogiBoardClient } from '../../../../proto/factory'
 import './Text.scss'
 
 export interface Props {
-  option: OptionStr
+  option: OptionRange
   sbclient: ShogiBoardClient
 }
 
 @observer
-export default class Text extends Component<Props> {
+export default class Range extends Component<Props> {
   constructor(props: Props) {
     super(props)
     this.update = this.update.bind(this)
   }
 
   render(): JSX.Element {
-    const { name, val } = this.props.option
-    const className: string =
-      val !== '' ? 'OptionTextInput' : 'OptionTextInput OptionTextInvalid'
+    const { name, val, inputValue, min, max } = this.props.option
+    // inputValue が Number && inRange のとき、 val に値をセットするようにしているため
+    // val と inputValue が一致していれば正しい値
+    const isValid: boolean = val.toString() === inputValue
+    const className: string = isValid
+      ? 'OptionTextInput'
+      : 'OptionTextInput OptionTextInvalid'
+
     return (
       <div className="OptionText">
         <input
           className={className}
           type="text"
-          value={val}
+          value={inputValue}
           placeholder=" "
           onChange={this.update}
           required
+          min={min}
+          max={max}
         />
-        <label>{name}</label>
+        <label>{`${name}(${min}~${max})`}</label>
       </div>
     )
   }
@@ -42,7 +45,6 @@ export default class Text extends Component<Props> {
   private update(e: React.ChangeEvent<HTMLInputElement>): void {
     const { option, sbclient } = this.props
     option.setValue(e.target.value)
-    if (option instanceof OptionFilename) sbclient.updateFilename(option)
-    else if (option instanceof OptionString) sbclient.updateString(option)
+    sbclient.updateSpin(option)
   }
 }

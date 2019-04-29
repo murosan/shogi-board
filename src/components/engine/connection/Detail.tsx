@@ -26,39 +26,27 @@ export default class Detail extends Component<Props> {
     return (
       <div className="DetailContainer">
         <h1 className="EngineName">{current}</h1>
-        <div>
-          <button
-            className="ButtonDisconnect"
-            onClick={() => this.disconnect()}
-          >
-            接続解除
-          </button>
-        </div>
-        <div className="OptionContainer">
-          <h3 className="OptionType">Button</h3>
-          <Buttons buttons={buttons} sbclient={sbclient} />
-        </div>
-        <div className="OptionContainer">
-          <h3 className="OptionType">Check</h3>
-          <Checks checks={checks} sbclient={sbclient} />
-        </div>
-        <div className="OptionContainer">
-          <h3 className="OptionType">Range</h3>
-          <Ranges ranges={spins} sbclient={sbclient} />
-        </div>
-        <div className="OptionContainer">
-          <h3 className="OptionType">Select</h3>
-          <Selects selects={selects} sbclient={sbclient} />
-        </div>
-        <div className="OptionContainer">
-          <h3 className="OptionType">String・Filename</h3>
-          <Texts strings={strings} filenames={filenames} sbclient={sbclient} />
-        </div>
+        {this.renderDisconnectButton()}
+        <Buttons buttons={buttons} sbclient={sbclient} />
+        <Checks checks={checks} sbclient={sbclient} />
+        <Ranges ranges={spins} sbclient={sbclient} />
+        <Selects selects={selects} sbclient={sbclient} />
+        <Texts strings={strings} filenames={filenames} sbclient={sbclient} />
       </div>
     )
   }
 
-  disconnect() {
+  private renderDisconnectButton() {
+    return (
+      <div>
+        <button className="ButtonDisconnect" onClick={() => this.disconnect()}>
+          接続解除
+        </button>
+      </div>
+    )
+  }
+
+  private disconnect() {
     console.log('disconnect')
   }
 }

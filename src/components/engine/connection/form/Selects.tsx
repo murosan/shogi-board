@@ -17,6 +17,11 @@ export default class Selects extends Component<Props> {
     const selects: JSX.Element[] = values.map((option, key) => (
       <Select key={key} option={option} sbclient={this.props.sbclient} />
     ))
-    return <div>{selects}</div>
+    return (
+      <div className="OptionContainer">
+        <h3 className="OptionType">Select</h3>
+        <div>{selects}</div>
+      </div>
+    )
   }
 }

@@ -5,6 +5,8 @@ import { getHostname } from '../../lib/dom-handler/url'
 import { getAsString } from '../../lib/kif-handler/getAsString'
 import { Store } from '../../store/GameStateStore'
 import './Buttons.scss'
+import { Thinking, StandBy } from '../../model/engine/EngineState'
+import { ShogiBoardClient } from '../../proto/factory'
 
 export interface Props {
   store?: Store
@@ -14,7 +16,13 @@ export interface Props {
 @observer
 export default class Buttons extends Component<Props> {
   render(): JSX.Element {
-    const i: number = this.props.store!.currentMove.index
+    const { currentMove, engineState } = this.props.store!
+    const i: number = currentMove.index
+
+    const engineIsThinking: boolean = engineState.state === Thinking
+    const engineButtonText: string = engineIsThinking
+      ? '思考停止'
+      : '将棋エンジン'
     return (
       <div className="ButtonsContainer">
         <button
@@ -52,15 +60,24 @@ export default class Buttons extends Component<Props> {
         </button>
         <button
           className="ConnectToEngine"
-          onClick={() => this.connectToEngine()}
+          onClick={() => this.engineOnClick()}
         >
-          将棋エンジン
+          {engineButtonText}
         </button>
       </div>
     )
   }
 
-  connectToEngine(): void {
+  private async engineOnClick(): Promise<void> {
+    const { engineState } = this.props.store!
+    const { current, state } = engineState
+    if (!current || state !== Thinking) return this.connectToEngine()
+
+    new ShogiBoardClient(current).stop()
+    this.props.store!.setEngineState(StandBy)
+  }
+
+  private async connectToEngine(): Promise<void> {
     const docsURL = 'https://murosan.github.io/shogi-board/'
     const docsIsHere = `ドキュメントはこちら`
     if (getHostname() === 'murosan.github.io') {

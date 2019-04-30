@@ -4,8 +4,11 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   line-height: 1.5em;
-  margin: 0.5em;
-  color: rgba(0, 0, 0, 0.67);
+  margin: 0.5em 0;
+  color: $FontColor;
+  span {
+    margin: 0.16em 0;
+  }
 }
 
 @mixin toggleColors() {

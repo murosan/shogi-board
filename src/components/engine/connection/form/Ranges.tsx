@@ -17,11 +17,6 @@ export default class Ranges extends Component<Props> {
     const ranges: JSX.Element[] = values.map((option, key) => (
       <Range key={key} option={option} sbclient={this.props.sbclient} />
     ))
-    return (
-      <div className="OptionContainer">
-        <h3 className="OptionType">Range</h3>
-        <div>{ranges}</div>
-      </div>
-    )
+    return <div>{ranges}</div>
   }
 }

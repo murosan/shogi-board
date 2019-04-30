@@ -27,11 +27,13 @@ export default class Detail extends Component<Props> {
       <div className="DetailContainer">
         <h1 className="EngineName">{current}</h1>
         {this.renderDisconnectButton()}
+        <h2 className="EngineOption">オプション</h2>
         <Buttons buttons={buttons} sbclient={sbclient} />
         <Checks checks={checks} sbclient={sbclient} />
         <Ranges ranges={spins} sbclient={sbclient} />
         <Selects selects={selects} sbclient={sbclient} />
         <Texts strings={strings} filenames={filenames} sbclient={sbclient} />
+        {this.renderDisconnectButton()}
       </div>
     )
   }

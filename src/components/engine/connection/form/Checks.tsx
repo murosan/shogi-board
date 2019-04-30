@@ -17,11 +17,6 @@ export default class Checks extends Component<Props> {
     const checks: JSX.Element[] = values.map((option, key) => (
       <Check key={key} option={option} sbclient={this.props.sbclient} />
     ))
-    return (
-      <div className="OptionContainer">
-        <h3 className="OptionType">Check</h3>
-        <div>{checks}</div>
-      </div>
-    )
+    return <div>{checks}</div>
   }
 }

@@ -13,6 +13,7 @@ import {
   Connecting,
   EngineState,
   NotConnected,
+  State,
 } from '../model/engine/EngineState'
 import { Options } from '../model/engine/Optoin'
 import { ClickProps } from '../model/events/ClickProps'
@@ -46,6 +47,7 @@ export interface Store extends GameState {
   clearMessages(): void
 
   engineState: EngineState
+  setEngineState(s: State): Promise<void>
 
   engineControllerIsVisible: boolean
   showEngineController(): Promise<void>
@@ -194,6 +196,10 @@ export default class GameStateStore implements Store {
 
   @action async closeEngineController(): Promise<void> {
     this.engineControllerIsVisible = false
+  }
+
+  @action async setEngineState(s: State): Promise<void> {
+    this.engineState.state = s
   }
 
   @action async setEngineNames(names: string[]): Promise<void> {

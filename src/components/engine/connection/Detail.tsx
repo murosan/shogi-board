@@ -1,6 +1,6 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { EngineState } from '../../../model/engine/EngineState'
+import { EngineState, Thinking } from '../../../model/engine/EngineState'
 import { ShogiBoardClient } from '../../../proto/factory'
 import { Store } from '../../../store/GameStateStore'
 import './Detail.scss'
@@ -27,6 +27,7 @@ export default class Detail extends Component<Props> {
       <div className="DetailContainer">
         <h1 className="EngineName">{current}</h1>
         {this.renderDisconnectButton()}
+        {this.renderStartButton(sbclient)}
         <h2 className="EngineOption">オプション</h2>
         <Buttons buttons={buttons} sbclient={sbclient} />
         <Checks checks={checks} sbclient={sbclient} />
@@ -34,22 +35,34 @@ export default class Detail extends Component<Props> {
         <Selects selects={selects} sbclient={sbclient} />
         <Texts strings={strings} filenames={filenames} sbclient={sbclient} />
         {this.renderDisconnectButton()}
+        {this.renderStartButton(sbclient)}
       </div>
     )
   }
 
   private renderDisconnectButton() {
+    const onClick = () => {
+      console.log('disconnect')
+      this.props.store!.unsetCurrentEngine()
+    }
     return (
-      <div>
-        <button className="ButtonDisconnect" onClick={() => this.disconnect()}>
-          接続解除
-        </button>
-      </div>
+      <button className="ButtonDisconnect" onClick={onClick}>
+        接続解除
+      </button>
     )
   }
 
-  private disconnect() {
-    console.log('disconnect')
-    this.props.store!.unsetCurrentEngine()
+  private renderStartButton(sbclient: ShogiBoardClient) {
+    const onClick = async () => {
+      console.log('start thinking')
+      await sbclient.start()
+      await this.props.store!.setEngineState(Thinking)
+      await this.props.store!.closeEngineController()
+    }
+    return (
+      <button className="ButtonStartThinking" onClick={onClick}>
+        思考開始
+      </button>
+    )
   }
 }

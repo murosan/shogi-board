@@ -17,6 +17,12 @@
 }
 
 .ButtonDisconnect {
-  @include button(#ff4242);
+  @include button(#db4444);
   width: 100%;
+}
+
+.ButtonStartThinking {
+  @include button(#5472c4);
+  width: 100%;
+  margin-top: 0.5em;
 }

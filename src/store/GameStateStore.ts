@@ -224,9 +224,16 @@ export default class GameStateStore implements Store {
   }
 
   @action async unsetCurrentEngine(): Promise<void> {
-    this.engineState.current = undefined
-    this.engineState.options = undefined
-    this.engineState.state = NotConnected
+    try {
+      if (this.engineState.current)
+        await new ShogiBoardClient(this.engineState.current).close()
+    } catch (e) {
+      console.error('接続解除に失敗しました', e)
+    } finally {
+      this.engineState.current = undefined
+      this.engineState.options = undefined
+      this.engineState.state = NotConnected
+    }
   }
 }
 

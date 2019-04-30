@@ -18,3 +18,13 @@ $baseZIndex: 1000;
   overflow: auto;
   z-index: $baseZIndex;
 }
+
+.ControllerBoard .ControllerCloseButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  line {
+    stroke: $FontColor;
+    stroke-width: 2px;
+  }
+}

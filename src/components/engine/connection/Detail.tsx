@@ -48,5 +48,6 @@ export default class Detail extends Component<Props> {
 
   private disconnect() {
     console.log('disconnect')
+    this.props.store!.unsetCurrentEngine()
   }
 }

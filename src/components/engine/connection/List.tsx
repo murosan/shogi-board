@@ -19,6 +19,13 @@ export interface Props {
 export default class List extends Component<Props> {
   render() {
     const { names, current, state } = this.props.store!.engineState
+    if (names.length === 0)
+      return (
+        <div className="ListEngineName">
+          <span>利用可能な将棋エンジンが設定されていません</span>
+        </div>
+      )
+
     return names.map((name, i) => {
       const isCurrent: boolean = name === current
       const loading: boolean = isCurrent && state === Connecting

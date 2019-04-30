@@ -31,14 +31,8 @@ export default class Texts extends Component<Props> {
 
     return (
       <div>
-        <div className="OptionContainer">
-          <h3 className="OptionType">String</h3>
-          {strings}
-        </div>
-        <div className="OptionContainer">
-          <h3 className="OptionType">Filename</h3>
-          {filenames}
-        </div>
+        {strings}
+        {filenames}
       </div>
     )
   }

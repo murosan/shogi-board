@@ -1,7 +1,7 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { Store } from '../../store/GameStateStore'
-import Controller from '../engine/Controller'
+import Controller from '../engine/connection/Controller'
 import Message from '../util/Message'
 import './Board.scss'
 import Cell from './Cell'

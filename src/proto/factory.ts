@@ -11,7 +11,7 @@ import {
   String,
 } from '../model/engine/Optoin'
 import Position from '../model/shogi/Position'
-import { ShogiBoardClient as PbClient } from './V1ServiceClientPb'
+import { ShogiBoardClient as PbClient } from './v1_grpc_web_pb'
 import {
   Button as PbButton,
   Check as PbCheck,
@@ -22,7 +22,7 @@ import {
   Position as PbPosition,
   Request,
   Response,
-  Result,
+  Result as PbResult,
   Row,
   Select as PbSelect,
   SetPositionRequest,
@@ -91,31 +91,30 @@ export class ShogiBoardClient {
         const selects: Map<string, Select> = new Map()
         const strings: Map<string, String> = new Map()
         const filenames: Map<string, Filename> = new Map()
-        const obj: any = res.toObject()
-        // FIXME: なぜか、.d.ts を見ると buttonsMap が buttonsList になってるっぽい..
-        obj.buttonsMap.forEach((b: any) => buttons.set(b[0], new Button(b[0])))
-        obj.checksMap.forEach((v: any) => {
-          const { name, val, pb_default } = v[1]
+        const obj = res.toObject()
+        obj.buttonsMap.forEach(([name]) => buttons.set(name, new Button(name)))
+        obj.checksMap.forEach(([_, pbcheck]) => {
+          const { name, val, pb_default } = pbcheck
           const c = new Check(name, val, pb_default)
           checks.set(name, c)
         })
-        obj.spinsMap.forEach((v: any) => {
-          const { name, val, pb_default, min, max } = v[1]
+        obj.spinsMap.forEach(([_, pbspin]) => {
+          const { name, val, pb_default, min, max } = pbspin
           const s = new Spin(name, val, pb_default, min, max)
           spins.set(name, s)
         })
-        obj.selectsMap.forEach((v: any) => {
-          const { name, val, pb_default, vars } = v[1]
-          const s = new Select(name, val, pb_default, vars)
+        obj.selectsMap.forEach(([_, pbselect]) => {
+          const { name, val, pb_default, varsList } = pbselect
+          const s = new Select(name, val, pb_default, varsList)
           selects.set(name, s)
         })
-        obj.stringsMap.forEach((v: any) => {
-          const { name, val, pb_default } = v[1]
+        obj.stringsMap.forEach(([_, pbstring]) => {
+          const { name, val, pb_default } = pbstring
           const s = new String(name, val, pb_default)
           strings.set(name, s)
         })
-        obj.filenamesMap.forEach((v: any) => {
-          const { name, val, pb_default } = v[1]
+        obj.filenamesMap.forEach(([_, pbfilename]) => {
+          const { name, val, pb_default } = pbfilename
           const f = new Filename(name, val, pb_default)
           filenames.set(name, f)
         })
@@ -198,12 +197,12 @@ export class ShogiBoardClient {
     })
   }
 
-  async getResult(): Promise<Result> {
+  async getResult(): Promise<PbResult.AsObject> {
     const en: EngineName = await this.getEngineName()
     return new Promise((resolve, reject) => {
-      this.client.getResult(en, {}, (err: Error, res: Result) => {
+      this.client.getResult(en, {}, (err: Error, res: PbResult) => {
         if (err) reject(err)
-        resolve(res)
+        resolve(res.toObject())
       })
     })
   }

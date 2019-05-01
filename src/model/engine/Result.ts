@@ -1,4 +1,4 @@
-import EngineMove from './EngineMove'
+import { EngineMove } from './EngineMove'
 
 // サーバーから fetch すると取れる値
 export class Result {

@@ -27,7 +27,7 @@ export default class Detail extends Component<Props> {
       <div className="DetailContainer">
         <h1 className="EngineName">{current}</h1>
         {this.renderDisconnectButton()}
-        {this.renderStartButton(sbclient)}
+        {this.renderStartButton()}
         <h2 className="EngineOption">オプション</h2>
         <Buttons buttons={buttons} sbclient={sbclient} />
         <Checks checks={checks} sbclient={sbclient} />
@@ -35,7 +35,7 @@ export default class Detail extends Component<Props> {
         <Selects selects={selects} sbclient={sbclient} />
         <Texts strings={strings} filenames={filenames} sbclient={sbclient} />
         {this.renderDisconnectButton()}
-        {this.renderStartButton(sbclient)}
+        {this.renderStartButton()}
       </div>
     )
   }
@@ -52,15 +52,12 @@ export default class Detail extends Component<Props> {
     )
   }
 
-  private renderStartButton(sbclient: ShogiBoardClient) {
-    const onClick = async () => {
-      console.log('start thinking')
-      await sbclient.start()
-      await this.props.store!.setEngineState(Thinking)
-      await this.props.store!.closeEngineController()
-    }
+  private renderStartButton() {
     return (
-      <button className="ButtonStartThinking" onClick={onClick}>
+      <button
+        className="ButtonStartThinking"
+        onClick={() => this.props.store!.startThinking()}
+      >
         思考開始
       </button>
     )

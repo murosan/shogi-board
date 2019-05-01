@@ -1,3 +1,4 @@
+import interval from 'interval-promise'
 import { action, computed, observable } from 'mobx'
 import { canPromote, mustPromote, promote } from '../lib/game-handler/piece'
 import { move } from '../lib/game-handler/position'
@@ -13,7 +14,9 @@ import {
   Connecting,
   EngineState,
   NotConnected,
+  StandBy,
   State,
+  Thinking,
 } from '../model/engine/EngineState'
 import { Options } from '../model/engine/Optoin'
 import { ClickProps } from '../model/events/ClickProps'
@@ -27,6 +30,7 @@ import Point from '../model/shogi/Point'
 import Position from '../model/shogi/Position'
 import { Turn } from '../model/shogi/Turn'
 import { ShogiBoardClient } from '../proto/factory'
+import { Result } from '../proto/v1_pb'
 
 export interface Store extends GameState {
   // 棋譜の現在表示局面を返す
@@ -48,6 +52,9 @@ export interface Store extends GameState {
 
   engineState: EngineState
   setEngineState(s: State): Promise<void>
+  setEngineResult(r: Result.AsObject): Promise<void>
+  startThinking(): Promise<void>
+  stopThinking(): Promise<void>
 
   engineControllerIsVisible: boolean
   showEngineController(): Promise<void>
@@ -200,6 +207,40 @@ export default class GameStateStore implements Store {
 
   @action async setEngineState(s: State): Promise<void> {
     this.engineState.state = s
+  }
+
+  @action async setEngineResult(r: Result.AsObject): Promise<void> {
+    this.engineState.result = r
+    console.log(r)
+  }
+
+  @action async startThinking(): Promise<void> {
+    const { current } = this.engineState
+    if (!current) throw new Error('[startThinking] current engine is not set')
+    const sbclient: ShogiBoardClient = new ShogiBoardClient(current)
+    await sbclient.start()
+    await this.setEngineState(Thinking)
+    await this.closeEngineController()
+    interval(async (_, stop) => {
+      const { current, state } = this.engineState
+      if (!current || state !== Thinking) stop()
+      const sbclient: ShogiBoardClient = new ShogiBoardClient(current)
+      try {
+        const result: Result.AsObject = await sbclient.getResult()
+        this.setEngineResult(result)
+      } catch (e) {
+        console.error(e)
+      }
+    }, 1000)
+  }
+
+  @action async stopThinking(): Promise<void> {
+    const { current, state } = this.engineState
+    if (!current) throw new Error('[stopThinking] current engine is not set')
+    if (state !== Thinking) return
+    const sbclient: ShogiBoardClient = new ShogiBoardClient(current)
+    await sbclient.stop()
+    await this.setEngineState(StandBy)
   }
 
   @action async setEngineNames(names: string[]): Promise<void> {

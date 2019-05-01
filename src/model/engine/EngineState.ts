@@ -1,6 +1,6 @@
 import { observable } from 'mobx'
+import { Result } from '../../proto/v1_pb'
 import { Options } from './Optoin'
-import { Result } from './Result'
 
 export type State = number
 
@@ -22,11 +22,11 @@ export class EngineState {
   @observable current?: string
   @observable options?: Options
   @observable state: State
-  @observable result: Result
+  @observable result: Result.AsObject | null
 
   constructor() {
     this.names = []
     this.state = NotConnected
-    this.result = new Result()
+    this.result = null
   }
 }

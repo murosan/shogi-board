@@ -4,10 +4,10 @@ import {
   Connecting,
   EngineState,
   NotConnected,
-} from '../../model/engine/EngineState'
-import { Store } from '../../store/GameStateStore'
-import Detail from './connection/Detail'
-import List from './connection/List'
+} from '../../../model/engine/EngineState'
+import { Store } from '../../../store/GameStateStore'
+import Detail from './Detail'
+import List from './List'
 import './Controller.scss'
 
 export interface Props {

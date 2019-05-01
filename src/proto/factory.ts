@@ -1,4 +1,5 @@
 import { Error } from 'grpc-web'
+import debounce from 'lodash.debounce'
 import { config } from '../config/Config'
 import {
   Button,
@@ -34,7 +35,6 @@ import {
   UpdateSpinRequest,
   UpdateStringRequest,
 } from './v1_pb'
-import debounce from 'lodash.debounce'
 
 const DEBOUNCE_MILLIS = 1000
 
@@ -252,7 +252,7 @@ export class ShogiBoardClient {
     })
   }
   async updateSelect(s: Select): Promise<void> {
-    console.log('update spin', s.val)
+    console.log('update select', s.val)
     const en: EngineName = await this.getEngineName()
     const sel: PbSelect = new PbSelect()
     sel.setName(s.name)
@@ -267,7 +267,7 @@ export class ShogiBoardClient {
     })
   }
   private async updateStringImpl(s: String): Promise<void> {
-    console.log('update spin', s.val)
+    console.log('update string', s.val)
     const en: EngineName = await this.getEngineName()
     const str: PbString = new PbString()
     str.setName(s.name)
@@ -281,7 +281,7 @@ export class ShogiBoardClient {
     })
   }
   private async updateFilenameImpl(f: Filename): Promise<void> {
-    console.log('update spin', f.val)
+    console.log('update filename', f.val)
     const en: EngineName = await this.getEngineName()
     const fil: PbFilename = new PbFilename()
     fil.setName(f.name)

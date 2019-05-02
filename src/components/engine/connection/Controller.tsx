@@ -15,7 +15,7 @@ export interface Props {
 @observer
 export default class Controller extends Component<Props> {
   render() {
-    const engineState: EngineState = this.props.store!.engineState
+    const { engineState }: Store = this.props.store!
     const { state }: EngineState = engineState
 
     // 接続前なら将棋エンジンの一覧画面を出す
@@ -26,12 +26,14 @@ export default class Controller extends Component<Props> {
     const line = (x1: number, y1: number, x2: number, y2: number) => (
       <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="black" strokeWidth="2" />
     )
+    const one = line(0, 0, width, width)
+    const two = line(width, 0, 0, width)
     return (
       <div className="ControllerBoard">
-        <div onClick={() => engineState.closeController()}>
+        <div onClick={this.close}>
           <svg width={width} height={width} className="ControllerCloseButton">
-            {line(0, 0, width, width)}
-            {line(width, 0, 0, width)}
+            {one}
+            {two}
           </svg>
         </div>
 
@@ -39,4 +41,6 @@ export default class Controller extends Component<Props> {
       </div>
     )
   }
+
+  private close = () => this.props.store!.engineState.closeController()
 }

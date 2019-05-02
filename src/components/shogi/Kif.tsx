@@ -17,10 +17,11 @@ const CURRENT_KIF_ID = 'Move-Current'
 @observer
 export default class Kif extends Component<Props> {
   render() {
-    const moves = this.props.store!.gameState.kif.history.moves
+    const { moves } = this.props.store!.gameState.kif.history
+    const elms: JSX.Element[] = this.renderKif(moves, 0)
     return (
       <div className="KifContainer">
-        <div className="Kif-Inner">{this.renderKif(moves, 0)}</div>
+        <div className="Kif-Inner">{elms}</div>
       </div>
     )
   }
@@ -43,13 +44,12 @@ export default class Kif extends Component<Props> {
     for (let i = 0; i < b.branches.length; i++) {
       if (i === b.index) continue
       const m: Move = b.branches[i].moves[0] as Move // head は必ず Move
+      const key: string = `${n}-${i}`
+      const txt: string = `-- ${m.str}`
+      const onClick = () => this.props.store!.gameState.clickKif(n, i)
       otherHeadsDom.push(
-        <div
-          key={`${n}-${i}`}
-          className="Branch"
-          onClick={() => this.props.store!.gameState.clickKif(n, i)}
-        >
-          <span>{`-- ${m.str}`}</span>
+        <div key={key} className="Branch" onClick={onClick}>
+          <span>{txt}</span>
         </div>
       )
     }
@@ -63,16 +63,12 @@ export default class Kif extends Component<Props> {
 
   renderMove(m: Move, n: number): JSX.Element {
     const { currentMove } = this.props.store!.gameState
-    const curNum: number = currentMove.index
+    const id = currentMove.index === n ? CURRENT_KIF_ID : undefined
+    const onClick = () => this.props.store!.gameState.clickKif(n)
 
     return (
-      <div
-        key={n}
-        className="Move"
-        id={curNum === n ? CURRENT_KIF_ID : undefined}
-        onClick={() => this.props.store!.gameState.clickKif(n)}
-      >
-        <span className={'Number code'}>{n + '.'}</span>
+      <div key={n} className="Move" id={id} onClick={onClick}>
+        <span className="Number code">{n + '.'}</span>
         <span>{m.str}</span>
       </div>
     )

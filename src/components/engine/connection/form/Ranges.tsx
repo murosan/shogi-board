@@ -13,10 +13,13 @@ export interface Props {
 @observer
 export default class Ranges extends Component<Props> {
   render() {
-    const values: OptionRange[] = Array.from(this.props.ranges.values())
-    const ranges: JSX.Element[] = values.map((option, key) => (
-      <Range key={key} option={option} sbclient={this.props.sbclient} />
+    const { ranges, sbclient } = this.props
+    const values: OptionRange[] = Array.from(ranges.values())
+
+    const elms: JSX.Element[] = values.map((option, key) => (
+      <Range key={key} option={option} sbclient={sbclient} />
     ))
-    return <div>{ranges}</div>
+
+    return <div>{elms}</div>
   }
 }

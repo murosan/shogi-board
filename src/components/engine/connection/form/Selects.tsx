@@ -13,10 +13,13 @@ export interface Props {
 @observer
 export default class Selects extends Component<Props> {
   render() {
-    const values: OptionSelect[] = Array.from(this.props.selects.values())
-    const selects: JSX.Element[] = values.map((option, key) => (
-      <Select key={key} option={option} sbclient={this.props.sbclient} />
+    const { selects, sbclient } = this.props
+    const values: OptionSelect[] = Array.from(selects.values())
+
+    const elms: JSX.Element[] = values.map((option, key) => (
+      <Select key={key} option={option} sbclient={sbclient} />
     ))
-    return <div>{selects}</div>
+
+    return <div>{elms}</div>
   }
 }

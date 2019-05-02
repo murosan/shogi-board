@@ -17,22 +17,22 @@ export interface Props {
 @observer
 export default class Texts extends Component<Props> {
   render() {
-    const stringValues: OptionString[] = Array.from(this.props.strings.values())
-    const filenameValues: OptionFilename[] = Array.from(
-      this.props.filenames.values()
-    )
+    const { strings, filenames, sbclient } = this.props
 
-    const strings: JSX.Element[] = stringValues.map((option, key) => (
-      <Text key={key} option={option} sbclient={this.props.sbclient} />
+    const stringValues: OptionString[] = Array.from(strings.values())
+    const filenameValues: OptionFilename[] = Array.from(filenames.values())
+
+    const strElms: JSX.Element[] = stringValues.map((option, key) => (
+      <Text key={key} option={option} sbclient={sbclient} />
     ))
-    const filenames: JSX.Element[] = filenameValues.map((option, key) => (
-      <Text key={key} option={option} sbclient={this.props.sbclient} />
+    const fnElms: JSX.Element[] = filenameValues.map((option, key) => (
+      <Text key={key} option={option} sbclient={sbclient} />
     ))
 
     return (
       <div>
-        {strings}
-        {filenames}
+        {strElms}
+        {fnElms}
       </div>
     )
   }

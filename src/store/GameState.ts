@@ -17,7 +17,7 @@ import { GameState } from '../model/shogi/GameState'
 import { Piece } from '../model/shogi/Piece'
 import Point from '../model/shogi/Point'
 import Position from '../model/shogi/Position'
-import { Turn } from '../model/shogi/Turn'
+import { Turn, Gote, Sente } from '../model/shogi/Turn'
 
 export class DefaultGameState implements GameState {
   @observable indexes: number[]
@@ -150,7 +150,7 @@ function isPiece(pc: Piece | Confirm): pc is Piece {
 }
 
 function ownerIsTurn(p: Piece, t: Turn): boolean {
-  return (p < 0 && t === -1) || (p > 0 && t === 1)
+  return (p < 0 && t === Gote) || (p > 0 && t === Sente)
 }
 
 function selectedAgain(sel: Point, cp: ClickProps): boolean {

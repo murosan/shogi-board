@@ -10,11 +10,6 @@ export interface Props {
 
 @observer
 export default class Button extends Component<Props> {
-  constructor(props: Props) {
-    super(props)
-    this.update = this.update.bind(this)
-  }
-
   render() {
     const name: string = this.props.option.name
     return (
@@ -24,7 +19,7 @@ export default class Button extends Component<Props> {
     )
   }
 
-  private update(): void {
+  private update: () => void = () => {
     const { option, sbclient } = this.props
     option.setValue(1)
     sbclient.updateButton(option)

@@ -11,11 +11,6 @@ export interface Props {
 
 @observer
 export default class Range extends Component<Props> {
-  constructor(props: Props) {
-    super(props)
-    this.update = this.update.bind(this)
-  }
-
   render(): JSX.Element {
     const { name, val, inputValue, min, max } = this.props.option
     // inputValue が Number && inRange のとき、 val に値をセットするようにしているため
@@ -24,6 +19,7 @@ export default class Range extends Component<Props> {
     const className: string = isValid
       ? 'OptionTextInput'
       : 'OptionTextInput OptionTextInvalid'
+    const labelText: string = `${name}(${min}~${max})`
 
     return (
       <div className="OptionText">
@@ -37,12 +33,12 @@ export default class Range extends Component<Props> {
           min={min}
           max={max}
         />
-        <label>{`${name}(${min}~${max})`}</label>
+        <label>{labelText}</label>
       </div>
     )
   }
 
-  private update(e: React.ChangeEvent<HTMLInputElement>): void {
+  private update = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { option, sbclient } = this.props
     option.setValue(e.target.value)
     sbclient.updateSpin(option)

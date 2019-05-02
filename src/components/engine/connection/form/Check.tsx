@@ -10,11 +10,6 @@ export interface Props {
 
 @observer
 export default class Check extends Component<Props> {
-  constructor(props: Props) {
-    super(props)
-    this.update = this.update.bind(this)
-  }
-
   render() {
     const { name, val } = this.props.option
     const id: string = `OptionCheck${name}`
@@ -41,7 +36,7 @@ export default class Check extends Component<Props> {
     )
   }
 
-  private update(e: React.ChangeEvent<HTMLInputElement>): void {
+  private update = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { option, sbclient } = this.props
     option.setValue(e.target.checked)
     sbclient.updateCheck(option)

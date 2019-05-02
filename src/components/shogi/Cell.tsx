@@ -71,17 +71,14 @@ export default class Cell extends Component<Props> {
 
     const className = 'Piece-Confirm Piece-Confirm' + Number(isGote)
 
+    const promote = () => this.click(cf, true)
+    const preserve = () => this.click(cf)
+
     // TODO: この方法だと画面幅によって1pxずれる
     return (
       <div className={className}>
-        <div
-          className="Piece-Confirm-Promote"
-          onClick={() => this.click(cf, true)}
-        />
-        <div
-          className="Piece-Confirm-Preserve"
-          onClick={() => this.click(cf)}
-        />
+        <div className="Piece-Confirm-Promote" onClick={promote} />
+        <div className="Piece-Confirm-Preserve" onClick={preserve} />
       </div>
     )
   }
@@ -101,12 +98,8 @@ export default class Cell extends Component<Props> {
   click(cf?: Confirm, promote?: true) {
     const { row, column, store } = this.props
     if (store!.gameState.confirm && !cf) return
-    const p: ClickProps = {
-      clicked: cf || this.getPiece(),
-      row,
-      column,
-      promote,
-    }
+    const clicked: Confirm | Piece = cf || this.getPiece()
+    const p: ClickProps = { clicked, row, column, promote }
     store!.gameState.clickPiece(p)
   }
 }

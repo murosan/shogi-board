@@ -4,7 +4,7 @@ import { intoView } from '../../lib/dom-handler/intoView'
 import Branch from '../../model/kif/Branch'
 import History, { isBranch, KifComponent } from '../../model/kif/History'
 import Move from '../../model/kif/Move'
-import { Store } from '../../store/GameStateStore'
+import { Store } from '../../model/store/Store'
 import './Kif.scss'
 
 interface Props {
@@ -17,7 +17,7 @@ const CURRENT_KIF_ID = 'Move-Current'
 @observer
 export default class Kif extends Component<Props> {
   render() {
-    const moves = this.props.store!.kif.history.moves
+    const moves = this.props.store!.gameState.kif.history.moves
     return (
       <div className="KifContainer">
         <div className="Kif-Inner">{this.renderKif(moves, 0)}</div>
@@ -47,7 +47,7 @@ export default class Kif extends Component<Props> {
         <div
           key={`${n}-${i}`}
           className="Branch"
-          onClick={() => this.props.store!.clickKif(n, i)}
+          onClick={() => this.props.store!.gameState.clickKif(n, i)}
         >
           <span>{`-- ${m.str}`}</span>
         </div>
@@ -62,14 +62,15 @@ export default class Kif extends Component<Props> {
   }
 
   renderMove(m: Move, n: number): JSX.Element {
-    const curNum: number = this.props.store!.currentMove.index
+    const { currentMove } = this.props.store!.gameState
+    const curNum: number = currentMove.index
 
     return (
       <div
         key={n}
         className="Move"
         id={curNum === n ? CURRENT_KIF_ID : undefined}
-        onClick={() => this.props.store!.clickKif(n)}
+        onClick={() => this.props.store!.gameState.clickKif(n)}
       >
         <span className={'Number code'}>{n + '.'}</span>
         <span>{m.str}</span>
@@ -78,6 +79,7 @@ export default class Kif extends Component<Props> {
   }
 
   // 自動スクロール
+  // TODO: スマホで使いにくいし自前実装した方がいいかも
   componentDidUpdate() {
     intoView(CURRENT_KIF_ID)
   }

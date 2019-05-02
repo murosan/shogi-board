@@ -1,14 +1,11 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import {
-  Connecting,
-  EngineState,
-  NotConnected,
-} from '../../../model/engine/EngineState'
-import { Store } from '../../../store/GameStateStore'
+import { EngineState } from '../../../model/engine/EngineState'
+import { Connecting, NotConnected } from '../../../model/engine/State'
+import { Store } from '../../../model/store/Store'
+import './Controller.scss'
 import Detail from './Detail'
 import List from './List'
-import './Controller.scss'
 
 export interface Props {
   store?: Store
@@ -19,10 +16,10 @@ export interface Props {
 export default class Controller extends Component<Props> {
   render() {
     const engineState: EngineState = this.props.store!.engineState
-    // 接続前なら将棋エンジンの一覧画面を出す
-    const isList: boolean =
-      engineState.state === NotConnected || engineState.state === Connecting
+    const { state }: EngineState = engineState
 
+    // 接続前なら将棋エンジンの一覧画面を出す
+    const isList: boolean = state === NotConnected || state === Connecting
     const child: JSX.Element = isList ? <List /> : <Detail />
 
     const width = 20
@@ -31,7 +28,7 @@ export default class Controller extends Component<Props> {
     )
     return (
       <div className="ControllerBoard">
-        <div onClick={() => this.props.store!.closeEngineController()}>
+        <div onClick={() => engineState.closeController()}>
           <svg width={width} height={width} className="ControllerCloseButton">
             {line(0, 0, width, width)}
             {line(width, 0, 0, width)}

@@ -1,8 +1,7 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { EngineState, Thinking } from '../../../model/engine/EngineState'
+import { Store } from '../../../model/store/Store'
 import { ShogiBoardClient } from '../../../proto/factory'
-import { Store } from '../../../store/GameStateStore'
 import './Detail.scss'
 import Buttons from './form/Buttons'
 import Checks from './form/Checks'
@@ -18,7 +17,7 @@ export interface Props {
 @observer
 export default class Detail extends Component<Props> {
   render() {
-    const { current, options }: EngineState = this.props.store!.engineState
+    const { current, options } = this.props.store!.engineState
     if (!current || !options) return <div />
 
     const sbclient: ShogiBoardClient = new ShogiBoardClient(current)
@@ -43,7 +42,7 @@ export default class Detail extends Component<Props> {
   private renderDisconnectButton() {
     const onClick = () => {
       console.log('disconnect')
-      this.props.store!.unsetCurrentEngine()
+      this.props.store!.engineState.disconnect()
     }
     return (
       <button className="ButtonDisconnect" onClick={onClick}>
@@ -56,7 +55,7 @@ export default class Detail extends Component<Props> {
     return (
       <button
         className="ButtonStartThinking"
-        onClick={() => this.props.store!.startThinking()}
+        onClick={() => this.props.store!.engineState.startThinking()}
       >
         思考開始
       </button>

@@ -1,11 +1,12 @@
 import { shallow } from 'enzyme'
 import React from 'react'
-import GameStateStore from '../../store/GameStateStore'
+import { Store } from '../../model/store/Store'
+import { DefaultStore } from '../../store/Store'
 import Board from './Board'
 import { Props as CellProps } from './Cell'
 
 it('レンダリングできる', async () => {
-  const store: GameStateStore = new GameStateStore()
+  const store: Store = new DefaultStore()
   const wrapper = shallow(<Board store={store} />).dive()
   expect(wrapper.find('.Board')).toHaveLength(1)
   const cells = wrapper.find('inject-Cell-with-store')
@@ -16,8 +17,8 @@ it('レンダリングできる', async () => {
 })
 
 it('反転されていてもレンダリングできる', async () => {
-  const store: GameStateStore = new GameStateStore()
-  store.reverse()
+  const store: Store = new DefaultStore()
+  store.gameState.reverse()
   const wrapper = shallow(<Board store={store} />).dive()
   expect(wrapper.find('.Board')).toHaveLength(1)
   const cells = wrapper.find('inject-Cell-with-store')

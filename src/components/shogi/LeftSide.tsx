@@ -1,7 +1,7 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { Gote, Sente } from '../../model/shogi/Turn'
-import { Store } from '../../store/GameStateStore'
+import { Store } from '../../model/store/Store'
 import Buttons from './Buttons'
 import Captures from './Captures'
 import './LeftSide.scss'
@@ -14,15 +14,10 @@ export interface Props {
 @observer
 export default class LeftSide extends Component<Props> {
   render() {
-    const caps: number[] =
-      this.props.store!.indexes[0] === -1
-        ? this.props.store!.currentMove.pos.cap1
-        : this.props.store!.currentMove.pos.cap0
-
-    const isTurn: boolean =
-      this.props.store!.indexes[0] === -1
-        ? this.props.store!.currentMove.pos.turn === Gote
-        : this.props.store!.currentMove.pos.turn === Sente
+    const { indexes, currentMove } = this.props.store!.gameState
+    const { turn, cap0, cap1 } = currentMove.pos
+    const caps: number[] = indexes[0] === -1 ? cap1 : cap0
+    const isTurn: boolean = indexes[0] === -1 ? turn === Gote : turn === Sente
 
     return (
       <div className="LeftSide">

@@ -9,11 +9,12 @@ import {
   Kyou1,
   To0,
 } from '../../model/shogi/Piece'
-import GameStateStore from '../../store/GameStateStore'
+import { Store } from '../../model/store/Store'
+import { DefaultStore } from '../../store/Store'
 import Cell from './Cell'
 
 it('正しいクラス名を付けられる', async () => {
-  const store: GameStateStore = new GameStateStore()
+  const store: Store = new DefaultStore()
   // 先手の駒
   const wrapper1 = shallow(<Cell store={store} row={6} column={1} />).dive()
   const wrapper2 = shallow(<Cell store={store} row={7} column={7} />).dive()
@@ -53,8 +54,8 @@ it('正しいクラス名を付けられる', async () => {
 })
 
 it('反転してる場合でも正しいクラス名を付けられる', async () => {
-  const store: GameStateStore = new GameStateStore()
-  store.reverse()
+  const store: Store = new DefaultStore()
+  store.gameState.reverse()
   // 先手の駒
   const wrapper1 = shallow(<Cell store={store} row={6} column={1} />).dive()
   const wrapper2 = shallow(<Cell store={store} row={7} column={7} />).dive()
@@ -94,7 +95,7 @@ it('反転してる場合でも正しいクラス名を付けられる', async (
 })
 
 it('手番の駒をクリックすると選択でき、Selectedクラスが付く', async () => {
-  const store: GameStateStore = new GameStateStore()
+  const store: Store = new DefaultStore()
   const wrapper = shallow(<Cell store={store} row={6} column={1} />).dive()
   const targeted = shallow(<Cell store={store} row={5} column={1} />).dive()
   wrapper.simulate('click')
@@ -106,9 +107,9 @@ it('手番の駒をクリックすると選択でき、Selectedクラスが付�
 })
 
 it('Confirm 周り一連をちゃんとできる', async () => {
-  const store: GameStateStore = new GameStateStore()
-  store.currentMove.pos.pos[3][1] = Fu0
-  store.currentMove.pos.pos[6][1] = Empty
+  const store: Store = new DefaultStore()
+  store.gameState.currentMove.pos.pos[3][1] = Fu0
+  store.gameState.currentMove.pos.pos[6][1] = Empty
   const wrapper1 = shallow(<Cell store={store} row={3} column={1} />).dive()
   const wrapper2 = shallow(<Cell store={store} row={2} column={1} />).dive()
   const wrapper3 = shallow(<Cell store={store} row={4} column={4} />).dive()
@@ -131,9 +132,9 @@ it('Confirm 周り一連をちゃんとできる', async () => {
 })
 
 it('成れる', async () => {
-  const store: GameStateStore = new GameStateStore()
-  store.currentMove.pos.pos[3][1] = Fu0
-  store.currentMove.pos.pos[6][1] = Empty
+  const store: Store = new DefaultStore()
+  store.gameState.currentMove.pos.pos[3][1] = Fu0
+  store.gameState.currentMove.pos.pos[6][1] = Empty
   const wrapper1 = shallow(<Cell store={store} row={3} column={1} />).dive()
   const wrapper2 = shallow(<Cell store={store} row={2} column={1} />).dive()
   wrapper1.simulate('click')
@@ -148,9 +149,9 @@ it('成れる', async () => {
 })
 
 it('不成もできる', async () => {
-  const store: GameStateStore = new GameStateStore()
-  store.currentMove.pos.pos[3][1] = Fu0
-  store.currentMove.pos.pos[6][1] = Empty
+  const store: Store = new DefaultStore()
+  store.gameState.currentMove.pos.pos[3][1] = Fu0
+  store.gameState.currentMove.pos.pos[6][1] = Empty
   const wrapper1 = shallow(<Cell store={store} row={3} column={1} />).dive()
   const wrapper2 = shallow(<Cell store={store} row={2} column={1} />).dive()
   wrapper1.simulate('click')
@@ -165,10 +166,10 @@ it('不成もできる', async () => {
 })
 
 it('反転していても Confirm オブジェクトを表示できる', async () => {
-  const store: GameStateStore = new GameStateStore()
-  store.reverse()
-  store.currentMove.pos.pos[3][1] = Fu0
-  store.currentMove.pos.pos[6][1] = Empty
+  const store: Store = new DefaultStore()
+  store.gameState.reverse()
+  store.gameState.currentMove.pos.pos[3][1] = Fu0
+  store.gameState.currentMove.pos.pos[6][1] = Empty
   const wrapper1 = shallow(<Cell store={store} row={3} column={1} />).dive()
   const wrapper2 = shallow(<Cell store={store} row={2} column={1} />).dive()
   wrapper1.simulate('click')

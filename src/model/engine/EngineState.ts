@@ -1,32 +1,51 @@
-import { observable } from 'mobx'
 import { Result } from '../../proto/v1_pb'
 import { Options } from './Optoin'
+import { State } from './State'
 
-export type State = number
-
-// 接続前
-export const NotConnected: State = 0
-// 接続中・ローディング中のComponentを表示するため
-export const Connecting: State = 1
-// 接続済
-export const Connected: State = 2
-// 将棋エンジン、待機中(思考中ではない)
-export const StandBy: State = 3
-// 将棋エンジン思考中
-export const Thinking: State = 4
-
-export class EngineState {
+export interface EngineState {
   // 将棋エンジン一覧
-  @observable names: string[]
-  // 接続中のエンジン
-  @observable current?: string
-  @observable options?: Options
-  @observable state: State
-  @observable result: Result.AsObject | null
+  names: string[]
 
-  constructor() {
-    this.names = []
-    this.state = NotConnected
-    this.result = null
-  }
+  // 接続中の将棋エンジン
+  current: string | null
+
+  // 接続中の将棋エンジンから取得したオプション一覧
+  // 接続時に初期化する
+  options: Options | null
+
+  // 将棋エンジンの状態
+  state: State
+
+  // 将棋エンジンの思考結果
+  result: Result.AsObject | null
+
+  // 将棋エンジンのオプション設定用 UI を表示するか
+  controllerIsVisible: boolean
+
+  // UI を表示する
+  showController(): Promise<void>
+
+  // UI を閉じる
+  closeController(): Promise<void>
+
+  // サーバー側に設定されている将棋エンジンの名前一覧をセットする
+  setNames(names: string[]): Promise<void>
+
+  // State の変更
+  setState(s: State): Promise<void>
+
+  // 将棋エンジンに接続
+  connect(name: string): Promise<void>
+
+  // 将棋エンジンとの接続を解除
+  disconnect(): Promise<void>
+
+  // 思考開始
+  startThinking(): Promise<void>
+
+  // 思考停止
+  stopThinking(): Promise<void>
+
+  // 思考結果をセット
+  setResult(r: Result.AsObject): Promise<void>
 }

@@ -1,11 +1,12 @@
 import { Provider } from 'mobx-react'
 import React, { Component } from 'react'
-import GameStateStore, { Store } from '../store/GameStateStore'
+import { Store } from '../model/store/Store'
+import { DefaultStore } from '../store/Store'
 import './App.scss'
 import BoardArea from './shogi/BoardArea'
 
 export default class App extends Component {
-  private store: Store = new GameStateStore()
+  private store: Store = new DefaultStore()
 
   render() {
     return (

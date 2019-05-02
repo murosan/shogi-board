@@ -1,11 +1,12 @@
 import { shallow } from 'enzyme'
 import React from 'react'
-import GameStateStore from '../../store/GameStateStore'
+import { Store } from '../../model/store/Store'
+import { DefaultStore } from '../../store/Store'
 import { Props as CapProps } from './Captures'
 import RightSide from './RightSide'
 
 it('レンダリングできる', async () => {
-  const store: GameStateStore = new GameStateStore()
+  const store: Store = new DefaultStore()
   const wrapper = shallow(<RightSide store={store} />).dive()
   expect(wrapper.find('.RightSide')).toHaveLength(1)
   const capProps = wrapper
@@ -17,8 +18,8 @@ it('レンダリングできる', async () => {
 })
 
 it('反転していてもレンダリングできる', async () => {
-  const store: GameStateStore = new GameStateStore()
-  store.reverse()
+  const store: Store = new DefaultStore()
+  store.gameState.reverse()
   const wrapper = shallow(<RightSide store={store} />).dive()
   expect(wrapper.find('.RightSide')).toHaveLength(1)
   const capProps = wrapper

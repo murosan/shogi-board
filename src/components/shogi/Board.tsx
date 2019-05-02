@@ -1,8 +1,7 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { Store } from '../../store/GameStateStore'
+import { Store } from '../../model/store/Store'
 import Controller from '../engine/connection/Controller'
-import Message from '../util/Message'
 import './Board.scss'
 import Cell from './Cell'
 
@@ -14,7 +13,7 @@ export interface Props {
 @observer
 export default class Board extends Component<Props> {
   render() {
-    const idx = this.props.store!.indexes
+    const idx = this.props.store!.gameState.indexes
     const rows = idx.map(r =>
       idx
         .slice()
@@ -26,21 +25,14 @@ export default class Board extends Component<Props> {
       <div className="BoardContainer">
         <div className="ResetPseudo">
           <div className="Board">{rows}</div>
-          {this.renderAlert()}
           {this.renderConnector()}
         </div>
       </div>
     )
   }
 
-  renderAlert() {
-    // TODO: なくす
-    const msg = this.props.store!.messages
-    if (msg.length !== 0) return <Message messages={msg} />
-  }
-
   renderConnector() {
-    const shouldRender = this.props.store!.engineControllerIsVisible
+    const shouldRender = this.props.store!.engineState.controllerIsVisible
     if (shouldRender) return <Controller />
   }
 }

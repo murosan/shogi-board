@@ -6,8 +6,8 @@ import { ClickProps } from '../../model/events/ClickProps'
 import Confirm from '../../model/shogi/Confirm'
 import { Empty, Piece } from '../../model/shogi/Piece'
 import Point from '../../model/shogi/Point'
-import { Gote, Sente } from '../../model/shogi/Turn'
-import { Store } from '../../store/GameStateStore'
+import { Gote, Sente, Turn } from '../../model/shogi/Turn'
+import { Store } from '../../model/store/Store'
 import './Cell.scss'
 
 export interface Props {
@@ -19,26 +19,27 @@ export interface Props {
 @inject('store')
 @observer
 export default class Cell extends Component<Props> {
-  getPiece = () =>
-    inRange(this.props.row) && inRange(this.props.column)
-      ? this.props.store!.currentMove.pos.pos[this.props.row][this.props.column]
-      : Empty
+  getPiece = () => {
+    const { row, column, store } = this.props
+    const isOnBoard: boolean = inRange(row) && inRange(column)
+    if (!isOnBoard) return Empty
+    return store!.gameState.currentMove.pos.pos[row][column]
+  }
 
   render(): JSX.Element | undefined {
+    const { row, column, store } = this.props
     const {
       indexes,
       selected,
       confirm,
       currentMove,
       moveTargets,
-    } = this.props.store!
+    } = store!.gameState
     const piece: Piece = this.getPiece()
-    const row: number = this.props.row
-    const column: number = this.props.column
 
+    const turn: Turn = currentMove.pos.turn
     const isTurn: boolean =
-      (piece > 0 && currentMove.pos.turn === Sente) ||
-      (piece < 0 && currentMove.pos.turn === Gote)
+      (piece > 0 && turn === Sente) || (piece < 0 && turn === Gote)
 
     const className: string = getClassName({
       r: row,
@@ -60,12 +61,11 @@ export default class Cell extends Component<Props> {
     )
   }
 
-  renderConfirm(cf?: Confirm): JSX.Element | undefined {
-    const row: number = this.props.row
-    const column: number = this.props.column
-    if (!cf || cf.row !== row || cf.column !== column) return undefined
+  renderConfirm(cf: Confirm | null): JSX.Element | undefined {
+    const { row, column, store } = this.props
+    if (!cf || cf.row !== row || cf.column !== column) return
 
-    const isReversed: boolean = this.props.store!.indexes[0] === 9
+    const isReversed: boolean = store!.gameState.indexes[0] === 9
     const isGote =
       (isReversed && cf.preserved > 0) || (!isReversed && cf.preserved < 0)
 
@@ -87,28 +87,27 @@ export default class Cell extends Component<Props> {
   }
 
   renderEdgeTextRow(): JSX.Element | undefined {
-    const needText = inRange(this.props.column) && this.props.row === -1
-    if (!needText) return undefined
-
-    return <span>{columnString(this.props.column)}</span>
+    const { row, column } = this.props
+    const needText = inRange(column) && row === -1
+    if (needText) return <span>{columnString(column)}</span>
   }
 
   renderEdgeTextColumn(): JSX.Element | undefined {
-    const needText = inRange(this.props.row) && this.props.column === -1
-    if (!needText) return undefined
-
-    return <span>{rowString(this.props.row)}</span>
+    const { row, column } = this.props
+    const needText = inRange(row) && column === -1
+    if (needText) return <span>{rowString(row)}</span>
   }
 
   click(cf?: Confirm, promote?: true) {
-    if (this.props.store!.confirm && !cf) return
+    const { row, column, store } = this.props
+    if (store!.gameState.confirm && !cf) return
     const p: ClickProps = {
       clicked: cf || this.getPiece(),
-      row: this.props.row,
-      column: this.props.column,
-      promote: promote,
+      row,
+      column,
+      promote,
     }
-    this.props.store!.clickPiece(p)
+    store!.gameState.clickPiece(p)
   }
 }
 
@@ -117,8 +116,8 @@ interface GetClassNameProps {
   c: number // column
   rv: boolean // isReversed
   p: Piece
-  sel?: Point // selected
-  confirm?: Confirm
+  sel: Point | null // selected
+  confirm: Confirm | null
   isTurn: boolean
   isTargeted: boolean
 }
@@ -126,8 +125,8 @@ interface GetClassNameProps {
 // つらい感じ
 function getClassName(p: GetClassNameProps): string {
   if (
-    p.confirm &&
-    p.sel &&
+    !!p.confirm &&
+    !!p.sel &&
     ((p.r === p.sel.row && p.c === p.sel.column) ||
       (p.r === p.confirm.row && p.c === p.confirm.column))
   ) {
@@ -155,7 +154,7 @@ function getClassName(p: GetClassNameProps): string {
   const isSelected: boolean =
     rowInRange &&
     colInRange &&
-    p.sel !== undefined &&
+    !!p.sel &&
     p.sel.row === p.r &&
     p.sel.column === p.c
 

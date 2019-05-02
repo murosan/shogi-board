@@ -1,12 +1,8 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import {
-  Connecting,
-  NotConnected,
-  State,
-} from '../../../model/engine/EngineState'
+import { Connecting, NotConnected, State } from '../../../model/engine/State'
+import { Store } from '../../../model/store/Store'
 import { ShogiBoardClient } from '../../../proto/factory'
-import { Store } from '../../../store/GameStateStore'
 import Loader from '../../util/Loader'
 import './List.scss'
 
@@ -45,18 +41,19 @@ export default class List extends Component<Props> {
 
   async setCurrentEngine(name: string, state: State): Promise<void> {
     if (state !== NotConnected) return
-    this.props.store!.setCurrentEngine(name)
+    await this.props.store!.engineState.connect(name)
   }
 
   componentWillMount() {
+    const { engineState } = this.props.store!
     new ShogiBoardClient()
       .initialize()
-      .then((list: string[]) => this.props.store!.setEngineNames(list))
+      .then((list: string[]) => engineState.setNames(list))
       .catch(err => {
         const msg = 'Failed to initialize.'
         console.error(msg, err)
-        this.props.store!.unsetCurrentEngine()
-        this.props.store!.setMessages([msg])
+        engineState.disconnect()
+        alert(msg)
       })
   }
 }

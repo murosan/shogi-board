@@ -3,10 +3,9 @@ import React, { Component } from 'react'
 import { config } from '../../config/Config'
 import { getHostname } from '../../lib/dom-handler/url'
 import { getAsString } from '../../lib/kif-handler/getAsString'
-import { Store } from '../../store/GameStateStore'
+import { Thinking } from '../../model/engine/State'
+import { Store } from '../../model/store/Store'
 import './Buttons.scss'
-import { Thinking, StandBy } from '../../model/engine/EngineState'
-import { ShogiBoardClient } from '../../proto/factory'
 
 export interface Props {
   store?: Store
@@ -16,7 +15,8 @@ export interface Props {
 @observer
 export default class Buttons extends Component<Props> {
   render(): JSX.Element {
-    const { currentMove, engineState } = this.props.store!
+    const { gameState, engineState } = this.props.store!
+    const { currentMove, kif } = gameState
     const i: number = currentMove.index
 
     const engineIsThinking: boolean = engineState.state === Thinking
@@ -27,35 +27,26 @@ export default class Buttons extends Component<Props> {
       <div className="ButtonsContainer">
         <button
           className="PrevOne"
-          onClick={() => this.props.store!.clickKif(i - 1 < 0 ? 0 : i - 1)}
+          onClick={() => gameState.clickKif(i - 1 < 0 ? 0 : i - 1)}
         >
           ＜
         </button>
-        <button
-          className="NextOne"
-          onClick={() => this.props.store!.clickKif(i + 1)}
-        >
+        <button className="NextOne" onClick={() => gameState.clickKif(i + 1)}>
           ＞
         </button>
         <button
           className="PrevFive"
-          onClick={() => this.props.store!.clickKif(i - 5 < 0 ? 0 : i - 5)}
+          onClick={() => gameState.clickKif(i - 5 < 0 ? 0 : i - 5)}
         >
           ＜ 5
         </button>
-        <button
-          className="NextFive"
-          onClick={() => this.props.store!.clickKif(i + 5)}
-        >
+        <button className="NextFive" onClick={() => gameState.clickKif(i + 5)}>
           5 ＞
         </button>
-        <button className="Reverse" onClick={() => this.props.store!.reverse()}>
+        <button className="Reverse" onClick={() => gameState.reverse()}>
           盤面反転
         </button>
-        <button
-          className="Copy"
-          data-clipboard-text={getAsString(this.props.store!.kif)}
-        >
+        <button className="Copy" data-clipboard-text={getAsString(kif)}>
           棋譜コピー
         </button>
         <button
@@ -69,35 +60,34 @@ export default class Buttons extends Component<Props> {
   }
 
   private async engineOnClick(): Promise<void> {
-    const { engineState } = this.props.store!
-    const { current, state } = engineState
-    if (!current || state !== Thinking) return this.connectToEngine()
-
-    new ShogiBoardClient(current).stop()
-    this.props.store!.setEngineState(StandBy)
+    const { current, state } = this.props.store!.engineState
+    if (!current || state !== Thinking) return await this.connectToEngine()
+    await this.props.store!.engineState.stopThinking()
   }
 
   private async connectToEngine(): Promise<void> {
     const docsURL = 'https://murosan.github.io/shogi-board/'
     const docsIsHere = `ドキュメントはこちら`
     if (getHostname() === 'murosan.github.io') {
-      this.props.store!.setMessages([
+      const msg: string = [
         'Playground では使用できません。各自PCにダウンロードしてご利用ください。',
         docsIsHere,
         docsURL,
-      ])
+      ].join('\n')
+      alert(msg)
       return
     }
 
     if (!config.serverURL) {
-      this.props.store!.setMessages([
+      const msg: string = [
         'serverURL を設定してください。',
         docsIsHere,
         docsURL,
-      ])
+      ].join('\n')
+      alert(msg)
       return
     }
 
-    this.props.store!.showEngineController()
+    this.props.store!.engineState.showController()
   }
 }

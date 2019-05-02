@@ -1,12 +1,13 @@
+import { ClickProps } from '../events/ClickProps'
+import Kif from '../kif/Kif'
+import Move from '../kif/Move'
 import Confirm from './Confirm'
 import Point from './Point'
-import Position from './Position'
-import Kif from '../kif/Kif'
 
 /**
  * 盤面が今どういう状態かを表す
  */
-export default interface GameState {
+export interface GameState {
   // 盤面描画用インデックスの配列
   // [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   // or
@@ -20,15 +21,27 @@ export default interface GameState {
   // 持ち駒が選択されていたら、
   // { -1, -1, Piece, 何番目か } で指定
   // undefined なら選択なしの状態
-  selected: Point | undefined
+  selected: Point | null
 
   // 成・不成 を選択する画面の状態
   // undefined なら選択画面ではない
-  confirm: Confirm | undefined
+  confirm: Confirm | null
 
   // 駒を動かせる場所を入れておくもの
   moveTargets: Point[]
 
   // 棋譜
   kif: Kif
+
+  // 棋譜の現在表示局面を返す
+  currentMove: Move
+
+  // 盤面反転
+  reverse(): void
+
+  // 駒をクリックして動かしたりする
+  clickPiece(p: ClickProps): void
+
+  // 棋譜をクリックして表示局面を変える
+  clickKif(moveCount: number, branchIndex?: number): void
 }

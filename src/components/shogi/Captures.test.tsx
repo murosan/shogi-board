@@ -16,11 +16,12 @@ import {
   Kyou0,
   Kyou1,
 } from '../../model/shogi/Piece'
-import GameStateStore from '../../store/GameStateStore'
+import { Store } from '../../model/store/Store'
+import { DefaultStore } from '../../store/Store'
 import Captures from './Captures'
 
 it('(RightSide)持ち駒のラッパー要素を正しくレンダリングできる', async () => {
-  const store: GameStateStore = new GameStateStore()
+  const store: Store = new DefaultStore()
   const wrapper = shallow(
     <Captures
       store={store}
@@ -50,7 +51,7 @@ it('(RightSide)持ち駒のラッパー要素を正しくレンダリングで�
 })
 
 it('(LefttSide)持ち駒のラッパー要素を正しくレンダリングできる', async () => {
-  const store: GameStateStore = new GameStateStore()
+  const store: Store = new DefaultStore()
   const wrapper = shallow(
     <Captures
       store={store}
@@ -80,7 +81,7 @@ it('(LefttSide)持ち駒のラッパー要素を正しくレンダリングで�
 })
 
 it('(RightSide)持ち駒の枚数に応じて正しいクラス名が付く', async () => {
-  const store: GameStateStore = new GameStateStore()
+  const store: Store = new DefaultStore()
   const wrapper = shallow(
     <Captures
       store={store}
@@ -123,7 +124,7 @@ it('(RightSide)持ち駒の枚数に応じて正しいクラス名が付く', as
 })
 
 it('(LeftSide)持ち駒の枚数に応じて正しいクラス名が付く', async () => {
-  const store: GameStateStore = new GameStateStore()
+  const store: Store = new DefaultStore()
   const wrapper = shallow(
     <Captures
       store={store}
@@ -166,7 +167,7 @@ it('(LeftSide)持ち駒の枚数に応じて正しいクラス名が付く', asy
 })
 
 it('持ち駒を選択できる', async () => {
-  const store: GameStateStore = new GameStateStore()
+  const store: Store = new DefaultStore()
   const wrapper = shallow(
     <Captures
       store={store}
@@ -184,7 +185,7 @@ it('持ち駒を選択できる', async () => {
 })
 
 it('手番ではない方の駒をクリックしても選択できない', async () => {
-  const store: GameStateStore = new GameStateStore()
+  const store: Store = new DefaultStore()
   const wrapper = shallow(
     <Captures
       store={store}

@@ -13,10 +13,13 @@ export interface Props {
 @observer
 export default class Checks extends Component<Props> {
   render() {
-    const values: OptionCheck[] = Array.from(this.props.checks.values())
-    const checks: JSX.Element[] = values.map((option, key) => (
-      <Check key={key} option={option} sbclient={this.props.sbclient} />
+    const { checks, sbclient } = this.props
+    const values: OptionCheck[] = Array.from(checks.values())
+
+    const elms: JSX.Element[] = values.map((option, key) => (
+      <Check key={key} option={option} sbclient={sbclient} />
     ))
-    return <div>{checks}</div>
+
+    return <div>{elms}</div>
   }
 }

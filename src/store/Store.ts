@@ -1,4 +1,4 @@
-import { observable } from 'mobx'
+import { observable, observe } from 'mobx'
 import { EngineState } from '../model/engine/EngineState'
 import { GameState } from '../model/shogi/GameState'
 import { Store } from '../model/store/Store'

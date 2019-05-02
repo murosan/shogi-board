@@ -13,11 +13,13 @@ export interface Props {
 @observer
 export default class Buttons extends Component<Props> {
   render() {
-    const values: OptionButton[] = Array.from(this.props.buttons.values())
-    const buttons: JSX.Element[] = values.map((option, key) => (
-      <Button key={key} option={option} sbclient={this.props.sbclient} />
+    const { buttons, sbclient } = this.props
+    const values: OptionButton[] = Array.from(buttons.values())
+
+    const elms: JSX.Element[] = values.map((option, key) => (
+      <Button key={key} option={option} sbclient={sbclient} />
     ))
 
-    return <div className="OptionButton">{buttons}</div>
+    return <div className="OptionButton">{elms}</div>
   }
 }

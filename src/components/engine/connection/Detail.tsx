@@ -22,43 +22,36 @@ export default class Detail extends Component<Props> {
 
     const sbclient: ShogiBoardClient = new ShogiBoardClient(current)
     const { buttons, checks, spins, selects, strings, filenames } = options
+
+    const disconnectBtn = (
+      <button className="ButtonDisconnect" onClick={this.disconnect}>
+        接続解除
+      </button>
+    )
+
+    const startBtn = (
+      <button className="ButtonStartThinking" onClick={this.start}>
+        思考開始
+      </button>
+    )
+
     return (
       <div className="DetailContainer">
         <h1 className="EngineName">{current}</h1>
-        {this.renderDisconnectButton()}
-        {this.renderStartButton()}
+        {disconnectBtn}
+        {startBtn}
         <h2 className="EngineOption">オプション</h2>
         <Buttons buttons={buttons} sbclient={sbclient} />
         <Checks checks={checks} sbclient={sbclient} />
         <Ranges ranges={spins} sbclient={sbclient} />
         <Selects selects={selects} sbclient={sbclient} />
         <Texts strings={strings} filenames={filenames} sbclient={sbclient} />
-        {this.renderDisconnectButton()}
-        {this.renderStartButton()}
+        {disconnectBtn}
+        {startBtn}
       </div>
     )
   }
 
-  private renderDisconnectButton() {
-    const onClick = () => {
-      console.log('disconnect')
-      this.props.store!.engineState.disconnect()
-    }
-    return (
-      <button className="ButtonDisconnect" onClick={onClick}>
-        接続解除
-      </button>
-    )
-  }
-
-  private renderStartButton() {
-    return (
-      <button
-        className="ButtonStartThinking"
-        onClick={() => this.props.store!.engineState.startThinking()}
-      >
-        思考開始
-      </button>
-    )
-  }
+  private disconnect = () => this.props.store!.engineState.disconnect()
+  private start = () => this.props.store!.engineState.startThinking()
 }

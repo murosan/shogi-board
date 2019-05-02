@@ -15,11 +15,6 @@ export interface Props {
 
 @observer
 export default class Text extends Component<Props> {
-  constructor(props: Props) {
-    super(props)
-    this.update = this.update.bind(this)
-  }
-
   render(): JSX.Element {
     const { name, val } = this.props.option
     const className: string =
@@ -39,7 +34,7 @@ export default class Text extends Component<Props> {
     )
   }
 
-  private update(e: React.ChangeEvent<HTMLInputElement>): void {
+  private update = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { option, sbclient } = this.props
     option.setValue(e.target.value)
     if (option instanceof OptionFilename) sbclient.updateFilename(option)

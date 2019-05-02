@@ -11,19 +11,15 @@ export interface Props {
 
 @observer
 export default class Select extends Component<Props> {
-  constructor(props: Props) {
-    super(props)
-    this.update = this.update.bind(this)
-  }
-
   render(): JSX.Element {
     const { name, val, vars } = this.props.option
+    const options = this.renderOptions(vars)
     return (
       <div className="SelectContainer">
         <label>{name}</label>
         <div className="OptionSelect SelectTriangle">
           <select onChange={this.update} value={val} required>
-            {this.renderOptions(vars)}
+            {options}
           </select>
         </div>
       </div>
@@ -38,7 +34,7 @@ export default class Select extends Component<Props> {
     ))
   }
 
-  update(e: React.ChangeEvent<HTMLSelectElement>): void {
+  private update = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { option, sbclient } = this.props
     option.setValue(e.target.value)
     sbclient.updateSelect(option)

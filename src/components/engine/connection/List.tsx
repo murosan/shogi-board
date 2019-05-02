@@ -26,12 +26,9 @@ export default class List extends Component<Props> {
       const isCurrent: boolean = name === current
       const loading: boolean = isCurrent && state === Connecting
       const loader = loading ? <Loader /> : undefined
+      const onClick = () => this.setCurrentEngine(name, state)
       return (
-        <div
-          className="ListEngineName"
-          key={i}
-          onClick={() => this.setCurrentEngine(name, state)}
-        >
+        <div className="ListEngineName" key={i} onClick={onClick}>
           {loader}
           <span>{name}</span>
         </div>
@@ -39,13 +36,13 @@ export default class List extends Component<Props> {
     })
   }
 
-  async setCurrentEngine(name: string, state: State): Promise<void> {
+  private async setCurrentEngine(name: string, state: State): Promise<void> {
     if (state !== NotConnected) return
     await this.props.store!.engineState.connect(name)
   }
 
   componentWillMount() {
-    const { engineState } = this.props.store!
+    const { engineState }: Store = this.props.store!
     new ShogiBoardClient()
       .initialize()
       .then((list: string[]) => engineState.setNames(list))

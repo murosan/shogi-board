@@ -10,7 +10,7 @@ import {
   Spin,
   String,
 } from '../model/engine/Optoin'
-import Position from '../model/shogi/Position'
+import { Position } from '../model/shogi/Position'
 import { ShogiBoardClient as PbClient } from './v1_grpc_web_pb'
 import {
   Button as PbButton,
@@ -208,7 +208,6 @@ export class ShogiBoardClient {
   }
 
   async updateButton(b: Button): Promise<void> {
-    console.log('update button')
     const en: EngineName = await this.getEngineName()
     const btn: PbButton = new PbButton()
     btn.setName(b.name)
@@ -220,7 +219,6 @@ export class ShogiBoardClient {
     })
   }
   async updateCheck(c: Check): Promise<void> {
-    console.log('update check', c.val)
     const en: EngineName = await this.getEngineName()
     const chk: PbCheck = new PbCheck()
     chk.setName(c.name)
@@ -235,7 +233,6 @@ export class ShogiBoardClient {
   }
 
   private async updateSpinImpl(s: Spin): Promise<void> {
-    console.log('update spin', s.val)
     const en: EngineName = await this.getEngineName()
     const spn: PbSpin = new PbSpin()
     spn.setName(s.name)
@@ -251,7 +248,6 @@ export class ShogiBoardClient {
     })
   }
   async updateSelect(s: Select): Promise<void> {
-    console.log('update select', s.val)
     const en: EngineName = await this.getEngineName()
     const sel: PbSelect = new PbSelect()
     sel.setName(s.name)
@@ -266,7 +262,6 @@ export class ShogiBoardClient {
     })
   }
   private async updateStringImpl(s: String): Promise<void> {
-    console.log('update string', s.val)
     const en: EngineName = await this.getEngineName()
     const str: PbString = new PbString()
     str.setName(s.name)
@@ -280,7 +275,6 @@ export class ShogiBoardClient {
     })
   }
   private async updateFilenameImpl(f: Filename): Promise<void> {
-    console.log('update filename', f.val)
     const en: EngineName = await this.getEngineName()
     const fil: PbFilename = new PbFilename()
     fil.setName(f.name)

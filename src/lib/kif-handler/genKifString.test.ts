@@ -1,6 +1,6 @@
-import MoveProps from '../../model/events/MoveProps'
+import { MoveProps } from '../../model/events/MoveProps'
 import { Fu0, To0 } from '../../model/shogi/Piece'
-import Position from '../../model/shogi/Position'
+import { Position } from '../../model/shogi/Position'
 import { Sente } from '../../model/shogi/Turn'
 import { genKifString } from './genKifString'
 

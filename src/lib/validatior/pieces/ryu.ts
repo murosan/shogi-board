@@ -1,6 +1,6 @@
 import { Ryu0, Ryu1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
-import Position from '../../../model/shogi/Position'
+import { Position } from '../../../model/shogi/Position'
 import { demote } from '../../game-handler/piece'
 import { comp } from '../utils/algorithm'
 import getFromNexts from '../utils/getFromNexts'

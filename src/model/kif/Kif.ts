@@ -1,4 +1,4 @@
-import Position from '../shogi/Position'
+import { Position } from '../shogi/Position'
 import { hirate } from '../shogi/PositionInit'
 import History from './History'
 import Meta from './Meta'

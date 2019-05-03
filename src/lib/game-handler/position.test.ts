@@ -1,5 +1,5 @@
 import { Empty, Fu0, Kin1, Kin0, To0, To1, Fu1 } from '../../model/shogi/Piece'
-import Position from '../../model/shogi/Position'
+import { Position } from '../../model/shogi/Position'
 import { hirate } from '../../model/shogi/PositionInit'
 import { move, moveBoardOnly } from './position'
 import { Gote, Sente } from '../../model/shogi/Turn'

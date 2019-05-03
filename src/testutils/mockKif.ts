@@ -1,8 +1,8 @@
 import Kif from '../model/kif/Kif'
-import Move from '../model/kif/Move'
+import { Move } from '../model/kif/Move'
 import { Empty } from '../model/shogi/Piece'
 import Point from '../model/shogi/Point'
-import Position from '../model/shogi/Position'
+import { Position } from '../model/shogi/Position'
 import { hirate } from '../model/shogi/PositionInit'
 import { Sente } from '../model/shogi/Turn'
 

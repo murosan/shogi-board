@@ -10,6 +10,7 @@ import {
   State,
   Thinking,
 } from '../model/engine/State'
+import { Position } from '../model/shogi/Position'
 import { ShogiBoardClient } from '../proto/factory'
 import { Result } from '../proto/v1_pb'
 
@@ -120,5 +121,9 @@ export class DefaultEngineState implements EngineState {
 
   @action async setResult(r: Result.AsObject): Promise<void> {
     this.result = r
+  }
+
+  async updatePosition(p: Position): Promise<void> {
+    await this.sbclient.setPosition(p)
   }
 }

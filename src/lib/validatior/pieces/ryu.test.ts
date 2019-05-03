@@ -1,6 +1,6 @@
 import { Kin0, Kin1, Ryu0, Ryu1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
-import Position from '../../../model/shogi/Position'
+import { Position } from '../../../model/shogi/Position'
 import emptyPosition from '../../../testutils/emptyPosition'
 import ryu from './ryu'
 

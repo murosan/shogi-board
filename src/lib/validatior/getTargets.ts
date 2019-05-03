@@ -30,7 +30,7 @@ import {
   Uma1,
 } from '../../model/shogi/Piece'
 import Point from '../../model/shogi/Point'
-import Position from '../../model/shogi/Position'
+import { Position } from '../../model/shogi/Position'
 import fu from './pieces/fu'
 import gin from './pieces/gin'
 import gyoku from './pieces/gyoku'

@@ -1,6 +1,6 @@
 import { Fu0, Fu1, Kaku0, Kaku1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
-import Position from '../../../model/shogi/Position'
+import { Position } from '../../../model/shogi/Position'
 import emptyPosition from '../../../testutils/emptyPosition'
 import newGameState from '../../../testutils/newGameState'
 import kaku from './kaku'

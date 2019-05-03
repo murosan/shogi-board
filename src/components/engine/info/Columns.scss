@@ -1,0 +1,18 @@
+@import '../../../styles/colors';
+@import '../../../styles/modules';
+
+.EngineInfoColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.EngineInfoColumn .EngineInfoRow {
+  padding: 0.2em 20px;
+  background-color: $White;
+  margin: 0 0.5px;
+  text-align: center;
+}
+
+.EngineInfoColumn .EngineInfoRow ~ .BB {
+  margin-bottom: 1px;
+}

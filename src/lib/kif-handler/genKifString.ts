@@ -6,17 +6,25 @@ import { columnString, pieceString, rowString } from '../strings'
  * 棋譜の文字列を生成する
  * @param p MoveProps
  */
-export function genKifString(p: MoveProps): string {
-  const pc: string = pieceString(p.promote ? demote(p.piece) : p.piece)
-  const dr: string = rowString(p.dest.row)
-  const dc: string = columnString(p.dest.column)
+export function genKifString({
+  source,
+  dest,
+  piece,
+  promote,
+}: MoveProps): string {
+  const pc: string = pieceString(promote ? demote(piece) : piece)
+  const dr: string = rowString(dest.row)
+  const dc: string = columnString(dest.column)
 
-  if (p.source.row === -1) return `${dc}${dr}${pc}打`
+  if (source.row === -1) return `${dc}${dr}${pc}打`
 
-  const sr: number = p.source.row + 1
-  const sc: number = p.source.column + 1
-  const promote: string =
-    p.promote === undefined ? '' : p.promote ? '成' : '不成'
+  const sr: number = source.row + 1
+  const sc: number = source.column + 1
+  const promoteStr: () => string = () => {
+    if (promote === true) return '成'
+    if (promote === false) return '不成'
+    return ''
+  }
 
-  return `${dc}${dr}${pc}${promote}(${sc}${sr})`
+  return `${dc}${dr}${pc}${promoteStr()}(${sc}${sr})`
 }

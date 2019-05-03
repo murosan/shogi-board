@@ -1,7 +1,11 @@
 import { Result } from '../../proto/v1_pb'
+import { Position } from '../shogi/Position'
 import { Options } from './Optoin'
 import { State } from './State'
 
+/**
+ * 将棋エンジンの状態を Store として保持するためのインターフェース
+ */
 export interface EngineState {
   // 将棋エンジン一覧
   names: string[]
@@ -48,4 +52,7 @@ export interface EngineState {
 
   // 思考結果をセット
   setResult(r: Result.AsObject): Promise<void>
+
+  // 局面の更新
+  updatePosition(p: Position): Promise<void>
 }

@@ -1,4 +1,4 @@
-import Position from '../shogi/Position'
+import { Position } from '../shogi/Position'
 
 export default interface Meta {
   // 棋譜のバージョン

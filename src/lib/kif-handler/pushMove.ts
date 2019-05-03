@@ -1,7 +1,7 @@
 import Branch from '../../model/kif/Branch'
 import History, { isBranch, KifComponent } from '../../model/kif/History'
 import Kif from '../../model/kif/Kif'
-import Move from '../../model/kif/Move'
+import { Move } from '../../model/kif/Move'
 
 /**
  * 棋譜に新しいMoveを追加する

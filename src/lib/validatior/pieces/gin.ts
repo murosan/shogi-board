@@ -1,6 +1,6 @@
 import { Gin0, Gin1, Piece } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
-import Position from '../../../model/shogi/Position'
+import { Position } from '../../../model/shogi/Position'
 import getEmpties from '../utils/getEmpties'
 import getFromNexts from '../utils/getFromNexts'
 

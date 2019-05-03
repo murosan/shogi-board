@@ -1,6 +1,6 @@
 import Kif from '../../model/kif/Kif'
 import Meta from '../../model/kif/Meta'
-import Position from '../../model/shogi/Position'
+import { Position } from '../../model/shogi/Position'
 import { Sente } from '../../model/shogi/Turn'
 import { mockKif } from '../../testutils/mockKif'
 import { getAsString } from './getAsString'

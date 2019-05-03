@@ -1,7 +1,7 @@
 import { Piece } from '../shogi/Piece'
-import Position from '../shogi/Position'
+import { Position } from '../shogi/Position'
 
-export default interface MoveProps {
+export interface MoveProps {
   // 駒を動かす前の Position
   pos: Position
 

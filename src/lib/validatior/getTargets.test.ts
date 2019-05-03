@@ -31,7 +31,7 @@ import {
   Uma1,
 } from '../../model/shogi/Piece'
 import Point from '../../model/shogi/Point'
-import Position from '../../model/shogi/Position'
+import { Position } from '../../model/shogi/Position'
 import { Sente } from '../../model/shogi/Turn'
 import getTargets from './getTargets'
 import fu from './pieces/fu'

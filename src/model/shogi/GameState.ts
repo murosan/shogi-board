@@ -1,6 +1,6 @@
 import { ClickProps } from '../events/ClickProps'
 import Kif from '../kif/Kif'
-import Move from '../kif/Move'
+import { Move } from '../kif/Move'
 import Confirm from './Confirm'
 import Point from './Point'
 

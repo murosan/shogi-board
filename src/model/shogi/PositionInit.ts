@@ -17,7 +17,7 @@ import {
   Kyou0,
   Kyou1,
 } from './Piece'
-import Position from './Position'
+import { Position } from './Position'
 import { Sente } from './Turn'
 
 /**

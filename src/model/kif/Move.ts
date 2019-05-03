@@ -1,6 +1,6 @@
-import MoveProps from '../events/MoveProps'
+import { MoveProps } from '../events/MoveProps'
 
-export default interface Move extends MoveProps {
+export interface Move extends MoveProps {
   // 手数
   index: number
 

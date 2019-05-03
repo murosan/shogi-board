@@ -1,6 +1,6 @@
 import { Fu0, Fu1, Piece } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
-import Position from '../../../model/shogi/Position'
+import { Position } from '../../../model/shogi/Position'
 import getEmpties from '../utils/getEmpties'
 
 export default function(pos: Position, p: Point): Point[] {

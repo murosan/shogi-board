@@ -1,7 +1,7 @@
 import { Piece } from './Piece'
 import { Turn } from './Turn'
 
-export default interface Position {
+export interface Position {
   // 駒の配置 9*9 (0始まり、8まで)
   // 初期局面の例は ./PositionInit.ts
   pos: Piece[][]

@@ -1,6 +1,6 @@
 import { Hisha0, Hisha1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
-import Position from '../../../model/shogi/Position'
+import { Position } from '../../../model/shogi/Position'
 import { comp } from '../utils/algorithm'
 import getEmpties from '../utils/getEmpties'
 import getWithDiff from '../utils/getWithDiff'

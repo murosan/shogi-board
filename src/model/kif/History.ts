@@ -1,5 +1,5 @@
 import Branch from './Branch'
-import Move from './Move'
+import { Move } from './Move'
 
 export type KifComponent = Move | Branch
 

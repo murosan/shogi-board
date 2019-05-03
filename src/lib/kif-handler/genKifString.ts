@@ -1,4 +1,4 @@
-import MoveProps from '../../model/events/MoveProps'
+import { MoveProps } from '../../model/events/MoveProps'
 import { demote } from '../game-handler/piece'
 import { columnString, pieceString, rowString } from '../strings'
 

@@ -1,6 +1,6 @@
-import MoveProps from '../../model/events/MoveProps'
+import { MoveProps } from '../../model/events/MoveProps'
 import { Empty, Piece } from '../../model/shogi/Piece'
-import Position from '../../model/shogi/Position'
+import { Position } from '../../model/shogi/Position'
 import { Gote, Sente, Turn } from '../../model/shogi/Turn'
 import { decreaseCaptures, increaseCaptures } from './captures'
 import { demote } from './piece'

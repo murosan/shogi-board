@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { intoView } from '../../lib/dom-handler/intoView'
 import Branch from '../../model/kif/Branch'
 import History, { isBranch, KifComponent } from '../../model/kif/History'
-import Move from '../../model/kif/Move'
+import { Move } from '../../model/kif/Move'
 import { Store } from '../../model/store/Store'
 import './Kif.scss'
 

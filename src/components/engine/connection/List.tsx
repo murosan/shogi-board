@@ -39,11 +39,8 @@ export default class List extends Component<Props> {
   private async setCurrentEngine(name: string, state: State): Promise<void> {
     if (state !== NotConnected) return
     const { store } = this.props
-    const { gameState, engineState } = store!
-    await engineState.connect(name)
-    await store!
-      .updatePosition(gameState.currentMove)
-      .catch(e => console.error(e))
+    await store!.engineState.connect(name)
+    await store!.updatePosition().catch(e => console.error(e))
   }
 
   componentWillMount() {

@@ -1,6 +1,6 @@
 import { observable, observe } from 'mobx'
 import { EngineState } from '../model/engine/EngineState'
-import { StandBy } from '../model/engine/State'
+import { Connected } from '../model/engine/State'
 import { Move } from '../model/kif/Move'
 import { GameState } from '../model/shogi/GameState'
 import { Store } from '../model/store/Store'
@@ -22,7 +22,7 @@ export class DefaultStore implements Store {
   }
 
   async updatePosition(move?: Move): Promise<void> {
-    const setPositionExecutable: boolean = this.engineState.state >= StandBy
+    const setPositionExecutable: boolean = this.engineState.state >= Connected
     if (!setPositionExecutable) return
 
     const m: Move = move || this.gameState.currentMove

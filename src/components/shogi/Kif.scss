@@ -11,18 +11,23 @@
 }
 
 .Kif-Inner {
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  height: 100%;
-  width: 100%;
+  min-width: 100%;
 }
 
 .Move {
+  display: flex;
   padding: 0.2em 0;
-  white-space: normal;
-  span.Number {
+  .Number {
     color: $GrayBase;
-    margin-right: 0.5vw;
+    margin-right: 0.05em;
     margin-left: 1vw;
+  }
+  .MoveText {
+    white-space: nowrap;
+    margin-right: 0.25em;
   }
 }
 

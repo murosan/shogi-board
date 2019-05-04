@@ -1,8 +1,8 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
+import { genKifString } from '../../../lib/kif-handler/genKifString'
 import { Store } from '../../../model/store/Store'
 import './Columns.scss'
-import { genKifString } from '../../../lib/kif-handler/genKifString'
 
 interface Props {
   store?: Store
@@ -11,27 +11,26 @@ interface Props {
 @inject('store')
 @observer
 export default class Columns extends Component<Props> {
-  render(): JSX.Element[] | undefined {
+  render(): JSX.Element[] | JSX.Element {
     const { result } = this.props.store!.engineState
-    if (!result) return
+    if (!result) return <div />
 
-    return result.resultMap.map(([n, i]) => {
-      // const r = i.movesList.map(m => {
-      //   console.log(m.pieceid)
-      //   const kif = genKifString({
-      //     source: { row: m.source!.row, column: m.source!.column },
-      //     dest: { row: m.dest!.row, column: m.dest!.column },
-      //     piece: m.pieceid,
-      //     promote: m.ispromoted,
-      //   })
-      //   return <div className="EngineInfoRow">{kif}</div>
-      // })
-      return (
-        <div key={`EngineInfo-${n}`} className="EngineInfoColumn">
-          <div className="EngineInfoRow">score</div>
-          <div className="EngineInfoRow BB" title={`score: ${i.score}`}>
-            {i.score}
+    return result.map(i => {
+      const moves = i.moves.map((m, n) => {
+        const kif = genKifString(m, true)
+        // TODO: key
+        return (
+          <div key={n} className="EngineInfoRow">
+            {kif}
           </div>
+        )
+      })
+
+      return (
+        <div key={i.id} className="EngineInfoColumn">
+          <div className="EngineInfoRow">score</div>
+          <div className="EngineInfoRow BB">{i.score}</div>
+          {moves}
         </div>
       )
     })

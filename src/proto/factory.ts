@@ -1,6 +1,9 @@
 import { Error } from 'grpc-web'
 import debounce from 'lodash.debounce'
+import shortid from 'shortid'
 import { config } from '../config/Config'
+import { move } from '../lib/game-handler/position'
+import { Info } from '../model/engine/Info'
 import {
   Button,
   Check,
@@ -10,6 +13,8 @@ import {
   Spin,
   String,
 } from '../model/engine/Optoin'
+import { MoveProps } from '../model/events/MoveProps'
+import { Move } from '../model/kif/Move'
 import { Position } from '../model/shogi/Position'
 import { ShogiBoardClient as PbClient } from './v1_grpc_web_pb'
 import {
@@ -18,6 +23,7 @@ import {
   EngineName,
   EngineNames,
   Filename as PbFilename,
+  Info as PbInfo,
   Options as PbOptions,
   Position as PbPosition,
   Request,
@@ -35,6 +41,7 @@ import {
   UpdateSpinRequest,
   UpdateStringRequest,
 } from './v1_pb'
+import { Empty } from '../model/shogi/Piece'
 
 const DEBOUNCE_MILLIS = 1000
 
@@ -182,7 +189,7 @@ export class ShogiBoardClient {
     p.setPosList(
       pos.pos.map(r => {
         const row: Row = new Row()
-        row.setRowList(r)
+        row.setRowList(r.slice().reverse())
         return row
       })
     )
@@ -197,12 +204,62 @@ export class ShogiBoardClient {
     })
   }
 
-  async getResult(): Promise<PbResult.AsObject> {
+  async getResult(current: Move): Promise<Info[]> {
     const en: EngineName = await this.getEngineName()
     return new Promise((resolve, reject) => {
       this.client.getResult(en, {}, (err: Error, res: PbResult) => {
         if (err) reject(err)
-        resolve(res.toObject())
+
+        // info を念の為ソートして取得
+        const pbinfoList: PbInfo.AsObject[] = res
+          .toObject()
+          .resultMap.sort((a, b) => {
+            if (a[0] < b[0]) return -1
+            if (a[0] > b[0]) return 1
+            return 0
+          })
+          .map(([_, i]) => i)
+
+        // move メソッドで局面を動かしながら Info を生成していく
+        // TODO: リファクタ
+        let p: Position = current.pos
+        const infoList: Info[] = pbinfoList.map(pbi => {
+          let i: number = 0
+          p = current.pos
+          const moves: MoveProps[] = []
+
+          try {
+            while (i < pbi.movesList.length) {
+              const m = pbi.movesList[i]
+              const source = { row: m.source!.row, column: m.source!.column }
+              const dest = { row: m.dest!.row, column: m.dest!.column }
+              const piece = m.pieceid || p.pos[source.row][source.column]
+              if (piece === Empty) break
+              const mp: MoveProps = {
+                pos: p,
+                source,
+                dest,
+                piece,
+                promote: m.ispromoted,
+              }
+              moves.push(mp)
+              p = move(mp)
+              i = (i + 1) | 0
+            }
+          } catch (e) {
+            // ズレは出るのでエラーは握りつぶす
+            // console.error(i, p, e)
+          }
+
+          return {
+            id: shortid.generate(),
+            values: new Map(pbi.valuesMap), // 一旦捨てる
+            score: pbi.score,
+            moves,
+          }
+        })
+
+        resolve(infoList)
       })
     })
   }

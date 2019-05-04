@@ -1,6 +1,6 @@
-import interval from 'interval-promise'
 import { action, computed, observable } from 'mobx'
 import { EngineState } from '../model/engine/EngineState'
+import { Info } from '../model/engine/Info'
 import { Options } from '../model/engine/Optoin'
 import {
   Connected,
@@ -12,16 +12,13 @@ import {
 } from '../model/engine/State'
 import { Position } from '../model/shogi/Position'
 import { ShogiBoardClient } from '../proto/factory'
-import { Result } from '../proto/v1_pb'
-
-const GET_RESULT_INTERVAL = 1000 // ms
 
 export class DefaultEngineState implements EngineState {
   @observable names: string[]
   @observable current: string | null
   @observable options: Options | null
   @observable state: State
-  @observable result: Result.AsObject | null
+  @observable result: Info[] | null
   @observable controllerIsVisible: boolean
 
   constructor() {
@@ -91,20 +88,6 @@ export class DefaultEngineState implements EngineState {
       await this.sbclient.start()
       await this.setState(Thinking)
       await this.closeController()
-
-      // 思考を開始したら、思考結果を定期的に取得する
-      interval(async (_, stop) => {
-        if (!this.current || this.state !== Thinking) {
-          stop()
-          return
-        }
-        try {
-          const result: Result.AsObject = await this.sbclient.getResult()
-          this.setResult(result)
-        } catch (e) {
-          console.error(e)
-        }
-      }, GET_RESULT_INTERVAL)
     } catch (e) {
       console.error('[startThinking] failed to start', e)
     }
@@ -119,8 +102,8 @@ export class DefaultEngineState implements EngineState {
     await this.setState(StandBy)
   }
 
-  @action async setResult(r: Result.AsObject): Promise<void> {
-    this.result = r
+  @action async setResult(i: Info[]): Promise<void> {
+    this.result = i
   }
 
   async updatePosition(p: Position): Promise<void> {

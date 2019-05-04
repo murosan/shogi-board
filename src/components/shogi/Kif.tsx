@@ -68,8 +68,8 @@ export default class Kif extends Component<Props> {
 
     return (
       <div key={n} className="Move" id={id} onClick={onClick}>
-        <span className="Number code">{n + '.'}</span>
-        <span>{m.str}</span>
+        <div className="Number code">{n + '.'}</div>
+        <div className="MoveText">{m.str}</div>
       </div>
     )
   }

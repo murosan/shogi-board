@@ -2,10 +2,17 @@
 @import '../../../styles/modules';
 
 .EngineSideInfo {
-  display: flex;
   position: relative;
   margin: 0 0 0 0.1em;
   border: 0.25vw solid $GreenBase;
   background-color: $GrayTransParent;
+  overflow: auto;
+}
+
+.EngineSideInfo .EngineSideInfoContainer {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
   overflow: auto;
 }

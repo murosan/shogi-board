@@ -1,5 +1,6 @@
-import { Result } from '../../proto/v1_pb'
+import { ShogiBoardClient } from '../../proto/factory'
 import { Position } from '../shogi/Position'
+import { Info } from './Info'
 import { Options } from './Optoin'
 import { State } from './State'
 
@@ -21,7 +22,10 @@ export interface EngineState {
   state: State
 
   // 将棋エンジンの思考結果
-  result: Result.AsObject | null
+  result: Info[] | null
+
+  // 非同期ラッパー。型変換とかやる
+  sbclient: ShogiBoardClient
 
   // 将棋エンジンのオプション設定用 UI を表示するか
   controllerIsVisible: boolean
@@ -51,7 +55,7 @@ export interface EngineState {
   stopThinking(): Promise<void>
 
   // 思考結果をセット
-  setResult(r: Result.AsObject): Promise<void>
+  setResult(i: Info[]): Promise<void>
 
   // 局面の更新
   updatePosition(p: Position): Promise<void>

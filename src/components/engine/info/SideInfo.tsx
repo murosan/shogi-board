@@ -6,7 +6,9 @@ export default class SideInfo extends Component {
   render() {
     return (
       <div className="EngineSideInfo">
-        <Columns />
+        <div className="EngineSideInfoContainer">
+          <Columns />
+        </div>
       </div>
     )
   }

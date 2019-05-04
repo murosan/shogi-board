@@ -20,7 +20,7 @@ export default class Columns extends Component<Props> {
         const kif = genKifString(m, true)
         // TODO: key
         return (
-          <div key={n} className="EngineInfoRow">
+          <div key={n} className="EngineInfoRowContent">
             {kif}
           </div>
         )
@@ -28,9 +28,14 @@ export default class Columns extends Component<Props> {
 
       return (
         <div key={i.id} className="EngineInfoColumn">
-          <div className="EngineInfoRow">score</div>
-          <div className="EngineInfoRow BB">{i.score}</div>
-          {moves}
+          <div className="EngineInfoRow EngineInfoRowContainer">
+            <div className="EngineInfoRowLabel">score</div>
+            <div className="EngineInfoRowContent Center">{i.score}</div>
+          </div>
+          <div className="EngineInfoRow EngineInfoRowContainer">
+            <div className="EngineInfoRowLabel">読み</div>
+            {moves}
+          </div>
         </div>
       )
     })

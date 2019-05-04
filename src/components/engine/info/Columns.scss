@@ -4,15 +4,34 @@
 .EngineInfoColumn {
   display: flex;
   flex-direction: column;
+  padding: 2px;
+  padding-right: 0;
+  box-sizing: border-box;
 }
 
 .EngineInfoColumn .EngineInfoRow {
-  padding: 0.2em 20px;
-  background-color: $White;
-  margin: 0 0.5px;
+  padding: 0.2em 10px;
+  white-space: nowrap;
+}
+
+.EngineInfoColumn .EngineInfoRowContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2px;
+  border: 1px solid $GreenBase;
+  border-radius: 0.25vw;
+}
+
+.EngineInfoColumn .EngineInfoRowLabel {
+  text-align: center;
+  font-size: 0.8em;
+  line-height: 1.1em;
+}
+
+.EngineInfoColumn .Center {
   text-align: center;
 }
 
-.EngineInfoColumn .EngineInfoRow ~ .BB {
-  margin-bottom: 1px;
+.EngineInfoColumn .EngineInfoRowContent {
+  line-height: 1.3em;
 }

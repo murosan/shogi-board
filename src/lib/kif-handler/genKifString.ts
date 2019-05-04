@@ -1,17 +1,17 @@
 import { MoveProps } from '../../model/events/MoveProps'
-import { demote } from '../game-handler/piece'
+import { canPromote, demote } from '../game-handler/piece'
 import { columnString, pieceString, rowString } from '../strings'
 
 /**
  * 棋譜の文字列を生成する
  * @param p MoveProps
+ * @param checkPromotable 将棋エンジンからもらう値では、不成or無印の判定が難しいので、
+ *                        ここでチェックする。
  */
-export function genKifString({
-  source,
-  dest,
-  piece,
-  promote,
-}: MoveProps): string {
+export function genKifString(
+  { source, dest, piece, promote }: MoveProps,
+  checkPromotable?: boolean
+): string {
   const pc: string = pieceString(promote ? demote(piece) : piece)
   const dr: string = rowString(dest.row)
   const dc: string = columnString(dest.column)
@@ -22,7 +22,20 @@ export function genKifString({
   const sc: number = source.column + 1
   const promoteStr: () => string = () => {
     if (promote === true) return '成'
-    if (promote === false) return '不成'
+
+    // undefined は無印
+    if (promote !== false) return ''
+
+    // promote === false && チェックしない
+    // or
+    // promote === false && 成れる駒
+    // なら不成
+    if (
+      !checkPromotable ||
+      canPromote({ sourceRow: source.row, destRow: dest.row, piece: piece })
+    )
+      return '不成'
+
     return ''
   }
 

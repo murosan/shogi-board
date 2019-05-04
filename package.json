@@ -33,6 +33,7 @@
     "@types/node": "^11.10.5",
     "@types/react": "^16.8.7",
     "@types/react-dom": "^16.8.2",
+    "@types/shortid": "^0.0.29",
     "clipboard": "^2.0.4",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",

@@ -81,7 +81,10 @@ export class ShogiBoardClient {
     const req = new Request()
     return new Promise((resolve, reject) => {
       this.client.initialize(req, {}, (err: Error, res: EngineNames) => {
-        if (err) reject(err)
+        if (err) {
+          reject(err)
+          return
+        }
         resolve(res.getEnginesList())
       })
     })
@@ -91,7 +94,10 @@ export class ShogiBoardClient {
     const en: EngineName = await this.getEngineName()
     return new Promise((resolve, reject) => {
       this.client.getOptions(en, {}, (err: Error, res: PbOptions) => {
-        if (err) reject(err)
+        if (err) {
+          reject(err)
+          return
+        }
         const buttons: Map<string, Button> = new Map()
         const checks: Map<string, Check> = new Map()
         const spins: Map<string, Spin> = new Map()
@@ -143,7 +149,10 @@ export class ShogiBoardClient {
     const en: EngineName = await this.getEngineName()
     return new Promise((resolve, reject) => {
       this.client.connect(en, {}, (err: Error, res: Response) => {
-        if (err) reject(err)
+        if (err) {
+          reject(err)
+          return
+        }
         resolve()
       })
     })
@@ -153,7 +162,10 @@ export class ShogiBoardClient {
     const en: EngineName = await this.getEngineName()
     return new Promise((resolve, reject) => {
       this.client.close(en, {}, (err: Error, res: Response) => {
-        if (err) reject(err)
+        if (err) {
+          reject(err)
+          return
+        }
         resolve()
       })
     })
@@ -163,7 +175,10 @@ export class ShogiBoardClient {
     const en: EngineName = await this.getEngineName()
     return new Promise((resolve, reject) => {
       this.client.start(en, {}, (err: Error, res: Response) => {
-        if (err) reject(err)
+        if (err) {
+          reject(err)
+          return
+        }
         resolve()
       })
     })
@@ -173,7 +188,10 @@ export class ShogiBoardClient {
     const en: EngineName = await this.getEngineName()
     return new Promise((resolve, reject) => {
       this.client.stop(en, {}, (err: Error, res: Response) => {
-        if (err) reject(err)
+        if (err) {
+          reject(err)
+          return
+        }
         resolve()
       })
     })
@@ -198,7 +216,10 @@ export class ShogiBoardClient {
     req.setPos(p)
     return new Promise((resolve, reject) => {
       this.client.setPosition(req, {}, (err: Error, res: Response) => {
-        if (err) reject(err)
+        if (err) {
+          reject(err)
+          return
+        }
         resolve()
       })
     })
@@ -208,7 +229,10 @@ export class ShogiBoardClient {
     const en: EngineName = await this.getEngineName()
     return new Promise((resolve, reject) => {
       this.client.getResult(en, {}, (err: Error, res: PbResult) => {
-        if (err) reject(err)
+        if (err) {
+          reject(err)
+          return
+        }
 
         // info を念の為ソートして取得
         const pbinfoList: PbInfo.AsObject[] = res

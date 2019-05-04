@@ -94,7 +94,8 @@
       "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
       "!<rootDir>/src/index.tsx",
       "!<rootDir>/src/config/*.js",
-      "!<rootDir>/src/serviceWorker.ts"
+      "!<rootDir>/src/serviceWorker.ts",
+      "!<rootDir>/src/proto/*_pb.{js,d.ts}"
     ]
   }
 }

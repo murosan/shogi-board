@@ -16,8 +16,7 @@ junit.xml
 
 # app
 /src/config/*.js
-!/src/config/default.js
-!/src/config/test.js
+!/src/config/for-testing.js
 /src/proto/*
 !/src/proto/factory.ts
 

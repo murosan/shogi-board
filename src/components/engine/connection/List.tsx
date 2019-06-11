@@ -1,8 +1,8 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
+import { ShogiBoardClient } from '../../../infrastructure/ShogiBoardClient'
 import { Connecting, NotConnected, State } from '../../../model/engine/State'
 import { Store } from '../../../model/store/Store'
-import { ShogiBoardClient } from '../../../proto/factory'
 import Loader from '../../util/Loader'
 import './List.scss'
 
@@ -46,7 +46,7 @@ export default class List extends Component<Props> {
   componentWillMount() {
     const { engineState }: Store = this.props.store!
     new ShogiBoardClient()
-      .initialize()
+      .init()
       .then((list: string[]) => engineState.setNames(list))
       .catch(err => {
         const msg = 'Failed to initialize.'

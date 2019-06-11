@@ -17,8 +17,6 @@ junit.xml
 # app
 /src/config/*.js
 !/src/config/for-testing.js
-/src/proto/*
-!/src/proto/factory.ts
 
 # misc
 .DS_Store
@@ -33,3 +31,4 @@ yarn-error.log*
 
 # editor
 .idea
+.vscode

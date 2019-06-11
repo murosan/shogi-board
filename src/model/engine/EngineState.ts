@@ -1,4 +1,4 @@
-import { ShogiBoardClient } from '../../proto/factory'
+import { ShogiBoardClient } from '../../infrastructure/ShogiBoardClient'
 import { Position } from '../shogi/Position'
 import { Info } from './Info'
 import { Options } from './Optoin'
@@ -24,7 +24,7 @@ export interface EngineState {
   // 将棋エンジンの思考結果
   result: Info[] | null
 
-  // 非同期ラッパー。型変換とかやる
+  // api client
   sbclient: ShogiBoardClient
 
   // 将棋エンジンのオプション設定用 UI を表示するか

@@ -1,5 +1,3 @@
 **/node_modules/**
 /build
 /coverage
-/src/proto/*
-!/src/proto/factory.ts

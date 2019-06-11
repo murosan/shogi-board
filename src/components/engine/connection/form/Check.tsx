@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
+import { ShogiBoardClient } from '../../../../infrastructure/ShogiBoardClient'
 import { Check as OptionCheck } from '../../../../model/engine/Optoin'
-import { ShogiBoardClient } from '../../../../proto/factory'
 
 export interface Props {
   option: OptionCheck
@@ -11,7 +11,7 @@ export interface Props {
 @observer
 export default class Check extends Component<Props> {
   render() {
-    const { name, val } = this.props.option
+    const { name, value } = this.props.option
     const id: string = `OptionCheck${name}`
     return (
       <div className="OptionCheck">
@@ -22,7 +22,7 @@ export default class Check extends Component<Props> {
             name={id}
             type="checkbox"
             onChange={this.update}
-            checked={val}
+            checked={value}
           />
           <label htmlFor={id}>
             <div

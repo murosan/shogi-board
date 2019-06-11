@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
+import { ShogiBoardClient } from '../../../../infrastructure/ShogiBoardClient'
 import { Button as OptionButton } from '../../../../model/engine/Optoin'
-import { ShogiBoardClient } from '../../../../proto/factory'
 
 export interface Props {
   option: OptionButton

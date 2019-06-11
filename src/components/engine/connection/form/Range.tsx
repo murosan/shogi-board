@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { Spin as OptionRange } from '../../../../model/engine/Optoin'
-import { ShogiBoardClient } from '../../../../proto/factory'
+import { ShogiBoardClient } from '../../../../infrastructure/ShogiBoardClient'
+import { Range as OptionRange } from '../../../../model/engine/Optoin'
 import './Text.scss'
 
 export interface Props {
@@ -12,10 +12,10 @@ export interface Props {
 @observer
 export default class Range extends Component<Props> {
   render(): JSX.Element {
-    const { name, val, inputValue, min, max } = this.props.option
+    const { name, value, inputValue, min, max } = this.props.option
     // inputValue が Number && inRange のとき、 val に値をセットするようにしているため
     // val と inputValue が一致していれば正しい値
-    const isValid: boolean = val.toString() === inputValue
+    const isValid: boolean = value.toString() === inputValue
     const className: string = isValid
       ? 'OptionTextInput'
       : 'OptionTextInput OptionTextInvalid'
@@ -41,6 +41,6 @@ export default class Range extends Component<Props> {
   private update = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { option, sbclient } = this.props
     option.setValue(e.target.value)
-    sbclient.updateSpin(option)
+    sbclient.updateRange(option)
   }
 }

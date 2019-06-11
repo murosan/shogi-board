@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx'
+import { action, observable } from 'mobx'
 
 interface Option<T> {
   readonly name: string
@@ -15,22 +15,22 @@ export class Button implements Option<any> {
 }
 
 export class Check implements Option<boolean> {
-  @observable val: boolean
+  @observable value: boolean
   readonly name: string
   readonly default: boolean
-  constructor(name: string, val: boolean, initial: boolean) {
+  constructor(name: string, value: boolean, initial: boolean) {
     this.name = name
-    this.val = val
+    this.value = value
     this.default = initial
   }
 
   @action setValue(value: boolean): void {
-    this.val = value
+    this.value = value
   }
 }
 
-export class Spin implements Option<string> {
-  @observable val: number
+export class Range implements Option<string> {
+  @observable value: number
   @observable inputValue: string
   readonly name: string
   readonly default: number
@@ -38,14 +38,14 @@ export class Spin implements Option<string> {
   readonly max: number
   constructor(
     name: string,
-    val: number,
+    value: number,
     initial: number,
     min: number,
     max: number
   ) {
     this.name = name
-    this.val = val
-    this.inputValue = val.toString()
+    this.value = value
+    this.inputValue = value.toString()
     this.default = initial
     this.min = min
     this.max = max
@@ -55,59 +55,47 @@ export class Spin implements Option<string> {
     this.inputValue = value
     const n: number = Number(this.inputValue)
     if (Number.isNaN(n) || n < this.min || n > this.max) return
-    this.val = n
+    this.value = n
   }
 }
 
 export class Select implements Option<string> {
-  @observable val: string
+  @observable value: string
   readonly name: string
   readonly default: string
   readonly vars: string[]
-  constructor(name: string, val: string, initial: string, vars: string[]) {
+  constructor(name: string, value: string, initial: string, vars: string[]) {
     this.name = name
-    this.val = val
+    this.value = value
     this.default = initial
     this.vars = vars
   }
 
   @action setValue(value: string) {
-    this.val = value
+    this.value = value
   }
 }
 
-export class Str implements Option<string> {
-  @observable val: string
+export class Text implements Option<string> {
+  @observable value: string
   readonly name: string
   readonly default: string
-  constructor(name: string, val: string, initial: string) {
+
+  constructor(name: string, value: string, initial: string) {
     this.name = name
-    this.val = val
+    this.value = value
     this.default = initial
   }
 
   @action setValue(value: string) {
-    this.val = value
-  }
-}
-
-export class String extends Str {
-  constructor(name: string, val: string, initial: string) {
-    super(name, val, initial)
-  }
-}
-
-export class Filename extends Str {
-  constructor(name: string, val: string, initial: string) {
-    super(name, val, initial)
+    this.value = value
   }
 }
 
 export interface Options {
   buttons: Map<string, Button>
   checks: Map<string, Check>
-  spins: Map<string, Spin>
+  ranges: Map<string, Range>
   selects: Map<string, Select>
-  strings: Map<string, String>
-  filenames: Map<string, Filename>
+  texts: Map<string, Text>
 }

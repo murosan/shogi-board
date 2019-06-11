@@ -14,7 +14,7 @@ import { Gote, Sente } from '../../../model/shogi/Turn'
 import emptyPosition from '../../../testutils/emptyPosition'
 import isPointed from './isPointed'
 
-describe('isPointed', async () => {
+describe('isPointed', () => {
   it('(attacker=先手)相手の駒の効きがあれば true', async () => {
     const pos = emptyPosition()
     pos.pos[8][4] = Hisha0

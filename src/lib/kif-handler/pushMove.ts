@@ -70,7 +70,7 @@ function pushToBranch(b: Branch, m: Move, recursive: boolean): Branch {
     }
 
   const indexOfNewMove: number = b.branches.findIndex(h =>
-    moveEquals(<Move>h.moves[0], m)
+    moveEquals(h.moves[0] as Move, m)
   )
 
   // 追加しようとしてる Move がすでに分岐の先頭にある

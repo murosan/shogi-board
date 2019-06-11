@@ -2,7 +2,7 @@ import { Fu0, Fu1 } from '../../../model/shogi/Piece'
 import { hirate } from '../../../model/shogi/PositionInit'
 import getFromNexts from './getFromNexts'
 
-describe('getFromNexts', async () => {
+describe('getFromNexts', () => {
   it('nexts で指定された場所が空白マスなら追加される', async () => {
     const pos = hirate().pos
     const nexts = [[4, 4], [0, 4], [7, 4], [4, 1], [4, 7]]

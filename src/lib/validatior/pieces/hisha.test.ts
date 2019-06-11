@@ -5,7 +5,7 @@ import emptyPosition from '../../../testutils/emptyPosition'
 import newGameState from '../../../testutils/newGameState'
 import hisha from './hisha'
 
-describe('飛車の動き判定', async () => {
+describe('飛車の動き判定', () => {
   it('障害物がないとき、縦横に無限に移動できる', async () => {
     const pos: Position = emptyPosition()
     const expected: Point[] = [

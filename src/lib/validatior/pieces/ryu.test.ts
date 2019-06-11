@@ -4,7 +4,7 @@ import { Position } from '../../../model/shogi/Position'
 import emptyPosition from '../../../testutils/emptyPosition'
 import ryu from './ryu'
 
-describe('龍の動き判定', async () => {
+describe('龍の動き判定', () => {
   it('障害物がないとき、飛車と玉を合わせた動きができる', async () => {
     const pos: Position = emptyPosition()
     const expected: Point[] = [

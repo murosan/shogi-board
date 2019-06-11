@@ -4,7 +4,7 @@ import { Position } from '../../../model/shogi/Position'
 import emptyPosition from '../../../testutils/emptyPosition'
 import uma from './uma'
 
-describe('馬の動き判定', async () => {
+describe('馬の動き判定', () => {
   it('障害物がないとき、角と玉を合わせた動きができる', async () => {
     const pos: Position = emptyPosition()
     pos.pos[4][4] = Uma0 // 55

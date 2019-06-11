@@ -5,7 +5,7 @@ import emptyPosition from '../../../testutils/emptyPosition'
 import newGameState from '../../../testutils/newGameState'
 import fu from './fu'
 
-describe('歩の動き判定', async () => {
+describe('歩の動き判定', () => {
   it('駒のない場所に移動できる(先手)', async () => {
     const pos: Position = emptyPosition()
     pos.pos[4][4] = Fu0 // 55

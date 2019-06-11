@@ -5,7 +5,7 @@ import emptyPosition from '../../../testutils/emptyPosition'
 import newGameState from '../../../testutils/newGameState'
 import gyoku from './gyoku'
 
-describe('玉の動き判定', async () => {
+describe('玉の動き判定', () => {
   it('駒のない場所に移動できる(先手)', async () => {
     const pos: Position = emptyPosition()
     const expected: Point[] = [

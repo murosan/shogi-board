@@ -35,7 +35,7 @@ export default function filter(
       pos: pos,
       source: { row: point.row, column: point.column },
       dest: { row: targets[i].row, column: targets[i].column },
-      piece: <Piece>point.piece,
+      piece: point.piece as Piece,
     })
 
     // 玉自身の動きチェックをしていたら、玉が動くので、再セット
@@ -43,13 +43,13 @@ export default function filter(
       gp = getGyokuPoint(moved.pos, turn)
 
     // 王手放置ならpushしない
-    const isOute = gp !== undefined && isPointed(moved, gp, <Turn>-turn)
+    const isOute = gp !== undefined && isPointed(moved, gp, -turn as Turn)
     if (isOute) continue
 
     // 打ち歩詰めチェック
     const isFu: boolean = Math.abs(point.piece) === Fu0
     const isFromCapture: boolean = point.row === -1
-    const enemyGyoku = getGyokuPoint(moved.pos, <Turn>-turn)
+    const enemyGyoku = getGyokuPoint(moved.pos, -turn as Turn)
     // 打った歩による王手である
     if (
       isFu &&
@@ -58,7 +58,7 @@ export default function filter(
       isPointed(moved, enemyGyoku, turn)
     ) {
       // 打った歩が次に取られるか
-      const fuIsPointed = isPointed(moved, targets[i], <Turn>-turn)
+      const fuIsPointed = isPointed(moved, targets[i], -turn as Turn)
 
       // 相手玉が逃げられる場所があるか
       const enemyGyokuTargets = getTargets(moved, enemyGyoku)

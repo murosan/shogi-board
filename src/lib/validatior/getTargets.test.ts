@@ -63,8 +63,8 @@ const mockPos: Position = {
   moveCount: 0,
 }
 
-describe('駒の動き判定の振り分け', async () => {
-  beforeEach(async () => {
+describe('駒の動き判定の振り分け', () => {
+  beforeEach(() => {
     // Editor の型チェックでエラーにならないように
     ;(fu as jest.Mock).mockClear()
     ;(kyou as jest.Mock).mockClear()

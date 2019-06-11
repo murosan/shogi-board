@@ -5,7 +5,7 @@ import emptyPosition from '../../../testutils/emptyPosition'
 import newGameState from '../../../testutils/newGameState'
 import kin from './kin'
 
-describe('金の動き判定', async () => {
+describe('金の動き判定', () => {
   it('駒のない場所に移動できる(先手)', async () => {
     const pos: Position = emptyPosition()
     const expected: Point[] = [

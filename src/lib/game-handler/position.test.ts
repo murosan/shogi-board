@@ -4,7 +4,7 @@ import { hirate } from '../../model/shogi/PositionInit'
 import { move, moveBoardOnly } from './position'
 import { Gote, Sente } from '../../model/shogi/Turn'
 
-describe('move', async () => {
+describe('move', () => {
   it('盤上の駒を動かすことができる(先手)', async () => {
     const pos: Position = hirate()
     const expected: Position = hirate()
@@ -154,7 +154,7 @@ describe('move', async () => {
   })
 })
 
-describe('moveBoardOnly', async () => {
+describe('moveBoardOnly', () => {
   it('盤上の駒を動かせる', async () => {
     const pos: Position = hirate()
     const expected: Position = hirate()

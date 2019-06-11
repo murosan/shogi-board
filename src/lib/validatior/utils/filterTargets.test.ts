@@ -14,7 +14,7 @@ import emptyPosition from '../../../testutils/emptyPosition'
 import getTargets from '../getTargets'
 import filterTargets from './filterTargets'
 
-describe('filterTargets', async () => {
+describe('filterTargets', () => {
   it('王手放置でも打ち歩詰めでもなければ弾かれない(先手)', async () => {
     const pos = emptyPosition()
     pos.pos[4][4] = Hisha0

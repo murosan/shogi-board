@@ -30,7 +30,7 @@ export function move(p: MoveProps): Position {
     pos: moveOnBoard(p),
     cap0: updatedCap0,
     cap1: updatedCap1,
-    turn: <Turn>-p.pos.turn,
+    turn: -p.pos.turn as Turn,
     moveCount: p.pos.moveCount + 1,
   }
 }
@@ -40,7 +40,7 @@ export function moveBoardOnly(p: MoveProps): Position {
     pos: moveOnBoard(p),
     cap0: p.pos.cap0.slice(),
     cap1: p.pos.cap1.slice(),
-    turn: <Turn>-p.pos.turn,
+    turn: -p.pos.turn as Turn,
     moveCount: p.pos.moveCount + 1,
   }
 }

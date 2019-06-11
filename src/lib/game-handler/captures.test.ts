@@ -14,7 +14,7 @@ import { decreaseCaptures, increaseCaptures } from './captures'
 
 const empty: number[] = [0, 0, 0, 0, 0, 0, 0]
 
-describe('持ち駒を増やすことができる', async () => {
+describe('持ち駒を増やすことができる', () => {
   it('歩', async () => {
     const after: number[] = increaseCaptures(empty, Fu0)
     const expected: number[] = [1, 0, 0, 0, 0, 0, 0]
@@ -52,7 +52,7 @@ describe('持ち駒を増やすことができる', async () => {
   })
 })
 
-describe('持ち駒を減らすことができる', async () => {
+describe('持ち駒を減らすことができる', () => {
   it('歩', async () => {
     const before: number[] = [1, 0, 0, 0, 0, 0, 0]
     const after: number[] = decreaseCaptures(before, Fu0)
@@ -90,7 +90,7 @@ describe('持ち駒を減らすことができる', async () => {
   })
 })
 
-describe('不正な値が渡されたらエラー', async () => {
+describe('不正な値が渡されたらエラー', () => {
   it('減らすと数がマイナスになる時はエラー', async () => {
     const r = /Captures must not contain negative value.$/
     expect(() => decreaseCaptures(empty, Fu0)).toThrowError(r)

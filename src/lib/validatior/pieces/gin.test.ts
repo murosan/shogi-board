@@ -5,7 +5,7 @@ import emptyPosition from '../../../testutils/emptyPosition'
 import newGameState from '../../../testutils/newGameState'
 import gin from './gin'
 
-describe('銀の動き判定', async () => {
+describe('銀の動き判定', () => {
   it('周りに駒がなければ5箇所に移動できる(先手)', async () => {
     const pos: Position = emptyPosition()
     const expected: Point[] = [

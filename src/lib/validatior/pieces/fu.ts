@@ -1,4 +1,4 @@
-import { Fu0, Fu1, Piece } from '../../../model/shogi/Piece'
+import { Fu0, Fu1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import { Position } from '../../../model/shogi/Position'
 import getEmpties from '../utils/getEmpties'

@@ -4,7 +4,7 @@ import { Position } from '../../../model/shogi/Position'
 import emptyPosition from '../../../testutils/emptyPosition'
 import kyou from './kyou'
 
-describe('香の動き判定', async () => {
+describe('香の動き判定', () => {
   it('障害物がない場合、縦に好きなだけ移動できる(先手)', async () => {
     const pos: Position = emptyPosition()
     const expected1: Point[] = [

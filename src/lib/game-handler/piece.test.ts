@@ -31,7 +31,7 @@ import {
 } from '../../model/shogi/Piece'
 import { demote, canPromote, promote, mustPromote } from './piece'
 
-describe('promote', async () => {
+describe('promote', () => {
   it('駒を成れる', async () => {
     expect(promote(Fu0)).toEqual(To0)
     expect(promote(Kyou0)).toEqual(NariKyou0)
@@ -49,7 +49,7 @@ describe('promote', async () => {
   })
 })
 
-describe('demote', async () => {
+describe('demote', () => {
   it('成駒を元に戻せる', async () => {
     expect(demote(To0)).toEqual(Fu0)
     expect(demote(NariKyou0)).toEqual(Kyou0)
@@ -87,7 +87,7 @@ describe('demote', async () => {
   })
 })
 
-describe('canPromote', async () => {
+describe('canPromote', () => {
   it('成れる駒を敵陣に動かすと true', async () => {
     expect(canPromote({ sourceRow: 3, destRow: 2, piece: Fu0 })).toBeTruthy()
     expect(canPromote({ sourceRow: 8, destRow: 0, piece: Kyou0 })).toBeTruthy()
@@ -160,7 +160,7 @@ describe('canPromote', async () => {
     expect(canPromote({ sourceRow: -1, destRow: 5, piece: Fu0 })).toBeFalsy())
 })
 
-describe('mustPromote', async () => {
+describe('mustPromote', () => {
   it('歩が敵陣最奥に行くと true', async () => {
     expect(mustPromote(Fu0, 0)).toBeTruthy()
     expect(mustPromote(Fu0, 1)).toBeFalsy()

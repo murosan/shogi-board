@@ -4,7 +4,7 @@ import { hirate } from '../../../model/shogi/PositionInit'
 import { Gote, Sente } from '../../../model/shogi/Turn'
 import getGyokuPoint from './getGyokuPoint'
 
-describe('getGyokuPoint', async () => {
+describe('getGyokuPoint', () => {
   it('先手玉の位置を取得できる', async () => {
     const pos: number[][] = hirate().pos
     const expected: Point = {

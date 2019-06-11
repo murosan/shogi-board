@@ -1,7 +1,7 @@
 import Point from '../../../model/shogi/Point'
 import { comp, find } from './algorithm'
 
-describe('comp', async () => {
+describe('comp', () => {
   it('row が a < b ならマイナスの値が返る', async () => {
     const a: Point = { row: 0, column: 4 }
     const b: Point = { row: 1, column: 4 }
@@ -33,7 +33,7 @@ describe('comp', async () => {
   })
 })
 
-describe('find', async () => {
+describe('find', () => {
   it('位置が一致するインデックスを返せる', async () => {
     const pts: Point[] = [
       { row: 0, column: 0 },

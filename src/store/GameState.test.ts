@@ -5,7 +5,7 @@ import { Empty, Fu0, Fu1, Kei1, To0 } from '../model/shogi/Piece'
 import { mockKif } from '../testutils/mockKif'
 import { DefaultGameState } from './GameState'
 
-describe('DefaultGameState', async () => {
+describe('DefaultGameState', () => {
   it('手番側の駒を選択すると selected に情報が入る', async () => {
     const s: GameState = new DefaultGameState()
     expect(s.selected).toBeNull()

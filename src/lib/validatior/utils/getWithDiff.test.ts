@@ -3,7 +3,7 @@ import Point from '../../../model/shogi/Point'
 import emptyPosition from '../../../testutils/emptyPosition'
 import getWithDiff from './getWithDiff'
 
-describe('getWithDiff', async () => {
+describe('getWithDiff', () => {
   it('空白マスは追加される', async () => {
     const pos = emptyPosition().pos
     const res: Point[] = []

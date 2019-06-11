@@ -1,7 +1,7 @@
 import { hirate } from '../../../model/shogi/PositionInit'
 import getEmpties from './getEmpties'
 
-describe('getEmpties', async () => {
+describe('getEmpties', () => {
   it('空白マスを全て取得できる', async () => {
     const pos = hirate().pos
     expect(getEmpties(pos)).toHaveLength(41)

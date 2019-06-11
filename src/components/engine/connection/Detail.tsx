@@ -1,10 +1,10 @@
 import interval from 'interval-promise'
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
+import { ShogiBoardClient } from '../../../infrastructure/ShogiBoardClient'
 import { Info } from '../../../model/engine/Info'
 import { Thinking } from '../../../model/engine/State'
 import { Store } from '../../../model/store/Store'
-import { ShogiBoardClient } from '../../../proto/factory'
 import './Detail.scss'
 import Buttons from './form/Buttons'
 import Checks from './form/Checks'
@@ -26,7 +26,7 @@ export default class Detail extends Component<Props> {
     if (!current || !options) return <div />
 
     const sbclient: ShogiBoardClient = new ShogiBoardClient(current)
-    const { buttons, checks, spins, selects, strings, filenames } = options
+    const { buttons, checks, ranges, selects, texts } = options
 
     const disconnectBtn = (
       <button className="ButtonDisconnect" onClick={this.disconnect}>
@@ -48,9 +48,9 @@ export default class Detail extends Component<Props> {
         <h2 className="EngineOption">オプション</h2>
         <Buttons buttons={buttons} sbclient={sbclient} />
         <Checks checks={checks} sbclient={sbclient} />
-        <Ranges ranges={spins} sbclient={sbclient} />
+        <Ranges ranges={ranges} sbclient={sbclient} />
         <Selects selects={selects} sbclient={sbclient} />
-        <Texts strings={strings} filenames={filenames} sbclient={sbclient} />
+        <Texts texts={texts} sbclient={sbclient} />
         {disconnectBtn}
         {startBtn}
       </div>

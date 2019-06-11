@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
+import { ShogiBoardClient } from '../../../../infrastructure/ShogiBoardClient'
 import { Select as OptionSelect } from '../../../../model/engine/Optoin'
-import { ShogiBoardClient } from '../../../../proto/factory'
 import Select from './Select'
 import './Selects.scss'
 
@@ -14,10 +14,9 @@ export interface Props {
 export default class Selects extends Component<Props> {
   render() {
     const { selects, sbclient } = this.props
-    const values: OptionSelect[] = Array.from(selects.values())
 
-    const elms: JSX.Element[] = values.map((option, key) => (
-      <Select key={key} option={option} sbclient={sbclient} />
+    const elms: JSX.Element[] = Array.from(selects).map(([name, option]) => (
+      <Select key={name} option={option} sbclient={sbclient} />
     ))
 
     return <div>{elms}</div>

@@ -1,4 +1,5 @@
 import { action, computed, observable } from 'mobx'
+import { ShogiBoardClient } from '../infrastructure/ShogiBoardClient'
 import { EngineState } from '../model/engine/EngineState'
 import { Info } from '../model/engine/Info'
 import { Options } from '../model/engine/Optoin'
@@ -11,7 +12,6 @@ import {
   Thinking,
 } from '../model/engine/State'
 import { Position } from '../model/shogi/Position'
-import { ShogiBoardClient } from '../proto/factory'
 
 export class DefaultEngineState implements EngineState {
   @observable names: string[]

@@ -5,13 +5,14 @@
   grid-area: buttons;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
     'prevOne prevOne nextOne nextOne'
     'prevFive prevFive nextFive nextFive'
     'rev rev rev rev'
     'cp cp cp cp'
-    'engine engine engine engine';
+    'engine engine engine engine'
+    'conf conf conf conf';
 
   button {
     margin: 0;
@@ -57,4 +58,8 @@
 
 .Copy {
   grid-area: cp;
+}
+
+.Configuration {
+  grid-area: conf;
 }

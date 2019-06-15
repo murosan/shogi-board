@@ -27,15 +27,6 @@ export interface EngineState {
   // api client
   sbclient: ShogiBoardClient
 
-  // 将棋エンジンのオプション設定用 UI を表示するか
-  controllerIsVisible: boolean
-
-  // UI を表示する
-  showController(): Promise<void>
-
-  // UI を閉じる
-  closeController(): Promise<void>
-
   // サーバー側に設定されている将棋エンジンの名前一覧をセットする
   setNames(names: string[]): Promise<void>
 

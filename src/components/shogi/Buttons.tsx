@@ -1,8 +1,12 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { config } from '../../config/Config'
-import { getHostname } from '../../lib/dom-handler/url'
 import { getAsString } from '../../lib/kif-handler/getAsString'
+import {
+  MockupEngineControl,
+  MockupServerSetting,
+  MockupSetting,
+} from '../../model/display/MockupState'
 import { Thinking } from '../../model/engine/State'
 import { Store } from '../../model/store/Store'
 import './Buttons.scss'
@@ -52,44 +56,35 @@ export default class Buttons extends Component<Props> {
         <button className="ConnectToEngine" onClick={this.engineOnClick}>
           {engineButtonText}
         </button>
+        <button className="Configuration" onClick={this.showSetting}>
+          設定
+        </button>
       </div>
     )
   }
 
   private reverse = () => this.props.store!.gameState.reverse()
 
-  private engineOnClick: () => Promise<void> = async () => {
-    const { current, state } = this.props.store!.engineState
-    if (!current || state !== Thinking) return await this.connectToEngine()
-    await this.props.store!.engineState.stopThinking()
-  }
-
   private kifHandler = (i: number) => () =>
     this.props.store!.gameState.clickKif(i)
 
-  private async connectToEngine(): Promise<void> {
-    const docsURL = 'https://murosan.github.io/shogi-board/'
-    const docsIsHere = `ドキュメントはこちら`
-    if (getHostname() === 'murosan.github.io') {
-      const msg: string = [
-        'Playground では使用できません。各自PCにダウンロードしてご利用ください。',
-        docsIsHere,
-        docsURL,
-      ].join('\n')
-      alert(msg)
-      return
-    }
-
-    if (!config.serverURL) {
-      const msg: string = [
-        'serverURL を設定してください。',
-        docsIsHere,
-        docsURL,
-      ].join('\n')
-      alert(msg)
-      return
-    }
-
-    this.props.store!.engineState.showController()
+  private engineOnClick: () => Promise<void> = async () => {
+    const { engineState } = this.props.store!
+    const { current, state } = engineState
+    if (!current || state !== Thinking) return await this.connectToEngine()
+    await engineState.stopThinking()
   }
+
+  private connectToEngine = async () => {
+    const { displayState } = this.props.store!
+
+    // サーバー URL が設定されてなかったら、設定画面を出す
+    if (!config.serverURL)
+      return await displayState.setMockupState(MockupServerSetting)
+
+    await displayState.setMockupState(MockupEngineControl)
+  }
+
+  private showSetting = async () =>
+    this.props.store!.displayState.setMockupState(MockupSetting)
 }

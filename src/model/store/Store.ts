@@ -1,3 +1,4 @@
+import { DisplayState } from '../display/DisplayState'
 import { EngineState } from '../engine/EngineState'
 import { Move } from '../kif/Move'
 import { GameState } from '../shogi/GameState'
@@ -5,6 +6,7 @@ import { GameState } from '../shogi/GameState'
 export interface Store {
   gameState: GameState
   engineState: EngineState
+  displayState: DisplayState
 
   /**
    * 将棋エンジンに対して setPosition を実行する

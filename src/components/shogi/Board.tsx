@@ -1,7 +1,12 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
+import {
+  MockupEngineControl,
+  MockupSetting,
+} from '../../model/display/MockupState'
 import { Store } from '../../model/store/Store'
 import Controller from '../engine/connection/Controller'
+import Setting from '../setting/Setting'
 import './Board.scss'
 import Cell from './Cell'
 
@@ -25,14 +30,15 @@ export default class Board extends Component<Props> {
       <div className="BoardContainer">
         <div className="ResetPseudo">
           <div className="Board">{rows}</div>
-          {this.renderConnector()}
+          {this.renderMockup()}
         </div>
       </div>
     )
   }
 
-  renderConnector() {
-    const shouldRender = this.props.store!.engineState.controllerIsVisible
-    if (shouldRender) return <Controller />
+  renderMockup() {
+    const { mockup } = this.props.store!.displayState
+    if (mockup === MockupEngineControl) return <Controller />
+    if (mockup === MockupSetting) return <Setting />
   }
 }

@@ -19,7 +19,6 @@ export class DefaultEngineState implements EngineState {
   @observable options: Options | null
   @observable state: State
   @observable result: Info[] | null
-  @observable controllerIsVisible: boolean
 
   constructor() {
     this.names = []
@@ -27,19 +26,10 @@ export class DefaultEngineState implements EngineState {
     this.options = null
     this.state = NotConnected
     this.result = null
-    this.controllerIsVisible = false
   }
 
   @computed get sbclient(): ShogiBoardClient {
     return new ShogiBoardClient(this.current || '')
-  }
-
-  @action async showController(): Promise<void> {
-    this.controllerIsVisible = true
-  }
-
-  @action async closeController(): Promise<void> {
-    this.controllerIsVisible = false
   }
 
   @action async setNames(names: string[]): Promise<void> {
@@ -58,8 +48,7 @@ export class DefaultEngineState implements EngineState {
     try {
       this.setState(Connecting)
       await this.sbclient.connect()
-      const options: Options = await this.sbclient.getOptions()
-      this.options = options
+      this.options = await this.sbclient.getOptions()
       this.setState(Connected)
     } catch (e) {
       console.error('Failed to connect', e)
@@ -84,13 +73,8 @@ export class DefaultEngineState implements EngineState {
     if (!this.current)
       throw new Error('[startThinking] current engine is not set')
 
-    try {
-      await this.sbclient.start()
-      await this.setState(Thinking)
-      await this.closeController()
-    } catch (e) {
-      console.error('[startThinking] failed to start', e)
-    }
+    await this.sbclient.start()
+    await this.setState(Thinking)
   }
 
   @action async stopThinking(): Promise<void> {

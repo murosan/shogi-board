@@ -57,24 +57,31 @@ export default class Detail extends Component<Props> {
     )
   }
 
-  private disconnect = async () => this.props.store!.engineState.disconnect()
-  private start = async () => {
-    await this.props.store!.engineState.startThinking().then(() => {
-      // 思考を開始したら、思考結果を定期的に取得する
-      interval(async (_, stop) => {
-        const { gameState, engineState } = this.props.store!
-        const { current, state, sbclient } = engineState
-        if (!current || state !== Thinking) {
-          stop()
-          return
-        }
-        try {
-          const result: Info[] = await sbclient.getResult(gameState.currentMove)
-          await engineState.setResult(result)
-        } catch (e) {
-          console.error(e)
-        }
-      }, GET_RESULT_INTERVAL)
-    })
+  private disconnect = () => this.props.store!.engineState.disconnect()
+  private start = () => {
+    const { engineState, displayState } = this.props.store!
+    engineState
+      .startThinking()
+      .then(() => displayState.closeMockup())
+      .then(this.fetchInterval)
+      .catch(e => console.error(e))
+  }
+
+  private fetchInterval = async () => {
+    // 思考を開始したら、思考結果を定期的に取得する
+    interval(async (_, stop) => {
+      const { gameState, engineState } = this.props.store!
+      const { current, state, sbclient } = engineState
+      if (!current || state !== Thinking) {
+        stop()
+        return
+      }
+      try {
+        const result: Info[] = await sbclient.getResult(gameState.currentMove)
+        await engineState.setResult(result)
+      } catch (e) {
+        console.error(e)
+      }
+    }, GET_RESULT_INTERVAL)
   }
 }

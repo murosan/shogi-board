@@ -1,6 +1,6 @@
-@import '../../../../styles/colors';
+@import '../../styles/colors';
 
-.OptionCheck {
+.FormCheck {
   display: grid;
   grid-template-columns: 1fr 1fr;
   line-height: 1.5em;
@@ -78,7 +78,7 @@
   }
 }
 
-.OptionCheckToggle {
+.FormCheckToggle {
   position: relative;
   *,
   *::before,

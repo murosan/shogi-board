@@ -52,7 +52,7 @@ export class ShogiBoardClient {
   async init(): Promise<string[]> {
     const url = await this.buildUrl('init', false)
     const res = await axios.post(url)
-    return res.data as any
+    return res.data
   }
 
   async connect(): Promise<void> {
@@ -183,11 +183,6 @@ export class ShogiBoardClient {
     return await this.post('position/set', pos)
   }
 
-  private async put(path: string): Promise<void> {
-    const url = await this.buildUrl(path, true)
-    await axios.put(url)
-  }
-
   private async get<T>(path: string): Promise<T> {
     const url = await this.buildUrl(path, true)
     const res = await axios.get(url)
@@ -197,10 +192,7 @@ export class ShogiBoardClient {
   private async post(path: string, body?: object): Promise<void> {
     const url = await this.buildUrl(path, true)
     await axios.post(url, body, {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-      },
+      headers: { 'Content-Type': 'application/json' },
     })
   }
 

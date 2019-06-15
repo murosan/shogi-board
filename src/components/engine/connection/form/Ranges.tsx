@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import { ShogiBoardClient } from '../../../../infrastructure/ShogiBoardClient'
 import { Range as OptionRange } from '../../../../model/engine/Optoin'
 import Range from './Range'
-import './Text.scss'
 
 export interface Props {
   ranges: Map<string, OptionRange>

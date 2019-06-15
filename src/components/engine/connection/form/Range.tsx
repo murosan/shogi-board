@@ -2,7 +2,6 @@ import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { ShogiBoardClient } from '../../../../infrastructure/ShogiBoardClient'
 import { Range as OptionRange } from '../../../../model/engine/Optoin'
-import './Text.scss'
 
 export interface Props {
   option: OptionRange
@@ -17,12 +16,12 @@ export default class Range extends Component<Props> {
     // val と inputValue が一致していれば正しい値
     const isValid: boolean = value.toString() === inputValue
     const className: string = isValid
-      ? 'OptionTextInput'
-      : 'OptionTextInput OptionTextInvalid'
+      ? 'FormTextInput'
+      : 'FormTextInput FormTextInvalid'
     const labelText: string = `${name}(${min}~${max})`
 
     return (
-      <div className="OptionText">
+      <div className="FormText">
         <input
           className={className}
           type="text"

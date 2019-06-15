@@ -28,18 +28,17 @@ export default class Cell extends Component<Props> {
 
   render(): JSX.Element | undefined {
     const { row, column, store } = this.props
-    const {
-      indexes,
-      selected,
-      confirm,
-      currentMove,
-      moveTargets,
-    } = store!.gameState
+    const { config, gameState } = store!
+    const { indexes, selected, confirm, currentMove, moveTargets } = gameState
     const piece: Piece = this.getPiece()
 
     const turn: Turn = currentMove.pos.turn
     const isTurn: boolean =
       (piece > 0 && turn === Sente) || (piece < 0 && turn === Gote)
+
+    // 着色する設定 && 駒が移動できるマスである
+    const isTargeted =
+      config.paintTargets && find(moveTargets, { row, column }) !== -1
 
     const className: string = getClassName({
       r: row,
@@ -49,7 +48,7 @@ export default class Cell extends Component<Props> {
       sel: selected,
       confirm: confirm,
       isTurn,
-      isTargeted: find(moveTargets, { row, column }) !== -1,
+      isTargeted,
     })
 
     return (

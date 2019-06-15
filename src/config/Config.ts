@@ -1,13 +1,47 @@
-import Config from '../model/config/Config'
+import Cookies, { CookieAttributes } from 'js-cookie'
+import { action, observable } from 'mobx'
+import { Config } from '../model/config/Config'
 
-// 初期設定を読み込む
-const defaultValues: Config = require('./default')
+export class DefaultConfig implements Config {
+  @observable paintTargets: boolean
+  @observable serverURL: string
+  @observable saveToCookie: boolean
 
-// 環境別の設定ファイルを読み込む
-// test ならテスト用ファイルを読み込む
-const env = process.env.NODE_ENV
-const file: string = env === 'test' ? 'for-testing' : env
-const userDefined: Config = require(`./${file}`)
+  private readonly keys = {
+    paintTargets: 'paintTargets',
+    serverURL: 'serverURL',
+    saveToCookie: 'saveToCookie',
+  }
 
-// 合成
-export const config: Config = Object.assign({}, defaultValues, userDefined)
+  // 1年
+  private readonly expire: CookieAttributes = { expires: 86400 * 365 }
+
+  constructor() {
+    this.paintTargets = !(Cookies.get(this.keys.paintTargets) === 'false')
+    this.serverURL = Cookies.get(this.keys.serverURL) || ''
+    this.saveToCookie = Cookies.get(this.keys.saveToCookie) === 'true'
+  }
+
+  @action
+  async setPaintTargets(b: boolean): Promise<void> {
+    this.paintTargets = b
+    if (this.saveToCookie)
+      Cookies.set(this.keys.paintTargets, String(b), this.expire)
+  }
+
+  @action
+  async setServerURL(s: string): Promise<void> {
+    this.serverURL = s
+    if (this.saveToCookie) Cookies.set(this.keys.serverURL, s, this.expire)
+  }
+
+  @action
+  async setSaveToCookie(b: boolean): Promise<void> {
+    this.saveToCookie = b
+    if (this.saveToCookie)
+      return Cookies.set(this.keys.saveToCookie, String(b), this.expire)
+
+    // false なら削除する
+    Object.values(this.keys).forEach(key => Cookies.remove(key))
+  }
+}

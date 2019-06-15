@@ -19,6 +19,7 @@ export class DefaultEngineState implements EngineState {
   @observable options: Options | null
   @observable state: State
   @observable result: Info[] | null
+  @observable serverURL: string
 
   constructor() {
     this.names = []
@@ -26,10 +27,11 @@ export class DefaultEngineState implements EngineState {
     this.options = null
     this.state = NotConnected
     this.result = null
+    this.serverURL = ''
   }
 
   @computed get sbclient(): ShogiBoardClient {
-    return new ShogiBoardClient(this.current || '')
+    return new ShogiBoardClient(this.current || '', this.serverURL)
   }
 
   @action async setNames(names: string[]): Promise<void> {
@@ -92,5 +94,9 @@ export class DefaultEngineState implements EngineState {
 
   async updatePosition(p: Position): Promise<void> {
     await this.sbclient.setPosition(p)
+  }
+
+  @action async setServerURL(s: string): Promise<void> {
+    this.serverURL = s
   }
 }

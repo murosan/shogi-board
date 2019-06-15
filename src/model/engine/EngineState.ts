@@ -50,4 +50,6 @@ export interface EngineState {
 
   // 局面の更新
   updatePosition(p: Position): Promise<void>
+
+  setServerURL(s: string): Promise<void>
 }

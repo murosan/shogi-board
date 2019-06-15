@@ -1,7 +1,6 @@
 import interval from 'interval-promise'
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { ShogiBoardClient } from '../../../infrastructure/ShogiBoardClient'
 import { Info } from '../../../model/engine/Info'
 import { Thinking } from '../../../model/engine/State'
 import { Store } from '../../../model/store/Store'
@@ -22,10 +21,9 @@ export interface Props {
 @observer
 export default class Detail extends Component<Props> {
   render() {
-    const { current, options } = this.props.store!.engineState
+    const { current, options, sbclient } = this.props.store!.engineState
     if (!current || !options) return <div />
 
-    const sbclient: ShogiBoardClient = new ShogiBoardClient(current)
     const { buttons, checks, ranges, selects, texts } = options
 
     const disconnectBtn = (

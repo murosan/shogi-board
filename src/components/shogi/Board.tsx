@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import {
   MockupEngineControl,
   MockupSetting,
+  MockupServerSetting,
 } from '../../model/display/MockupState'
 import { Store } from '../../model/store/Store'
 import Controller from '../engine/connection/Controller'
@@ -39,6 +40,8 @@ export default class Board extends Component<Props> {
   renderMockup() {
     const { mockup } = this.props.store!.displayState
     if (mockup === MockupEngineControl) return <Controller />
-    if (mockup === MockupSetting) return <Setting />
+    // TODO: server setting は別に分ける？
+    if (mockup === MockupSetting || mockup === MockupServerSetting)
+      return <Setting />
   }
 }

@@ -1,6 +1,5 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { ShogiBoardClient } from '../../../infrastructure/ShogiBoardClient'
 import { Connecting, NotConnected, State } from '../../../model/engine/State'
 import { Store } from '../../../model/store/Store'
 import Loader from '../../util/Loader'
@@ -45,12 +44,19 @@ export default class List extends Component<Props> {
 
   componentWillMount() {
     const { engineState }: Store = this.props.store!
-    new ShogiBoardClient()
+    engineState.sbclient
       .init()
       .then((list: string[]) => engineState.setNames(list))
       .catch(err => {
-        const msg = 'Failed to initialize.'
-        console.error(msg, err)
+        const msg = [
+          '接続に失敗しました。以下を確認してください。',
+          '1. サーバーが起動しているか',
+          '2. サーバーのURLが正しいか',
+          '3. サーバーのログを確認し、エラー等が出ていないか',
+          '4. サーバーで将棋エンジンの実行パスを設定したか',
+          '5. 将棋エンジンが実行可能であるか',
+        ].join('\n')
+        console.error(err)
         engineState.disconnect()
         alert(msg)
       })

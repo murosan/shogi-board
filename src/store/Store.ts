@@ -1,4 +1,6 @@
 import { observable, observe } from 'mobx'
+import { DefaultConfig } from '../config/Config'
+import { Config } from '../model/config/Config'
 import { DisplayState } from '../model/display/DisplayState'
 import { EngineState } from '../model/engine/EngineState'
 import { Connected } from '../model/engine/State'
@@ -13,15 +15,23 @@ export class DefaultStore implements Store {
   @observable gameState: GameState
   @observable engineState: EngineState
   @observable displayState: DisplayState
+  @observable config: Config
 
   constructor() {
     this.gameState = new DefaultGameState()
     this.engineState = new DefaultEngineState()
     this.displayState = new DefaultDisplayState()
+    this.config = new DefaultConfig()
+    this.engineState.setServerURL(this.config.serverURL)
 
     // gameState で現在局面に変更があったら、将棋エンジンに局面をセットする
     observe(this.gameState, 'currentMove', change =>
       this.updatePosition(change.newValue)
+    )
+
+    // config の serverURL に変更があったら、engineState の serverURL を更新する
+    observe(this.config, 'serverURL', change =>
+      this.engineState.setServerURL(change.newValue)
     )
   }
 

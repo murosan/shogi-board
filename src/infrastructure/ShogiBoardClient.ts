@@ -1,7 +1,6 @@
 import axios from 'axios'
 import debounce from 'lodash.debounce'
 import shortid from 'shortid'
-import { config } from '../config/Config'
 import { move } from '../lib/game-handler/position'
 import { Info } from '../model/engine/Info'
 import {
@@ -26,9 +25,9 @@ export class ShogiBoardClient {
 
   private readonly engineNameKey = 'key'
 
-  constructor(engineName?: string) {
+  constructor(engineName?: string, serverURL?: string) {
     this._engineName = engineName
-    this._serverURL = config.serverURL
+    this._serverURL = serverURL
   }
 
   set engineName(name: string) {

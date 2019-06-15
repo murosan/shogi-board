@@ -20,6 +20,7 @@ export default class Check extends Component<Props> {
         <span>{label}</span>
         <div className="FormCheckToggle">
           <input
+            id={id}
             name={id}
             type="checkbox"
             onChange={e => this.props.onChange(e.target.checked)}

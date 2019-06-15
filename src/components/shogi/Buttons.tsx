@@ -1,6 +1,5 @@
 import { inject, observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { config } from '../../config/Config'
 import { getAsString } from '../../lib/kif-handler/getAsString'
 import {
   MockupEngineControl,
@@ -76,11 +75,13 @@ export default class Buttons extends Component<Props> {
   }
 
   private connectToEngine = async () => {
-    const { displayState } = this.props.store!
+    const { displayState, config } = this.props.store!
 
     // サーバー URL が設定されてなかったら、設定画面を出す
-    if (!config.serverURL)
+    if (config.serverURL === '') {
+      console.log('here')
       return await displayState.setMockupState(MockupServerSetting)
+    }
 
     await displayState.setMockupState(MockupEngineControl)
   }

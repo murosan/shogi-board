@@ -7,12 +7,13 @@ export interface Props {
   label: string
   onChange: (s: string) => Promise<void>
   allowEmpty?: boolean
+  placeholder?: string
 }
 
 @observer
 export default class Text extends Component<Props> {
   render(): JSX.Element {
-    const { value, label, allowEmpty } = this.props
+    const { value, label, allowEmpty, placeholder } = this.props
 
     const classes = ['FormTextInput']
     if (allowEmpty !== true && value === '') classes.push('FormTextInvalid')
@@ -24,7 +25,7 @@ export default class Text extends Component<Props> {
           className={className}
           type="text"
           value={value}
-          placeholder=" "
+          placeholder={placeholder || ' '}
           onChange={this.onChange}
           required
         />

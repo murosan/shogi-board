@@ -1,9 +1,9 @@
-.SelectContainer {
+.FormSelectContainer {
   color: rgba(0, 0, 0, 0.67);
   letter-spacing: 0.05em;
 }
 
-.OptionSelect {
+.FormSelect {
   overflow: hidden;
   width: 100%;
   margin: 0.5em auto 1.5em auto;
@@ -29,7 +29,7 @@
   }
 }
 
-.OptionSelect.SelectTriangle {
+.FormSelect.SelectTriangle {
   position: relative;
   border: 1px solid #bbbbbb;
   border-radius: 2px;

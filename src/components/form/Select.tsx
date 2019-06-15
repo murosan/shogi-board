@@ -1,25 +1,26 @@
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
-import { ShogiBoardClient } from '../../../../infrastructure/ShogiBoardClient'
-import { Select as OptionSelect } from '../../../../model/engine/Optoin'
-import './Selects.scss'
+import './Select.scss'
 
 export interface Props {
-  option: OptionSelect
-  sbclient: ShogiBoardClient
+  label: string
+  value: string
+  options: string[]
+  onChange: (s: string) => Promise<void>
 }
 
 @observer
 export default class Select extends Component<Props> {
   render(): JSX.Element {
-    const { name, value, vars } = this.props.option
-    const options = this.renderOptions(vars)
+    const { label, value, options } = this.props
+    const opts = this.renderOptions(options)
+
     return (
-      <div className="SelectContainer">
-        <label>{name}</label>
-        <div className="OptionSelect SelectTriangle">
+      <div className="FormSelectContainer">
+        <label>{label}</label>
+        <div className="FormSelect SelectTriangle">
           <select onChange={this.update} value={value} required>
-            {options}
+            {opts}
           </select>
         </div>
       </div>
@@ -35,8 +36,6 @@ export default class Select extends Component<Props> {
   }
 
   private update = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { option, sbclient } = this.props
-    option.setValue(e.target.value)
-    sbclient.updateSelect(option)
+    this.props.onChange(e.target.value)
   }
 }

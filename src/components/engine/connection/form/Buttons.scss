@@ -6,16 +6,6 @@
   overflow: hidden;
 }
 
-.OptionButton .ButtonApply {
-  @include button(darken($GreenSelected, 10%)); // #1abc9c
-  margin-bottom: 0.5em;
-  height: 35px;
-
-  &:active {
-    background-color: $White;
-  }
-}
-
 .ButtonDisconnect {
   @include button(#db4444);
   width: 100%;

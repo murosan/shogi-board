@@ -1,4 +1,4 @@
-.OptionText {
+.FormText {
   display: block;
   max-height: 2em;
   padding: 20px 0px 4px 0px;
@@ -8,7 +8,7 @@
   margin-bottom: 1.7em;
 }
 
-.OptionText .OptionTextInput {
+.FormText .FormTextInput {
   outline: 0;
   border: 0;
   display: block;
@@ -23,7 +23,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.67);
 }
 
-.OptionText .OptionTextInput ~ label {
+.FormText .FormTextInput ~ label {
   display: block;
   position: absolute;
   top: 8px;
@@ -35,6 +35,6 @@
   transition: all 0.2s;
 }
 
-.OptionText .OptionTextInvalid {
+.FormText .FormTextInvalid {
   border-bottom: 1px solid rgba(255, 0, 0, 0.67);
 }

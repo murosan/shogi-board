@@ -205,7 +205,8 @@ export class ShogiBoardClient {
   }
 
   private async buildUrl(path: string, withName: boolean) {
-    const query = withName ? `?${this.engineNameKey}=${this.engineName}` : ''
+    const e = (s: string) => encodeURIComponent(s)
+    const query = withName ? `?${this.engineNameKey}=${e(this.engineName)}` : ''
     return `${this.serverURL}/${path}${query}`
   }
 

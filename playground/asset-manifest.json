@@ -1,14 +1,16 @@
 {
-  "main.css": "/shogi-board/playground/static/css/main.ce7a9279.chunk.css",
-  "main.js": "/shogi-board/playground/static/js/main.c2fa7f0e.chunk.js",
-  "main.js.map": "/shogi-board/playground/static/js/main.c2fa7f0e.chunk.js.map",
-  "static/js/1.2a72fb21.chunk.js": "/shogi-board/playground/static/js/1.2a72fb21.chunk.js",
-  "static/js/1.2a72fb21.chunk.js.map": "/shogi-board/playground/static/js/1.2a72fb21.chunk.js.map",
-  "runtime~main.js": "/shogi-board/playground/static/js/runtime~main.b940b8ac.js",
-  "runtime~main.js.map": "/shogi-board/playground/static/js/runtime~main.b940b8ac.js.map",
-  "static/media/App.scss": "/shogi-board/playground/static/media/tatami.8d2b7da0.jpg",
-  "static/css/main.ce7a9279.chunk.css.map": "/shogi-board/playground/static/css/main.ce7a9279.chunk.css.map",
-  "index.html": "/shogi-board/playground/index.html",
-  "precache-manifest.a1c7ce675fe5efa0616b570af8ac7b3e.js": "/shogi-board/playground/precache-manifest.a1c7ce675fe5efa0616b570af8ac7b3e.js",
-  "service-worker.js": "/shogi-board/playground/service-worker.js"
+  "files": {
+    "main.css": "/shogi-board/playground/static/css/main.5ce9ca06.chunk.css",
+    "main.js": "/shogi-board/playground/static/js/main.f73f2d7e.chunk.js",
+    "main.js.map": "/shogi-board/playground/static/js/main.f73f2d7e.chunk.js.map",
+    "runtime~main.js": "/shogi-board/playground/static/js/runtime~main.fb99919e.js",
+    "runtime~main.js.map": "/shogi-board/playground/static/js/runtime~main.fb99919e.js.map",
+    "static/js/2.68772eb0.chunk.js": "/shogi-board/playground/static/js/2.68772eb0.chunk.js",
+    "static/js/2.68772eb0.chunk.js.map": "/shogi-board/playground/static/js/2.68772eb0.chunk.js.map",
+    "index.html": "/shogi-board/playground/index.html",
+    "precache-manifest.a0d301b90f9463917d65416990c13a0e.js": "/shogi-board/playground/precache-manifest.a0d301b90f9463917d65416990c13a0e.js",
+    "service-worker.js": "/shogi-board/playground/service-worker.js",
+    "static/css/main.5ce9ca06.chunk.css.map": "/shogi-board/playground/static/css/main.5ce9ca06.chunk.css.map",
+    "static/media/App.scss": "/shogi-board/playground/static/media/tatami.8d2b7da0.jpg"
+  }
 }

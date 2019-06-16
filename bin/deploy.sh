@@ -11,7 +11,7 @@ cd $PROJECT_ROOT
 yarn test:c
 
 # insert Google Analytics to index.html
-node $PROJECT_ROOT/scripts/ga.js insert
+node $PROJECT_ROOT/bin/ga.js insert
 
 # build app
 yarn build
@@ -42,7 +42,7 @@ mkdir playground
 cp -r $PROJECT_ROOT/build/* ./playground/
 
 # restore index.html
-node $PROJECT_ROOT/scripts/ga.js remove
+node $PROJECT_ROOT/bin/ga.js remove
 
 # deploy
 read -p "Are you sure to deploy? [y/n]" CONFIRM

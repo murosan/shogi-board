@@ -12,7 +12,7 @@
     "将棋",
     "検討",
     "ブラウザ",
-    "動かせる"
+    "将棋ソフト"
   ],
   "repository": {
     "type": "git",
@@ -65,7 +65,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "scripts/deploy.sh",
+    "deploy": "bin/deploy.sh",
     "test": "react-scripts test",
     "test:c": "react-scripts test --coverage",
     "test:debug": "react-scripts --inspect-brk test --runInBand",

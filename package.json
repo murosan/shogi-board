@@ -67,7 +67,7 @@
     "build": "react-scripts build",
     "deploy": "bin/deploy.sh",
     "test": "react-scripts test",
-    "test:c": "react-scripts test --coverage",
+    "test:c": "react-scripts test --coverage --watchAll=false",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "test:ci": "CI=true node --max_old_space_size=1024 --trace-gc ./node_modules/react-scripts/bin/react-scripts.js test --maxWorkers=2 --coverage --reporters=default",
     "lint": "prettier --write '**/*.{js,jsx,ts,tsx,json,yml,css,scss,md,html}'",

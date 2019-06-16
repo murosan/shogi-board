@@ -1,5 +1,3 @@
-'use strict'
-
 // See https://docusaurus.io/docs/site-config for all the possible
 // site configuration options.
 
@@ -22,9 +20,9 @@ const siteConfig = {
 
   headerLinks: [
     { href: playgroundUrl, label: 'Playground' }, // デプロイ前にビルドする
-    { doc: 'features', label: 'Docs' },
+    { doc: 'getting-started', label: 'Docs' },
     { href: repositoryUrl, label: 'GitHub' },
-    { blog: true, label: 'Blog' },
+    { blog: true, label: 'Release Notes' },
   ],
 
   headerIcon: 'img/icon.svg',

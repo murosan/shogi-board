@@ -1,5 +1,3 @@
-'use strict'
-
 const React = require('react')
 
 const CompLibrary = require('../../core/CompLibrary.js')
@@ -59,7 +57,7 @@ class HomeSplash extends React.Component {
           <ProjectTitle siteConfig={siteConfig} />
           <PromoSection>
             <Button href={playgroundUrl}>Try It Out</Button>
-            <Button href={docUrl('features')}>Usage</Button>
+            <Button href={docUrl('getting-started')}>Usage</Button>
           </PromoSection>
         </div>
       </SplashContainer>
@@ -70,7 +68,10 @@ class HomeSplash extends React.Component {
 class Index extends React.Component {
   render() {
     const { config: siteConfig, language = '' } = this.props
-    const { baseUrl, playgroundUrl } = siteConfig
+    const { baseUrl, docsUrl, playgroundUrl } = siteConfig
+    const gettingStarted = `${docsUrl}/getting-started`
+    const useEngine = `${docsUrl}/use-engine`
+    const sbserverUrl = 'https:/github.com/murosan/shogi-board-server'
 
     const Block = props => (
       <Container
@@ -106,7 +107,7 @@ $ yarn start
           {
             title: '',
             imageAlt: 'image',
-            image: `${baseUrl}img/shogi-board.jpg`,
+            image: `${baseUrl}img/shogi-board.gif`,
             imageAlign: 'left',
           },
         ]}
@@ -117,21 +118,25 @@ $ yarn start
       <Block layout="twoColumn" background="light">
         {[
           {
+            title: '将棋の検討をブラウザで',
             content:
-              'PC と最新版 GoogleChrome だけあれば動作する、' +
-              'とても軽量な Web アプリケーションです。' +
-              '多少のプログラミング知識があれば各自PCにダウンロードしてオフラインでも使用可能。' +
-              'macOS を完全にサポートします。' +
-              '将棋ソフトを扱う機能も開発中です。',
-            title: 'ブラウザで動作',
+              'ブラウザで動作する軽量な将棋盤 Web アプリケーションです<br>' +
+              'PWA に対応しているため、オフラインでも使用可能<br>' +
+              'macOS を完全にサポートします<br><br>' +
+              'ルール通りに駒を動かすことができ<br>' +
+              '王手放置・打ち歩詰め防止機能など<br>' +
+              '検討に必要な最低限の機能が付いています',
           },
           {
+            title: '将棋ソフトを用いた検討',
             content:
-              'ルール通りに駒を動かすことができます。' +
-              '王手放置・打ち歩詰めも防止します。' +
-              '棋譜作成・分岐の作成も可能。<br>' +
-              '棋譜の保存・取り込み機能などは今年中にリリースします。',
-            title: '検討・棋譜並べに最適',
+              `[shogi-board-server](${sbserverUrl}) ` +
+              'と合わせて使うことで<br>' +
+              '将棋ソフトを使って検討することができます。<br>' +
+              'もちろん macOS でも動作します<br><br>' +
+              `使い方は以下のドキュメントをご覧ください<br>` +
+              `- [Getting Started](${gettingStarted})<br>` +
+              `- [将棋ソフトを使って検討する方法](${useEngine})`,
           },
         ]}
       </Block>
@@ -150,7 +155,7 @@ $ yarn start
 }
 
 Index.description =
-  'ブラウザで動く将棋盤！将棋の検討・棋譜並べができる、軽量で無料な将棋盤Webアプリケーションです。' +
-  '各自PCにダウンロードして、オフラインでも使用可能。棋譜作成にも対応しています。'
+  'ブラウザで動く将棋盤。将棋の検討・棋譜並べができる、軽量で無料な将棋盤Webアプリケーションです。' +
+  'オフラインでも使用可能。将棋ソフトを使った検討もできます。'
 
 module.exports = Index

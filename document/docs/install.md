@@ -1,18 +1,16 @@
 ---
 id: install
-title: インストール
+title: 開発者向け
 ---
 
-インストールせずに試すには [Playground](/shogi-board/playground/) から
+GitHub リポジトリから close して使う方法を紹介します。開発者向けのページです
 
-## Option 1. Clone して使う
-
-#### 必要なもの
+## 事前に必要なもの
 
 Git・Node.js・Yarn  
-↑ のインストール方法は [こちら](install_tools.md)
+インストール方法は [こちら](install_tools.md)
 
-#### 手順
+## Quick Start
 
 ```sh
 $ git clone https://github.com/murosan/shogi-board.git
@@ -21,6 +19,22 @@ $ yarn
 $ yarn start
 ```
 
-## Option 2. Docker
+## ドキュメントを編集する
 
-WIP
+```sh
+$ cd shogi-board/document/website/
+$ yarn start
+```
+
+Docusaurus という静的サイトジェネレータを使用しています。  
+詳しくは [docusaurus.io](https://docusaurus.io/) を参照してください。
+
+## shogi-board-server の Quick Start
+
+```sh
+$ git clone https://github.com/murosan/shogi-board-server.git
+$ cd shogi-board-server
+$ cp ./config/app_example.yml ./config/app.yml
+# ./config/app.yml に記入する
+$ go run main.go
+```

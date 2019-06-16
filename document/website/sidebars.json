@@ -1,6 +1,6 @@
 {
   "docs": {
-    "Getting Started": ["features", "install"],
+    "Getting Started": ["getting-started", "features", "use-engine", "install"],
     "Help": ["help", "install_tools"]
   }
 }

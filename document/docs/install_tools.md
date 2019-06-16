@@ -6,7 +6,6 @@ title: 各種ツールのインストール方法
 Shogi Board をセットアップするために必要な各種ツールのインストール方法一覧です。  
 不明な点などがあれば、お気軽に [issue](https://github.com/murosan/shogi-board/issues) へどうぞ！。
 
-- [title: 各種ツールのインストール方法](#title-%E5%90%84%E7%A8%AE%E3%83%84%E3%83%BC%E3%83%AB%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%96%B9%E6%B3%95)
 - [Git](#git)
   - [macOS](#macos)
   - [Windows](#windows)
@@ -58,6 +57,7 @@ Homebrew がインストールされている前提です([インストール方
 $ brew install nodebrew
 $ echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> ~/.bash_profile
 $ source ~/.bash_profile
+$ nodebrew setup
 $ nodebrew -v
 nodebrew 0.9.7
 # (略)
@@ -67,7 +67,6 @@ nodebrew 0.9.7
 
 ```sh
 $ nodebrew install-binary v10.14.1
-# 数分かかる
 $ use v10.14.1
 $ node -v
 v10.14.1
@@ -79,8 +78,7 @@ Help wanted
 
 ## Yarn
 
-`npm` と同じパッケージマネージャです。  
-`npm` より高速に動作します（今はほとんど差がないですが）。
+`npm` と同じパッケージマネージャです。
 
 #### macOS
 

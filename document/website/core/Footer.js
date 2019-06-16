@@ -1,5 +1,3 @@
-'use strict'
-
 const React = require('react')
 
 class Footer extends React.Component {
@@ -38,7 +36,7 @@ class Footer extends React.Component {
           </div>
           <div>
             <h5>More</h5>
-            <a href={`${this.props.config.baseUrl}blog`}>Blog</a>
+            <a href={`${this.props.config.baseUrl}blog`}>Release Notes</a>
             <a href={this.props.config.repoUrl}>GitHub</a>
             <a href={`${this.props.config.repoUrl}/issues`}>Issues</a>
             <a

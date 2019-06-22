@@ -12,7 +12,8 @@ macOS の最新版 Google Chrome
 Windows は、開発者がデバイスを所持していないため基本的にサポート対象外です。  
 最新版 Google Chrome では同じように動作するはずですが、
 デザイン崩れが発生する場合があります。  
-その場合、 [issue](https://github.com/murosan/shogi-board/issues) やプルリクエストをいただければ対応します。
+その場合、 <u>[issue](https://github.com/murosan/shogi-board/issues)</u>
+やプルリクエストをいただければ対応します。
 
 スマートフォンは非対応です
 

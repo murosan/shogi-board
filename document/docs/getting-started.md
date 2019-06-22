@@ -9,7 +9,7 @@ title: Getting Started
 
 もっとも簡単な方法です。まずはこちらでお試しください。
 
-https://murosan.github.io/shogi-board/playground
+<u>https://murosan.github.io/shogi-board/playground</u>
 
 - メリット
   - 簡単
@@ -19,12 +19,13 @@ https://murosan.github.io/shogi-board/playground
 ## 方法 2. PWA
 
 Shogi Board は `v3.0.0` から PWA(Progressive Web Apps) に対応しています。  
-Chrome などで、 [Playground](/shogi-board/playground/) にアクセスすると
+Chrome などで、 <u>[Playground](/shogi-board/playground/)</u> にアクセスすると
 バナーが表示されますので、クリックして Chrome アプリに追加してください。
 
 iOS や Android における「ホーム画面に追加」と同じ仕組みです。
 
-次回以降は、アプリのアイコンをクリックすることで [Playground](/shogi-board/playground/)
+次回以降は、アプリのアイコンをクリックすることで
+<u>[Playground](/shogi-board/playground/)</u>
 を表示することができます。
 
 一手間かかりますが、もっともオススメの方法です。
@@ -41,7 +42,7 @@ iOS や Android における「ホーム画面に追加」と同じ仕組みで�
 以下からファイルをダウンロードできます。  
 ダウンロード後 `index.html` をブラウザで開いてください。
 
-https://github.com/murosan/shogi-board/releases
+<u>https://github.com/murosan/shogi-board/releases</u>
 
 - メリット
   - オフラインでも使用可能

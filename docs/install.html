@@ -64,7 +64,7 @@
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">開発者向け</h1></header><article><div><span><p>GitHub リポジトリから close して使う方法を紹介します。開発者向けのページです</p>
 <h2><a class="anchor" aria-hidden="true" id="事前に必要なもの"></a><a href="#事前に必要なもの" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>事前に必要なもの</h2>
 <p>Git・Node.js・Yarn<br>
-インストール方法は <a href="/shogi-board/docs/install_tools">こちら</a></p>
+インストール方法は <u><a href="/shogi-board/docs/install_tools">こちら</a></u></p>
 <h2><a class="anchor" aria-hidden="true" id="quick-start"></a><a href="#quick-start" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Quick Start</h2>
 <pre><code class="hljs css language-sh">$ git <span class="hljs-built_in">clone</span> https://github.com/murosan/shogi-board.git
 $ <span class="hljs-built_in">cd</span> shogi-board
@@ -76,12 +76,29 @@ $ yarn start
 $ yarn start
 </code></pre>
 <p>Docusaurus という静的サイトジェネレータを使用しています。<br>
-詳しくは <a href="https://docusaurus.io/">docusaurus.io</a> を参照してください。</p>
+詳しくは <u><a href="https://docusaurus.io/">docusaurus.io</a></u> を参照してください。</p>
 <h2><a class="anchor" aria-hidden="true" id="shogi-board-server-の-quick-start"></a><a href="#shogi-board-server-の-quick-start" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>shogi-board-server の Quick Start</h2>
+<ul>
+<li><code>Go Modules</code> を有効にしてください</li>
+</ul>
+<pre><code class="hljs css language-sh">$ <span class="hljs-built_in">export</span> GO111MODULES=on
+</code></pre>
+<ul>
+<li><code>GOPATH</code> 以下で実行する場合</li>
+</ul>
+<pre><code class="hljs css language-sh">$ go get github.com/murosan/shogi-board-server
+$ <span class="hljs-built_in">cd</span> <span class="hljs-variable">$GOPATH</span>/src/github.com/murosan/shogi-board-server
+$ cp ./config/app_example.yml ./config/app.yml
+<span class="hljs-comment"># ./config/app.yml に記入する</span>
+$ go run main.go
+</code></pre>
+<ul>
+<li><code>GOPATH</code> の外側で実行する場合</li>
+</ul>
 <pre><code class="hljs css language-sh">$ git <span class="hljs-built_in">clone</span> https://github.com/murosan/shogi-board-server.git
 $ <span class="hljs-built_in">cd</span> shogi-board-server
 $ cp ./config/app_example.yml ./config/app.yml
 <span class="hljs-comment"># ./config/app.yml に記入する</span>
 $ go run main.go
 </code></pre>
-</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-6-16 by murosan</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/shogi-board/docs/use-engine"><span class="arrow-prev">← </span><span>将棋ソフトを使う</span></a><a class="docs-next button" href="/shogi-board/docs/help"><span>ヘルプ</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#事前に必要なもの">事前に必要なもの</a></li><li><a href="#quick-start">Quick Start</a></li><li><a href="#ドキュメントを編集する">ドキュメントを編集する</a></li><li><a href="#shogi-board-server-の-quick-start">shogi-board-server の Quick Start</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/shogi-board/" class="nav-home"><img src="/shogi-board/img/icon.svg" alt="Shogi Board" width="66" height="58"/></a><div><h5>Docs</h5><a href="/shogi-board/docs/en/features.html">Getting Started</a></div><div><h5>More</h5><a href="/shogi-board/blog">Release Notes</a><a href="https://github.com/murosan/shogi-board">GitHub</a><a href="https://github.com/murosan/shogi-board/issues">Issues</a><a class="github-button" href="https://github.com/murosan/shogi-board" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 murosan</section></footer></div></body></html>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-6-22 by murosan</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/shogi-board/docs/use-engine"><span class="arrow-prev">← </span><span>将棋ソフトを使う</span></a><a class="docs-next button" href="/shogi-board/docs/help"><span>ヘルプ</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#事前に必要なもの">事前に必要なもの</a></li><li><a href="#quick-start">Quick Start</a></li><li><a href="#ドキュメントを編集する">ドキュメントを編集する</a></li><li><a href="#shogi-board-server-の-quick-start">shogi-board-server の Quick Start</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/shogi-board/" class="nav-home"><img src="/shogi-board/img/icon.svg" alt="Shogi Board" width="66" height="58"/></a><div><h5>Docs</h5><a href="/shogi-board/docs/en/features.html">Getting Started</a></div><div><h5>More</h5><a href="/shogi-board/blog">Release Notes</a><a href="https://github.com/murosan/shogi-board">GitHub</a><a href="https://github.com/murosan/shogi-board/issues">Issues</a><a class="github-button" href="https://github.com/murosan/shogi-board" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 murosan</section></footer></div></body></html>

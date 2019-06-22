@@ -130,13 +130,13 @@ $ yarn start
           {
             title: '将棋ソフトを用いた検討',
             content:
-              `[shogi-board-server](${sbserverUrl}) ` +
+              `<u>[shogi-board-server](${sbserverUrl})</u> ` +
               'と合わせて使うことで<br>' +
               '将棋ソフトを使って検討することができます。<br>' +
               'もちろん macOS でも動作します<br><br>' +
               `使い方は以下のドキュメントをご覧ください<br>` +
-              `- [Getting Started](${gettingStarted})<br>` +
-              `- [将棋ソフトを使って検討する方法](${useEngine})`,
+              `- <u>[Getting Started](${gettingStarted})</u><br>` +
+              `- <u>[将棋ソフトを使って検討する方法](${useEngine})</u>`,
           },
         ]}
       </Block>

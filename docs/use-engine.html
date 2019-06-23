@@ -107,14 +107,18 @@
 </code></pre>
 <p>最新版への更新も上記コマンドのみで可能です(<code>-u</code> を忘れないこと)。</p>
 <h3><a class="anchor" aria-hidden="true" id="b-ダウンロードして使用する場合"></a><a href="#b-ダウンロードして使用する場合" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>B. ダウンロードして使用する場合</h3>
-<p>※ 現在は macOS 版のみ用意。Windows/Linux は要望があれば対応します。</p>
+<ul>
+<li>Linux 用バイナリは用意してません。要望があれば対応します。</li>
+<li>Windows は開発者がデバイスを所持していないため、動作確認できていません。
+動かない場合、<u><a href="https://github.com/murosan/shogi-board/issues">issue</a></u> へお願いします。</li>
+</ul>
 <p>以下のページからバイナリをダウンロードできます。</p>
 <p><u><a href="https://github.com/murosan/shogi-board-server/releases">https://github.com/murosan/shogi-board-server/releases</a></u></p>
 <h2><a class="anchor" aria-hidden="true" id="3-設定ファイルを用意する"></a><a href="#3-設定ファイルを用意する" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. 設定ファイルを用意する</h2>
 <h3><a class="anchor" aria-hidden="true" id="a-ビルドした場合"></a><a href="#a-ビルドした場合" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A. ビルドした場合</h3>
 <p>将棋ソフトの名前と実行パスが書かれた設定ファイルを <code>YAML</code> で作成します。<br>
 以下の例を参考にしてください。</p>
-<pre><code class="hljs css language-yml"><span class="hljs-comment"># app.yml などのファイル名で作成します</span>
+<pre><code class="hljs css language-yml"><span class="hljs-comment"># app.config.yml などのファイル名で作成します</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># engines の下に以下のフォーマットで1つ以上記入してください</span>
 <span class="hljs-comment"># 実行パスは絶対パスを推奨します</span>
@@ -127,17 +131,27 @@
 <span class="hljs-attr">  engine3:</span> <span class="hljs-string">/Users/murosan/shogi/engines/engine3</span>
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="b-ダウンロードした場合"></a><a href="#b-ダウンロードした場合" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>B. ダウンロードした場合</h3>
-<p>すでに <code>app.yml</code> が用意されていますので、各自編集してください。</p>
+<p>すでに <code>./config/app.config.yml</code> が用意されていますので、各自編集してください。</p>
 <h2><a class="anchor" aria-hidden="true" id="4-shogi-board-server-を立ち上げる"></a><a href="#4-shogi-board-server-を立ち上げる" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. shogi-board-server を立ち上げる</h2>
 <p>サーバーを起動します</p>
 <h3><a class="anchor" aria-hidden="true" id="a-ビルドした場合-1"></a><a href="#a-ビルドした場合-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A. ビルドした場合</h3>
 <pre><code class="hljs css language-sh"><span class="hljs-comment"># $GOPATH/bin に shogi-board-server というバイナリが作成されています</span>
-<span class="hljs-comment"># ./app.yml の部分に先ほど作成した設定ファイルのパスを指定してください</span>
-$ shogi-board-server -app_config ./app.yml
+<span class="hljs-comment"># ./app.config.yml の部分に先ほど作成した設定ファイルのパスを指定してください</span>
+$ shogi-board-server -app_config ./app.config.yml
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="b-ダウンロードした場合-1"></a><a href="#b-ダウンロードした場合-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>B. ダウンロードした場合</h3>
-<p><code>start</code> というファイルが同梱されています。<br>
-ダブルクリックすると <code>ターミナル</code> が立ち上がり、サーバーが起動されます。</p>
+<ul>
+<li>macOS の場合
+<ul>
+<li><code>ターミナル.app</code> を開く</li>
+<li><code>sbserver</code> をドラッグ&amp;ドロップする</li>
+<li><code>Enter</code></li>
+</ul></li>
+<li>Windows の場合 (Help wanted)
+<ul>
+<li><code>sbserver.exe</code> をダブルクリック？</li>
+</ul></li>
+</ul>
 <h2><a class="anchor" aria-hidden="true" id="5-shogi-board-をブラウザで開く"></a><a href="#5-shogi-board-をブラウザで開く" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5. Shogi Board をブラウザで開く</h2>
 <p><u><a href="getting-started">Getting Started</a></u> を参考に、
 いずれかの方法で <code>Shogi Board</code> を開きます</p>
@@ -155,4 +169,4 @@ $ shogi-board-server -app_config ./app.yml
 <li>その将棋ソフトのオプション設定画面が表示されます</li>
 <li>「思考開始」をクリックします</li>
 </ol>
-</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-6-22 by murosan</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/shogi-board/docs/features"><span class="arrow-prev">← </span><span>機能・特徴について</span></a><a class="docs-next button" href="/shogi-board/docs/install"><span>開発者向け</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#1-将棋ソフトの実行バイナリを用意する">1. 将棋ソフトの実行バイナリを用意する</a></li><li><a href="#2-shogi-board-server-をダウンロードする">2. shogi-board-server をダウンロードする</a><ul class="toc-headings"><li><a href="#a-自分でビルドする場合">A. 自分でビルドする場合</a></li><li><a href="#b-ダウンロードして使用する場合">B. ダウンロードして使用する場合</a></li></ul></li><li><a href="#3-設定ファイルを用意する">3. 設定ファイルを用意する</a><ul class="toc-headings"><li><a href="#a-ビルドした場合">A. ビルドした場合</a></li><li><a href="#b-ダウンロードした場合">B. ダウンロードした場合</a></li></ul></li><li><a href="#4-shogi-board-server-を立ち上げる">4. shogi-board-server を立ち上げる</a><ul class="toc-headings"><li><a href="#a-ビルドした場合-1">A. ビルドした場合</a></li><li><a href="#b-ダウンロードした場合-1">B. ダウンロードした場合</a></li></ul></li><li><a href="#5-shogi-board-をブラウザで開く">5. Shogi Board をブラウザで開く</a></li><li><a href="#6-サーバーの-url-を設定する">6. サーバーの URL を設定する</a></li><li><a href="#7-将棋ソフトを使う">7. 将棋ソフトを使う</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/shogi-board/" class="nav-home"><img src="/shogi-board/img/icon.svg" alt="Shogi Board" width="66" height="58"/></a><div><h5>Docs</h5><a href="/shogi-board/docs/en/features.html">Getting Started</a></div><div><h5>More</h5><a href="/shogi-board/blog">Release Notes</a><a href="https://github.com/murosan/shogi-board">GitHub</a><a href="https://github.com/murosan/shogi-board/issues">Issues</a><a class="github-button" href="https://github.com/murosan/shogi-board" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 murosan</section></footer></div></body></html>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-6-23 by murosan</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/shogi-board/docs/features"><span class="arrow-prev">← </span><span>機能・特徴について</span></a><a class="docs-next button" href="/shogi-board/docs/install"><span>開発者向け</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#1-将棋ソフトの実行バイナリを用意する">1. 将棋ソフトの実行バイナリを用意する</a></li><li><a href="#2-shogi-board-server-をダウンロードする">2. shogi-board-server をダウンロードする</a><ul class="toc-headings"><li><a href="#a-自分でビルドする場合">A. 自分でビルドする場合</a></li><li><a href="#b-ダウンロードして使用する場合">B. ダウンロードして使用する場合</a></li></ul></li><li><a href="#3-設定ファイルを用意する">3. 設定ファイルを用意する</a><ul class="toc-headings"><li><a href="#a-ビルドした場合">A. ビルドした場合</a></li><li><a href="#b-ダウンロードした場合">B. ダウンロードした場合</a></li></ul></li><li><a href="#4-shogi-board-server-を立ち上げる">4. shogi-board-server を立ち上げる</a><ul class="toc-headings"><li><a href="#a-ビルドした場合-1">A. ビルドした場合</a></li><li><a href="#b-ダウンロードした場合-1">B. ダウンロードした場合</a></li></ul></li><li><a href="#5-shogi-board-をブラウザで開く">5. Shogi Board をブラウザで開く</a></li><li><a href="#6-サーバーの-url-を設定する">6. サーバーの URL を設定する</a></li><li><a href="#7-将棋ソフトを使う">7. 将棋ソフトを使う</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/shogi-board/" class="nav-home"><img src="/shogi-board/img/icon.svg" alt="Shogi Board" width="66" height="58"/></a><div><h5>Docs</h5><a href="/shogi-board/docs/en/features.html">Getting Started</a></div><div><h5>More</h5><a href="/shogi-board/blog">Release Notes</a><a href="https://github.com/murosan/shogi-board">GitHub</a><a href="https://github.com/murosan/shogi-board/issues">Issues</a><a class="github-button" href="https://github.com/murosan/shogi-board" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 murosan</section></footer></div></body></html>

@@ -52,7 +52,9 @@ $ go get -u github.com/murosan/shogi-board-server
 
 ### B. ダウンロードして使用する場合
 
-※ 現在は macOS 版のみ用意。Windows/Linux は要望があれば対応します。
+- Linux 用バイナリは用意してません。要望があれば対応します。
+- Windows は開発者がデバイスを所持していないため、動作確認できていません。
+  動かない場合、<u>[issue](https://github.com/murosan/shogi-board/issues)</u> へお願いします。
 
 以下のページからバイナリをダウンロードできます。
 
@@ -66,7 +68,7 @@ $ go get -u github.com/murosan/shogi-board-server
 以下の例を参考にしてください。
 
 ```yml
-# app.yml などのファイル名で作成します
+# app.config.yml などのファイル名で作成します
 #
 # engines の下に以下のフォーマットで1つ以上記入してください
 # 実行パスは絶対パスを推奨します
@@ -81,7 +83,7 @@ engines:
 
 ### B. ダウンロードした場合
 
-すでに `app.yml` が用意されていますので、各自編集してください。
+すでに `./config/app.config.yml` が用意されていますので、各自編集してください。
 
 ## 4. shogi-board-server を立ち上げる
 
@@ -91,14 +93,18 @@ engines:
 
 ```sh
 # $GOPATH/bin に shogi-board-server というバイナリが作成されています
-# ./app.yml の部分に先ほど作成した設定ファイルのパスを指定してください
-$ shogi-board-server -app_config ./app.yml
+# ./app.config.yml の部分に先ほど作成した設定ファイルのパスを指定してください
+$ shogi-board-server -app_config ./app.config.yml
 ```
 
 ### B. ダウンロードした場合
 
-`start` というファイルが同梱されています。  
-ダブルクリックすると `ターミナル` が立ち上がり、サーバーが起動されます。
+- macOS の場合
+  - `ターミナル.app` を開く
+  - `sbserver` をドラッグ&ドロップする
+  - `Enter`
+- Windows の場合 (Help wanted)
+  - `sbserver.exe` をダブルクリック？
 
 ## 5. Shogi Board をブラウザで開く
 

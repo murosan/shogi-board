@@ -38,8 +38,15 @@ export class DefaultConfig implements Config {
   @action
   async setSaveToCookie(b: boolean): Promise<void> {
     this.saveToCookie = b
-    if (this.saveToCookie)
-      return Cookies.set(this.keys.saveToCookie, String(b), this.expire)
+
+    if (this.saveToCookie) {
+      const { saveToCookie, serverURL, paintTargets } = this.keys
+      const expire = this.expire
+      Cookies.set(saveToCookie, String(b), expire)
+      Cookies.set(serverURL, this.serverURL, expire)
+      Cookies.set(paintTargets, String(this.paintTargets), expire)
+      return
+    }
 
     // false なら削除する
     Object.values(this.keys).forEach(key => Cookies.remove(key))

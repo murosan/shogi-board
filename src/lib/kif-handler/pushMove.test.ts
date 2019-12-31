@@ -78,7 +78,10 @@ it('分岐を増やせる', async () => {
       moves: [
         head,
         {
-          branches: [{ moves: [one], index: 0 }, { moves: [two], index: 0 }],
+          branches: [
+            { moves: [one], index: 0 },
+            { moves: [two], index: 0 },
+          ],
           index: 1,
         },
       ],
@@ -115,7 +118,10 @@ it('分岐を経由して、表示局面の末尾に追加できる', async () =
       moves: [
         head,
         {
-          branches: [{ moves: [one], index: 0 }, { moves: [two], index: 0 }],
+          branches: [
+            { moves: [one], index: 0 },
+            { moves: [two], index: 0 },
+          ],
           index: 1,
         },
       ],

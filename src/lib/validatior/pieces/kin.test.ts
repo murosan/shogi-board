@@ -88,13 +88,19 @@ describe('金の動き判定', () => {
 
   it('盤外には動けない(先手)', async () => {
     const pos: Position = emptyPosition()
-    const expected1: Point[] = [{ row: 0, column: 1 }, { row: 1, column: 0 }]
+    const expected1: Point[] = [
+      { row: 0, column: 1 },
+      { row: 1, column: 0 },
+    ]
     const expected2: Point[] = [
       { row: 7, column: 0 },
       { row: 7, column: 1 },
       { row: 8, column: 1 },
     ]
-    const expected3: Point[] = [{ row: 0, column: 7 }, { row: 1, column: 8 }]
+    const expected3: Point[] = [
+      { row: 0, column: 7 },
+      { row: 1, column: 8 },
+    ]
     const expected4: Point[] = [
       { row: 7, column: 7 },
       { row: 7, column: 8 },
@@ -113,13 +119,19 @@ describe('金の動き判定', () => {
       { row: 1, column: 0 },
       { row: 1, column: 1 },
     ]
-    const expected2: Point[] = [{ row: 7, column: 0 }, { row: 8, column: 1 }]
+    const expected2: Point[] = [
+      { row: 7, column: 0 },
+      { row: 8, column: 1 },
+    ]
     const expected3: Point[] = [
       { row: 0, column: 7 },
       { row: 1, column: 7 },
       { row: 1, column: 8 },
     ]
-    const expected4: Point[] = [{ row: 7, column: 8 }, { row: 8, column: 7 }]
+    const expected4: Point[] = [
+      { row: 7, column: 8 },
+      { row: 8, column: 7 },
+    ]
     expect(kin(pos, { row: 0, column: 0, piece: Kin1 })).toEqual(expected1)
     expect(kin(pos, { row: 8, column: 0, piece: Kin1 })).toEqual(expected2)
     expect(kin(pos, { row: 0, column: 8, piece: Kin1 })).toEqual(expected3)

@@ -11,7 +11,12 @@ export default function(pos: Position, p: Point): Point[] {
 
   if (p.row === -1 && p.column === -1) return getEmpties(pos.pos)
 
-  const diffList = [[-1, 0], [0, -1], [0, 1], [1, 0]]
+  const diffList = [
+    [-1, 0],
+    [0, -1],
+    [0, 1],
+    [1, 0],
+  ]
   const points: Point[] = []
 
   for (let i = 0; i < diffList.length; i++) {

@@ -7,13 +7,19 @@ import kei from './kei'
 describe('桂の動き判定', () => {
   it('空白マスに移動できる(先手)', async () => {
     const pos: Position = emptyPosition()
-    const expected: Point[] = [{ row: 2, column: 3 }, { row: 2, column: 5 }]
+    const expected: Point[] = [
+      { row: 2, column: 3 },
+      { row: 2, column: 5 },
+    ]
     expect(kei(pos, { row: 4, column: 4, piece: Kei0 })).toEqual(expected)
   })
 
   it('空白マスに移動できる(後手)', async () => {
     const pos: Position = emptyPosition()
-    const expected: Point[] = [{ row: 6, column: 3 }, { row: 6, column: 5 }]
+    const expected: Point[] = [
+      { row: 6, column: 3 },
+      { row: 6, column: 5 },
+    ]
     expect(kei(pos, { row: 4, column: 4, piece: Kei1 })).toEqual(expected)
   })
 
@@ -34,14 +40,20 @@ describe('桂の動き判定', () => {
   it('相手の駒があるところには動ける(先手)', async () => {
     const pos: Position = emptyPosition()
     pos.pos[2][3] = Kin1 // 43
-    const expected: Point[] = [{ row: 2, column: 3 }, { row: 2, column: 5 }]
+    const expected: Point[] = [
+      { row: 2, column: 3 },
+      { row: 2, column: 5 },
+    ]
     expect(kei(pos, { row: 4, column: 4, piece: Kei0 })).toEqual(expected)
   })
 
   it('相手の駒があるところには動ける(後手)', async () => {
     const pos: Position = emptyPosition()
     pos.pos[6][3] = Kin0 // 47
-    const expected: Point[] = [{ row: 6, column: 3 }, { row: 6, column: 5 }]
+    const expected: Point[] = [
+      { row: 6, column: 3 },
+      { row: 6, column: 5 },
+    ]
     expect(kei(pos, { row: 4, column: 4, piece: Kei1 })).toEqual(expected)
   })
 
@@ -50,7 +62,10 @@ describe('桂の動き判定', () => {
     pos.pos[3][3] = Kin0 // 44
     pos.pos[3][4] = Kin0 // 54
     pos.pos[3][5] = Kin0 // 64
-    const expected: Point[] = [{ row: 2, column: 3 }, { row: 2, column: 5 }]
+    const expected: Point[] = [
+      { row: 2, column: 3 },
+      { row: 2, column: 5 },
+    ]
     expect(kei(pos, { row: 4, column: 4, piece: Kei0 })).toEqual(expected)
   })
 
@@ -59,7 +74,10 @@ describe('桂の動き判定', () => {
     pos.pos[5][3] = Kin1 // 46
     pos.pos[5][4] = Kin1 // 56
     pos.pos[5][5] = Kin1 // 66
-    const expected: Point[] = [{ row: 6, column: 3 }, { row: 6, column: 5 }]
+    const expected: Point[] = [
+      { row: 6, column: 3 },
+      { row: 6, column: 5 },
+    ]
     expect(kei(pos, { row: 4, column: 4, piece: Kei1 })).toEqual(expected)
   })
 

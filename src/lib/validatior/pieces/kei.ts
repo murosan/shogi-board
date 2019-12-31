@@ -16,6 +16,9 @@ export default function(pos: Position, p: Point): Point[] {
 
   const nextRow: number = p.piece > 0 ? p.row - 2 : p.row + 2
   if (nextRow < 0 || nextRow > 8) return []
-  const nexts: number[][] = [[nextRow, p.column - 1], [nextRow, p.column + 1]]
+  const nexts: number[][] = [
+    [nextRow, p.column - 1],
+    [nextRow, p.column + 1],
+  ]
   return getFromNexts(pos.pos, nexts, p.piece)
 }

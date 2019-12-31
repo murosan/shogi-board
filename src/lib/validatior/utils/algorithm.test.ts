@@ -69,7 +69,10 @@ describe('find', () => {
   })
 
   it('数が少ない場合でも正しい値を返せる', async () => {
-    const pts1: Point[] = [{ row: 0, column: 0 }, { row: 0, column: 8 }]
+    const pts1: Point[] = [
+      { row: 0, column: 0 },
+      { row: 0, column: 8 },
+    ]
     const pts2: Point[] = [{ row: 0, column: 0 }]
     expect(find(pts1, { row: 0, column: 0 })).toEqual(0)
     expect(find(pts1, { row: 0, column: 8 })).toEqual(1)

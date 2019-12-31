@@ -1,6 +1,6 @@
 {
   "name": "shogi-board",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "private": true,
   "author": "murosan",
   "description": "shogi board on browser",
@@ -21,7 +21,7 @@
   "bugs": "https://github.com/murosan/shogi-board/issues",
   "homepage": "https://murosan.github.io/shogi-board",
   "engines": {
-    "node": ">=10.14.1"
+    "node": ">=13.5.0"
   },
   "dependencies": {
     "@types/clipboard": "^2.0.1",

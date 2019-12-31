@@ -6,7 +6,7 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![LICENSE](https://img.shields.io/github/license/murosan/shogi-board.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![tag](https://img.shields.io/github/tag/murosan/shogi-board.svg?style=flat-square)](https://github.com/murosan/shogi-board/releases)
-[![node](https://img.shields.io/badge/node->%3D%2010.14.1-brightgreen.svg?style=flat-square)](https://nodejs.org/ja/)
+[![node](https://img.shields.io/badge/node-%3E=%2013.5.0-brightgreen.svg?style=flat-square)](https://nodejs.org/ja/)
 
 まずは Playground でお試しください  
 <https://murosan.github.io/shogi-board/playground/>

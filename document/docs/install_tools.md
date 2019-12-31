@@ -7,16 +7,16 @@ Shogi Board をセットアップするために必要な各種ツールのイ�
 不明な点などがあれば、お気軽に
 <u>[issue](https://github.com/murosan/shogi-board/issues)</u> へどうぞ。
 
-- [Git](#Git)
-  - [macOS](#macOS)
-  - [Windows](#Windows)
-- [Homebrew](#Homebrew)
-- [Node.js](#Nodejs)
-  - [macOS](#macOS-1)
+- [Git](#git)
+  - [macOS](#macos)
+  - [Windows](#windows)
+- [Homebrew](#homebrew)
+- [Node.js](#nodejs)
+  - [macOS](#macos-1)
   - [windows](#windows)
-- [Yarn](#Yarn)
-  - [macOS](#macOS-2)
-  - [Windows](#Windows-1)
+- [Yarn](#yarn)
+  - [macOS](#macos-2)
+  - [Windows](#windows-1)
 
 ## Git
 
@@ -60,17 +60,17 @@ $ echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> ~/.bash_profile
 $ source ~/.bash_profile
 $ nodebrew setup
 $ nodebrew -v
-nodebrew 0.9.7
+nodebrew 1.0.1
 # (略)
 ```
 
 3. `Node.js` をインストールします
 
 ```sh
-$ nodebrew install-binary v10.14.1
-$ use v10.14.1
+$ nodebrew install-binary v13.5.0
+$ use v13.5.0
 $ node -v
-v10.14.1
+v13.5.0
 ```
 
 #### windows

@@ -58,7 +58,7 @@
     "lint-staged": "9.5.0",
     "prettier": "1.19.1",
     "react-test-renderer": "16.8.6",
-    "source-map-explorer": "2.1.2",
+    "source-map-explorer": "2.2.0",
     "ts-jest": "24.0.2"
   },
   "scripts": {

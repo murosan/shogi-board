@@ -165,7 +165,7 @@ export class ShogiBoardClient {
         return {
           id: shortid.generate(),
           values, // 一旦捨てる
-          score: info.score,
+          score: info.score * current.pos.turn, // 後手番なら -1 をかける
           moves,
         }
       })

@@ -1,4 +1,4 @@
-FROM node:10-slim
+FROM node:13.8.0-slim
 
 WORKDIR /src/shogi-board
 COPY . .

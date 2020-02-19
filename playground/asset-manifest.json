@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/shogi-board/playground/static/css/main.829790cc.chunk.css",
-    "main.js": "/shogi-board/playground/static/js/main.b013fd58.chunk.js",
-    "main.js.map": "/shogi-board/playground/static/js/main.b013fd58.chunk.js.map",
+    "main.js": "/shogi-board/playground/static/js/main.55a9f63e.chunk.js",
+    "main.js.map": "/shogi-board/playground/static/js/main.55a9f63e.chunk.js.map",
     "runtime-main.js": "/shogi-board/playground/static/js/runtime-main.6f6e7fde.js",
     "runtime-main.js.map": "/shogi-board/playground/static/js/runtime-main.6f6e7fde.js.map",
     "static/js/2.7d52a161.chunk.js": "/shogi-board/playground/static/js/2.7d52a161.chunk.js",
     "static/js/2.7d52a161.chunk.js.map": "/shogi-board/playground/static/js/2.7d52a161.chunk.js.map",
     "index.html": "/shogi-board/playground/index.html",
-    "precache-manifest.a1f483de39be5b25316cbecb8f1b58e2.js": "/shogi-board/playground/precache-manifest.a1f483de39be5b25316cbecb8f1b58e2.js",
+    "precache-manifest.ccb678c124ef9d648286deec8e15823b.js": "/shogi-board/playground/precache-manifest.ccb678c124ef9d648286deec8e15823b.js",
     "service-worker.js": "/shogi-board/playground/service-worker.js",
     "static/css/main.829790cc.chunk.css.map": "/shogi-board/playground/static/css/main.829790cc.chunk.css.map",
     "static/js/2.7d52a161.chunk.js.LICENSE": "/shogi-board/playground/static/js/2.7d52a161.chunk.js.LICENSE",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.6f6e7fde.js",
     "static/js/2.7d52a161.chunk.js",
     "static/css/main.829790cc.chunk.css",
-    "static/js/main.b013fd58.chunk.js"
+    "static/js/main.55a9f63e.chunk.js"
   ]
 }

@@ -27,13 +27,10 @@ export default class Kif extends Component<Props> {
   }
 
   renderKif(moves: KifComponent[], n: number): JSX.Element[] {
-    const nested = moves.map((kc: KifComponent, i: number) => {
+    return moves.flatMap((kc: KifComponent, i: number) => {
       if (isBranch(kc)) return this.renderBranch(kc, n + i)
       return this.renderMove(kc, n + i)
     })
-
-    // TODO: flatMap 使いてぇ
-    return Array.prototype.concat.apply([], nested)
   }
 
   renderBranch(b: Branch, n: number): JSX.Element[] {
@@ -50,7 +47,7 @@ export default class Kif extends Component<Props> {
       otherHeadsDom.push(
         <div key={key} className="Branch" onClick={onClick}>
           <span>{txt}</span>
-        </div>
+        </div>,
       )
     }
 

@@ -46,7 +46,7 @@
     "react-dom": "16.12.0",
     "react-scripts": "3.4.1",
     "shortid": "2.2.15",
-    "typescript": "^3.5.1"
+    "typescript": "3.9.6"
   },
   "devDependencies": {
     "codecov": "^3.7.0",

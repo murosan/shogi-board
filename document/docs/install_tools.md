@@ -13,10 +13,10 @@ Shogi Board をセットアップするために必要な各種ツールのイ�
 - [Homebrew](#homebrew)
 - [Node.js](#nodejs)
   - [macOS](#macos-1)
-  - [windows](#windows)
+  - [Windows](#windows-1)
 - [Yarn](#yarn)
   - [macOS](#macos-2)
-  - [Windows](#windows-1)
+  - [Windows](#windows-2)
 
 ## Git
 
@@ -36,10 +36,10 @@ Homebrew とは、macOS 用のパッケージマネージャです。
 1. 以下の URL より、「インストール」の直下にあるスクリプトをコピーします  
    <u>https://brew.sh/index_ja</u>
 
-   2019/01/15 現在は以下のスクリプトです
+   2020 年 7 月 現在は以下のスクリプトです
 
    ```ruby
-   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
    ```
 
 2. ターミナルを開きます
@@ -67,13 +67,13 @@ nodebrew 1.0.1
 3. `Node.js` をインストールします
 
 ```sh
-$ nodebrew install-binary v13.5.0
-$ use v13.5.0
+$ nodebrew install-binary v13.14.0
+$ use v13.14.0
 $ node -v
-v13.5.0
+v13.14.0
 ```
 
-#### windows
+#### Windows
 
 Help wanted
 

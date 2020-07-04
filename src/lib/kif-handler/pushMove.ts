@@ -8,7 +8,7 @@ import { Move } from '../../model/kif/Move'
  * @param old Kif
  * @param m Move 追加する一手
  */
-export default function(old: Kif, m: Move): Kif {
+export default function (old: Kif, m: Move): Kif {
   return {
     meta: old.meta,
     history: pushToHistory(old.history, m),

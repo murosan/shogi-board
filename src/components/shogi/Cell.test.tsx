@@ -139,11 +139,7 @@ it('成れる', async () => {
   const wrapper2 = shallow(<Cell store={store} row={2} column={1} />).dive()
   wrapper1.simulate('click')
   wrapper2.simulate('click')
-  wrapper2
-    .children()
-    .children()
-    .first()
-    .simulate('click')
+  wrapper2.children().children().first().simulate('click')
   const className2 = `Cell Piece Piece-Bordered Piece-${To0}`
   expect(wrapper2.hasClass(className2)).toBeTruthy()
 })
@@ -156,11 +152,7 @@ it('不成もできる', async () => {
   const wrapper2 = shallow(<Cell store={store} row={2} column={1} />).dive()
   wrapper1.simulate('click')
   wrapper2.simulate('click')
-  wrapper2
-    .children()
-    .children()
-    .last()
-    .simulate('click')
+  wrapper2.children().children().last().simulate('click')
   const className2 = `Cell Piece Piece-Bordered Piece-${Fu0}`
   expect(wrapper2.hasClass(className2)).toBeTruthy()
 })

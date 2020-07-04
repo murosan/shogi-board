@@ -24,5 +24,5 @@ $boardAspectValue: 109%;
   display: grid;
   grid-template-columns: 1fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 1fr;
   grid-template-rows: 1fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 1fr;
-  background-image: url($ImgComponentsPath+'/board.jpg');
+  background-image: url($ImgComponentsPath + '/board.jpg');
 }

@@ -8,7 +8,7 @@ $ImgPiecesPath: '../img/img/pieces';
   display: grid;
   padding: 1em;
   min-width: 650px;
-  background-image: url($ImgComponentsPath+'/tatami.jpg');
+  background-image: url($ImgComponentsPath + '/tatami.jpg');
 }
 
 .App-BoardOnly {

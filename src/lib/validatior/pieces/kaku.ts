@@ -5,7 +5,7 @@ import { comp } from '../utils/algorithm'
 import getEmpties from '../utils/getEmpties'
 import getWithDiff from '../utils/getWithDiff'
 
-export default function(pos: Position, p: Point): Point[] {
+export default function (pos: Position, p: Point): Point[] {
   if (!p.piece || (p.piece !== Kaku0 && p.piece !== Kaku1))
     throw new Error('Called validation for kaku, but piece id was not kaku.')
 

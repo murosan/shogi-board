@@ -47,7 +47,7 @@ import uma from './pieces/uma'
  * @param pos Position 駒の配置
  * @param point Point 動ける場所を取得したい駒の位置
  */
-export default function(pos: Position, point: Point): Point[] {
+export default function (pos: Position, point: Point): Point[] {
   const piece = point.piece
 
   if (piece === Empty)

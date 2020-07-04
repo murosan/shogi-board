@@ -6,7 +6,7 @@ import { comp } from '../utils/algorithm'
 import getFromNexts from '../utils/getFromNexts'
 import kaku from './kaku'
 
-export default function(pos: Position, p: Point): Point[] {
+export default function (pos: Position, p: Point): Point[] {
   if (!p.piece || (p.piece !== Uma0 && p.piece !== Uma1))
     throw new Error('Called validation for uma, but piece id was not uma.')
 

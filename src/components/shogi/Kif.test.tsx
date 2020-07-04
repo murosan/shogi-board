@@ -31,10 +31,7 @@ it('棋譜をクリックすると Store のメソッドが呼ばれる', async 
   store.gameState.kif = mockKif() // 分岐ありの棋譜
   const wrapper = shallow(<Kif store={store} />).dive()
   expect(store.gameState.clickKif).toBeCalledTimes(0)
-  wrapper
-    .find('.Move')
-    .first()
-    .simulate('click')
+  wrapper.find('.Move').first().simulate('click')
   expect(store.gameState.clickKif).toBeCalledTimes(1)
   expect(store.gameState.clickKif).toBeCalledWith(0)
 })
@@ -45,10 +42,7 @@ it('分岐をクリックすると Store のメソッドが呼ばれる', async 
   store.gameState.kif = mockKif() // 分岐ありの棋譜
   const wrapper = shallow(<Kif store={store} />).dive()
   expect(store.gameState.clickKif).toBeCalledTimes(0)
-  wrapper
-    .find('.Branch')
-    .at(1)
-    .simulate('click')
+  wrapper.find('.Branch').at(1).simulate('click')
   expect(store.gameState.clickKif).toBeCalledTimes(1)
   expect(store.gameState.clickKif).toBeCalledWith(3, 2)
 })

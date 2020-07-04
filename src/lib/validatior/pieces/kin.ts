@@ -15,7 +15,7 @@ import { Position } from '../../../model/shogi/Position'
 import getEmpties from '../utils/getEmpties'
 import getFromNexts from '../utils/getFromNexts'
 
-export default function(pos: Position, p: Point): Point[] {
+export default function (pos: Position, p: Point): Point[] {
   if (
     !p.piece ||
     (p.piece !== Kin0 &&

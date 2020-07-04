@@ -47,7 +47,7 @@ export default class Kif extends Component<Props> {
       otherHeadsDom.push(
         <div key={key} className="Branch" onClick={onClick}>
           <span>{txt}</span>
-        </div>,
+        </div>
       )
     }
 

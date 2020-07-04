@@ -4,7 +4,7 @@ import { Position } from '../../../model/shogi/Position'
 import getEmpties from '../utils/getEmpties'
 import getFromNexts from '../utils/getFromNexts'
 
-export default function(pos: Position, p: Point): Point[] {
+export default function (pos: Position, p: Point): Point[] {
   if (!p.piece || (p.piece !== Gin0 && p.piece !== Gin1))
     throw new Error('Called validation for gin, but piece id was not gin.')
 

@@ -7,7 +7,7 @@ import { Move } from '../../model/kif/Move'
  * 開始局面は0なので、3手目を表示中なら3と3手目のMoveが返る
  * @param k Kif
  */
-export default function(k: Kif): Move {
+export default function (k: Kif): Move {
   let history: History = k.history
   let moveOrBranch: KifComponent = history.moves[history.index]
 

@@ -6,7 +6,7 @@ import { comp } from '../utils/algorithm'
 import getFromNexts from '../utils/getFromNexts'
 import hisha from './hisha'
 
-export default function(pos: Position, p: Point): Point[] {
+export default function (pos: Position, p: Point): Point[] {
   if (!p.piece || (p.piece !== Ryu0 && p.piece !== Ryu1))
     throw new Error('Called validation for ryu, but piece id was not ryu.')
 

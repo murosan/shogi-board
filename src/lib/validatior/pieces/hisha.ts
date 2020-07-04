@@ -5,7 +5,7 @@ import { comp } from '../utils/algorithm'
 import getEmpties from '../utils/getEmpties'
 import getWithDiff from '../utils/getWithDiff'
 
-export default function(pos: Position, p: Point): Point[] {
+export default function (pos: Position, p: Point): Point[] {
   if (!p.piece || (p.piece !== Hisha0 && p.piece !== Hisha1))
     throw new Error('Called validation for hisha, but piece id was not hisha.')
 

@@ -78,12 +78,12 @@ $edgeTextSize: 1.2vw;
 }
 
 .Piece-Confirm-Promote {
-  background-image: url($ImgComponentsPath+'/promote.png');
+  background-image: url($ImgComponentsPath + '/promote.png');
   background-size: 38% !important;
 }
 
 .Piece-Confirm-Preserve {
-  background-image: url($ImgComponentsPath+'/preserve.png');
+  background-image: url($ImgComponentsPath + '/preserve.png');
   background-size: 75% !important;
 }
 
@@ -133,6 +133,6 @@ $piecesMap: (
 
 @each $id, $name in $piecesMap {
   .Piece-#{$id} {
-    background-image: url($ImgPiecesPath+'/'+$name+'.png');
+    background-image: url($ImgPiecesPath + '/' + $name + '.png');
   }
 }

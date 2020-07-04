@@ -9,7 +9,7 @@ import { Turn } from '../../../model/shogi/Turn'
  * @returns 見つかった場合 Point
  *          見つからなかった場合 undefined
  */
-export default function(pos: number[][], turn: Turn): Point | undefined {
+export default function (pos: number[][], turn: Turn): Point | undefined {
   for (let r = 0; r < pos.length; r++) {
     for (let c = 0; c < pos.length; c++) {
       const piece: Piece = pos[r][c]

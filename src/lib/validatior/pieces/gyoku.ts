@@ -3,7 +3,7 @@ import Point from '../../../model/shogi/Point'
 import { Position } from '../../../model/shogi/Position'
 import getFromNexts from '../utils/getFromNexts'
 
-export default function(pos: Position, p: Point): Point[] {
+export default function (pos: Position, p: Point): Point[] {
   if (!p.piece || (p.piece !== Gyoku0 && p.piece !== Gyoku1))
     throw new Error('Called validation for gyoku, but piece id was not gyoku.')
 

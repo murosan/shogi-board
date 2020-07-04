@@ -3,7 +3,7 @@ import Point from '../../../model/shogi/Point'
 import { Position } from '../../../model/shogi/Position'
 import getEmpties from '../utils/getEmpties'
 
-export default function(pos: Position, p: Point): Point[] {
+export default function (pos: Position, p: Point): Point[] {
   if (!p.piece || (p.piece !== Fu0 && p.piece !== Fu1))
     throw new Error('Called validation for fu, but piece id was not fu.')
 

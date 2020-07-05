@@ -31,16 +31,17 @@ import { Sente } from './Turn'
  */
 export function hirate(): Position {
   return {
+    // prettier-ignore
     pos: [
-      [Kyou1, Kei1, Gin1, Kin1, Gyoku1, Kin1, Gin1, Kei1, Kyou1],
-      [Empty, Kaku1, Empty, Empty, Empty, Empty, Empty, Hisha1, Empty],
-      [Fu1, Fu1, Fu1, Fu1, Fu1, Fu1, Fu1, Fu1, Fu1],
-      [Empty, Empty, Empty, Empty, Empty, Empty, Empty, Empty, Empty],
-      [Empty, Empty, Empty, Empty, Empty, Empty, Empty, Empty, Empty],
-      [Empty, Empty, Empty, Empty, Empty, Empty, Empty, Empty, Empty],
-      [Fu0, Fu0, Fu0, Fu0, Fu0, Fu0, Fu0, Fu0, Fu0],
-      [Empty, Hisha0, Empty, Empty, Empty, Empty, Empty, Kaku0, Empty],
-      [Kyou0, Kei0, Gin0, Kin0, Gyoku0, Kin0, Gin0, Kei0, Kyou0],
+      [Kyou1, Kei1,   Gin1,  Kin1,  Gyoku1, Kin1,  Gin1,  Kei1,   Kyou1],
+      [Empty, Kaku1,  Empty, Empty, Empty,  Empty, Empty, Hisha1, Empty],
+      [Fu1,   Fu1,    Fu1,   Fu1,   Fu1,    Fu1,   Fu1,   Fu1,    Fu1  ],
+      [Empty, Empty,  Empty, Empty, Empty,  Empty, Empty, Empty,  Empty],
+      [Empty, Empty,  Empty, Empty, Empty,  Empty, Empty, Empty,  Empty],
+      [Empty, Empty,  Empty, Empty, Empty,  Empty, Empty, Empty,  Empty],
+      [Fu0,   Fu0,    Fu0,   Fu0,   Fu0,    Fu0,   Fu0,   Fu0,    Fu0  ],
+      [Empty, Hisha0, Empty, Empty, Empty,  Empty, Empty, Kaku0,  Empty],
+      [Kyou0, Kei0,   Gin0,  Kin0,  Gyoku0, Kin0,  Gin0,  Kei0,   Kyou0],
     ],
     cap0: [0, 0, 0, 0, 0, 0, 0],
     cap1: [0, 0, 0, 0, 0, 0, 0],

@@ -21,7 +21,7 @@ const Buttons: FC = () => {
   const nextOne: number = i + 1
   const prevFive: number = i - 5 < 0 ? 0 : i - 5
   const nextFive: number = i + 5
-  const skipKif = gameState.clickKif
+  const skipKif = (i: number) => gameState.clickKif(i)
 
   const engineOnClick: () => Promise<void> = async () => {
     const { current, state } = engineState

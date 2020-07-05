@@ -1,35 +1,23 @@
-import { inject, observer } from 'mobx-react'
-import React, { Component } from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { FC } from 'react'
 import { Thinking } from '../model/engine/State'
-import { Store } from '../model/store/Store'
+import { StoreContext } from '../store/Store'
 import './App.scss'
 import SideInfo from './engine/info/SideInfo'
 import BoardArea from './shogi/BoardArea'
 
-interface Props {
-  store?: Store
+const App: FC = () => {
+  const { engineState } = React.useContext(StoreContext)
+
+  const isThinking: boolean = engineState.state === Thinking
+  const className = 'App App-' + (isThinking ? 'SideInfo' : 'BoardOnly')
+
+  return (
+    <div className={className}>
+      <BoardArea />
+      {isThinking ? <SideInfo /> : null}
+    </div>
+  )
 }
 
-@inject('store')
-@observer
-export default class App extends Component<Props> {
-  render(): JSX.Element {
-    const { state } = this.props.store!.engineState
-    const isThinking: boolean = state === Thinking
-
-    const en = this.renderEngineInfo(isThinking)
-    const className = isThinking ? 'App App-SideInfo' : 'App App-BoardOnly'
-
-    return (
-      <div className={className}>
-        <BoardArea />
-        {en}
-      </div>
-    )
-  }
-
-  renderEngineInfo(isThinking: boolean): JSX.Element | undefined {
-    if (!isThinking) return
-    return <SideInfo />
-  }
-}
+export default observer(App)

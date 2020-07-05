@@ -1,5 +1,5 @@
-import { observer } from 'mobx-react'
-import React, { Component } from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { FC } from 'react'
 import { ShogiBoardClient } from '../../../../infrastructure/ShogiBoardClient'
 import { Check as OptionCheck } from '../../../../model/engine/Optoin'
 import Check from '../../../form/Check'
@@ -9,30 +9,26 @@ export interface Props {
   sbclient: ShogiBoardClient
 }
 
-@observer
-export default class Checks extends Component<Props> {
-  render() {
-    const { checks } = this.props
+const Checks: FC<Props> = (props: Props) => {
+  const checks = Array.from(props.checks)
+  const elms: JSX.Element[] = checks.map(([name, option]) => {
+    const onChange = (b: boolean) => {
+      option.setValue(b)
+      return props.sbclient.updateCheck(option)
+    }
 
-    const elms: JSX.Element[] = Array.from(checks).map(([name, option]) => {
-      const onChange = this.getOnChange(option)
-      return (
-        <Check
-          key={name}
-          label={name}
-          name={name}
-          value={option.value}
-          onChange={onChange}
-        />
-      )
-    })
+    return (
+      <Check
+        key={name}
+        label={name}
+        name={name}
+        value={option.value}
+        onChange={onChange}
+      />
+    )
+  })
 
-    return <div>{elms}</div>
-  }
-
-  getOnChange = (option: OptionCheck) => async (b: boolean) => {
-    const { sbclient } = this.props
-    option.setValue(b)
-    sbclient.updateCheck(option)
-  }
+  return <div>{elms}</div>
 }
+
+export default observer(Checks)

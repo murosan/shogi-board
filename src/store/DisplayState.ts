@@ -3,11 +3,7 @@ import { DisplayState } from '../model/display/DisplayState'
 import { MockupHidden, MockupState } from '../model/display/MockupState'
 
 export class DefaultDisplayState implements DisplayState {
-  @observable mockup: MockupState
-
-  constructor() {
-    this.mockup = MockupHidden
-  }
+  @observable mockup: MockupState = MockupHidden
 
   @action
   async setMockupState(state: MockupState): Promise<void> {

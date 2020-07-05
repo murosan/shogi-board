@@ -14,21 +14,12 @@ import {
 import { Position } from '../model/shogi/Position'
 
 export class DefaultEngineState implements EngineState {
-  @observable names: string[]
-  @observable current: string | null
-  @observable options: Options | null
-  @observable state: State
-  @observable result: Info[] | null
-  @observable serverURL: string
-
-  constructor() {
-    this.names = []
-    this.current = null
-    this.options = null
-    this.state = NotConnected
-    this.result = null
-    this.serverURL = ''
-  }
+  @observable names: string[] = []
+  @observable current: string | null = null
+  @observable options: Options | null = null
+  @observable state: State = NotConnected
+  @observable result: Info[] | null = null
+  @observable serverURL: string = ''
 
   @computed get sbclient(): ShogiBoardClient {
     return new ShogiBoardClient(this.current || '', this.serverURL)

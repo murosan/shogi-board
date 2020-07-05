@@ -1,5 +1,5 @@
-import { observer } from 'mobx-react'
-import React, { Component } from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { ChangeEvent, FC } from 'react'
 import './Select.scss'
 
 export interface Props {
@@ -9,33 +9,28 @@ export interface Props {
   onChange: (s: string) => Promise<void>
 }
 
-@observer
-export default class Select extends Component<Props> {
-  render(): JSX.Element {
-    const { label, value, options } = this.props
-    const opts = this.renderOptions(options)
+const Select: FC<Props> = (props: Props) => {
+  const { label, value, options } = props
+  const opts = options.map((value: string, i: number) => (
+    <option key={i} value={value}>
+      {value}
+    </option>
+  ))
 
-    return (
-      <div className="FormSelectContainer">
-        <label>{label}</label>
-        <div className="FormSelect SelectTriangle">
-          <select onChange={this.update} value={value} required>
-            {opts}
-          </select>
-        </div>
+  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    props.onChange(e.target.value)
+  }
+
+  return (
+    <div className="FormSelectContainer">
+      <label>{label}</label>
+      <div className="FormSelect SelectTriangle">
+        <select onChange={onChange} value={value} required>
+          {opts}
+        </select>
       </div>
-    )
-  }
-
-  private renderOptions(vars: string[]): JSX.Element[] {
-    return vars.map((value: string, i: number) => (
-      <option key={i} value={value}>
-        {value}
-      </option>
-    ))
-  }
-
-  private update = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    this.props.onChange(e.target.value)
-  }
+    </div>
+  )
 }
+
+export default observer(Select)

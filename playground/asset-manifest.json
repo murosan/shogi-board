@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/shogi-board/playground/static/css/main.829790cc.chunk.css",
-    "main.js": "/shogi-board/playground/static/js/main.55a9f63e.chunk.js",
-    "main.js.map": "/shogi-board/playground/static/js/main.55a9f63e.chunk.js.map",
-    "runtime-main.js": "/shogi-board/playground/static/js/runtime-main.6f6e7fde.js",
-    "runtime-main.js.map": "/shogi-board/playground/static/js/runtime-main.6f6e7fde.js.map",
-    "static/js/2.7d52a161.chunk.js": "/shogi-board/playground/static/js/2.7d52a161.chunk.js",
-    "static/js/2.7d52a161.chunk.js.map": "/shogi-board/playground/static/js/2.7d52a161.chunk.js.map",
+    "main.css": "/shogi-board/playground/static/css/main.9de3deab.chunk.css",
+    "main.js": "/shogi-board/playground/static/js/main.4ecef003.chunk.js",
+    "main.js.map": "/shogi-board/playground/static/js/main.4ecef003.chunk.js.map",
+    "runtime-main.js": "/shogi-board/playground/static/js/runtime-main.d7d5fe78.js",
+    "runtime-main.js.map": "/shogi-board/playground/static/js/runtime-main.d7d5fe78.js.map",
+    "static/js/2.101cc3f7.chunk.js": "/shogi-board/playground/static/js/2.101cc3f7.chunk.js",
+    "static/js/2.101cc3f7.chunk.js.map": "/shogi-board/playground/static/js/2.101cc3f7.chunk.js.map",
     "index.html": "/shogi-board/playground/index.html",
-    "precache-manifest.ccb678c124ef9d648286deec8e15823b.js": "/shogi-board/playground/precache-manifest.ccb678c124ef9d648286deec8e15823b.js",
+    "precache-manifest.f5bbcd29dfcf5e6c22cc6e86c3253f51.js": "/shogi-board/playground/precache-manifest.f5bbcd29dfcf5e6c22cc6e86c3253f51.js",
     "service-worker.js": "/shogi-board/playground/service-worker.js",
-    "static/css/main.829790cc.chunk.css.map": "/shogi-board/playground/static/css/main.829790cc.chunk.css.map",
-    "static/js/2.7d52a161.chunk.js.LICENSE": "/shogi-board/playground/static/js/2.7d52a161.chunk.js.LICENSE",
+    "static/css/main.9de3deab.chunk.css.map": "/shogi-board/playground/static/css/main.9de3deab.chunk.css.map",
+    "static/js/2.101cc3f7.chunk.js.LICENSE.txt": "/shogi-board/playground/static/js/2.101cc3f7.chunk.js.LICENSE.txt",
     "static/media/App.scss": "/shogi-board/playground/static/media/tatami.8d2b7da0.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.6f6e7fde.js",
-    "static/js/2.7d52a161.chunk.js",
-    "static/css/main.829790cc.chunk.css",
-    "static/js/main.55a9f63e.chunk.js"
+    "static/js/runtime-main.d7d5fe78.js",
+    "static/js/2.101cc3f7.chunk.js",
+    "static/css/main.9de3deab.chunk.css",
+    "static/js/main.4ecef003.chunk.js"
   ]
 }

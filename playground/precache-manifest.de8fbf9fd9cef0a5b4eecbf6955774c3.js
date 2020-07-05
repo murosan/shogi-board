@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ab8d2607b6fb1a295e9cba3e8aef4b7d",
+    "revision": "6bfcd553db672d3d2ce2fe0e2c30548c",
     "url": "/shogi-board/playground/index.html"
   },
   {
-    "revision": "a542dd4b3f05f9dcfb4b",
-    "url": "/shogi-board/playground/static/css/main.9de3deab.chunk.css"
+    "revision": "74d52d8aa66dc31f587d",
+    "url": "/shogi-board/playground/static/css/main.8f960929.chunk.css"
   },
   {
     "revision": "1a5208617472dad55a18",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/shogi-board/playground/static/js/2.26f0571e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a542dd4b3f05f9dcfb4b",
-    "url": "/shogi-board/playground/static/js/main.34f22f4d.chunk.js"
+    "revision": "74d52d8aa66dc31f587d",
+    "url": "/shogi-board/playground/static/js/main.c56f312f.chunk.js"
   },
   {
     "revision": "0849734a045384b94034",

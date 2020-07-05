@@ -1,20 +1,13 @@
 import ClipboardJS from 'clipboard'
-import { Provider } from 'mobx-react'
+// https://github.com/mobxjs/mobx-react-lite/#observer-batching
+import 'mobx-react-lite/batchingForReactDom'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './components/App'
 import './index.scss'
-import { Store } from './model/store/Store'
 import * as serviceWorker from './serviceWorker'
-import { DefaultStore } from './store/Store'
 
-const store: Store = new DefaultStore()
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-)
+ReactDOM.render(<App />, document.getElementById('root'))
 new ClipboardJS('.Copy')
 
 // If you want your app to work offline and load faster, you can change

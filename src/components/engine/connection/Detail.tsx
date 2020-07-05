@@ -1,9 +1,11 @@
 import interval from 'interval-promise'
-import { inject, observer } from 'mobx-react'
-import React, { Component } from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { FC } from 'react'
+import { EngineState } from '../../../model/engine/EngineState'
 import { Info } from '../../../model/engine/Info'
 import { Thinking } from '../../../model/engine/State'
 import { Store } from '../../../model/store/Store'
+import { StoreContext } from '../../../store/Store'
 import './Detail.scss'
 import Buttons from './form/Buttons'
 import Checks from './form/Checks'
@@ -13,67 +15,60 @@ import Texts from './form/Texts'
 
 const GET_RESULT_INTERVAL = 1000 // ms
 
-export interface Props {
-  store?: Store
-}
+const Detail: FC = () => {
+  const { gameState, displayState, engineState }: Store = React.useContext(
+    StoreContext
+  )
+  const { current, options, sbclient }: EngineState = engineState
+  if (!current || !options) return <div />
 
-@inject('store')
-@observer
-export default class Detail extends Component<Props> {
-  render() {
-    const { current, options, sbclient } = this.props.store!.engineState
-    if (!current || !options) return <div />
+  const { buttons, checks, ranges, selects, texts } = options
 
-    const { buttons, checks, ranges, selects, texts } = options
-
-    const disconnectBtn = (
-      <button className="ButtonDisconnect" onClick={this.disconnect}>
-        接続解除
-      </button>
-    )
-
-    const startBtn = (
-      <button className="ButtonStartThinking" onClick={this.start}>
-        思考開始
-      </button>
-    )
-
-    return (
-      <div className="DetailContainer">
-        <h1 className="EngineName">{current}</h1>
-        {disconnectBtn}
-        {startBtn}
-        <h2 className="EngineOption">オプション</h2>
-        <Buttons buttons={buttons} sbclient={sbclient} />
-        <Checks checks={checks} sbclient={sbclient} />
-        <Ranges ranges={ranges} sbclient={sbclient} />
-        <Selects selects={selects} sbclient={sbclient} />
-        <Texts texts={texts} sbclient={sbclient} />
-        {disconnectBtn}
-        {startBtn}
-      </div>
-    )
-  }
-
-  private disconnect = () => this.props.store!.engineState.disconnect()
-  private start = () => {
-    const { engineState, displayState } = this.props.store!
+  const disconnect = () => engineState.disconnect()
+  const start = () =>
     engineState
       .startThinking()
       .then(() => displayState.closeMockup())
-      .then(this.fetchInterval)
+      .then(fetchInterval)
       .catch(e => console.error(e))
-  }
 
-  private fetchInterval = async () => {
+  const disconnectBtn = (
+    <button className="ButtonDisconnect" onClick={disconnect}>
+      接続解除
+    </button>
+  )
+
+  const startBtn = (
+    <button className="ButtonStartThinking" onClick={start}>
+      思考開始
+    </button>
+  )
+
+  return (
+    <div className="DetailContainer">
+      <h1 className="EngineName">{current}</h1>
+      {disconnectBtn}
+      {startBtn}
+      <h2 className="EngineOption">オプション</h2>
+      <Buttons buttons={buttons} sbclient={sbclient} />
+      <Checks checks={checks} sbclient={sbclient} />
+      <Ranges ranges={ranges} sbclient={sbclient} />
+      <Selects selects={selects} sbclient={sbclient} />
+      <Texts texts={texts} sbclient={sbclient} />
+      {disconnectBtn}
+      {startBtn}
+    </div>
+  )
+
+  function fetchInterval(): Promise<void> {
     // 思考を開始したら、思考結果を定期的に取得する
-    interval(async (_, stop) => {
-      const { gameState, engineState } = this.props.store!
+    return interval(async (_, stop) => {
       const { current, state, sbclient } = engineState
       if (!current || state !== Thinking) {
         stop()
         return
       }
+
       try {
         const result: Info[] = await sbclient.getResult(gameState.currentMove)
         await engineState.setResult(result)
@@ -83,3 +78,5 @@ export default class Detail extends Component<Props> {
     }, GET_RESULT_INTERVAL)
   }
 }
+
+export default observer(Detail)

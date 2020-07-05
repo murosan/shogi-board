@@ -1,4 +1,3 @@
-import { shallow } from 'enzyme'
 import React from 'react'
 import {
   Empty,
@@ -11,33 +10,34 @@ import {
 } from '../../model/shogi/Piece'
 import { Store } from '../../model/store/Store'
 import { DefaultStore } from '../../store/Store'
+import { mount, shallow } from '../../testutils/component-helper'
 import Cell from './Cell'
 
 it('正しいクラス名を付けられる', async () => {
   const store: Store = new DefaultStore()
   // 先手の駒
-  const wrapper1 = shallow(<Cell store={store} row={6} column={1} />).dive()
-  const wrapper2 = shallow(<Cell store={store} row={7} column={7} />).dive()
+  const wrapper1 = shallow(() => <Cell row={6} column={1} />, store)
+  const wrapper2 = shallow(() => <Cell row={7} column={7} />, store)
   const className1 = `Cell Piece Piece-Bordered Piece-${Fu0} Piece-Turn`
   const className2 = `Cell Piece Piece-Bordered Piece-${Kaku0} Piece-Turn`
   // 後手の駒
-  const wrapper3 = shallow(<Cell store={store} row={2} column={7} />).dive()
-  const wrapper4 = shallow(<Cell store={store} row={1} column={1} />).dive()
+  const wrapper3 = shallow(() => <Cell row={2} column={7} />, store)
+  const wrapper4 = shallow(() => <Cell row={1} column={1} />, store)
   const className3 = `Cell Piece Piece-Bordered Piece-${Fu1}`
   const className4 = `Cell Piece Piece-Bordered Piece-${Kaku1}`
   // 星
-  const wrapper5 = shallow(<Cell store={store} row={2} column={6} />).dive()
-  const wrapper6 = shallow(<Cell store={store} row={2} column={3} />).dive()
-  const wrapper7 = shallow(<Cell store={store} row={5} column={6} />).dive()
-  const wrapper8 = shallow(<Cell store={store} row={5} column={3} />).dive()
+  const wrapper5 = shallow(() => <Cell row={2} column={6} />, store)
+  const wrapper6 = shallow(() => <Cell row={2} column={3} />, store)
+  const wrapper7 = shallow(() => <Cell row={5} column={6} />, store)
+  const wrapper8 = shallow(() => <Cell row={5} column={3} />, store)
   const className5 = `Cell Piece Piece-Bordered Piece-${Fu1} Piece-Star`
   const className7 = `Cell Piece Piece-Bordered Piece-Star`
   // 駒の中で、最上段・一番左
-  const wrapper9 = shallow(<Cell store={store} row={0} column={8} />).dive()
+  const wrapper9 = shallow(() => <Cell row={0} column={8} />, store)
   const className9 = `Cell Piece Piece-Bordered Piece-${Kyou1} Piece-Left Piece-Top`
   // EdgeText
-  const wrapper10 = shallow(<Cell store={store} row={-1} column={0} />).dive()
-  const wrapper11 = shallow(<Cell store={store} row={0} column={-1} />).dive()
+  const wrapper10 = shallow(() => <Cell row={-1} column={0} />, store)
+  const wrapper11 = shallow(() => <Cell row={0} column={-1} />, store)
   const className10 = `Cell Cell-EdgeText`
 
   expect(wrapper1.hasClass(className1)).toBeTruthy()
@@ -57,28 +57,28 @@ it('反転してる場合でも正しいクラス名を付けられる', async (
   const store: Store = new DefaultStore()
   store.gameState.reverse()
   // 先手の駒
-  const wrapper1 = shallow(<Cell store={store} row={6} column={1} />).dive()
-  const wrapper2 = shallow(<Cell store={store} row={7} column={7} />).dive()
+  const wrapper1 = shallow(() => <Cell row={6} column={1} />, store)
+  const wrapper2 = shallow(() => <Cell row={7} column={7} />, store)
   const className1 = `Cell Piece Piece-Bordered Piece-${Fu1} Piece-Turn`
   const className2 = `Cell Piece Piece-Bordered Piece-${Kaku1} Piece-Turn`
   // 後手の駒
-  const wrapper3 = shallow(<Cell store={store} row={2} column={7} />).dive()
-  const wrapper4 = shallow(<Cell store={store} row={1} column={1} />).dive()
+  const wrapper3 = shallow(() => <Cell row={2} column={7} />, store)
+  const wrapper4 = shallow(() => <Cell row={1} column={1} />, store)
   const className3 = `Cell Piece Piece-Bordered Piece-${Fu0}`
   const className4 = `Cell Piece Piece-Bordered Piece-${Kaku0}`
   // 星
-  const wrapper5 = shallow(<Cell store={store} row={6} column={2} />).dive()
-  const wrapper6 = shallow(<Cell store={store} row={6} column={5} />).dive()
-  const wrapper7 = shallow(<Cell store={store} row={3} column={2} />).dive()
-  const wrapper8 = shallow(<Cell store={store} row={3} column={5} />).dive()
+  const wrapper5 = shallow(() => <Cell row={6} column={2} />, store)
+  const wrapper6 = shallow(() => <Cell row={6} column={5} />, store)
+  const wrapper7 = shallow(() => <Cell row={3} column={2} />, store)
+  const wrapper8 = shallow(() => <Cell row={3} column={5} />, store)
   const className5 = `Cell Piece Piece-Bordered Piece-${Fu1} Piece-Turn Piece-Star`
   const className7 = `Cell Piece Piece-Bordered Piece-Star`
   // 駒の中で、最上段・一番左
-  const wrapper9 = shallow(<Cell store={store} row={8} column={0} />).dive()
+  const wrapper9 = shallow(() => <Cell row={8} column={0} />, store)
   const className9 = `Cell Piece Piece-Bordered Piece-${Kyou1} Piece-Turn Piece-Left Piece-Top`
   // EdgeText
-  const wrapper10 = shallow(<Cell store={store} row={-1} column={0} />).dive()
-  const wrapper11 = shallow(<Cell store={store} row={0} column={-1} />).dive()
+  const wrapper10 = shallow(() => <Cell row={-1} column={0} />, store)
+  const wrapper11 = shallow(() => <Cell row={0} column={-1} />, store)
   const className10 = `Cell Cell-EdgeText`
 
   expect(wrapper1.hasClass(className1)).toBeTruthy()
@@ -96,33 +96,36 @@ it('反転してる場合でも正しいクラス名を付けられる', async (
 
 it('手番の駒をクリックすると選択でき、Selectedクラスが付く', async () => {
   const store: Store = new DefaultStore()
-  const wrapper = shallow(<Cell store={store} row={6} column={1} />).dive()
-  const targeted = shallow(<Cell store={store} row={5} column={1} />).dive()
+  const wrapper = mount(() => <Cell row={6} column={1} />, store)
+  const targeted = mount(() => <Cell row={5} column={1} />, store)
   wrapper.simulate('click')
+  targeted.update()
   const className = `Cell Piece Piece-Bordered Piece-${Fu0} Piece-Turn Piece-Selected`
-  expect(wrapper.hasClass(className)).toBeTruthy()
+  expect(wrapper.find('.Cell').hasClass(className)).toBeTruthy()
   // 移動先も着色される
   const classNameTargeted = `Cell Piece Piece-Bordered Piece-Targeted`
-  expect(targeted.hasClass(classNameTargeted)).toBeTruthy()
+  expect(targeted.find('.Cell').hasClass(classNameTargeted)).toBeTruthy()
 })
 
 it('Confirm 周り一連をちゃんとできる', async () => {
   const store: Store = new DefaultStore()
   store.gameState.currentMove.pos.pos[3][1] = Fu0
   store.gameState.currentMove.pos.pos[6][1] = Empty
-  const wrapper1 = shallow(<Cell store={store} row={3} column={1} />).dive()
-  const wrapper2 = shallow(<Cell store={store} row={2} column={1} />).dive()
-  const wrapper3 = shallow(<Cell store={store} row={4} column={4} />).dive()
+  const wrapper1 = mount(() => <Cell row={3} column={1} />, store)
+  const wrapper2 = mount(() => <Cell row={2} column={1} />, store)
+  const wrapper3 = mount(() => <Cell row={4} column={4} />, store)
   wrapper1.simulate('click')
   wrapper2.simulate('click')
+  wrapper1.update()
+  wrapper3.update()
   const className1 = `Cell Piece Piece-Bordered Piece-Turn Piece-Selected`
   const className2 = `Cell Piece Piece-Bordered`
   const classNameConfirm = `Piece-Confirm Piece-Confirm0`
   const classNamePromote = `Piece-Confirm-Promote`
   const classNamePreserve = `Piece-Confirm-Preserve`
-  expect(wrapper1.hasClass(className1)).toBeTruthy()
-  expect(wrapper2.hasClass(className2)).toBeTruthy()
-  const firstChild = wrapper2.children()
+  expect(wrapper1.find('.Cell').hasClass(className1)).toBeTruthy()
+  expect(wrapper2.find('.Cell').hasClass(className2)).toBeTruthy()
+  const firstChild = wrapper2.find('.Cell').children()
   expect(firstChild.hasClass(classNameConfirm)).toBeTruthy()
   const confirmOpts = firstChild.children()
   expect(confirmOpts.first().hasClass(classNamePromote)).toBeTruthy()
@@ -135,26 +138,26 @@ it('成れる', async () => {
   const store: Store = new DefaultStore()
   store.gameState.currentMove.pos.pos[3][1] = Fu0
   store.gameState.currentMove.pos.pos[6][1] = Empty
-  const wrapper1 = shallow(<Cell store={store} row={3} column={1} />).dive()
-  const wrapper2 = shallow(<Cell store={store} row={2} column={1} />).dive()
+  const wrapper1 = mount(() => <Cell row={3} column={1} />, store)
+  const wrapper2 = mount(() => <Cell row={2} column={1} />, store)
   wrapper1.simulate('click')
   wrapper2.simulate('click')
-  wrapper2.children().children().first().simulate('click')
+  wrapper2.find('.Piece-Confirm-Promote').simulate('click')
   const className2 = `Cell Piece Piece-Bordered Piece-${To0}`
-  expect(wrapper2.hasClass(className2)).toBeTruthy()
+  expect(wrapper2.childAt(0).hasClass(className2)).toBeTruthy()
 })
 
 it('不成もできる', async () => {
   const store: Store = new DefaultStore()
   store.gameState.currentMove.pos.pos[3][1] = Fu0
   store.gameState.currentMove.pos.pos[6][1] = Empty
-  const wrapper1 = shallow(<Cell store={store} row={3} column={1} />).dive()
-  const wrapper2 = shallow(<Cell store={store} row={2} column={1} />).dive()
+  const wrapper1 = mount(() => <Cell row={3} column={1} />, store)
+  const wrapper2 = mount(() => <Cell row={2} column={1} />, store)
   wrapper1.simulate('click')
   wrapper2.simulate('click')
-  wrapper2.children().children().last().simulate('click')
+  wrapper2.find('.Piece-Confirm-Preserve').simulate('click')
   const className2 = `Cell Piece Piece-Bordered Piece-${Fu0}`
-  expect(wrapper2.hasClass(className2)).toBeTruthy()
+  expect(wrapper2.find('.Cell').hasClass(className2)).toBeTruthy()
 })
 
 it('反転していても Confirm オブジェクトを表示できる', async () => {
@@ -162,18 +165,19 @@ it('反転していても Confirm オブジェクトを表示できる', async (
   store.gameState.reverse()
   store.gameState.currentMove.pos.pos[3][1] = Fu0
   store.gameState.currentMove.pos.pos[6][1] = Empty
-  const wrapper1 = shallow(<Cell store={store} row={3} column={1} />).dive()
-  const wrapper2 = shallow(<Cell store={store} row={2} column={1} />).dive()
+  const wrapper1 = mount(() => <Cell row={3} column={1} />, store)
+  const wrapper2 = mount(() => <Cell row={2} column={1} />, store)
   wrapper1.simulate('click')
   wrapper2.simulate('click')
+  wrapper1.update()
   const className1 = `Cell Piece Piece-Bordered Piece-Turn Piece-Selected`
   const className2 = `Cell Piece Piece-Bordered`
   const classNameConfirm = `Piece-Confirm Piece-Confirm1`
   const classNamePromote = `Piece-Confirm-Promote`
   const classNamePreserve = `Piece-Confirm-Preserve`
-  expect(wrapper1.hasClass(className1)).toBeTruthy()
-  expect(wrapper2.hasClass(className2)).toBeTruthy()
-  const firstChild = wrapper2.children()
+  expect(wrapper1.find('.Cell').hasClass(className1)).toBeTruthy()
+  expect(wrapper2.find('.Cell').hasClass(className2)).toBeTruthy()
+  const firstChild = wrapper2.childAt(0).childAt(0)
   expect(firstChild.hasClass(classNameConfirm)).toBeTruthy()
   const confirmOpts = firstChild.children()
   // CSS で上下反転してるので一緒。将来的には変えるかも

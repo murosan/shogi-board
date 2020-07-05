@@ -1,5 +1,5 @@
-import { observer } from 'mobx-react'
-import React, { Component } from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { FC } from 'react'
 import { ShogiBoardClient } from '../../../../infrastructure/ShogiBoardClient'
 import { Select as OptionSelect } from '../../../../model/engine/Optoin'
 import Select from '../../../form/Select'
@@ -9,30 +9,27 @@ export interface Props {
   sbclient: ShogiBoardClient
 }
 
-@observer
-export default class Selects extends Component<Props> {
-  render() {
-    const { selects } = this.props
+const Selects: FC<Props> = (props: Props) => {
+  const selects = Array.from(props.selects)
 
-    const elms: JSX.Element[] = Array.from(selects).map(([name, option]) => {
-      const onChange = this.getOnChange(option)
-      return (
-        <Select
-          key={name}
-          label={name}
-          value={option.value}
-          options={option.vars}
-          onChange={onChange}
-        />
-      )
-    })
+  const elms: JSX.Element[] = selects.map(([name, option]) => {
+    const onChange = (s: string) => {
+      option.setValue(s)
+      return props.sbclient.updateSelect(option)
+    }
 
-    return <div>{elms}</div>
-  }
+    return (
+      <Select
+        key={name}
+        label={name}
+        value={option.value}
+        options={option.vars}
+        onChange={onChange}
+      />
+    )
+  })
 
-  getOnChange = (option: OptionSelect) => async (s: string) => {
-    const { sbclient } = this.props
-    option.setValue(s)
-    sbclient.updateSelect(option)
-  }
+  return <div>{elms}</div>
 }
+
+export default observer(Selects)

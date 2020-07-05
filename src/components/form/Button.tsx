@@ -1,5 +1,5 @@
-import { observer } from 'mobx-react'
-import React, { Component } from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { FC } from 'react'
 import './Button.scss'
 
 export interface Props {
@@ -7,14 +7,12 @@ export interface Props {
   onClick: () => Promise<void>
 }
 
-@observer
-export default class Button extends Component<Props> {
-  render() {
-    const { label } = this.props
-    return (
-      <button className="FormButton" onClick={() => this.props.onClick()}>
-        {label}
-      </button>
-    )
-  }
+const Button: FC<Props> = (props: Props) => {
+  return (
+    <button className="FormButton" onClick={() => props.onClick()}>
+      {props.label}
+    </button>
+  )
 }
+
+export default observer(Button)

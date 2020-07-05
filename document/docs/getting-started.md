@@ -20,7 +20,7 @@ title: Getting Started
 
 Shogi Board は `v3.0.0` から PWA(Progressive Web Apps) に対応しています。  
 Chrome などで、 <u>[Playground](/shogi-board/playground/)</u> にアクセスすると
-バナーが表示されますので、クリックして Chrome アプリに追加してください。
+URL 欄の右端に `+` マークが表示されますので、クリックして Chrome アプリに追加してください。
 
 iOS や Android における「ホーム画面に追加」と同じ仕組みです。
 

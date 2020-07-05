@@ -1,4 +1,5 @@
 import { observable, observe } from 'mobx'
+import { createContext } from 'react'
 import { DefaultConfig } from '../config/Config'
 import { Config } from '../model/config/Config'
 import { DisplayState } from '../model/display/DisplayState'
@@ -12,16 +13,7 @@ import { DefaultEngineState } from './EngineState'
 import { DefaultGameState } from './GameState'
 
 export class DefaultStore implements Store {
-  @observable gameState: GameState
-  @observable engineState: EngineState
-  @observable displayState: DisplayState
-  @observable config: Config
-
   constructor() {
-    this.gameState = new DefaultGameState()
-    this.engineState = new DefaultEngineState()
-    this.displayState = new DefaultDisplayState()
-    this.config = new DefaultConfig()
     this.engineState.setServerURL(this.config.serverURL)
 
     // gameState で現在局面に変更があったら、将棋エンジンに局面をセットする
@@ -35,6 +27,11 @@ export class DefaultStore implements Store {
     )
   }
 
+  @observable gameState: GameState = new DefaultGameState()
+  @observable engineState: EngineState = new DefaultEngineState()
+  @observable displayState: DisplayState = new DefaultDisplayState()
+  @observable config: Config = new DefaultConfig()
+
   async updatePosition(move?: Move): Promise<void> {
     const setPositionExecutable: boolean = this.engineState.state >= Connected
     if (!setPositionExecutable) return
@@ -43,3 +40,5 @@ export class DefaultStore implements Store {
     this.engineState.updatePosition(m.pos)
   }
 }
+
+export const StoreContext = createContext<Store>(new DefaultStore())

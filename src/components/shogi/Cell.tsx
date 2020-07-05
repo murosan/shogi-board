@@ -1,5 +1,5 @@
-import { inject, observer } from 'mobx-react'
-import React, { Component } from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { FC } from 'react'
 import { columnString, rowString } from '../../lib/strings'
 import { find } from '../../lib/validatior/utils/algorithm'
 import { ClickProps } from '../../model/events/ClickProps'
@@ -7,71 +7,65 @@ import Confirm from '../../model/shogi/Confirm'
 import { Empty, Piece } from '../../model/shogi/Piece'
 import Point from '../../model/shogi/Point'
 import { Gote, Sente, Turn } from '../../model/shogi/Turn'
-import { Store } from '../../model/store/Store'
+import { StoreContext } from '../../store/Store'
 import './Cell.scss'
 
 export interface Props {
-  store?: Store
   row: number
   column: number
 }
 
-@inject('store')
-@observer
-export default class Cell extends Component<Props> {
-  getPiece = () => {
-    const { row, column, store } = this.props
+const Cell: FC<Props> = (props: Props) => {
+  const { gameState, config } = React.useContext(StoreContext)
+  const { indexes, selected, confirm, currentMove, moveTargets } = gameState
+  const { row, column } = props
+
+  const getPiece = () => {
     const isOnBoard: boolean = inRange(row) && inRange(column)
     if (!isOnBoard) return Empty
-    return store!.gameState.currentMove.pos.pos[row][column]
+    return gameState.currentMove.pos.pos[row][column]
   }
 
-  render(): JSX.Element | undefined {
-    const { row, column, store } = this.props
-    const { config, gameState } = store!
-    const { indexes, selected, confirm, currentMove, moveTargets } = gameState
-    const piece: Piece = this.getPiece()
+  const piece: Piece = getPiece()
 
-    const turn: Turn = currentMove.pos.turn
-    const isTurn: boolean =
-      (piece > 0 && turn === Sente) || (piece < 0 && turn === Gote)
+  const turn: Turn = currentMove.pos.turn
+  const isTurn: boolean =
+    (piece > 0 && turn === Sente) || (piece < 0 && turn === Gote)
 
-    // 着色する設定 && 駒が移動できるマスである
-    const isTargeted =
-      config.paintTargets && find(moveTargets, { row, column }) !== -1
+  // 着色する設定 && 駒が移動できるマスである
+  const isTargeted =
+    config.paintTargets && find(moveTargets, { row, column }) !== -1
 
-    const className: string = getClassName({
-      r: row,
-      c: column,
-      rv: indexes[0] === 9,
-      p: piece,
-      sel: selected,
-      confirm: confirm,
-      isTurn,
-      isTargeted,
-    })
+  const className: string = getClassName({
+    r: row,
+    c: column,
+    rv: indexes[0] === 9,
+    p: piece,
+    sel: selected,
+    confirm: confirm,
+    isTurn,
+    isTargeted,
+  })
 
-    return (
-      <div className={className} onClick={() => this.click()}>
-        {this.renderConfirm(confirm)}
-        {this.renderEdgeTextRow()}
-        {this.renderEdgeTextColumn()}
-      </div>
-    )
-  }
+  return (
+    <div className={className} onClick={() => click()}>
+      {renderConfirm(confirm)}
+      {renderEdgeTextRow()}
+      {renderEdgeTextColumn()}
+    </div>
+  )
 
-  renderConfirm(cf: Confirm | null): JSX.Element | undefined {
-    const { row, column, store } = this.props
+  function renderConfirm(cf: Confirm | null): JSX.Element | undefined {
     if (!cf || cf.row !== row || cf.column !== column) return
 
-    const isReversed: boolean = store!.gameState.indexes[0] === 9
+    const isReversed: boolean = indexes[0] === 9
     const isGote =
       (isReversed && cf.preserved > 0) || (!isReversed && cf.preserved < 0)
 
     const className = 'Piece-Confirm Piece-Confirm' + Number(isGote)
 
-    const promote = () => this.click(cf, true)
-    const preserve = () => this.click(cf)
+    const promote = () => click(cf, true)
+    const preserve = () => click(cf)
 
     // TODO: この方法だと画面幅によって1pxずれる
     return (
@@ -82,24 +76,21 @@ export default class Cell extends Component<Props> {
     )
   }
 
-  renderEdgeTextRow(): JSX.Element | undefined {
-    const { row, column } = this.props
+  function renderEdgeTextRow(): JSX.Element | undefined {
     const needText = inRange(column) && row === -1
     if (needText) return <span>{columnString(column)}</span>
   }
 
-  renderEdgeTextColumn(): JSX.Element | undefined {
-    const { row, column } = this.props
+  function renderEdgeTextColumn(): JSX.Element | undefined {
     const needText = inRange(row) && column === -1
     if (needText) return <span>{rowString(row)}</span>
   }
 
-  click(cf?: Confirm, promote?: true) {
-    const { row, column, store } = this.props
-    if (store!.gameState.confirm && !cf) return
-    const clicked: Confirm | Piece = cf || this.getPiece()
+  function click(cf?: Confirm, promote?: true) {
+    if (confirm && !cf) return
+    const clicked: Confirm | Piece = cf || getPiece()
     const p: ClickProps = { clicked, row, column, promote }
-    store!.gameState.clickPiece(p)
+    gameState.clickPiece(p)
   }
 }
 
@@ -170,3 +161,5 @@ function getClassName(p: GetClassNameProps): string {
 function inRange(n: number): boolean {
   return 0 <= n && n <= 8
 }
+
+export default observer(Cell)

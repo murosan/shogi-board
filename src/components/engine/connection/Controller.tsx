@@ -1,36 +1,30 @@
-import { inject, observer } from 'mobx-react'
-import React, { Component } from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { FC } from 'react'
 import { MockupHidden } from '../../../model/display/MockupState'
 import { EngineState } from '../../../model/engine/EngineState'
 import { Connecting, NotConnected } from '../../../model/engine/State'
 import { Store } from '../../../model/store/Store'
+import { StoreContext } from '../../../store/Store'
 import CloseButton from '../../util/CloseButton'
 import Detail from './Detail'
 import List from './List'
 
-export interface Props {
-  store?: Store
+const Controller: FC = () => {
+  const { engineState, displayState }: Store = React.useContext(StoreContext)
+  const { state }: EngineState = engineState
+
+  // 接続前なら将棋エンジンの一覧画面を出す
+  const isList: boolean = state === NotConnected || state === Connecting
+  const child: JSX.Element = isList ? <List /> : <Detail />
+
+  const onClick = () => displayState.setMockupState(MockupHidden)
+
+  return (
+    <div className="Mockup">
+      <CloseButton onClick={onClick} />
+      {child}
+    </div>
+  )
 }
 
-@inject('store')
-@observer
-export default class Controller extends Component<Props> {
-  render() {
-    const { engineState }: Store = this.props.store!
-    const { state }: EngineState = engineState
-
-    // 接続前なら将棋エンジンの一覧画面を出す
-    const isList: boolean = state === NotConnected || state === Connecting
-    const child: JSX.Element = isList ? <List /> : <Detail />
-
-    return (
-      <div className="Mockup">
-        <CloseButton onClick={this.close} />
-        {child}
-      </div>
-    )
-  }
-
-  private close = () =>
-    this.props.store!.displayState.setMockupState(MockupHidden)
-}
+export default observer(Controller)

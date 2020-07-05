@@ -1,5 +1,5 @@
-import { observer } from 'mobx-react'
-import React, { Component } from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { FC } from 'react'
 import { ShogiBoardClient } from '../../../../infrastructure/ShogiBoardClient'
 import { Text as OptionText } from '../../../../model/engine/Optoin'
 import Text from '../../../form/Text'
@@ -9,29 +9,21 @@ export interface Props {
   sbclient: ShogiBoardClient
 }
 
-@observer
-export default class Texts extends Component<Props> {
-  render() {
-    const { texts } = this.props
+const Texts: FC<Props> = (props: Props) => {
+  const texts = Array.from(props.texts)
 
-    const strElms: JSX.Element[] = Array.from(texts).map(([name, option]) => {
-      const onChange = this.getOnChange(option)
-      return (
-        <Text
-          key={name}
-          label={name}
-          value={option.value}
-          onChange={onChange}
-        />
-      )
-    })
+  const strElms: JSX.Element[] = texts.map(([name, option]) => {
+    const onChange = (s: string) => {
+      option.setValue(s)
+      return props.sbclient.updateText(option)
+    }
 
-    return <div>{strElms}</div>
-  }
+    return (
+      <Text key={name} label={name} value={option.value} onChange={onChange} />
+    )
+  })
 
-  getOnChange = (option: OptionText) => async (s: string) => {
-    const { sbclient } = this.props
-    option.setValue(s)
-    sbclient.updateText(option)
-  }
+  return <div>{strElms}</div>
 }
+
+export default observer(Texts)

@@ -1,5 +1,5 @@
-import { observer } from 'mobx-react'
-import React, { Component } from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { FC } from 'react'
 import { ShogiBoardClient } from '../../../../infrastructure/ShogiBoardClient'
 import { Button as OptionButton } from '../../../../model/engine/Optoin'
 import Button from '../../../form/Button'
@@ -10,21 +10,14 @@ export interface Props {
   sbclient: ShogiBoardClient
 }
 
-@observer
-export default class Buttons extends Component<Props> {
-  render() {
-    const { buttons } = this.props
+const Buttons: FC<Props> = (props: Props) => {
+  const buttons = Array.from(props.buttons)
+  const elms: JSX.Element[] = buttons.map(([name, option]) => {
+    const onClick = () => props.sbclient.updateButton(option)
+    return <Button key={name} label={name} onClick={onClick} />
+  })
 
-    const elms: JSX.Element[] = Array.from(buttons).map(([name, option]) => {
-      const onClick = this.getOnClick(option)
-      return <Button key={name} label={name} onClick={onClick} />
-    })
-
-    return <div className="OptionButton">{elms}</div>
-  }
-
-  getOnClick = (option: OptionButton) => async () => {
-    const { sbclient } = this.props
-    sbclient.updateButton(option)
-  }
+  return <div className="OptionButton">{elms}</div>
 }
+
+export default observer(Buttons)

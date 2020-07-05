@@ -1,47 +1,42 @@
-import { inject, observer } from 'mobx-react'
-import React, { Component } from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { FC } from 'react'
 import {
   MockupEngineControl,
-  MockupSetting,
   MockupServerSetting,
+  MockupSetting,
 } from '../../model/display/MockupState'
-import { Store } from '../../model/store/Store'
+import { StoreContext } from '../../store/Store'
 import Controller from '../engine/connection/Controller'
 import Setting from '../setting/Setting'
 import './Board.scss'
 import Cell from './Cell'
 
-export interface Props {
-  store?: Store
-}
+const Board: FC = () => {
+  const { gameState, displayState } = React.useContext(StoreContext)
+  const idx = gameState.indexes
+  const rows = idx.map(r =>
+    idx
+      .slice()
+      .reverse()
+      .map(c => <Cell key={r * 10 + c} row={r} column={c} />)
+  )
 
-@inject('store')
-@observer
-export default class Board extends Component<Props> {
-  render() {
-    const idx = this.props.store!.gameState.indexes
-    const rows = idx.map(r =>
-      idx
-        .slice()
-        .reverse()
-        .map(c => <Cell key={r * 10 + c} row={r} column={c} />)
-    )
-
-    return (
-      <div className="BoardContainer">
-        <div className="ResetPseudo">
-          <div className="Board">{rows}</div>
-          {this.renderMockup()}
-        </div>
+  return (
+    <div className="BoardContainer">
+      <div className="ResetPseudo">
+        <div className="Board">{rows}</div>
+        {renderMockup()}
       </div>
-    )
-  }
+    </div>
+  )
 
-  renderMockup() {
-    const { mockup } = this.props.store!.displayState
+  function renderMockup() {
+    const { mockup } = displayState
     if (mockup === MockupEngineControl) return <Controller />
     // TODO: server setting は別に分ける？
     if (mockup === MockupSetting || mockup === MockupServerSetting)
       return <Setting />
   }
 }
+
+export default observer(Board)

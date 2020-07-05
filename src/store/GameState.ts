@@ -20,19 +20,11 @@ import { Position } from '../model/shogi/Position'
 import { Turn, Gote, Sente } from '../model/shogi/Turn'
 
 export class DefaultGameState implements GameState {
-  @observable indexes: number[]
-  @observable selected: Point | null
-  @observable confirm: Confirm | null
-  @observable moveTargets: Point[]
-  @observable kif: Kif
-
-  constructor() {
-    this.indexes = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    this.selected = null
-    this.confirm = null
-    this.moveTargets = []
-    this.kif = newKif() // TODO
-  }
+  @observable indexes: number[] = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  @observable selected: Point | null = null
+  @observable confirm: Confirm | null = null
+  @observable moveTargets: Point[] = []
+  @observable kif: Kif = newKif()
 
   @computed get currentMove(): Move {
     return getCurrent(this.kif)

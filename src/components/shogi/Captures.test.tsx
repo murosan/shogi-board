@@ -1,4 +1,3 @@
-import { shallow } from 'enzyme'
 import React from 'react'
 import {
   Fu0,
@@ -16,20 +15,19 @@ import {
   Kyou0,
   Kyou1,
 } from '../../model/shogi/Piece'
-import { Store } from '../../model/store/Store'
-import { DefaultStore } from '../../store/Store'
+import { shallow, mount } from '../../testutils/component-helper'
 import Captures from './Captures'
+import { DefaultStore } from '../../store/Store'
+import { Store } from '../../model/store/Store'
 
 it('(RightSide)持ち駒のラッパー要素を正しくレンダリングできる', async () => {
-  const store: Store = new DefaultStore()
-  const wrapper = shallow(
+  const wrapper = shallow(() => (
     <Captures
-      store={store}
       isLeftSide={false}
       isTurn={true}
       captures={[1, 1, 1, 1, 1, 1, 1]}
     />
-  ).dive()
+  ))
   expect(wrapper.hasClass('Captures Captures0')).toBeTruthy()
 
   expect(wrapper.children()).toHaveLength(7)
@@ -51,15 +49,13 @@ it('(RightSide)持ち駒のラッパー要素を正しくレンダリングで�
 })
 
 it('(LefttSide)持ち駒のラッパー要素を正しくレンダリングできる', async () => {
-  const store: Store = new DefaultStore()
-  const wrapper = shallow(
+  const wrapper = shallow(() => (
     <Captures
-      store={store}
       isLeftSide={true}
       isTurn={true}
       captures={[1, 1, 1, 1, 1, 1, 1]}
     />
-  ).dive()
+  ))
   expect(wrapper.hasClass('Captures Captures1')).toBeTruthy()
 
   expect(wrapper.children()).toHaveLength(7)
@@ -81,15 +77,13 @@ it('(LefttSide)持ち駒のラッパー要素を正しくレンダリングで�
 })
 
 it('(RightSide)持ち駒の枚数に応じて正しいクラス名が付く', async () => {
-  const store: Store = new DefaultStore()
-  const wrapper = shallow(
+  const wrapper = shallow(() => (
     <Captures
-      store={store}
       isLeftSide={false}
       isTurn={true}
       captures={[10, 4, 2, 1, 1, 2, 1]}
     />
-  ).dive()
+  ))
 
   expect(wrapper.childAt(0).children()).toHaveLength(1)
   expect(wrapper.childAt(1).children()).toHaveLength(2)
@@ -124,15 +118,13 @@ it('(RightSide)持ち駒の枚数に応じて正しいクラス名が付く', as
 })
 
 it('(LeftSide)持ち駒の枚数に応じて正しいクラス名が付く', async () => {
-  const store: Store = new DefaultStore()
-  const wrapper = shallow(
+  const wrapper = shallow(() => (
     <Captures
-      store={store}
       isLeftSide={true}
       isTurn={false}
       captures={[10, 4, 2, 1, 1, 2, 1]}
     />
-  ).dive()
+  ))
 
   expect(wrapper.childAt(0).children()).toHaveLength(1)
   expect(wrapper.childAt(1).children()).toHaveLength(2)
@@ -168,36 +160,38 @@ it('(LeftSide)持ち駒の枚数に応じて正しいクラス名が付く', asy
 
 it('持ち駒を選択できる', async () => {
   const store: Store = new DefaultStore()
-  const wrapper = shallow(
-    <Captures
-      store={store}
-      isLeftSide={false}
-      isTurn={true}
-      captures={[10, 4, 2, 1, 1, 2, 1]}
-    />
-  ).dive()
+  const wrapper = mount(
+    () => (
+      <Captures
+        isLeftSide={false}
+        isTurn={true}
+        captures={[10, 4, 2, 1, 1, 2, 1]}
+      />
+    ),
+    store
+  )
 
-  const p = wrapper.childAt(0).childAt(0)
-  p.simulate('click')
+  const p = () => wrapper.childAt(0).childAt(0).childAt(0)
+  p().simulate('click')
   const className = `Piece Piece-${Hisha0} Piece-Turn Piece-Selected Capture-${Hisha0}011`
-  const p2 = wrapper.childAt(0).childAt(0) // 再度取得する必要があった
-  expect(p2.hasClass(className)).toBeTruthy()
+  expect(p().hasClass(className)).toBeTruthy()
 })
 
 it('手番ではない方の駒をクリックしても選択できない', async () => {
   const store: Store = new DefaultStore()
-  const wrapper = shallow(
-    <Captures
-      store={store}
-      isLeftSide={false}
-      isTurn={false}
-      captures={[10, 4, 2, 1, 1, 2, 1]}
-    />
-  ).dive()
+  const wrapper = mount(
+    () => (
+      <Captures
+        isLeftSide={false}
+        isTurn={false}
+        captures={[10, 4, 2, 1, 1, 2, 1]}
+      />
+    ),
+    store
+  )
 
-  const p = wrapper.childAt(0).childAt(0)
-  p.simulate('click')
+  const p = () => wrapper.childAt(0).childAt(0).childAt(0)
+  p().simulate('click')
   const className = `Piece Piece-${Hisha0}   Capture-${Hisha0}011`
-  const p2 = wrapper.childAt(0).childAt(0) // 再度取得する必要があった
-  expect(p2.hasClass(className)).toBeTruthy()
+  expect(p().hasClass(className)).toBeTruthy()
 })

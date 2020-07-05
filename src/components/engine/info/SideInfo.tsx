@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
+import React, { FC } from 'react'
 import Columns from './Columns'
 import './SideInfo.scss'
 
-export default class SideInfo extends Component {
-  render() {
-    return (
-      <div className="EngineSideInfo">
-        <div className="EngineSideInfoContainer">
-          <Columns />
-        </div>
+const SideInfo: FC = () => {
+  return (
+    <div className="EngineSideInfo">
+      <div className="EngineSideInfoContainer">
+        <Columns />
       </div>
-    )
-  }
+    </div>
+  )
 }
+
+export default SideInfo

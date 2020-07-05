@@ -117,7 +117,7 @@ $ shogi-board-server -app_config ./app.config.yml
 「shogi-board-server の URL」に `http://localhost:8080` を入力します。
 これは、4 で起動したサーバーの URL です。
 
-「Cookie に保存」を `ON` にすると次回以降入力を省略できます。  
+「ブラウザに設定を保存する」を `ON` にすると、設定がブラウザのローカルストレージに保存され、次回以降入力を省略できます。  
 入力が完了したら、設定画面は閉じます。
 
 ## 7. 将棋ソフトを使う

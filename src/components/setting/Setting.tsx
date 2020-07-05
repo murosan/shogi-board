@@ -8,7 +8,7 @@ import CloseButton from '../util/CloseButton'
 
 const Setting: FC = () => {
   const { config, displayState } = React.useContext(StoreContext)
-  const { paintTargets, serverURL, saveToCookie } = config
+  const { paintTargets, serverURL, saveToLocalStorage } = config
 
   return (
     <div className="Mockup">
@@ -28,10 +28,10 @@ const Setting: FC = () => {
         onChange={b => config.setPaintTargets(b)}
       />
       <Check
-        label="Cookie に設定を保存する"
-        value={saveToCookie}
+        label="ブラウザに設定を保存する"
+        value={saveToLocalStorage}
         name="SaveToCookie"
-        onChange={b => config.setSaveToCookie(b)}
+        onChange={b => config.setSaveToLocalStorage(b)}
       />
     </div>
   )

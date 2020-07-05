@@ -31,12 +31,6 @@ Docusaurus という静的サイトジェネレータを使用しています。
 
 ## shogi-board-server の Quick Start
 
-- `Go Modules` を有効にしてください
-
-```sh
-$ export GO111MODULES=on
-```
-
 - `GOPATH` 以下で実行する場合
 
 ```sh

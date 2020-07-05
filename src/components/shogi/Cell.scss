@@ -63,8 +63,11 @@ $edgeTextSize: 1.2vw;
 
 .Piece-Confirm {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  top: -25%;
+  left: -25%;
+  width: 150%;
+  height: 150%;
+  z-index: 10;
 
   div {
     @include backImgCenter;
@@ -72,7 +75,7 @@ $edgeTextSize: 1.2vw;
     width: 100%;
     height: 50%;
     &:hover {
-      background-color: $WhiteHover;
+      background-color: $GreenHover2;
     }
   }
 }

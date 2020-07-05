@@ -9,8 +9,8 @@ export interface Config {
 
   setServerURL(s: string): Promise<void>
 
-  // cookie に保存するか
-  saveToCookie: boolean
+  // localStorage に保存するか
+  saveToLocalStorage: boolean
 
-  setSaveToCookie(b: boolean): Promise<void>
+  setSaveToLocalStorage(b: boolean): Promise<void>
 }

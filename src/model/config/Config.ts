@@ -13,4 +13,15 @@ export interface Config {
   saveToLocalStorage: boolean
 
   setSaveToLocalStorage(b: boolean): Promise<void>
+
+  // ボードエリアの幅を localStorage に保存するか
+  saveBoardWidth: boolean
+
+  setSaveBoardWidth(b: boolean): Promise<void>
+
+  // ボードエリアの幅 px で指定される
+  // null の場合は 100% が適用される
+  appWidth: number | null
+
+  setAppWidth(w?: number): Promise<void>
 }

@@ -1,0 +1,34 @@
+@import '../../styles/colors';
+
+.WidthController {
+  position: absolute;
+  right: 0px;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  cursor: w-resize;
+  box-sizing: border-box;
+  border-right: 1px dashed transparent;
+  color: $WhiteHover;
+
+  @mixin arrow($pos) {
+    position: absolute;
+    top: 0;
+    right: $pos;
+  }
+
+  &::before {
+    @include arrow(-0.1em);
+    content: '←';
+  }
+
+  &::after {
+    @include arrow(-0.9em);
+    content: '→';
+  }
+
+  &:hover {
+    color: $White;
+    border-right: 1px dashed $White;
+  }
+}

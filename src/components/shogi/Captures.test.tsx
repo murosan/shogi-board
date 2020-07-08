@@ -15,10 +15,8 @@ import {
   Kyou0,
   Kyou1,
 } from '../../model/shogi/Piece'
-import { shallow, mount } from '../../testutils/component-helper'
+import { mount, shallow } from '../../testutils/component-helper'
 import Captures from './Captures'
-import { DefaultStore } from '../../store/Store'
-import { Store } from '../../model/store/Store'
 
 it('(RightSide)持ち駒のラッパー要素を正しくレンダリングできる', async () => {
   const wrapper = shallow(() => (
@@ -159,17 +157,13 @@ it('(LeftSide)持ち駒の枚数に応じて正しいクラス名が付く', asy
 })
 
 it('持ち駒を選択できる', async () => {
-  const store: Store = new DefaultStore()
-  const wrapper = mount(
-    () => (
-      <Captures
-        isLeftSide={false}
-        isTurn={true}
-        captures={[10, 4, 2, 1, 1, 2, 1]}
-      />
-    ),
-    store
-  )
+  const wrapper = mount(() => (
+    <Captures
+      isLeftSide={false}
+      isTurn={true}
+      captures={[10, 4, 2, 1, 1, 2, 1]}
+    />
+  ))
 
   const p = () => wrapper.childAt(0).childAt(0).childAt(0)
   p().simulate('click')
@@ -178,17 +172,13 @@ it('持ち駒を選択できる', async () => {
 })
 
 it('手番ではない方の駒をクリックしても選択できない', async () => {
-  const store: Store = new DefaultStore()
-  const wrapper = mount(
-    () => (
-      <Captures
-        isLeftSide={false}
-        isTurn={false}
-        captures={[10, 4, 2, 1, 1, 2, 1]}
-      />
-    ),
-    store
-  )
+  const wrapper = mount(() => (
+    <Captures
+      isLeftSide={false}
+      isTurn={false}
+      captures={[10, 4, 2, 1, 1, 2, 1]}
+    />
+  ))
 
   const p = () => wrapper.childAt(0).childAt(0).childAt(0)
   p().simulate('click')

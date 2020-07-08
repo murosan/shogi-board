@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react-lite'
 import React, { FC } from 'react'
-import { columnString, rowString } from '../../lib/strings'
 import { find } from '../../lib/validatior/utils/algorithm'
 import { ClickProps } from '../../model/events/ClickProps'
 import Confirm from '../../model/shogi/Confirm'
@@ -50,8 +49,6 @@ const Cell: FC<Props> = (props: Props) => {
   return (
     <div className={className} onClick={() => click()}>
       {renderConfirm(confirm)}
-      {renderEdgeTextRow()}
-      {renderEdgeTextColumn()}
     </div>
   )
 
@@ -74,16 +71,6 @@ const Cell: FC<Props> = (props: Props) => {
         <div className="Piece-Confirm-Preserve" onClick={preserve} />
       </div>
     )
-  }
-
-  function renderEdgeTextRow(): JSX.Element | undefined {
-    const needText = inRange(column) && row === -1
-    if (needText) return <span>{columnString(column)}</span>
-  }
-
-  function renderEdgeTextColumn(): JSX.Element | undefined {
-    const needText = inRange(row) && column === -1
-    if (needText) return <span>{rowString(row)}</span>
   }
 
   function click(cf?: Confirm, promote?: true) {
@@ -150,12 +137,13 @@ function getClassName(p: GetClassNameProps): string {
   const left: string = isLeft ? 'Piece-Left ' : ''
   const top: string = isTop ? 'Piece-Top ' : ''
   const edgeText: string =
-    (p.c === -1 && rowInRange) || (p.r === -1 && colInRange)
-      ? 'Cell-EdgeText '
-      : ''
+    (p.c === -1 && rowInRange) || (p.r === -1 && colInRange) ? 'Cell-Edge ' : ''
+  const edgeTextColumn =
+    inRange(p.c) && p.r === -1 ? `Edge-Column-${p.c + 1} ` : ''
+  const edgeTextRow = inRange(p.r) && p.c === -1 ? `Edge-Row-${p.r + 1} ` : ''
   const star: string = isStar ? 'Piece-Star' : ''
 
-  return `Cell ${piece}${pieceImg}${pieceTurn}${pieceSelected}${pieceTargeted}${left}${top}${edgeText}${star}`
+  return `Cell ${piece}${pieceImg}${pieceTurn}${pieceSelected}${pieceTargeted}${left}${top}${edgeText}${edgeTextRow}${edgeTextColumn}${star}`
 }
 
 function inRange(n: number): boolean {

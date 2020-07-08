@@ -1,21 +1,41 @@
 import { action, observable } from 'mobx'
 import { Config } from '../model/config/Config'
+import debounce from 'lodash.debounce'
 
 export class DefaultConfig implements Config {
   @observable paintTargets: boolean
   @observable serverURL: string
   @observable saveToLocalStorage: boolean
+  @observable saveBoardWidth: boolean
+  @observable appWidth: number | null
 
   private readonly keys = {
     paintTargets: 'paintTargets',
     serverURL: 'serverURL',
     saveToLocalStorage: 'saveToLocalStorage',
+    saveBoardWidth: 'saveBoardWidth',
+    appWidth: 'appWidth',
   }
 
   constructor() {
-    this.paintTargets = !(this.get(this.keys.paintTargets) === 'false')
-    this.serverURL = this.get(this.keys.serverURL) || ''
-    this.saveToLocalStorage = this.get(this.keys.saveToLocalStorage) === 'true'
+    const {
+      paintTargets,
+      serverURL,
+      saveToLocalStorage,
+      saveBoardWidth,
+      appWidth,
+    } = this.keys
+    this.paintTargets = !(this.get(paintTargets) === 'false')
+    this.serverURL = this.get(serverURL) || ''
+    this.saveToLocalStorage = this.get(saveToLocalStorage) === 'true'
+    this.saveBoardWidth = this.get(saveBoardWidth) === 'true'
+    this.appWidth = (() => {
+      if (!this.saveBoardWidth) return null
+
+      const v = Number(this.get(appWidth))
+      if (!v || isNaN(v)) return null
+      return v
+    })()
   }
 
   @action
@@ -45,6 +65,35 @@ export class DefaultConfig implements Config {
     // false なら削除する
     Object.values(this.keys).forEach(key => this.remove(key))
   }
+
+  @action
+  async setSaveBoardWidth(b: boolean): Promise<void> {
+    this.saveBoardWidth = b
+    if (!b) {
+      this.remove(this.keys.saveBoardWidth)
+      this.remove(this.keys.appWidth)
+      return
+    }
+    this.set(this.keys.saveBoardWidth, 'true')
+    const w = this.appWidth
+    if (w) this.saveAppWidth(w)
+  }
+
+  @action
+  async setAppWidth(w?: number): Promise<void> {
+    if (!w) {
+      this.appWidth = null
+      this.remove(this.keys.appWidth)
+      return
+    }
+    this.appWidth = w
+    this.saveAppWidth(w)
+  }
+
+  saveAppWidth = debounce(
+    (w: number) => this.set(this.keys.appWidth, `${w}`),
+    1000
+  )
 
   private set(key: string, value: string): void {
     localStorage.setItem(key, value)

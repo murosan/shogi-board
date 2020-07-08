@@ -29,35 +29,23 @@ const Buttons: FC = () => {
     await engineState.stopThinking()
   }
 
+  const connectToEngineClassName =
+    'ConnectToEngine ' +
+    (engineState.state === Thinking ? 'CTE-Img-Stop-Engine' : 'CTE-Img')
+
   return (
     <div className="ButtonsContainer">
-      <button className="PrevOne" onClick={() => skipKif(prevOne)}>
-        ＜
-      </button>
-      <button className="NextOne" onClick={() => skipKif(nextOne)}>
-        ＞
-      </button>
-      <button className="PrevFive" onClick={() => skipKif(prevFive)}>
-        ＜ 5
-      </button>
-      <button className="NextFive" onClick={() => skipKif(nextFive)}>
-        5 ＞
-      </button>
-      <button className="Reverse" onClick={() => gameState.reverse()}>
-        盤面反転
-      </button>
-      <button className="Copy" data-clipboard-text={getAsString(kif)}>
-        棋譜コピー
-      </button>
-      <button className="ConnectToEngine" onClick={engineOnClick}>
-        {engineState.state === Thinking ? '思考停止' : '将棋エンジン'}
-      </button>
+      <button className="PrevOne" onClick={() => skipKif(prevOne)} />
+      <button className="NextOne" onClick={() => skipKif(nextOne)} />
+      <button className="PrevFive" onClick={() => skipKif(prevFive)} />
+      <button className="NextFive" onClick={() => skipKif(nextFive)} />
+      <button className="Reverse" onClick={() => gameState.reverse()} />
+      <button className="Copy" data-clipboard-text={getAsString(kif)} />
+      <button className={connectToEngineClassName} onClick={engineOnClick} />
       <button
         className="Configuration"
         onClick={() => displayState.setMockupState(MockupSetting)}
-      >
-        設定
-      </button>
+      />
     </div>
   )
 

@@ -38,7 +38,8 @@ it('正しいクラス名を付けられる', async () => {
   // EdgeText
   const wrapper10 = shallow(() => <Cell row={-1} column={0} />, store)
   const wrapper11 = shallow(() => <Cell row={0} column={-1} />, store)
-  const className10 = `Cell Cell-EdgeText`
+  const className10 = `Cell Cell-Edge Edge-Column-1`
+  const className11 = `Cell Cell-Edge Edge-Row-1`
 
   expect(wrapper1.hasClass(className1)).toBeTruthy()
   expect(wrapper2.hasClass(className2)).toBeTruthy()
@@ -50,7 +51,7 @@ it('正しいクラス名を付けられる', async () => {
   expect(wrapper8.hasClass(className7)).toBeTruthy()
   expect(wrapper9.hasClass(className9)).toBeTruthy()
   expect(wrapper10.hasClass(className10)).toBeTruthy()
-  expect(wrapper11.hasClass(className10)).toBeTruthy()
+  expect(wrapper11.hasClass(className11)).toBeTruthy()
 })
 
 it('反転してる場合でも正しいクラス名を付けられる', async () => {
@@ -79,7 +80,8 @@ it('反転してる場合でも正しいクラス名を付けられる', async (
   // EdgeText
   const wrapper10 = shallow(() => <Cell row={-1} column={0} />, store)
   const wrapper11 = shallow(() => <Cell row={0} column={-1} />, store)
-  const className10 = `Cell Cell-EdgeText`
+  const className10 = `Cell Cell-Edge Edge-Column-1`
+  const className11 = `Cell Cell-Edge Edge-Row-1`
 
   expect(wrapper1.hasClass(className1)).toBeTruthy()
   expect(wrapper2.hasClass(className2)).toBeTruthy()
@@ -91,7 +93,7 @@ it('反転してる場合でも正しいクラス名を付けられる', async (
   expect(wrapper8.hasClass(className7)).toBeTruthy()
   expect(wrapper9.hasClass(className9)).toBeTruthy()
   expect(wrapper10.hasClass(className10)).toBeTruthy()
-  expect(wrapper11.hasClass(className10)).toBeTruthy()
+  expect(wrapper11.hasClass(className11)).toBeTruthy()
 })
 
 it('手番の駒をクリックすると選択でき、Selectedクラスが付く', async () => {

@@ -1,14 +1,15 @@
 @import '../styles/modules';
 
-$ImgComponentsPath: '../img/components';
-$ImgPiecesPath: '../img/img/pieces';
+.AppContainer {
+  margin: auto;
+  min-width: 250px;
+  max-width: 100%;
+  position: relative;
+}
 
 .App {
-  @include backImgCenter;
   display: grid;
   padding: 1em;
-  min-width: 650px;
-  background-image: url($ImgComponentsPath + '/tatami.jpg');
 }
 
 .App-BoardOnly {

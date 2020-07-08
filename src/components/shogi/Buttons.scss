@@ -1,4 +1,5 @@
 @import '../../styles/colors';
+@import '../../styles/modules';
 
 .ButtonsContainer {
   margin: 0 0.2em 0 0;
@@ -15,6 +16,7 @@
     'conf conf conf conf';
 
   button {
+    @include backImgCenter;
     margin: 0;
     font: inherit;
     font-size: 1.9vw;
@@ -35,31 +37,44 @@
 .ConnectToEngine {
   grid-area: engine;
 }
+.ConnectToEngine.CTE-Img {
+  @include backgroundSVG('将棋エンジン', 130, 35, 15px);
+}
+.ConnectToEngine.CTE-Img-Stop-Engine {
+  @include backgroundSVG('思考停止', 130, 35, 15px);
+}
 
 .PrevOne {
   grid-area: prevOne;
+  @include backgroundSVG('＜', 65, 17, 7px);
 }
 
 .NextOne {
   grid-area: nextOne;
+  @include backgroundSVG('＞', 65, 17, 7px);
 }
 
 .PrevFive {
   grid-area: prevFive;
+  @include backgroundSVG('＜5', 65, 17, 7px);
 }
 
 .NextFive {
   grid-area: nextFive;
+  @include backgroundSVG('5＞', 65, 17, 7px);
 }
 
 .Reverse {
   grid-area: rev;
+  @include backgroundSVG('盤面反転', 130, 35, 14px);
 }
 
 .Copy {
   grid-area: cp;
+  @include backgroundSVG('棋譜コピー', 130, 35, 14px);
 }
 
 .Configuration {
   grid-area: conf;
+  @include backgroundSVG('設定', 130, 35, 14px);
 }

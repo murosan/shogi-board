@@ -1,5 +1,7 @@
 @import 'styles/reset';
 @import 'styles/colors';
+@import 'styles/modules';
+$ImgComponentsPath: './img/components';
 
 body {
   width: 100%;
@@ -18,7 +20,13 @@ code,
 }
 
 #root {
+  @include backImgCenter;
   width: 100%;
+  height: 100%;
+  margin: auto;
+  position: relative;
+  background-image: url($ImgComponentsPath + '/tatami.jpg');
+  overflow-x: hidden;
 }
 
 .headerMain {

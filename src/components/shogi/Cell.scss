@@ -94,12 +94,34 @@ $edgeTextSize: 1.2vw;
   transform: rotate(180deg);
 }
 
-.Cell-EdgeText {
-  @include flexCenter;
+.Cell-Edge {
+  @include backImgCenter;
   pointer-events: none;
+  position: relative;
+}
 
-  span {
-    font-size: $edgeTextSize;
+// prettier-ignore
+$edgeRowTextMap: (
+  1: '%E4%B8%80', // 一
+  2: '%E4%BA%8C', // 二
+  3: '%E4%B8%89', // 三
+  4: '%E5%9B%9B', // 四
+  5: '%E4%BA%94', // 五
+  6: '%E5%85%AD', // 六
+  7: '%E4%B8%83', // 七
+  8: '%E5%85%AB', // 八
+  9: '%E4%B9%9D', // 九
+);
+
+@each $i, $txt in $edgeRowTextMap {
+  .Edge-Row-#{$i} {
+    @include backgroundSVG($txt, 10, 30, 6px);
+  }
+}
+
+@for $i from 1 through 9 {
+  .Edge-Column-#{$i} {
+    @include backgroundSVG($i, 30, 10, 6px);
   }
 }
 

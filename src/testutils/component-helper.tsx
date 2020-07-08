@@ -39,8 +39,7 @@ function render<T, U>(
   f: (element: ReactElement<T>, options?: ShallowRendererProps) => U,
   { element, store, options }: RenderProps<T>
 ): U {
-  jest
-    .spyOn(React, 'useContext')
-    .mockImplementation(() => store || defaultStore())
+  const s = store || defaultStore()
+  jest.spyOn(React, 'useContext').mockImplementation(() => s)
   return f(element(), options)
 }

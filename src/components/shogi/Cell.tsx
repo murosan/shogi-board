@@ -1,5 +1,23 @@
 import { observer } from 'mobx-react-lite'
-import React, { FC } from 'react'
+import React, { CSSProperties, FC } from 'react'
+import Column1Img from '../../img/components/columns/1.svg'
+import Column2Img from '../../img/components/columns/2.svg'
+import Column3Img from '../../img/components/columns/3.svg'
+import Column4Img from '../../img/components/columns/4.svg'
+import Column5Img from '../../img/components/columns/5.svg'
+import Column6Img from '../../img/components/columns/6.svg'
+import Column7Img from '../../img/components/columns/7.svg'
+import Column8Img from '../../img/components/columns/8.svg'
+import Column9Img from '../../img/components/columns/9.svg'
+import Row1Img from '../../img/components/rows/1.svg'
+import Row2Img from '../../img/components/rows/2.svg'
+import Row3Img from '../../img/components/rows/3.svg'
+import Row4Img from '../../img/components/rows/4.svg'
+import Row5Img from '../../img/components/rows/5.svg'
+import Row6Img from '../../img/components/rows/6.svg'
+import Row7Img from '../../img/components/rows/7.svg'
+import Row8Img from '../../img/components/rows/8.svg'
+import Row9Img from '../../img/components/rows/9.svg'
 import { find } from '../../lib/validatior/utils/algorithm'
 import { ClickProps } from '../../model/events/ClickProps'
 import Confirm from '../../model/shogi/Confirm'
@@ -46,8 +64,32 @@ const Cell: FC<Props> = (props: Props) => {
     isTargeted,
   })
 
+  const bgImg = (url: string) => ({ backgroundImage: `url(${url})` })
+  let style: CSSProperties | undefined
+  if (inRange(column) && row === -1) {
+    if (column === 0) style = bgImg(Column1Img)
+    else if (column === 1) style = bgImg(Column2Img)
+    else if (column === 2) style = bgImg(Column3Img)
+    else if (column === 3) style = bgImg(Column4Img)
+    else if (column === 4) style = bgImg(Column5Img)
+    else if (column === 5) style = bgImg(Column6Img)
+    else if (column === 6) style = bgImg(Column7Img)
+    else if (column === 7) style = bgImg(Column8Img)
+    else if (column === 8) style = bgImg(Column9Img)
+  } else if (inRange(row) && column === -1) {
+    if (row === 0) style = bgImg(Row1Img)
+    else if (row === 1) style = bgImg(Row2Img)
+    else if (row === 2) style = bgImg(Row3Img)
+    else if (row === 3) style = bgImg(Row4Img)
+    else if (row === 4) style = bgImg(Row5Img)
+    else if (row === 5) style = bgImg(Row6Img)
+    else if (row === 6) style = bgImg(Row7Img)
+    else if (row === 7) style = bgImg(Row8Img)
+    else if (row === 8) style = bgImg(Row9Img)
+  }
+
   return (
-    <div className={className} onClick={() => click()}>
+    <div className={className} onClick={() => click()} style={style}>
       {renderConfirm(confirm)}
     </div>
   )

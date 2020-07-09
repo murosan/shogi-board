@@ -1,6 +1,6 @@
 import React from 'react'
-import { Store } from '../../model/store/Store'
-import { DefaultStore } from '../../store/Store'
+import { Store } from '../../store/Store'
+import { defaultStore } from '../../store/Store'
 import { shallow } from '../../testutils/component-helper'
 import Board from './Board'
 import { Props as CellProps } from './Cell'
@@ -16,7 +16,7 @@ it('レンダリングできる', async () => {
 })
 
 it('反転されていてもレンダリングできる', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   store.gameState.reverse()
   const wrapper = shallow(() => <Board />, store)
   expect(wrapper.find('.Board')).toHaveLength(1)

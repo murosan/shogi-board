@@ -8,13 +8,13 @@ import {
   Kyou1,
   To0,
 } from '../../model/shogi/Piece'
-import { Store } from '../../model/store/Store'
-import { DefaultStore } from '../../store/Store'
+import { Store } from '../../store/Store'
+import { defaultStore } from '../../store/Store'
 import { mount, shallow } from '../../testutils/component-helper'
 import Cell from './Cell'
 
 it('正しいクラス名を付けられる', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   // 先手の駒
   const wrapper1 = shallow(() => <Cell row={6} column={1} />, store)
   const wrapper2 = shallow(() => <Cell row={7} column={7} />, store)
@@ -54,7 +54,7 @@ it('正しいクラス名を付けられる', async () => {
 })
 
 it('反転してる場合でも正しいクラス名を付けられる', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   store.gameState.reverse()
   // 先手の駒
   const wrapper1 = shallow(() => <Cell row={6} column={1} />, store)
@@ -95,7 +95,7 @@ it('反転してる場合でも正しいクラス名を付けられる', async (
 })
 
 it('手番の駒をクリックすると選択でき、Selectedクラスが付く', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   const wrapper = mount(() => <Cell row={6} column={1} />, store)
   const targeted = mount(() => <Cell row={5} column={1} />, store)
   wrapper.simulate('click')
@@ -108,7 +108,7 @@ it('手番の駒をクリックすると選択でき、Selectedクラスが付�
 })
 
 it('Confirm 周り一連をちゃんとできる', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   store.gameState.currentMove.pos.pos[3][1] = Fu0
   store.gameState.currentMove.pos.pos[6][1] = Empty
   const wrapper1 = mount(() => <Cell row={3} column={1} />, store)
@@ -135,7 +135,7 @@ it('Confirm 周り一連をちゃんとできる', async () => {
 })
 
 it('成れる', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   store.gameState.currentMove.pos.pos[3][1] = Fu0
   store.gameState.currentMove.pos.pos[6][1] = Empty
   const wrapper1 = mount(() => <Cell row={3} column={1} />, store)
@@ -148,7 +148,7 @@ it('成れる', async () => {
 })
 
 it('不成もできる', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   store.gameState.currentMove.pos.pos[3][1] = Fu0
   store.gameState.currentMove.pos.pos[6][1] = Empty
   const wrapper1 = mount(() => <Cell row={3} column={1} />, store)
@@ -161,7 +161,7 @@ it('不成もできる', async () => {
 })
 
 it('反転していても Confirm オブジェクトを表示できる', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   store.gameState.reverse()
   store.gameState.currentMove.pos.pos[3][1] = Fu0
   store.gameState.currentMove.pos.pos[6][1] = Empty

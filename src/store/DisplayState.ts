@@ -1,23 +1,20 @@
-import { action, observable } from 'mobx'
-import { DisplayState } from '../model/display/DisplayState'
-import { MockupHidden, MockupState } from '../model/display/MockupState'
+import { MockupState } from '../model/display/MockupState'
 
-export class DefaultDisplayState implements DisplayState {
-  @observable mockup: MockupState = MockupHidden
-  @observable resizing: boolean = false
+/**
+ * 画面表示に関する State
+ */
+export interface DisplayState {
+  // モックアップ画面の現在の状態
+  mockup: MockupState
 
-  @action
-  async setMockupState(state: MockupState): Promise<void> {
-    this.mockup = state
-  }
+  // ボードエリアをリサイズ中かどうか
+  resizing: boolean
 
-  @action
-  async closeMockup(): Promise<void> {
-    this.mockup = MockupHidden
-  }
+  // MockupState を更新する
+  setMockupState(state: MockupState): Promise<void>
 
-  @action
-  setResizing(b: boolean): void {
-    this.resizing = b
-  }
+  // モックアップを閉じる
+  closeMockup(): Promise<void>
+
+  setResizing(b: boolean): void
 }

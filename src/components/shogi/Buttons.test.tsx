@@ -1,6 +1,6 @@
 import React from 'react'
-import { Store } from '../../model/store/Store'
-import { DefaultStore } from '../../store/Store'
+import { Store } from '../../store/Store'
+import { defaultStore } from '../../store/Store'
 import { shallow } from '../../testutils/component-helper'
 import { mockKif } from '../../testutils/mockKif'
 import Buttons from './Buttons'
@@ -11,7 +11,7 @@ it('レンダリングできる', async () => {
 })
 
 it('盤面反転ボタンを押すと store の reverse が実行される', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   store.gameState.reverse = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)
 
@@ -21,7 +21,7 @@ it('盤面反転ボタンを押すと store の reverse が実行される', asy
 })
 
 it('一手前に変更ボタンを押すと store の clickKif が実行される', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   store.gameState.clickKif = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)
 
@@ -32,13 +32,13 @@ it('一手前に変更ボタンを押すと store の clickKif が実行され�
 })
 
 it('一手前に変更ボタンを押してもエラーにならない', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   const wrapper = shallow(() => <Buttons />, store)
   wrapper.find('.PrevOne').simulate('click')
 })
 
 it('一手前に変更ボタンを押すと store の clickKif が実行される2', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   store.gameState.kif = mockKif()
   store.gameState.clickKif = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)
@@ -50,7 +50,7 @@ it('一手前に変更ボタンを押すと store の clickKif が実行され�
 })
 
 it('一手後に変更ボタンを押すと store の clickKif が実行される', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   store.gameState.clickKif = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)
 
@@ -61,7 +61,7 @@ it('一手後に変更ボタンを押すと store の clickKif が実行され�
 })
 
 it('五手前に変更ボタンを押すと store の clickKif が実行される', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   store.gameState.clickKif = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)
 
@@ -72,7 +72,7 @@ it('五手前に変更ボタンを押すと store の clickKif が実行され�
 })
 
 it('五手前に変更ボタンを押すと store の clickKif が実行される2', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   store.gameState.kif = mockKif()
   store.gameState.clickKif = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)
@@ -84,7 +84,7 @@ it('五手前に変更ボタンを押すと store の clickKif が実行され�
 })
 
 it('五手後に変更ボタンを押すと store の clickKif が実行される', async () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   store.gameState.kif = mockKif()
   store.gameState.clickKif = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)

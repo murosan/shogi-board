@@ -1,6 +1,6 @@
 import React from 'react'
-import { Store } from '../../model/store/Store'
-import { DefaultStore } from '../../store/Store'
+import { Store } from '../../store/Store'
+import { defaultStore } from '../../store/Store'
 import { mount } from '../../testutils/component-helper'
 import WidthController from './WidthController'
 
@@ -24,7 +24,7 @@ beforeEach(() => {
 })
 
 it('ボードエリアの幅を変更できる', () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   const { config, displayState } = store
   const wrapper = mount(() => <WidthController />, store)
   expect(config.appWidth).toBeNull()

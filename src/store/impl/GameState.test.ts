@@ -1,8 +1,8 @@
-import * as PositionHandler from '../lib/game-handler/position'
-import * as KifHandler from '../lib/kif-handler/genKifString'
-import { GameState } from '../model/shogi/GameState'
-import { Empty, Fu0, Fu1, Kei1, To0 } from '../model/shogi/Piece'
-import { mockKif } from '../testutils/mockKif'
+import * as PositionHandler from '../../lib/game-handler/position'
+import * as KifHandler from '../../lib/kif-handler/genKifString'
+import { GameState } from '../GameState'
+import { Empty, Fu0, Fu1, Kei1, To0 } from '../../model/shogi/Piece'
+import { mockKif } from '../../testutils/mockKif'
 import { DefaultGameState } from './GameState'
 
 describe('DefaultGameState', () => {

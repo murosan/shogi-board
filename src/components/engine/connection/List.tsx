@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import React, { FC, useEffect, useRef } from 'react'
 import { Connecting, NotConnected, State } from '../../../model/engine/State'
-import { Store } from '../../../model/store/Store'
+import { Store } from '../../../store/Store'
 import { StoreContext } from '../../../store/Store'
 import Loader from '../../util/Loader'
 import './List.scss'

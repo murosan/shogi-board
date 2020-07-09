@@ -6,8 +6,7 @@ import {
   ShallowWrapper,
 } from 'enzyme'
 import React, { ReactElement } from 'react'
-import { Store } from '../model/store/Store'
-import { DefaultStore } from '../store/Store'
+import { defaultStore, Store } from '../store/Store'
 
 export function shallow<T, U>(
   element: () => ReactElement<T>,
@@ -29,10 +28,6 @@ export interface RenderProps<T> {
   element: () => ReactElement<T>
   store?: Store
   options?: ShallowRendererProps
-}
-
-function defaultStore(): Store {
-  return new DefaultStore()
 }
 
 function render<T, U>(

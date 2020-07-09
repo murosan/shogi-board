@@ -1,93 +1,55 @@
-import { action, computed, observable } from 'mobx'
 import { ShogiBoardClient } from '../infrastructure/ShogiBoardClient'
-import { EngineState } from '../model/engine/EngineState'
+import { Position } from '../model/shogi/Position'
 import { Info } from '../model/engine/Info'
 import { Options } from '../model/engine/Optoin'
-import {
-  Connected,
-  Connecting,
-  NotConnected,
-  StandBy,
-  State,
-  Thinking,
-} from '../model/engine/State'
-import { Position } from '../model/shogi/Position'
+import { State } from '../model/engine/State'
 
-export class DefaultEngineState implements EngineState {
-  @observable names: string[] = []
-  @observable current: string | null = null
-  @observable options: Options | null = null
-  @observable state: State = NotConnected
-  @observable result: Info[] | null = null
-  @observable serverURL: string = ''
+/**
+ * 将棋エンジンの状態を Store として保持するためのインターフェース
+ */
+export interface EngineState {
+  // 将棋エンジン一覧
+  names: string[]
 
-  @computed get sbclient(): ShogiBoardClient {
-    return new ShogiBoardClient(this.current || '', this.serverURL)
-  }
+  // 接続中の将棋エンジン
+  current: string | null
 
-  @action async setNames(names: string[]): Promise<void> {
-    this.names = names
-  }
+  // 接続中の将棋エンジンから取得したオプション一覧
+  // 接続時に初期化する
+  options: Options | null
 
-  @action async setState(state: State): Promise<void> {
-    this.state = state
-  }
+  // 将棋エンジンの状態
+  state: State
 
-  @action async connect(name: string): Promise<void> {
-    if (!this.names.includes(name))
-      throw new Error('Unknown engine name. name=' + name)
+  // 将棋エンジンの思考結果
+  result: Info[] | null
 
-    this.current = name
-    try {
-      this.setState(Connecting)
-      await this.sbclient.connect()
-      this.options = await this.sbclient.getOptions()
-      this.setState(Connected)
-    } catch (e) {
-      console.error('Failed to connect', e)
-      alert('接続に失敗しました') // TODO
-      await this.disconnect()
-    }
-  }
+  // api client
+  sbclient: ShogiBoardClient
 
-  @action async disconnect(): Promise<void> {
-    try {
-      await this.sbclient.close()
-    } catch (e) {
-      console.error('接続解除に失敗しました', e)
-    } finally {
-      this.current = null
-      this.options = null
-      this.state = NotConnected
-    }
-  }
+  // サーバー側に設定されている将棋エンジンの名前一覧をセットする
+  setNames(names: string[]): Promise<void>
 
-  @action async startThinking(): Promise<void> {
-    if (!this.current)
-      throw new Error('[startThinking] current engine is not set')
+  // State の変更
+  setState(s: State): Promise<void>
 
-    await this.sbclient.start()
-    await this.setState(Thinking)
-  }
+  // 将棋エンジンに接続
+  connect(name: string): Promise<void>
 
-  @action async stopThinking(): Promise<void> {
-    if (!this.current)
-      throw new Error('[stopThinking] current engine is not set')
-    if (this.state !== Thinking) return
+  // 将棋エンジンとの接続を解除
+  disconnect(): Promise<void>
 
-    await this.sbclient.stop()
-    await this.setState(StandBy)
-  }
+  // 思考開始
+  startThinking(): Promise<void>
 
-  @action async setResult(i: Info[]): Promise<void> {
-    this.result = i
-  }
+  // 思考停止
+  stopThinking(): Promise<void>
 
-  async updatePosition(p: Position): Promise<void> {
-    await this.sbclient.setPosition(p)
-  }
+  // 思考結果をセット
+  setResult(i: Info[]): Promise<void>
 
-  @action async setServerURL(s: string): Promise<void> {
-    this.serverURL = s
-  }
+  // 局面の更新
+  updatePosition(p: Position): Promise<void>
+
+  setServerURL(s: string): Promise<void>
 }

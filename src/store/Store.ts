@@ -1,18 +1,31 @@
 import { observable, observe } from 'mobx'
 import { createContext } from 'react'
-import { DefaultConfig } from '../config/Config'
-import { Config } from '../model/config/Config'
-import { DisplayState } from '../model/display/DisplayState'
-import { EngineState } from '../model/engine/EngineState'
 import { Connected } from '../model/engine/State'
 import { Move } from '../model/kif/Move'
-import { GameState } from '../model/shogi/GameState'
-import { Store } from '../model/store/Store'
-import { DefaultDisplayState } from './DisplayState'
-import { DefaultEngineState } from './EngineState'
-import { DefaultGameState } from './GameState'
+import { Config } from './Config'
+import { DisplayState } from './DisplayState'
+import { EngineState } from './EngineState'
+import { GameState } from './GameState'
+import { DefaultConfig } from './impl/Config'
+import { DefaultDisplayState } from './impl/DisplayState'
+import { DefaultEngineState } from './impl/EngineState'
+import { DefaultGameState } from './impl/GameState'
 
-export class DefaultStore implements Store {
+export interface Store {
+  gameState: GameState
+  engineState: EngineState
+  displayState: DisplayState
+  config: Config
+
+  /**
+   * 将棋エンジンに対して setPosition を実行する
+   * @param move move が渡されなかった場合 gameState から局面を取得し実行する
+   *             move を渡さないのは connect 実行後に一度だけの想定
+   */
+  updatePosition(move?: Move): Promise<void>
+}
+
+class DefaultStore implements Store {
   constructor() {
     this.engineState.setServerURL(this.config.serverURL)
 
@@ -41,4 +54,5 @@ export class DefaultStore implements Store {
   }
 }
 
-export const StoreContext = createContext<Store>(new DefaultStore())
+export const defaultStore: () => Store = () => new DefaultStore()
+export const StoreContext = createContext<Store>(defaultStore())

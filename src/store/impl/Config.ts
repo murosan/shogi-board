@@ -1,6 +1,6 @@
-import { action, observable } from 'mobx'
-import { Config } from '../model/config/Config'
 import debounce from 'lodash.debounce'
+import { action, observable } from 'mobx'
+import { Config } from '../Config'
 
 export class DefaultConfig implements Config {
   @observable paintTargets: boolean

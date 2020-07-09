@@ -1,12 +1,12 @@
 import React from 'react'
 import { MockupHidden } from '../../model/display/MockupState'
-import { Store } from '../../model/store/Store'
-import { DefaultStore } from '../../store/Store'
+import { Store } from '../../store/Store'
+import { defaultStore } from '../../store/Store'
 import { mount, shallow } from '../../testutils/component-helper'
 import Setting from './Setting'
 
 it('閉じることができる', () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   store.displayState.setMockupState = jest.fn()
   const wrapper = shallow(() => <Setting />, store)
   wrapper.find('CloseButton').simulate('click')
@@ -14,7 +14,7 @@ it('閉じることができる', () => {
 })
 
 it('serverURL を表示 & 更新できる', () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   const { config } = store
   const url = 'http://localhost/test/serverURL'
   config.serverURL = url
@@ -31,7 +31,7 @@ it('serverURL を表示 & 更新できる', () => {
 })
 
 it('着色設定のチェックを切り替えることができる', () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   const { config } = store
   const wrapper = mount(() => <Setting />, store)
   const checkbox = () => wrapper.find('Check').at(0)
@@ -45,7 +45,7 @@ it('着色設定のチェックを切り替えることができる', () => {
 })
 
 it('設定を保存するチェックを切り替えることができる', () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   const { config } = store
   const wrapper = mount(() => <Setting />, store)
   const checkbox = () => wrapper.find('Check').at(1)
@@ -60,7 +60,7 @@ it('設定を保存するチェックを切り替えることができる', () =
 })
 
 it('ボードエリアの幅を記憶するチェックを切り替えることができる', () => {
-  const store: Store = new DefaultStore()
+  const store: Store = defaultStore()
   const { config } = store
   const wrapper = mount(() => <Setting />, store)
   const checkbox = () => wrapper.find('Check').at(2)

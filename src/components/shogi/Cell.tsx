@@ -136,56 +136,56 @@ interface GetClassNameProps {
 
 // つらい感じ
 function getClassName(p: GetClassNameProps): string {
+  const { r, c, sel, confirm, rv, isTurn, isTargeted } = p
   if (
-    !!p.confirm &&
-    !!p.sel &&
-    ((p.r === p.sel.row && p.c === p.sel.column) ||
-      (p.r === p.confirm.row && p.c === p.confirm.column))
+    !!confirm &&
+    !!sel &&
+    ((r === sel.row && c === sel.column) ||
+      (r === confirm.row && c === confirm.column))
   ) {
-    // TODO: ヒドス。あとで必ず修正すること!!
+    // 成・不成の選択ウィンドウができるとき、元の駒の表示は消す
+    // TODO: ひどい
     p.p = Empty
   }
 
-  const rowInRange: boolean = inRange(p.r)
-  const colInRange: boolean = inRange(p.c)
-  const isLeft: boolean =
-    rowInRange && ((!p.rv && p.c === 8) || (p.rv && p.c === 0))
-  const isTop: boolean =
-    colInRange && ((!p.rv && p.r === 0) || (p.rv && p.r === 8))
+  const classes: string[] = ['Cell']
+
+  const rowInRange: boolean = inRange(r)
+  const colInRange: boolean = inRange(c)
+  const isLeft: boolean = rowInRange && ((!rv && c === 8) || (rv && c === 0))
+  const isTop: boolean = colInRange && ((!rv && r === 0) || (rv && r === 8))
   const isStar: boolean =
-    (!p.rv &&
-      ((p.r === 2 && p.c === 6) ||
-        (p.r === 2 && p.c === 3) ||
-        (p.r === 5 && p.c === 6) ||
-        (p.r === 5 && p.c === 3))) ||
-    (p.rv &&
-      ((p.r === 6 && p.c === 2) ||
-        (p.r === 6 && p.c === 5) ||
-        (p.r === 3 && p.c === 2) ||
-        (p.r === 3 && p.c === 5)))
+    (!rv &&
+      ((r === 2 && c === 6) ||
+        (r === 2 && c === 3) ||
+        (r === 5 && c === 6) ||
+        (r === 5 && c === 3))) ||
+    (rv &&
+      ((r === 6 && c === 2) ||
+        (r === 6 && c === 5) ||
+        (r === 3 && c === 2) ||
+        (r === 3 && c === 5)))
   const isSelected: boolean =
-    rowInRange &&
-    colInRange &&
-    !!p.sel &&
-    p.sel.row === p.r &&
-    p.sel.column === p.c
+    rowInRange && colInRange && !!sel && sel.row === r && sel.column === c
 
-  const piece: string = rowInRange && colInRange ? 'Piece Piece-Bordered ' : ''
-  const rvp: number | undefined = p.p && p.rv ? p.p * -1 : p.p
-  const pieceImg: string = rvp ? `Piece-${rvp} ` : ''
-  const pieceTurn: string = p.isTurn ? 'Piece-Turn ' : ''
-  const pieceSelected: string = isSelected ? 'Piece-Selected ' : ''
-  const pieceTargeted: string = p.isTargeted ? 'Piece-Targeted ' : ''
-  const left: string = isLeft ? 'Piece-Left ' : ''
-  const top: string = isTop ? 'Piece-Top ' : ''
-  const edgeText: string =
-    (p.c === -1 && rowInRange) || (p.r === -1 && colInRange) ? 'Cell-Edge ' : ''
-  const edgeTextColumn =
-    inRange(p.c) && p.r === -1 ? `Edge-Column-${p.c + 1} ` : ''
-  const edgeTextRow = inRange(p.r) && p.c === -1 ? `Edge-Row-${p.r + 1} ` : ''
-  const star: string = isStar ? 'Piece-Star' : ''
+  if (rowInRange && colInRange) {
+    classes.push('Piece')
+    classes.push('Piece-Bordered')
+  }
 
-  return `Cell ${piece}${pieceImg}${pieceTurn}${pieceSelected}${pieceTargeted}${left}${top}${edgeText}${edgeTextRow}${edgeTextColumn}${star}`
+  const rvp: number | undefined = p.p && rv ? p.p * -1 : p.p
+  if (rvp) classes.push(`Piece-${rvp}`)
+  if (isTurn) classes.push('Piece-Turn')
+  if (isSelected) classes.push('Piece-Selected')
+  if (isTargeted) classes.push('Piece-Targeted')
+  if (isLeft) classes.push('Piece-Left')
+  if (isTop) classes.push('Piece-Top')
+
+  const isEdge = (c === -1 && rowInRange) || (r === -1 && colInRange)
+  if (isEdge) classes.push('Cell-Edge')
+  if (isStar) classes.push('Piece-Star')
+
+  return classes.join(' ')
 }
 
 function inRange(n: number): boolean {

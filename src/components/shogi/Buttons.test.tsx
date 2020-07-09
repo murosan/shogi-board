@@ -31,6 +31,12 @@ it('一手前に変更ボタンを押すと store の clickKif が実行され�
   expect(store.gameState.clickKif).toBeCalledWith(0)
 })
 
+it('一手前に変更ボタンを押してもエラーにならない', async () => {
+  const store: Store = new DefaultStore()
+  const wrapper = shallow(() => <Buttons />, store)
+  wrapper.find('.PrevOne').simulate('click')
+})
+
 it('一手前に変更ボタンを押すと store の clickKif が実行される2', async () => {
   const store: Store = new DefaultStore()
   store.gameState.kif = mockKif()

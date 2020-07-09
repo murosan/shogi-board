@@ -38,20 +38,19 @@ it('正しいクラス名を付けられる', async () => {
   // EdgeText
   const wrapper10 = shallow(() => <Cell row={-1} column={0} />, store)
   const wrapper11 = shallow(() => <Cell row={0} column={-1} />, store)
-  const className10 = `Cell Cell-Edge Edge-Column-1`
-  const className11 = `Cell Cell-Edge Edge-Row-1`
+  const className10 = `Cell Cell-Edge`
 
-  expect(wrapper1.hasClass(className1)).toBeTruthy()
-  expect(wrapper2.hasClass(className2)).toBeTruthy()
-  expect(wrapper3.hasClass(className3)).toBeTruthy()
-  expect(wrapper4.hasClass(className4)).toBeTruthy()
-  expect(wrapper5.hasClass(className5)).toBeTruthy()
-  expect(wrapper6.hasClass(className5)).toBeTruthy()
-  expect(wrapper7.hasClass(className7)).toBeTruthy()
-  expect(wrapper8.hasClass(className7)).toBeTruthy()
-  expect(wrapper9.hasClass(className9)).toBeTruthy()
-  expect(wrapper10.hasClass(className10)).toBeTruthy()
-  expect(wrapper11.hasClass(className11)).toBeTruthy()
+  expect(wrapper1.prop('className')).toBe(className1)
+  expect(wrapper2.prop('className')).toBe(className2)
+  expect(wrapper3.prop('className')).toBe(className3)
+  expect(wrapper4.prop('className')).toBe(className4)
+  expect(wrapper5.prop('className')).toBe(className5)
+  expect(wrapper6.prop('className')).toBe(className5)
+  expect(wrapper7.prop('className')).toBe(className7)
+  expect(wrapper8.prop('className')).toBe(className7)
+  expect(wrapper9.prop('className')).toBe(className9)
+  expect(wrapper10.prop('className')).toBe(className10)
+  expect(wrapper11.prop('className')).toBe(className10)
 })
 
 it('反転してる場合でも正しいクラス名を付けられる', async () => {
@@ -80,20 +79,19 @@ it('反転してる場合でも正しいクラス名を付けられる', async (
   // EdgeText
   const wrapper10 = shallow(() => <Cell row={-1} column={0} />, store)
   const wrapper11 = shallow(() => <Cell row={0} column={-1} />, store)
-  const className10 = `Cell Cell-Edge Edge-Column-1`
-  const className11 = `Cell Cell-Edge Edge-Row-1`
+  const className10 = `Cell Cell-Edge`
 
-  expect(wrapper1.hasClass(className1)).toBeTruthy()
-  expect(wrapper2.hasClass(className2)).toBeTruthy()
-  expect(wrapper3.hasClass(className3)).toBeTruthy()
-  expect(wrapper4.hasClass(className4)).toBeTruthy()
-  expect(wrapper5.hasClass(className5)).toBeTruthy()
-  expect(wrapper6.hasClass(className5)).toBeTruthy()
-  expect(wrapper7.hasClass(className7)).toBeTruthy()
-  expect(wrapper8.hasClass(className7)).toBeTruthy()
-  expect(wrapper9.hasClass(className9)).toBeTruthy()
-  expect(wrapper10.hasClass(className10)).toBeTruthy()
-  expect(wrapper11.hasClass(className11)).toBeTruthy()
+  expect(wrapper1.prop('className')).toBe(className1)
+  expect(wrapper2.prop('className')).toBe(className2)
+  expect(wrapper3.prop('className')).toBe(className3)
+  expect(wrapper4.prop('className')).toBe(className4)
+  expect(wrapper5.prop('className')).toBe(className5)
+  expect(wrapper6.prop('className')).toBe(className5)
+  expect(wrapper7.prop('className')).toBe(className7)
+  expect(wrapper8.prop('className')).toBe(className7)
+  expect(wrapper9.prop('className')).toBe(className9)
+  expect(wrapper10.prop('className')).toBe(className10)
+  expect(wrapper11.prop('className')).toBe(className10)
 })
 
 it('手番の駒をクリックすると選択でき、Selectedクラスが付く', async () => {

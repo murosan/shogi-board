@@ -29,6 +29,15 @@
   padding: 0;
 }
 
+.github-star-container {
+  margin-top: 1rem;
+}
+
+.nav-footer .sitemap h5 {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }
 

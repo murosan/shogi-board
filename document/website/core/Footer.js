@@ -29,27 +29,34 @@ class Footer extends React.Component {
             )}
           </a>
           <div>
-            <h5>Docs</h5>
+            <h5>遊ぶ</h5>
+            <a href={this.pageUrl('playground.html')}>Web将棋盤</a>
+            <h5>ドキュメント</h5>
             <a href={this.docUrl('features.html', this.props.language)}>
               Getting Started
             </a>
           </div>
           <div>
-            <h5>More</h5>
-            <a href={`${this.props.config.baseUrl}blog`}>Release Notes</a>
-            <a href={this.props.config.repoUrl}>GitHub</a>
-            <a href={`${this.props.config.repoUrl}/issues`}>Issues</a>
-            <a
-              className="github-button"
-              href={this.props.config.repoUrl}
-              data-icon="octicon-star"
-              data-count-href="/facebook/docusaurus/stargazers"
-              data-show-count="true"
-              data-count-aria-label="# stargazers on GitHub"
-              aria-label="Star this project on GitHub"
-            >
-              Star
+            <h5>その他</h5>
+            <a href={`${this.props.config.baseUrl}blog`}>リリースノート</a>
+            <a href={this.props.config.repoUrl}>ソースコード(GitHub)</a>
+            <a href={`${this.props.config.repoUrl}/issues`}>
+              質問・不具合報告(GitHub - Issues)
             </a>
+
+            <div className="github-star-container">
+              <a
+                className="github-button"
+                href={this.props.config.repoUrl}
+                data-icon="octicon-star"
+                data-count-href="/facebook/docusaurus/stargazers"
+                data-show-count="true"
+                data-count-aria-label="# stargazers on GitHub"
+                aria-label="Star this project on GitHub"
+              >
+                Star
+              </a>
+            </div>
           </div>
         </section>
         <section className="copyright">{this.props.config.copyright}</section>

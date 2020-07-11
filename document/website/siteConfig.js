@@ -19,10 +19,10 @@ const siteConfig = {
   organizationName: org,
 
   headerLinks: [
-    { href: playgroundUrl, label: 'Playground' }, // デプロイ前にビルドする
-    { doc: 'getting-started', label: 'Docs' },
-    { href: repositoryUrl, label: 'GitHub' },
-    { blog: true, label: 'Release Notes' },
+    { href: playgroundUrl, label: 'Web将棋盤' }, // デプロイ前にビルドする
+    { doc: 'getting-started', label: 'ドキュメント' },
+    { href: repositoryUrl, label: 'ソースコード' },
+    { blog: true, label: 'リリースノート' },
   ],
 
   headerIcon: 'img/icon.svg',

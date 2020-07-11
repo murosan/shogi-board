@@ -75,7 +75,7 @@ const Cell: FC<Props> = (props: Props) => {
     else if (column === 5) style = bgImg(Column6Img)
     else if (column === 6) style = bgImg(Column7Img)
     else if (column === 7) style = bgImg(Column8Img)
-    else if (column === 8) style = bgImg(Column9Img)
+    else style = bgImg(Column9Img)
   } else if (inRange(row) && column === -1) {
     if (row === 0) style = bgImg(Row1Img)
     else if (row === 1) style = bgImg(Row2Img)
@@ -85,7 +85,7 @@ const Cell: FC<Props> = (props: Props) => {
     else if (row === 5) style = bgImg(Row6Img)
     else if (row === 6) style = bgImg(Row7Img)
     else if (row === 7) style = bgImg(Row8Img)
-    else if (row === 8) style = bgImg(Row9Img)
+    else style = bgImg(Row9Img)
   }
 
   return (

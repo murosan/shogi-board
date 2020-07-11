@@ -56,8 +56,8 @@ class HomeSplash extends React.Component {
         <div className="inner">
           <ProjectTitle siteConfig={siteConfig} />
           <PromoSection>
-            <Button href={playgroundUrl}>Try It Out</Button>
-            <Button href={docUrl('getting-started')}>Usage</Button>
+            <Button href={playgroundUrl}>Web将棋盤</Button>
+            <Button href={docUrl('getting-started')}>使い方</Button>
           </PromoSection>
         </div>
       </SplashContainer>
@@ -93,7 +93,7 @@ class Index extends React.Component {
           {
             title: 'Getting Started',
             content: `
-ダウンロード不要で試すには [Playground](${playgroundUrl}) から  
+ダウンロード不要で試すには [Web将棋盤](${playgroundUrl}) から  
 Git・Node.js を扱える方は以下のように始めることができます  
 
 \`\`\`sh

@@ -25,3 +25,10 @@ it('DOMを取得できなかったら scrollIntoView は実行されない', asy
   intoView(MOCK_ID)
   expect(result).toBeFalsy()
 })
+
+it('scrollIntoViewIfNeeded がそもそも実行できないブラウザでもエラーにはならない', async () => {
+  const mockDiv: any = document.createElement('div')
+  mockDiv.scrollIntoViewIfNeeded = undefined
+  document.getElementById = () => mockDiv
+  intoView(MOCK_ID)
+})

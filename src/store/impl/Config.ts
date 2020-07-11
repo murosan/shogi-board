@@ -32,9 +32,12 @@ export class DefaultConfig implements Config {
     this.appWidth = (() => {
       if (!this.saveBoardWidth) return null
 
-      const v = Number(this.get(appWidth))
-      if (!v || isNaN(v)) return null
-      return v
+      const v = this.get(appWidth)
+      if (!v) return null
+
+      const n = Number(v)
+      if (isNaN(n)) return null
+      return n
     })()
   }
 
@@ -53,17 +56,18 @@ export class DefaultConfig implements Config {
   @action
   async setSaveToLocalStorage(b: boolean): Promise<void> {
     this.saveToLocalStorage = b
+    const { saveToLocalStorage, serverURL, paintTargets } = this.keys
 
     if (this.saveToLocalStorage) {
-      const { saveToLocalStorage, serverURL, paintTargets } = this.keys
-      this.set(saveToLocalStorage, String(b))
+      this.set(saveToLocalStorage, `${b}`)
       this.set(serverURL, this.serverURL)
-      this.set(paintTargets, String(this.paintTargets))
+      this.set(paintTargets, `${this.paintTargets}`)
       return
     }
 
     // false なら削除する
-    Object.values(this.keys).forEach(key => this.remove(key))
+    const keys = [saveToLocalStorage, serverURL, paintTargets]
+    keys.forEach(key => this.remove(key))
   }
 
   @action
@@ -87,7 +91,7 @@ export class DefaultConfig implements Config {
       return
     }
     this.appWidth = w
-    this.saveAppWidth(w)
+    if (this.saveBoardWidth) this.saveAppWidth(w)
   }
 
   saveAppWidth = debounce(

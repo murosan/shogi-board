@@ -8,8 +8,7 @@ import {
   Kyou1,
   To0,
 } from '../../model/shogi/Piece'
-import { Store } from '../../store/Store'
-import { defaultStore } from '../../store/Store'
+import { defaultStore, Store } from '../../store/Store'
 import { mount, shallow } from '../../testutils/component-helper'
 import Cell from './Cell'
 
@@ -51,6 +50,22 @@ it('正しいクラス名を付けられる', async () => {
   expect(wrapper9.prop('className')).toBe(className9)
   expect(wrapper10.prop('className')).toBe(className10)
   expect(wrapper11.prop('className')).toBe(className10)
+
+  // SVG のパスをチェック
+  // production ビルドで出力されるものは別だけど一応テスト
+  for (let i = 0; i <= 8; i++) {
+    const wrapper1 = shallow(() => <Cell row={-1} column={i} />, store)
+    expect(wrapper1.html()).toMatch(`background-image:url(${i + 1}.svg)`)
+
+    const wrapper2 = shallow(() => <Cell row={i} column={-1} />, store)
+    expect(wrapper2.html()).toContain(`background-image:url(${i + 1}.svg)`)
+  }
+
+  // SVG は付かない
+  const wrapper12 = shallow(() => <Cell row={-1} column={9} />, store)
+  expect(wrapper12.html()).not.toMatch(`background-image`)
+  const wrapper13 = shallow(() => <Cell row={9} column={-1} />, store)
+  expect(wrapper13.html()).not.toContain(`background-image`)
 })
 
 it('反転してる場合でも正しいクラス名を付けられる', async () => {
@@ -92,6 +107,19 @@ it('反転してる場合でも正しいクラス名を付けられる', async (
   expect(wrapper9.prop('className')).toBe(className9)
   expect(wrapper10.prop('className')).toBe(className10)
   expect(wrapper11.prop('className')).toBe(className10)
+
+  for (let i = 0; i <= 8; i++) {
+    const wrapper1 = shallow(() => <Cell row={-1} column={i} />, store)
+    expect(wrapper1.html()).toMatch(`background-image:url(${i + 1}.svg)`)
+
+    const wrapper2 = shallow(() => <Cell row={i} column={-1} />, store)
+    expect(wrapper2.html()).toContain(`background-image:url(${i + 1}.svg)`)
+  }
+
+  const wrapper12 = shallow(() => <Cell row={-1} column={9} />, store)
+  expect(wrapper12.html()).not.toMatch(`background-image`)
+  const wrapper13 = shallow(() => <Cell row={9} column={-1} />, store)
+  expect(wrapper13.html()).not.toContain(`background-image`)
 })
 
 it('手番の駒をクリックすると選択でき、Selectedクラスが付く', async () => {
@@ -184,3 +212,5 @@ it('反転していても Confirm オブジェクトを表示できる', async (
   expect(confirmOpts.first().hasClass(classNamePromote)).toBeTruthy()
   expect(confirmOpts.last().hasClass(classNamePreserve)).toBeTruthy()
 })
+
+it('', () => {})

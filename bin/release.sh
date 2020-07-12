@@ -8,8 +8,10 @@ DEST="release/$SB_DIR"
 
 export PUBLIC_URL="./"
 
-yarn build
+rm -rf $DEST
 mkdir -p $DEST
+
+yarn build
 cp -a build/* $DEST
 
 cd release

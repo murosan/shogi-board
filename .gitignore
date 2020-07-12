@@ -13,6 +13,7 @@ junit.xml
 
 # production
 /build
+/release
 
 # app
 /src/config/*.js

@@ -17,10 +17,17 @@ export interface MoveProps {
     column: number
   }
 
+  // 一手前の移動先
+  // 同じだったら`同歩`のような棋譜を生成するため
+  prevDest?: {
+    row: number
+    column: number
+  }
+
   // 移動する駒
   piece: Piece
 
-  // undefined: 選択できない局面
+  // undefined: 成・不成 はそもそも選択できない状態
   // true: 成
   // false: 不成
   promote?: boolean

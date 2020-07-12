@@ -2,7 +2,7 @@ import { Empty } from '../model/shogi/Piece'
 import { Position } from '../model/shogi/Position'
 import { Sente } from '../model/shogi/Turn'
 
-export default function (): Position {
+export function emptyPosition(): Position {
   return {
     pos: [
       [Empty, Empty, Empty, Empty, Empty, Empty, Empty, Empty, Empty],

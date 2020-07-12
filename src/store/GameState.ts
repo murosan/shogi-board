@@ -33,6 +33,9 @@ export interface GameState {
   // 棋譜
   kif: Kif
 
+  // 前回の移動先。棋譜で `同歩` のような文字列を作成するため
+  prevDestination: Point | null
+
   // 棋譜の現在表示局面を返す
   currentMove: Move
 

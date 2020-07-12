@@ -5,7 +5,7 @@ import { changeIndex } from '../../lib/kif-handler/changeIndex'
 import { genKifString } from '../../lib/kif-handler/genKifString'
 import getCurrent from '../../lib/kif-handler/getCurrent'
 import pushMove from '../../lib/kif-handler/pushMove'
-import getTargets from '../../lib/validatior/getTargets'
+import { getTargets } from '../../lib/validatior/getTargets'
 import { find } from '../../lib/validatior/utils/algorithm'
 import filterTargets from '../../lib/validatior/utils/filterTargets'
 import { ClickProps } from '../../model/events/ClickProps'
@@ -13,11 +13,11 @@ import { MoveProps } from '../../model/events/MoveProps'
 import Kif, { newKif } from '../../model/kif/Kif'
 import { Move } from '../../model/kif/Move'
 import Confirm from '../../model/shogi/Confirm'
-import { GameState } from '../GameState'
 import { Piece } from '../../model/shogi/Piece'
 import Point from '../../model/shogi/Point'
 import { Position } from '../../model/shogi/Position'
-import { Turn, Gote, Sente } from '../../model/shogi/Turn'
+import { Gote, Sente, Turn } from '../../model/shogi/Turn'
+import { GameState } from '../GameState'
 
 export class DefaultGameState implements GameState {
   @observable indexes: number[] = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -25,6 +25,7 @@ export class DefaultGameState implements GameState {
   @observable confirm: Confirm | null = null
   @observable moveTargets: Point[] = []
   @observable kif: Kif = newKif()
+  @observable prevDestination: Point | null = null
 
   @computed get currentMove(): Move {
     return getCurrent(this.kif)
@@ -77,11 +78,13 @@ export class DefaultGameState implements GameState {
         pos: this.currentMove.pos,
         source,
         dest,
+        prevDest: this.prevDestination ?? undefined,
         piece,
         promote,
       }
       const pos: Position = move(moveProps)
       const kifStr: string = genKifString(moveProps)
+      this.prevDestination = dest
       const moveForKif: Move = {
         index: this.currentMove.index + 1,
         str: kifStr,

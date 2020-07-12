@@ -3,14 +3,19 @@ import React, { FC } from 'react'
 import { genKifString } from '../../../lib/kif-handler/genKifString'
 import { StoreContext } from '../../../store/Store'
 import './Columns.scss'
+import Point from '../../../model/shogi/Point'
 
 const Columns: FC = () => {
-  const { result } = React.useContext(StoreContext).engineState
+  const { engineState, gameState } = React.useContext(StoreContext)
+  const { result } = engineState
   if (!result) return <div />
 
   const columns = result.map(i => {
+    let prevDest: Point | null = gameState.prevDestination
     const moves = i.moves.map((m, n) => {
-      const kif = genKifString(m, true)
+      if (prevDest) m.prevDest = prevDest
+      const kif = genKifString(m)
+      prevDest = m.dest
       // TODO: key
       return (
         <div key={n} className="EngineInfoRowContent">

@@ -74,17 +74,17 @@ export class DefaultGameState implements GameState {
     const dest: Point = { row: p.row, column: p.column }
 
     const moveAndUpdateState = (piece: Piece, promote?: boolean) => {
+      this.prevDestination = dest
       const moveProps: MoveProps = {
         pos: this.currentMove.pos,
         source,
         dest,
-        prevDest: this.prevDestination ?? undefined,
+        prevDest: this.currentMove.dest,
         piece,
         promote,
       }
       const pos: Position = move(moveProps)
       const kifStr: string = genKifString(moveProps)
-      this.prevDestination = dest
       const moveForKif: Move = {
         index: this.currentMove.index + 1,
         str: kifStr,

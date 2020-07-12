@@ -1,6 +1,6 @@
 import { Fu0, Fu1, Kyou0 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
-import emptyPosition from '../../../testutils/emptyPosition'
+import { emptyPosition } from '../../../testutils/emptyPosition'
 import getWithDiff from './getWithDiff'
 
 describe('getWithDiff', () => {

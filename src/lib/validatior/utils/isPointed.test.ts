@@ -11,7 +11,7 @@ import {
   Kin1,
 } from '../../../model/shogi/Piece'
 import { Gote, Sente } from '../../../model/shogi/Turn'
-import emptyPosition from '../../../testutils/emptyPosition'
+import { emptyPosition } from '../../../testutils/emptyPosition'
 import isPointed from './isPointed'
 
 describe('isPointed', () => {

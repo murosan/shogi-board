@@ -1,7 +1,7 @@
 import { Kin0, Kin1, Ryu0, Ryu1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import { Position } from '../../../model/shogi/Position'
-import emptyPosition from '../../../testutils/emptyPosition'
+import { emptyPosition } from '../../../testutils/emptyPosition'
 import ryu from './ryu'
 
 describe('龍の動き判定', () => {

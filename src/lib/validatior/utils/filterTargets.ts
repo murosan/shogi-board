@@ -3,7 +3,7 @@ import Point from '../../../model/shogi/Point'
 import { Position } from '../../../model/shogi/Position'
 import { Gote, Sente, Turn } from '../../../model/shogi/Turn'
 import { moveBoardOnly } from '../../game-handler/position'
-import getTargets from '../getTargets'
+import { getTargets } from '../getTargets'
 import getGyokuPoint from './getGyokuPoint'
 import isPointed from './isPointed'
 

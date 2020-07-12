@@ -1,7 +1,7 @@
 import { Kin0, Kin1, Uma0, Uma1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import { Position } from '../../../model/shogi/Position'
-import emptyPosition from '../../../testutils/emptyPosition'
+import { emptyPosition } from '../../../testutils/emptyPosition'
 import uma from './uma'
 
 describe('馬の動き判定', () => {

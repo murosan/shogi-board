@@ -1,7 +1,7 @@
 import { Fu0, Kyou0, Kyou1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import { Position } from '../../../model/shogi/Position'
-import emptyPosition from '../../../testutils/emptyPosition'
+import { emptyPosition } from '../../../testutils/emptyPosition'
 import kyou from './kyou'
 
 describe('香の動き判定', () => {

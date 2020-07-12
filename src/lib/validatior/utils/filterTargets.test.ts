@@ -10,8 +10,8 @@ import {
   Kin0,
   Kin1,
 } from '../../../model/shogi/Piece'
-import emptyPosition from '../../../testutils/emptyPosition'
-import getTargets from '../getTargets'
+import { emptyPosition } from '../../../testutils/emptyPosition'
+import { getTargets } from '../getTargets'
 import filterTargets from './filterTargets'
 
 describe('filterTargets', () => {

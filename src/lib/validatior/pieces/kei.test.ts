@@ -1,7 +1,7 @@
 import { Fu0, Kei0, Kei1, Kin0, Kin1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import { Position } from '../../../model/shogi/Position'
-import emptyPosition from '../../../testutils/emptyPosition'
+import { emptyPosition } from '../../../testutils/emptyPosition'
 import kei from './kei'
 
 describe('桂の動き判定', () => {

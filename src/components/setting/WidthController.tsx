@@ -10,8 +10,9 @@ const Setting: FC = () => {
 
   const resizeOn = () => displayState.setResizing(true)
   const resizeOff = () => {
+    const ds = displayStateRef.current
+    if (ds.resizing) window.getSelection()?.removeAllRanges()
     displayStateRef.current.setResizing(false)
-    window.getSelection()?.removeAllRanges()
   }
   const onMove = (e: MouseEvent) => {
     const displayState = displayStateRef.current

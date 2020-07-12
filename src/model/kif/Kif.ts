@@ -27,8 +27,8 @@ export function newKif(): Kif {
           index: 0,
           str: '開始局面',
           pos: initPos,
-          source: { row: 0, column: 0 },
-          dest: { row: 0, column: 0 },
+          source: { row: -1, column: -1 }, // 盤上に存在しない場所にしておく
+          dest: { row: -1, column: -1 },
           piece: 0,
         },
       ],

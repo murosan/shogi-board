@@ -43,7 +43,7 @@ const Kif: FC = () => {
       if (i === b.index) continue
       const m: Move = b.branches[i].moves[0] as Move // head は必ず Move
       const key: string = `${n}-${i}`
-      const txt: string = `-- ${m.str}`
+      const txt: string = `-- ${kifText(m)}`
       const onClick = () => gameState.clickKif(n, i)
       otherHeadsDom.push(
         <div key={key} className="Branch" onClick={onClick}>
@@ -65,9 +65,16 @@ const Kif: FC = () => {
     return (
       <div key={n} className="Move" id={id} onClick={onClick}>
         <div className="Number code">{n + '.'}</div>
-        <div className="MoveText">{m.str}</div>
+        <div className="MoveText">{kifText(m)}</div>
       </div>
     )
+  }
+
+  function kifText(m: Move): string {
+    const s = m.str
+    // 同 で始まっていて2文字だったら空白を入れる
+    if (s.length === 2 && s[0] === '同') return `同　${s[1]}`
+    return s
   }
 }
 

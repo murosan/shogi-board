@@ -64,3 +64,32 @@ it('更新が入ると componentDidUpdate が呼ばれる', async () => {
   expect(wrapper.find('.KifContainer')).toHaveLength(1)
   expect(wrapper.find('.Move')).toHaveLength(2) // 棋譜は増えている
 })
+
+it('`同`で表記される棋譜は、2文字の場合、間に全角の空白文字が入る', async () => {
+  const store: Store = defaultStore()
+  store.gameState.kif = pushMove(store.gameState.kif, {
+    index: 1,
+    str: '同歩',
+    pos: hirate(),
+    piece: 0,
+    source: { row: 0, column: 0 },
+    dest: { row: 0, column: 0 },
+  })
+  const wrapper = mount(() => <Kif />, store)
+  expect(wrapper.find('.KifContainer')).toHaveLength(1)
+  expect(wrapper.find('.Move')).toHaveLength(2)
+  expect(wrapper.text()).toContain('同　歩') // 中心に空白が入っている
+
+  store.gameState.kif = pushMove(store.gameState.kif, {
+    index: 2,
+    str: '同角成',
+    pos: hirate(),
+    piece: 0,
+    source: { row: 0, column: 0 },
+    dest: { row: 0, column: 0 },
+  })
+  wrapper.update()
+  // 3文字以上なら入らない
+  expect(wrapper.text()).toContain('同角成')
+  expect(wrapper.text()).not.toContain('同　角成')
+})

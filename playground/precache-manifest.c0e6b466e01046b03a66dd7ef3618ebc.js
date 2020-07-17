@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1e5ee5cf415bcdb5c17d04710d8b5cca",
+    "revision": "88acd79dbee0a6f70b056298fba97ee2",
     "url": "/shogi-board/playground/index.html"
   },
   {
-    "revision": "8cb29c4bf070eb42fa49",
-    "url": "/shogi-board/playground/static/css/main.83fcbf97.chunk.css"
+    "revision": "2b52dade82cf396dee8a",
+    "url": "/shogi-board/playground/static/css/main.5b776b30.chunk.css"
   },
   {
     "revision": "6d830ebce49f503e8db5",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/shogi-board/playground/static/js/2.83346e69.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8cb29c4bf070eb42fa49",
+    "revision": "2b52dade82cf396dee8a",
     "url": "/shogi-board/playground/static/js/main.032437fd.chunk.js"
   },
   {
@@ -108,6 +108,94 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/shogi-board/playground/static/media/copy-kif.6a0a1831.svg"
   },
   {
+    "revision": "edbd2ee375a707478243141478b96c05",
+    "url": "/shogi-board/playground/static/media/fu0.edbd2ee3.svg"
+  },
+  {
+    "revision": "a160e1c5db0b16988bebdb670a29b799",
+    "url": "/shogi-board/playground/static/media/fu1.a160e1c5.svg"
+  },
+  {
+    "revision": "db70ba9dfc6ca32e6628ff2c79cf5eb3",
+    "url": "/shogi-board/playground/static/media/gin0.db70ba9d.svg"
+  },
+  {
+    "revision": "9056641821cb4a99cac0d0a7f2cc5311",
+    "url": "/shogi-board/playground/static/media/gin1.90566418.svg"
+  },
+  {
+    "revision": "dfd43e2d59bb5f768c322d5b2ad47049",
+    "url": "/shogi-board/playground/static/media/gyoku0.dfd43e2d.svg"
+  },
+  {
+    "revision": "370c46fe2461a181addc002e05da43ad",
+    "url": "/shogi-board/playground/static/media/gyoku1.370c46fe.svg"
+  },
+  {
+    "revision": "ae816c26183147f6a2970b50fca7e08d",
+    "url": "/shogi-board/playground/static/media/hisha0.ae816c26.svg"
+  },
+  {
+    "revision": "c32a6576c4521bb49c3f834234462c07",
+    "url": "/shogi-board/playground/static/media/hisha1.c32a6576.svg"
+  },
+  {
+    "revision": "2135cee30684fc1c20d84b375318c757",
+    "url": "/shogi-board/playground/static/media/kaku0.2135cee3.svg"
+  },
+  {
+    "revision": "1c15a1100fe69805b35abaf6385fff65",
+    "url": "/shogi-board/playground/static/media/kaku1.1c15a110.svg"
+  },
+  {
+    "revision": "7bd1ef12007e62d08c83e05ee6a4e369",
+    "url": "/shogi-board/playground/static/media/kei0.7bd1ef12.svg"
+  },
+  {
+    "revision": "c1889f835dff3de41bafc68f9cec94ef",
+    "url": "/shogi-board/playground/static/media/kei1.c1889f83.svg"
+  },
+  {
+    "revision": "bde10b049d8d6e39d6e1a00c6ebe249b",
+    "url": "/shogi-board/playground/static/media/kin0.bde10b04.svg"
+  },
+  {
+    "revision": "55ddd79eb672a0b6cd4ecf233de92b2a",
+    "url": "/shogi-board/playground/static/media/kin1.55ddd79e.svg"
+  },
+  {
+    "revision": "86b54517a92e0164e526427db15c2bad",
+    "url": "/shogi-board/playground/static/media/kyou0.86b54517.svg"
+  },
+  {
+    "revision": "29581f01ef4e0748f06b221bcd3bc42e",
+    "url": "/shogi-board/playground/static/media/kyou1.29581f01.svg"
+  },
+  {
+    "revision": "b77bdb4db3effe40b893544e664e5fdb",
+    "url": "/shogi-board/playground/static/media/narigin0.b77bdb4d.svg"
+  },
+  {
+    "revision": "b8c3caebd2e918eed9b834308b961cfe",
+    "url": "/shogi-board/playground/static/media/narigin1.b8c3caeb.svg"
+  },
+  {
+    "revision": "33c8c935feb9db69f8a81c64d23d66e3",
+    "url": "/shogi-board/playground/static/media/narikei0.33c8c935.svg"
+  },
+  {
+    "revision": "50611813f11fcfbdf210c959e489a0df",
+    "url": "/shogi-board/playground/static/media/narikei1.50611813.svg"
+  },
+  {
+    "revision": "aa61eb126e15d9e953267c435da2e70f",
+    "url": "/shogi-board/playground/static/media/narikyou0.aa61eb12.svg"
+  },
+  {
+    "revision": "561ebc26ad83d04d15461a7da6d977f1",
+    "url": "/shogi-board/playground/static/media/narikyou1.561ebc26.svg"
+  },
+  {
     "revision": "af1deb212a87f2e7eb41433695a48d09",
     "url": "/shogi-board/playground/static/media/next-five.af1deb21.svg"
   },
@@ -128,11 +216,35 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/shogi-board/playground/static/media/reverse.13ea1c9a.svg"
   },
   {
+    "revision": "7b1ebe04bcb3e24f9859684ad80d5ee7",
+    "url": "/shogi-board/playground/static/media/ryu0.7b1ebe04.svg"
+  },
+  {
+    "revision": "61523a8ee5d06b1d3b25d2a802c2545d",
+    "url": "/shogi-board/playground/static/media/ryu1.61523a8e.svg"
+  },
+  {
     "revision": "d8f888158f038214d27db4b81925976c",
     "url": "/shogi-board/playground/static/media/stop-engine.d8f88815.svg"
   },
   {
     "revision": "8d2b7da0fe49650c62dc9410be190ebe",
     "url": "/shogi-board/playground/static/media/tatami.8d2b7da0.jpg"
+  },
+  {
+    "revision": "397c6182e3c016658fc4dab3d3ed2e86",
+    "url": "/shogi-board/playground/static/media/to0.397c6182.svg"
+  },
+  {
+    "revision": "78f6c5fe1afede4ae52f7e9c3d676f69",
+    "url": "/shogi-board/playground/static/media/to1.78f6c5fe.svg"
+  },
+  {
+    "revision": "8e43c3459d60aa1b9c12473b0b22feb2",
+    "url": "/shogi-board/playground/static/media/uma0.8e43c345.svg"
+  },
+  {
+    "revision": "4337e8ecae366050d89bb16ce708ea52",
+    "url": "/shogi-board/playground/static/media/uma1.4337e8ec.svg"
   }
 ]);

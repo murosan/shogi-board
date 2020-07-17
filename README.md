@@ -46,21 +46,29 @@ yarn start
 
 ## ライセンス
 
-- ソースコード
+### ソースコード
 
-  MIT License
+[MIT License](./LICENSE)
 
-- イメージ・画像
+### 駒の画像
 
-  - pieces, board(adapted)
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja" target="_blank"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja" target="_blank">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際 ライセンス</a>
 
-    by [muchonovski](http://mucho.girly.jp/bona)  
-    under [Creative Commons 表示-非営利 2.1 日本 License](https://creativecommons.org/licenses/by-nc/2.1/jp/)
+利用する際は、[このページ](https://github.com/murosan/shogi-board)か[Shogi Board](https://murosan.github.io/shogi-board/)のリンク（または両方）と  
+著作者（murosan）をクレジット表示してください。
 
-  - tatami
+### その他の画像
 
-    [フリーテクスチャ素材館](https://free-texture.net/seamless-pattern/tatami01.html)
+- 盤面(色調改変あり)
 
-  - other
+  by [muchonovski](http://mucho.girly.jp/bona)  
+  under [Creative Commons 表示-非営利 2.1 日本 License](https://creativecommons.org/licenses/by-nc/2.1/jp/)
 
-    free material
+- 畳
+
+  [フリーテクスチャ素材館](https://free-texture.net/seamless-pattern/tatami01.html)
+
+- その他
+
+  free material

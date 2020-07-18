@@ -2,12 +2,36 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://murosan.github.io/shogi-board/blog</id>
     <title>Shogi Board Blog</title>
-    <updated>2019-06-15T06:00:00.000Z</updated>
+    <updated>2020-07-18T06:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://murosan.github.io/shogi-board/blog"/>
     <subtitle>The best place to stay up-to-date with the latest Shogi Board news and events.</subtitle>
     <logo>https://murosan.github.io/shogi-board/img/icon.svg</logo>
     <rights>Copyright © 2020 murosan</rights>
+    <entry>
+        <title type="html"><![CDATA[v3.2.0 - 駒の画像を変更しました]]></title>
+        <id>https://murosan.github.io/shogi-board/blog/2020/07/18.html</id>
+        <link href="https://murosan.github.io/shogi-board/blog/2020/07/18.html"/>
+        <updated>2020-07-18T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<h1><a class="anchor" aria-hidden="true" id="release-note-v320"></a><a href="#release-note-v320" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>Release Note v3.2.0</h1> <p>駒の画像を更新しました！</p> <p>今までは <a href="http://mucho.girly.jp/bona">muchonovski</a> さんが <a href="https://creativecommons.org/licenses/by-nc/2.1/jp/">Creative Commons 表示-非営利 2.1 日本 License</a> の元、提供していた画像を使用させていただいていました。<br> muchonovski さんありがとうございました。</p> <p>このバージョンからは、自作した画像に変更しています。SVG 画像を <a href="https://affinity.serif.com/ja-jp/designer/" target="_blank">Affinity Designer</a> で自作しました。<br> 書体は錦旗書です。</p> <p>また、この駒画像は、<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja" target="_blank">クリエイティブ・コモンズ 表示 - 非営利...</a></p>]]></summary>
+        <author>
+            <name>murosan</name>
+            <email/>
+            <uri/>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[v3.1.0 - 棋譜が正しく表記されるように]]></title>
+        <id>https://murosan.github.io/shogi-board/blog/2020/07/13.html</id>
+        <link href="https://murosan.github.io/shogi-board/blog/2020/07/13.html"/>
+        <updated>2020-07-13T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<h1><a class="anchor" aria-hidden="true" id="release-note-v310"></a><a href="#release-note-v310" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>Release Note v3.1.0</h1> <h3><a class="anchor" aria-hidden="true" id="overview"></a><a href="#overview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>Overview</h3> <ul> <li>棋譜の表記が正しくなりました</li> <li>盤面の幅を変更できる機能を追加</li> <li>ボタン・行・列の文字を SVG 画像化</li> </ul> <h3><a class="anchor" aria-hidden="true" id="棋譜の表記"></a><a href="#棋譜の表記" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>棋譜の表記</h3> <p>将棋連盟の公式ページに記載されている記述方法を参考に、正しい表記がされるよう、変更を行いました。<br> <a href="https://www.shogi.or.jp/faq/kihuhyouki.html">https://www.shogi.or.jp/faq/kihuhyouki.html</a></p> <table> <tr> <th>今まで</th> <th>これから</th> </tr><tr> <td> ２六歩(27)<br> ８四歩(83)<br> ２五歩(26)<br> ８五歩(84)<br> ７八金(69)<br> ３二金(41)<br> ２四歩(25)<br> ...</td></tr></table>]]></summary>
+        <author>
+            <name>murosan</name>
+            <email/>
+            <uri/>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[v3.0.0 - 将棋ソフトが使用可能に]]></title>
         <id>https://murosan.github.io/shogi-board/blog/2019/06/15.html</id>

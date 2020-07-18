@@ -1,6 +1,6 @@
 {
   "name": "shogi-board",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "private": true,
   "author": "murosan",
   "description": "shogi board on browser",
@@ -61,6 +61,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:doc": "cd document/website; yarn start",
     "build": "react-scripts build",
     "deploy": "bin/deploy.sh",
     "test": "react-scripts test",

@@ -8,7 +8,7 @@ DEST="release/$SB_DIR"
 
 export PUBLIC_URL="./"
 
-rm -rf $DEST
+rm -rf release
 mkdir -p $DEST
 
 yarn build

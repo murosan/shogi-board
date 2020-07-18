@@ -8,23 +8,19 @@
 [![tag](https://img.shields.io/github/tag/murosan/shogi-board.svg?style=flat-square)](https://github.com/murosan/shogi-board/releases)
 [![node](https://img.shields.io/badge/node-%3E=%2013.7.0-brightgreen.svg?style=flat-square)](https://nodejs.org/ja/)
 
-まずは Playground でお試しください  
+まずは Playground(Web 将棋盤) でお試しください  
 <https://murosan.github.io/shogi-board/playground/>
 
 ドキュメントはこちら  
 <https://murosan.github.io/shogi-board/>
 
-<div style="width: 100%; display: flex; justify-content: center; align-items: center;">
-  <img src="https://github.com/murosan/pictures-for-readme/blob/master/shogi-board-example.jpg" alt="shogi-board sample image">
+<div style="width: 80%">
+  <img src="./document/website/static/img/shogi-board.jpg" alt="shogi-board sample image">
 </div>
 
 ## できること
 
 - ブラウザ上で駒を動かして将棋の検討や棋譜並べができる
-
-## 対応ブラウザ
-
-PC 最新版の Chrome のみ
 
 ## 使い方
 

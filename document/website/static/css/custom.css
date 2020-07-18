@@ -18,6 +18,10 @@
   font-size: 2em;
 }
 
+.post div a {
+  text-decoration: underline;
+}
+
 .mainContainer .post h2 {
   border-bottom: 1px solid;
   padding-bottom: 0.3em;

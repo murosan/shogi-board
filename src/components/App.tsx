@@ -12,8 +12,22 @@ const App: FC = () => {
   const { appWidth } = config
 
   const isThinking: boolean = engineState.state === Thinking
-  const className = 'App App-' + (isThinking ? 'SideInfo' : 'BoardOnly')
 
+  const classes: string[] = ['App']
+  if (isThinking) classes.push('App-SideInfo')
+  else classes.push('App-BoardOnly')
+
+  if (appWidth) {
+    const w = (n: number) => {
+      if (isThinking) return (n * 2) / 3
+      return n
+    }
+    if (appWidth >= w(1500)) classes.push('Border-3')
+    if (appWidth >= w(800)) classes.push('Border-2')
+    classes.push('Border-1')
+  }
+
+  const className = classes.join(' ')
   const style: CSSProperties = { width: appWidth ? `${appWidth}px` : '100%' }
 
   return (

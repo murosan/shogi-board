@@ -13,7 +13,8 @@ const Range: FC<Props> = (props: Props) => {
   // inputValue が Number && inRange のとき、 val に値をセットするようにしているため
   // val と inputValue が一致していれば正しい値
   const isValid: boolean = value.toString() === inputValue
-  const className: string = 'FormTextInput' + (isValid ? '' : 'FormTextInvalid')
+  const className: string =
+    'FormTextInput' + (isValid ? '' : ' FormTextInvalid')
   const labelText: string = `${name}(${min}~${max})`
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

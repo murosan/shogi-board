@@ -1,9 +1,9 @@
-import Kif from '../../model/kif/Kif'
-import Meta from '../../model/kif/Meta'
-import { Move } from '../../model/kif/Move'
+import Kifu from '../../model/kifu/Kifu'
+import Meta from '../../model/kifu/Meta'
+import { Move } from '../../model/kifu/Move'
 import { Position } from '../../model/shogi/Position'
 import { Sente } from '../../model/shogi/Turn'
-import { mockMove } from '../../testutils/mockKif'
+import { mockMove } from '../../testutils/mockKifu'
 import { changeIndex } from './changeIndex'
 
 const mockPos: Position = {
@@ -22,61 +22,61 @@ const mockMeta: Meta = {
 const moveMock: Move = mockMove('mock0', 0)
 
 it('棋譜のインデックスを更新できる', async () => {
-  const kif: Kif = {
+  const kifu: Kifu = {
     meta: mockMeta,
     history: {
       moves: [moveMock, moveMock, moveMock, moveMock, moveMock, moveMock],
       index: 5,
     },
   }
-  const expected: Kif = {
+  const expected: Kifu = {
     meta: mockMeta,
     history: {
       moves: [moveMock, moveMock, moveMock, moveMock, moveMock, moveMock],
       index: 0,
     },
   }
-  expect(changeIndex(kif, 0)).toEqual(expected)
+  expect(changeIndex(kifu, 0)).toEqual(expected)
 })
 
 it('棋譜のインデックスを更新できる2', async () => {
-  const kif: Kif = {
+  const kifu: Kifu = {
     meta: mockMeta,
     history: {
       moves: [moveMock, moveMock, moveMock, moveMock, moveMock, moveMock],
       index: 0,
     },
   }
-  const expected: Kif = {
+  const expected: Kifu = {
     meta: mockMeta,
     history: {
       moves: [moveMock, moveMock, moveMock, moveMock, moveMock, moveMock],
       index: 5,
     },
   }
-  expect(changeIndex(kif, 5)).toEqual(expected)
+  expect(changeIndex(kifu, 5)).toEqual(expected)
 })
 
 it('インデックスが最大値を超えていても最後に設定できる', async () => {
-  const kif: Kif = {
+  const kifu: Kifu = {
     meta: mockMeta,
     history: {
       moves: [moveMock, moveMock, moveMock, moveMock, moveMock, moveMock],
       index: 0,
     },
   }
-  const expected: Kif = {
+  const expected: Kifu = {
     meta: mockMeta,
     history: {
       moves: [moveMock, moveMock, moveMock, moveMock, moveMock, moveMock],
       index: 5,
     },
   }
-  expect(changeIndex(kif, 100)).toEqual(expected)
+  expect(changeIndex(kifu, 100)).toEqual(expected)
 })
 
 it('分岐が入っていても更新できる', async () => {
-  const kif: Kif = {
+  const kifu: Kifu = {
     meta: mockMeta,
     history: {
       moves: [
@@ -92,7 +92,7 @@ it('分岐が入っていても更新できる', async () => {
       index: 1,
     },
   }
-  const expected: Kif = {
+  const expected: Kifu = {
     meta: mockMeta,
     history: {
       moves: [
@@ -108,11 +108,11 @@ it('分岐が入っていても更新できる', async () => {
       index: 1,
     },
   }
-  expect(changeIndex(kif, 3)).toEqual(expected)
+  expect(changeIndex(kifu, 3)).toEqual(expected)
 })
 
 it('分岐が入っていても更新できる2', async () => {
-  const kif: Kif = {
+  const kifu: Kifu = {
     meta: mockMeta,
     history: {
       moves: [
@@ -128,7 +128,7 @@ it('分岐が入っていても更新できる2', async () => {
       index: 1,
     },
   }
-  const expected: Kif = {
+  const expected: Kifu = {
     meta: mockMeta,
     history: {
       moves: [
@@ -144,11 +144,11 @@ it('分岐が入っていても更新できる2', async () => {
       index: 1,
     },
   }
-  expect(changeIndex(kif, 1)).toEqual(expected)
+  expect(changeIndex(kifu, 1)).toEqual(expected)
 })
 
 it('違う分岐を選択できる', async () => {
-  const kif: Kif = {
+  const kifu: Kifu = {
     meta: mockMeta,
     history: {
       moves: [
@@ -177,7 +177,7 @@ it('違う分岐を選択できる', async () => {
       index: 1,
     },
   }
-  const expected: Kif = {
+  const expected: Kifu = {
     meta: mockMeta,
     history: {
       moves: [
@@ -206,5 +206,5 @@ it('違う分岐を選択できる', async () => {
       index: 1,
     },
   }
-  expect(changeIndex(kif, 1, 0)).toEqual(expected)
+  expect(changeIndex(kifu, 1, 0)).toEqual(expected)
 })

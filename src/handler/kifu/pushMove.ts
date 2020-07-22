@@ -1,14 +1,14 @@
-import Branch from '../../model/kif/Branch'
-import History, { isBranch, KifComponent } from '../../model/kif/History'
-import Kif from '../../model/kif/Kif'
-import { Move } from '../../model/kif/Move'
+import Branch from '../../model/kifu/Branch'
+import History, { isBranch, KifuComponent } from '../../model/kifu/History'
+import Kifu from '../../model/kifu/Kifu'
+import { Move } from '../../model/kifu/Move'
 
 /**
  * 棋譜に新しいMoveを追加する
- * @param old Kif
+ * @param old Kifu
  * @param m Move 追加する一手
  */
-export default function (old: Kif, m: Move): Kif {
+export default function (old: Kifu, m: Move): Kifu {
   return {
     meta: old.meta,
     history: pushToHistory(old.history, m),
@@ -17,7 +17,7 @@ export default function (old: Kif, m: Move): Kif {
 
 function pushToHistory(h: History, m: Move): History {
   const lastIsCurrent: boolean = h.index === h.moves.length - 1
-  const last: KifComponent = h.moves[h.index]
+  const last: KifuComponent = h.moves[h.index]
 
   if (lastIsCurrent && isBranch(last))
     return {
@@ -35,8 +35,8 @@ function pushToHistory(h: History, m: Move): History {
       index: nextIndex,
     }
 
-  const next: KifComponent = h.moves[nextIndex]
-  const init: KifComponent[] = h.moves.slice(0, nextIndex)
+  const next: KifuComponent = h.moves[nextIndex]
+  const init: KifuComponent[] = h.moves.slice(0, nextIndex)
 
   if (isBranch(next))
     return {
@@ -51,7 +51,7 @@ function pushToHistory(h: History, m: Move): History {
       index: nextIndex,
     }
 
-  const tail: KifComponent[] = h.moves.slice(nextIndex, h.moves.length)
+  const tail: KifuComponent[] = h.moves.slice(nextIndex, h.moves.length)
   return {
     moves: init.concat(createBranch(tail, m)),
     index: nextIndex,
@@ -86,14 +86,14 @@ function pushToBranch(b: Branch, m: Move, recursive: boolean): Branch {
   }
 }
 
-function createBranch(tail: KifComponent[], m: Move): Branch {
+function createBranch(tail: KifuComponent[], m: Move): Branch {
   return {
     branches: [toHistory(tail), toHistory([m])],
     index: 1,
   }
 }
 
-function toHistory(c: KifComponent[]): History {
+function toHistory(c: KifuComponent[]): History {
   return { moves: c, index: 0 }
 }
 

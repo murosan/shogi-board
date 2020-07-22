@@ -1,14 +1,14 @@
-import Branch from '../../model/kif/Branch'
-import History, { isBranch, KifComponent } from '../../model/kif/History'
-import Kif from '../../model/kif/Kif'
+import Branch from '../../model/kifu/Branch'
+import History, { isBranch, KifuComponent } from '../../model/kifu/History'
+import Kifu from '../../model/kifu/Kifu'
 
 /**
  * 現在局面を更新した新しい棋譜を返す
- * @param k Kif 更新したい棋譜
+ * @param k Kifu 更新したい棋譜
  * @param x number 現在局面にしたい手数
  * @param y number | undefined 分岐を切り替える場合のみ、分岐のインデックス
  */
-export function changeIndex(k: Kif, x: number, y?: number): Kif {
+export function changeIndex(k: Kifu, x: number, y?: number): Kifu {
   return {
     meta: k.meta,
     history: changeHistory(k.history, x, y),
@@ -18,12 +18,12 @@ export function changeIndex(k: Kif, x: number, y?: number): Kif {
 // TODO: Move にインデックスを入れたので、少しシンプルにできる
 function changeHistory(h: History, x: number, y?: number): History {
   const lastIndex: number = h.moves.length - 1
-  const last: KifComponent = h.moves[lastIndex]
-  const init: KifComponent[] = h.moves.slice(0, lastIndex)
+  const last: KifuComponent = h.moves[lastIndex]
+  const init: KifuComponent[] = h.moves.slice(0, lastIndex)
 
   const xPassesIfBranch: number = x <= lastIndex ? 0 : x - lastIndex
 
-  const moves: KifComponent[] = isBranch(last)
+  const moves: KifuComponent[] = isBranch(last)
     ? init.concat(changeBranch(last, xPassesIfBranch, y))
     : h.moves.slice()
 

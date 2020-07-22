@@ -1,7 +1,7 @@
 import axios from 'axios'
 import debounce from 'lodash.debounce'
 import shortid from 'shortid'
-import { move } from '../lib/game-handler/position'
+import { move } from '../handler/game/position'
 import { Info } from '../model/engine/Info'
 import {
   Button,
@@ -12,7 +12,7 @@ import {
   Text,
 } from '../model/engine/Optoin'
 import { MoveProps } from '../model/events/MoveProps'
-import { Move } from '../model/kif/Move'
+import { Move } from '../model/kifu/Move'
 import { ResponseInfo } from '../model/response/ResponseInfo'
 import { Empty } from '../model/shogi/Piece'
 import { Position } from '../model/shogi/Position'

@@ -1,15 +1,15 @@
 import { observer } from 'mobx-react-lite'
 import React, { FC } from 'react'
+import { getAsString } from '../../handler/kifu/getAsString'
 import ConfigurationImg from '../../img/components/buttons/configuration.svg'
 import ConnectToEngineImg from '../../img/components/buttons/connect-to-engine.svg'
-import CopyKifImg from '../../img/components/buttons/copy-kif.svg'
+import CopyKifuImg from '../../img/components/buttons/copy-kifu.svg'
 import NextFiveImg from '../../img/components/buttons/next-five.svg'
 import NextOneImg from '../../img/components/buttons/next-one.svg'
 import PrevFiveImg from '../../img/components/buttons/prev-five.svg'
 import PrevOneImg from '../../img/components/buttons/prev-one.svg'
 import ReverseImg from '../../img/components/buttons/reverse.svg'
 import StopEngineImg from '../../img/components/buttons/stop-engine.svg'
-import { getAsString } from '../../lib/kif-handler/getAsString'
 import {
   MockupEngineControl,
   MockupServerSetting,
@@ -23,14 +23,14 @@ const Buttons: FC = () => {
   const { gameState, displayState, engineState, config } = React.useContext(
     StoreContext
   )
-  const { currentMove, kif } = gameState
+  const { currentMove, kifu } = gameState
   const i: number = currentMove.index
 
   const prevOne: number = i - 1 < 0 ? 0 : i - 1
   const nextOne: number = i + 1
   const prevFive: number = i - 5 < 0 ? 0 : i - 5
   const nextFive: number = i + 5
-  const skipKif = (i: number) => gameState.clickKif(i)
+  const skipKifu = (i: number) => gameState.clickKifu(i)
 
   const engineOnClick: () => Promise<void> = async () => {
     const { current, state } = engineState
@@ -44,22 +44,22 @@ const Buttons: FC = () => {
     <div className="ButtonsContainer">
       <button
         className="PrevOne"
-        onClick={() => skipKif(prevOne)}
+        onClick={() => skipKifu(prevOne)}
         style={bgImg(PrevOneImg)}
       />
       <button
         className="NextOne"
-        onClick={() => skipKif(nextOne)}
+        onClick={() => skipKifu(nextOne)}
         style={bgImg(NextOneImg)}
       />
       <button
         className="PrevFive"
-        onClick={() => skipKif(prevFive)}
+        onClick={() => skipKifu(prevFive)}
         style={bgImg(PrevFiveImg)}
       />
       <button
         className="NextFive"
-        onClick={() => skipKif(nextFive)}
+        onClick={() => skipKifu(nextFive)}
         style={bgImg(NextFiveImg)}
       />
       <button
@@ -69,8 +69,8 @@ const Buttons: FC = () => {
       />
       <button
         className="Copy"
-        data-clipboard-text={getAsString(kif)}
-        style={bgImg(CopyKifImg)}
+        data-clipboard-text={getAsString(kifu)}
+        style={bgImg(CopyKifuImg)}
       />
       <button
         className="ConnectToEngine"

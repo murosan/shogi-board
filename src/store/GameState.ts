@@ -1,6 +1,6 @@
 import { ClickProps } from '../model/events/ClickProps'
-import Kif from '../model/kif/Kif'
-import { Move } from '../model/kif/Move'
+import Kifu from '../model/kifu/Kifu'
+import { Move } from '../model/kifu/Move'
 import Confirm from '../model/shogi/Confirm'
 import Point from '../model/shogi/Point'
 
@@ -31,7 +31,7 @@ export interface GameState {
   moveTargets: Point[]
 
   // 棋譜
-  kif: Kif
+  kifu: Kifu
 
   // 前回の移動先。棋譜で `同歩` のような文字列を作成するため
   // ただし、通常は使われることはない。将棋ソフトから読みを受け取った場合、最初の手を`同歩`の
@@ -48,5 +48,5 @@ export interface GameState {
   clickPiece(p: ClickProps): void
 
   // 棋譜をクリックして表示局面を変える
-  clickKif(moveCount: number, branchIndex?: number): void
+  clickKifu(moveCount: number, branchIndex?: number): void
 }

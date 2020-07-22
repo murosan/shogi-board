@@ -2,7 +2,7 @@ import { Gyoku0, Piece } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import { Position } from '../../../model/shogi/Position'
 import { Turn } from '../../../model/shogi/Turn'
-import { moveBoardOnly } from '../../game-handler/position'
+import { moveBoardOnly } from '../../../handler/game/position'
 import { getTargets } from '../getTargets'
 import { find } from './algorithm'
 

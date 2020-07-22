@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import React, { FC } from 'react'
-import { genKifString } from '../../../lib/kif-handler/genKifString'
+import { genKifuString } from '../../../handler/kifu/genKifuString'
 import { StoreContext } from '../../../store/Store'
 import './Columns.scss'
 import Point from '../../../model/shogi/Point'
@@ -14,12 +14,12 @@ const Columns: FC = () => {
     let prevDest: Point | null = gameState.prevDestination
     const moves = i.moves.map((m, n) => {
       if (prevDest) m.prevDest = prevDest
-      const kif = genKifString(m)
+      const kifu = genKifuString(m)
       prevDest = m.dest
       // TODO: key
       return (
         <div key={n} className="EngineInfoRowContent">
-          {kif}
+          {kifu}
         </div>
       )
     })

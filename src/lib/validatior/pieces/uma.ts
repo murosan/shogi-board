@@ -1,7 +1,7 @@
 import { Uma0, Uma1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 import { Position } from '../../../model/shogi/Position'
-import { demote } from '../../game-handler/piece'
+import { demote } from '../../../handler/game/piece'
 import { comp } from '../utils/algorithm'
 import getFromNexts from '../utils/getFromNexts'
 import kaku from './kaku'

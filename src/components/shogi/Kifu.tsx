@@ -1,34 +1,34 @@
 import { observer } from 'mobx-react-lite'
 import React, { FC, useEffect } from 'react'
-import { intoView } from '../../lib/dom-handler/intoView'
-import Branch from '../../model/kif/Branch'
-import History, { isBranch, KifComponent } from '../../model/kif/History'
-import { Move } from '../../model/kif/Move'
+import { intoView } from '../../handler/dom/intoView'
+import Branch from '../../model/kifu/Branch'
+import History, { isBranch, KifuComponent } from '../../model/kifu/History'
+import { Move } from '../../model/kifu/Move'
 import { StoreContext } from '../../store/Store'
-import './Kif.scss'
+import './Kifu.scss'
 
-const CURRENT_KIF_ELM_ID = 'Move-Current'
+const CURRENT_KIFU_ELM_ID = 'Move-Current'
 
-const Kif: FC = () => {
+const Kifu: FC = () => {
   const { gameState } = React.useContext(StoreContext)
 
   useEffect(() => {
     // 自動スクロール
     // TODO: スマホで使いにくいし自前実装した方がいいかも
     //       まぁスマホサポートしてないけど
-    intoView(CURRENT_KIF_ELM_ID)
+    intoView(CURRENT_KIFU_ELM_ID)
   })
 
-  const { moves } = gameState.kif.history
-  const elms: JSX.Element[] = renderKif(moves, 0)
+  const { moves } = gameState.kifu.history
+  const elms: JSX.Element[] = renderKifu(moves, 0)
   return (
-    <div className="KifContainer">
-      <div className="Kif-Inner">{elms}</div>
+    <div className="KifuContainer">
+      <div className="Kifu-Inner">{elms}</div>
     </div>
   )
 
-  function renderKif(moves: KifComponent[], n: number): JSX.Element[] {
-    return moves.flatMap((kc: KifComponent, i: number) => {
+  function renderKifu(moves: KifuComponent[], n: number): JSX.Element[] {
+    return moves.flatMap((kc: KifuComponent, i: number) => {
       if (isBranch(kc)) return renderBranch(kc, n + i)
       return renderMove(kc, n + i)
     })
@@ -43,8 +43,8 @@ const Kif: FC = () => {
       if (i === b.index) continue
       const m: Move = b.branches[i].moves[0] as Move // head は必ず Move
       const key: string = `${n}-${i}`
-      const txt: string = `-- ${kifText(m)}`
-      const onClick = () => gameState.clickKif(n, i)
+      const txt: string = `-- ${kifuText(m)}`
+      const onClick = () => gameState.clickKifu(n, i)
       otherHeadsDom.push(
         <div key={key} className="Branch" onClick={onClick}>
           <span>{txt}</span>
@@ -52,25 +52,25 @@ const Kif: FC = () => {
       )
     }
 
-    const restDom = rest.length !== 0 ? renderKif(rest, n + 1) : []
+    const restDom = rest.length !== 0 ? renderKifu(rest, n + 1) : []
 
     return [renderMove(head as Move, n)].concat(otherHeadsDom).concat(restDom)
   }
 
   function renderMove(m: Move, n: number): JSX.Element {
     const { currentMove } = gameState
-    const id = currentMove.index === n ? CURRENT_KIF_ELM_ID : undefined
-    const onClick = () => gameState.clickKif(n)
+    const id = currentMove.index === n ? CURRENT_KIFU_ELM_ID : undefined
+    const onClick = () => gameState.clickKifu(n)
 
     return (
       <div key={n} className="Move" id={id} onClick={onClick}>
         <div className="Number code">{n + '.'}</div>
-        <div className="MoveText">{kifText(m)}</div>
+        <div className="MoveText">{kifuText(m)}</div>
       </div>
     )
   }
 
-  function kifText(m: Move): string {
+  function kifuText(m: Move): string {
     const s = m.str
     // 同 で始まっていて2文字だったら空白を入れる
     if (s.length === 2 && s[0] === '同') return `同　${s[1]}`
@@ -78,4 +78,4 @@ const Kif: FC = () => {
   }
 }
 
-export default observer(Kif)
+export default observer(Kifu)

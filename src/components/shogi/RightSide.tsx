@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { Gote, Sente } from '../../model/shogi/Turn'
 import { StoreContext } from '../../store/Store'
 import Captures from './Captures'
-import Kif from './Kif'
+import Kifu from './Kifu'
 import './RightSide.scss'
 
 const RightSide: FC = () => {
@@ -15,7 +15,7 @@ const RightSide: FC = () => {
   return (
     <div className="RightSide">
       <div className="RightInfo">
-        <Kif />
+        <Kifu />
       </div>
       <Captures isLeftSide={false} captures={caps} isTurn={isTurn} />
     </div>

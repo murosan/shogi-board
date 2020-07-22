@@ -1,7 +1,7 @@
-import History, { isBranch, KifComponent } from '../../model/kif/History'
-import Kif from '../../model/kif/Kif'
+import History, { isBranch, KifuComponent } from '../../model/kifu/History'
+import Kifu from '../../model/kifu/Kifu'
 
-export function getAsString(k: Kif): string {
+export function getAsString(k: Kifu): string {
   if (k.history.moves.length < 1) return ''
   return getRec({
     moves: k.history.moves.slice(1),
@@ -11,7 +11,7 @@ export function getAsString(k: Kif): string {
 
 function getRec(h: History): string {
   return h.moves
-    .map((kc: KifComponent) =>
+    .map((kc: KifuComponent) =>
       isBranch(kc) ? getRec(kc.branches[kc.index]) : `${kc.index} ${kc.str}`
     )
     .join('\n')

@@ -177,7 +177,7 @@ describe('mustPromote', () => {
 
   it('桂が敵陣2段目以降に行くと true', async () => {
     expect(mustPromote(Kei0, 0)).toBeTruthy()
-    expect(mustPromote(Kei0, 1)).toBeTruthy
+    expect(mustPromote(Kei0, 1)).toBeTruthy()
     expect(mustPromote(Kei0, 2)).toBeFalsy()
     expect(mustPromote(Kei1, 8)).toBeTruthy()
     expect(mustPromote(Kei1, 7)).toBeTruthy()

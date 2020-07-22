@@ -1,8 +1,8 @@
-import * as PositionHandler from '../../lib/game-handler/position'
-import * as KifHandler from '../../lib/kif-handler/genKifString'
+import * as PositionHandler from '../../handler/game/position'
+import * as KifuHandler from '../../handler/kifu/genKifuString'
 import { GameState } from '../GameState'
 import { Empty, Fu0, Fu1, Kei1, To0 } from '../../model/shogi/Piece'
-import { mockKif } from '../../testutils/mockKif'
+import { mockKifu } from '../../testutils/mockKifu'
 import { DefaultGameState } from './GameState'
 
 describe('DefaultGameState', () => {
@@ -40,7 +40,7 @@ describe('DefaultGameState', () => {
 
   it('選択ありで、動けない場所をクリックしたら何もしない', async () => {
     const phSpy = jest.spyOn(PositionHandler, 'move')
-    const khSpy = jest.spyOn(KifHandler, 'genKifString')
+    const khSpy = jest.spyOn(KifuHandler, 'genKifuString')
     const s = new DefaultGameState()
     expect(s.selected).toBeNull()
     s.clickPiece({ clicked: Fu0, row: 6, column: 1 })
@@ -57,7 +57,7 @@ describe('DefaultGameState', () => {
 
   it('選択ありで、動ける場所がクリックされたら配置を更新できる', async () => {
     const phSpy = jest.spyOn(PositionHandler, 'move')
-    const khSpy = jest.spyOn(KifHandler, 'genKifString')
+    const khSpy = jest.spyOn(KifuHandler, 'genKifuString')
     const s = new DefaultGameState()
     expect(s.selected).toBeNull()
     s.clickPiece({ clicked: Fu0, row: 6, column: 1 })
@@ -71,7 +71,7 @@ describe('DefaultGameState', () => {
 
   it('選択ありで、成・不成を選択できる場所がクリックされたら Confirm オブジェクトがセットされる', async () => {
     const phSpy = jest.spyOn(PositionHandler, 'move')
-    const khSpy = jest.spyOn(KifHandler, 'genKifString')
+    const khSpy = jest.spyOn(KifuHandler, 'genKifuString')
     const s = new DefaultGameState()
     expect(s.selected).toBeNull()
     s.currentMove.pos.pos[6][1] = Empty
@@ -95,7 +95,7 @@ describe('DefaultGameState', () => {
 
   it('成・不成を選択できる画面で、Confirm オブジェクト以外がクリックされたら何もしない', async () => {
     const phSpy = jest.spyOn(PositionHandler, 'move')
-    const khSpy = jest.spyOn(KifHandler, 'genKifString')
+    const khSpy = jest.spyOn(KifuHandler, 'genKifuString')
     const s = new DefaultGameState()
     expect(s.selected).toBeNull()
     s.currentMove.pos.pos[6][1] = Empty
@@ -120,7 +120,7 @@ describe('DefaultGameState', () => {
 
   it('成・不成を選択できる画面で、成ボタンがクリックされたら成れる', async () => {
     const phSpy = jest.spyOn(PositionHandler, 'move')
-    const khSpy = jest.spyOn(KifHandler, 'genKifString')
+    const khSpy = jest.spyOn(KifuHandler, 'genKifuString')
     const s = new DefaultGameState()
     expect(s.selected).toBeNull()
     s.currentMove.pos.pos[6][1] = Empty
@@ -143,7 +143,7 @@ describe('DefaultGameState', () => {
 
   it('成・不成を選択できる画面で、不成ボタンがクリックされたらそのまま', async () => {
     const phSpy = jest.spyOn(PositionHandler, 'move')
-    const khSpy = jest.spyOn(KifHandler, 'genKifString')
+    const khSpy = jest.spyOn(KifuHandler, 'genKifuString')
     const s = new DefaultGameState()
     expect(s.selected).toBeNull()
     s.currentMove.pos.pos[6][1] = Empty
@@ -165,7 +165,7 @@ describe('DefaultGameState', () => {
 
   it('選択ありで、強制的に成必要があれば Confirm オブジェクトは出ず自動で移動される', async () => {
     const phSpy = jest.spyOn(PositionHandler, 'move')
-    const khSpy = jest.spyOn(KifHandler, 'genKifString')
+    const khSpy = jest.spyOn(KifuHandler, 'genKifuString')
     const s = new DefaultGameState()
     expect(s.selected).toBeNull()
     s.currentMove.pos.pos[6][1] = Empty
@@ -192,32 +192,32 @@ describe('DefaultGameState', () => {
   it('棋譜の表示局面のインデックスを取得できる', async () => {
     const s = new DefaultGameState()
     expect(s.currentMove.index).toEqual(0)
-    s.kif = mockKif()
+    s.kifu = mockKifu()
     expect(s.currentMove.index).toEqual(5)
   })
 
   it('棋譜をクリックしてインデックスを更新できる', async () => {
     const s = new DefaultGameState()
-    s.kif = mockKif()
+    s.kifu = mockKifu()
     expect(s.currentMove.index).toEqual(5)
-    s.clickKif(0)
+    s.clickKifu(0)
     expect(s.currentMove.index).toEqual(0)
   })
 
   it('棋譜の分岐をクリックしてインデックスを更新できる', async () => {
     const s = new DefaultGameState()
-    s.kif = mockKif()
+    s.kifu = mockKifu()
     expect(s.currentMove.index).toEqual(5)
-    s.clickKif(3, 2)
+    s.clickKifu(3, 2)
     expect(s.currentMove.index).toEqual(3)
   })
 
   it('棋譜をクリックしてもConfirmオブジェクトがセットされていたら何もしない', async () => {
     const s = new DefaultGameState()
     s.confirm = { preserved: Empty, promoted: Empty, row: 0, column: 0 }
-    s.kif = mockKif()
+    s.kifu = mockKifu()
     expect(s.currentMove.index).toEqual(5)
-    s.clickKif(0)
+    s.clickKifu(0)
     expect(s.currentMove.index).toEqual(5)
   })
 })

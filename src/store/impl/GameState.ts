@@ -1,17 +1,17 @@
 import { action, computed, observable } from 'mobx'
-import { canPromote, mustPromote, promote } from '../../lib/game-handler/piece'
-import { move } from '../../lib/game-handler/position'
-import { changeIndex } from '../../lib/kif-handler/changeIndex'
-import { genKifString } from '../../lib/kif-handler/genKifString'
-import getCurrent from '../../lib/kif-handler/getCurrent'
-import pushMove from '../../lib/kif-handler/pushMove'
+import { canPromote, mustPromote, promote } from '../../handler/game/piece'
+import { move } from '../../handler/game/position'
+import { changeIndex } from '../../handler/kifu/changeIndex'
+import { genKifuString } from '../../handler/kifu/genKifuString'
+import getCurrent from '../../handler/kifu/getCurrent'
+import pushMove from '../../handler/kifu/pushMove'
 import { getTargets } from '../../lib/validatior/getTargets'
 import { find } from '../../lib/validatior/utils/algorithm'
 import filterTargets from '../../lib/validatior/utils/filterTargets'
 import { ClickProps } from '../../model/events/ClickProps'
 import { MoveProps } from '../../model/events/MoveProps'
-import Kif, { newKif } from '../../model/kif/Kif'
-import { Move } from '../../model/kif/Move'
+import Kifu, { newKifu } from '../../model/kifu/Kifu'
+import { Move } from '../../model/kifu/Move'
 import Confirm from '../../model/shogi/Confirm'
 import { Piece } from '../../model/shogi/Piece'
 import Point from '../../model/shogi/Point'
@@ -24,11 +24,11 @@ export class DefaultGameState implements GameState {
   @observable selected: Point | null = null
   @observable confirm: Confirm | null = null
   @observable moveTargets: Point[] = []
-  @observable kif: Kif = newKif()
+  @observable kifu: Kifu = newKifu()
   @observable prevDestination: Point | null = null
 
   @computed get currentMove(): Move {
-    return getCurrent(this.kif)
+    return getCurrent(this.kifu)
   }
 
   @action reverse(): void {
@@ -84,10 +84,10 @@ export class DefaultGameState implements GameState {
         promote,
       }
       const pos: Position = move(moveProps)
-      const kifStr: string = genKifString(moveProps)
-      const moveForKif: Move = {
+      const kifuStr: string = genKifuString(moveProps)
+      const moveForKifu: Move = {
         index: this.currentMove.index + 1,
-        str: kifStr,
+        str: kifuStr,
         pos,
         source,
         dest,
@@ -97,7 +97,7 @@ export class DefaultGameState implements GameState {
       this.selected = null
       this.confirm = null
       this.moveTargets = []
-      this.kif = pushMove(this.kif, moveForKif)
+      this.kifu = pushMove(this.kifu, moveForKifu)
     }
 
     // Confirm オブジェクトがクリックされたら動かす(成 or 不成の処理)
@@ -132,9 +132,9 @@ export class DefaultGameState implements GameState {
     moveAndUpdateState(piece, mp || undefined)
   }
 
-  @action clickKif(moveCount: number, branchIndex?: number): void {
+  @action clickKifu(moveCount: number, branchIndex?: number): void {
     if (this.confirm) return
-    this.kif = changeIndex(this.kif, moveCount, branchIndex)
+    this.kifu = changeIndex(this.kifu, moveCount, branchIndex)
     this.selected = null
     this.moveTargets = []
   }

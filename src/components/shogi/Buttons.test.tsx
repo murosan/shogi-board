@@ -2,7 +2,7 @@ import React from 'react'
 import { Store } from '../../store/Store'
 import { defaultStore } from '../../store/Store'
 import { shallow } from '../../testutils/component-helper'
-import { mockKif } from '../../testutils/mockKif'
+import { mockKifu } from '../../testutils/mockKifu'
 import Buttons from './Buttons'
 
 it('レンダリングできる', async () => {
@@ -22,13 +22,13 @@ it('盤面反転ボタンを押すと store の reverse が実行される', asy
 
 it('一手前に変更ボタンを押すと store の clickKif が実行される', async () => {
   const store: Store = defaultStore()
-  store.gameState.clickKif = jest.fn()
+  store.gameState.clickKifu = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)
 
-  expect(store.gameState.clickKif).toBeCalledTimes(0)
+  expect(store.gameState.clickKifu).toBeCalledTimes(0)
   wrapper.find('.PrevOne').simulate('click')
-  expect(store.gameState.clickKif).toBeCalledTimes(1)
-  expect(store.gameState.clickKif).toBeCalledWith(0)
+  expect(store.gameState.clickKifu).toBeCalledTimes(1)
+  expect(store.gameState.clickKifu).toBeCalledWith(0)
 })
 
 it('一手前に変更ボタンを押してもエラーにならない', async () => {
@@ -39,60 +39,60 @@ it('一手前に変更ボタンを押してもエラーにならない', async (
 
 it('一手前に変更ボタンを押すと store の clickKif が実行される2', async () => {
   const store: Store = defaultStore()
-  store.gameState.kif = mockKif()
-  store.gameState.clickKif = jest.fn()
+  store.gameState.kifu = mockKifu()
+  store.gameState.clickKifu = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)
 
-  expect(store.gameState.clickKif).toBeCalledTimes(0)
+  expect(store.gameState.clickKifu).toBeCalledTimes(0)
   wrapper.find('.PrevOne').simulate('click')
-  expect(store.gameState.clickKif).toBeCalledTimes(1)
-  expect(store.gameState.clickKif).toBeCalledWith(4)
+  expect(store.gameState.clickKifu).toBeCalledTimes(1)
+  expect(store.gameState.clickKifu).toBeCalledWith(4)
 })
 
 it('一手後に変更ボタンを押すと store の clickKif が実行される', async () => {
   const store: Store = defaultStore()
-  store.gameState.clickKif = jest.fn()
+  store.gameState.clickKifu = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)
 
-  expect(store.gameState.clickKif).toBeCalledTimes(0)
+  expect(store.gameState.clickKifu).toBeCalledTimes(0)
   wrapper.find('.NextOne').simulate('click')
-  expect(store.gameState.clickKif).toBeCalledTimes(1)
-  expect(store.gameState.clickKif).toBeCalledWith(1)
+  expect(store.gameState.clickKifu).toBeCalledTimes(1)
+  expect(store.gameState.clickKifu).toBeCalledWith(1)
 })
 
 it('五手前に変更ボタンを押すと store の clickKif が実行される', async () => {
   const store: Store = defaultStore()
-  store.gameState.clickKif = jest.fn()
+  store.gameState.clickKifu = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)
 
-  expect(store.gameState.clickKif).toBeCalledTimes(0)
+  expect(store.gameState.clickKifu).toBeCalledTimes(0)
   wrapper.find('.PrevFive').simulate('click')
-  expect(store.gameState.clickKif).toBeCalledTimes(1)
-  expect(store.gameState.clickKif).toBeCalledWith(0)
+  expect(store.gameState.clickKifu).toBeCalledTimes(1)
+  expect(store.gameState.clickKifu).toBeCalledWith(0)
 })
 
 it('五手前に変更ボタンを押すと store の clickKif が実行される2', async () => {
   const store: Store = defaultStore()
-  store.gameState.kif = mockKif()
-  store.gameState.clickKif = jest.fn()
+  store.gameState.kifu = mockKifu()
+  store.gameState.clickKifu = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)
 
-  expect(store.gameState.clickKif).toBeCalledTimes(0)
+  expect(store.gameState.clickKifu).toBeCalledTimes(0)
   wrapper.find('.PrevFive').simulate('click')
-  expect(store.gameState.clickKif).toBeCalledTimes(1)
-  expect(store.gameState.clickKif).toBeCalledWith(0)
+  expect(store.gameState.clickKifu).toBeCalledTimes(1)
+  expect(store.gameState.clickKifu).toBeCalledWith(0)
 })
 
 it('五手後に変更ボタンを押すと store の clickKif が実行される', async () => {
   const store: Store = defaultStore()
-  store.gameState.kif = mockKif()
-  store.gameState.clickKif = jest.fn()
+  store.gameState.kifu = mockKifu()
+  store.gameState.clickKifu = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)
 
-  expect(store.gameState.clickKif).toBeCalledTimes(0)
+  expect(store.gameState.clickKifu).toBeCalledTimes(0)
   wrapper.find('.NextFive').simulate('click')
-  expect(store.gameState.clickKif).toBeCalledTimes(1)
-  expect(store.gameState.clickKif).toBeCalledWith(10)
+  expect(store.gameState.clickKifu).toBeCalledTimes(1)
+  expect(store.gameState.clickKifu).toBeCalledWith(10)
 })
 
 // clipboard.js の仕事なのでカバーだけしておく

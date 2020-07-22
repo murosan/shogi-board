@@ -21,7 +21,7 @@ import Point from '../../model/shogi/Point'
 import { Position } from '../../model/shogi/Position'
 import { Gote, Sente, Turn } from '../../model/shogi/Turn'
 import { emptyPosition } from '../../testutils/emptyPosition'
-import { genKifString } from './genKifString'
+import { genKifuString } from './genKifuString'
 
 interface TestProps {
   source: Point
@@ -104,7 +104,7 @@ class Setup extends TestRunner {
       piece: this.piece,
       promote: this.promote,
     }
-    expect(genKifString(p)).toBe(this.expected)
+    expect(genKifuString(p)).toBe(this.expected)
   }
 }
 

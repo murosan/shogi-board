@@ -20,9 +20,9 @@ import {
 import Point from '../../model/shogi/Point'
 import { Position } from '../../model/shogi/Position'
 import { Turn } from '../../model/shogi/Turn'
-import { canPromote, demote } from '../game-handler/piece'
-import { columnString, pieceString, rowString } from '../strings'
-import { getTargets } from '../validatior/getTargets'
+import { canPromote, demote } from '../game/piece'
+import { columnString, pieceString, rowString } from '../../lib/strings'
+import { getTargets } from '../../lib/validatior/getTargets'
 
 /*
 優先順位イメージ
@@ -42,7 +42,7 @@ import { getTargets } from '../validatior/getTargets'
  *
  * @param p MoveProps
  */
-export function genKifString(props: MoveProps): string {
+export function genKifuString(props: MoveProps): string {
   const { source, dest, prevDest, piece, promote, pos } = props
   const { row: srow, column: scol } = source
   const { row: drow, column: dcol } = dest

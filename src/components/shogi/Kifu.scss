@@ -1,16 +1,16 @@
 @import '../../styles/colors';
 @import '../../styles/modules';
 
-.KifContainer {
+.KifuContainer {
   position: relative;
-  grid-area: kif;
+  grid-area: kifu;
   margin: 0 0 0 0.2em;
   border: 0.25vw solid $GreenBase;
   background-color: $GrayTransParent;
   overflow: auto;
 }
 
-.Kif-Inner {
+.Kifu-Inner {
   display: flex;
   flex-direction: column;
   position: absolute;

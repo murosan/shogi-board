@@ -1,7 +1,7 @@
 import { observable, observe } from 'mobx'
 import { createContext } from 'react'
 import { Connected } from '../model/engine/State'
-import { Move } from '../model/kif/Move'
+import { Move } from '../model/kifu/Move'
 import { Config } from './Config'
 import { DisplayState } from './DisplayState'
 import { EngineState } from './EngineState'

@@ -3,7 +3,7 @@ import { hirate } from '../shogi/PositionInit'
 import History from './History'
 import Meta from './Meta'
 
-export default interface Kif {
+export default interface Kifu {
   // 対局者などの対局情報
   meta: Meta
 
@@ -11,7 +11,7 @@ export default interface Kif {
   history: History
 }
 
-export function newKif(): Kif {
+export function newKifu(): Kifu {
   const initPos: Position = hirate()
   return {
     meta: {

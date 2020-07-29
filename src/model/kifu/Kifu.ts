@@ -1,7 +1,7 @@
+import { HandicapKinds, positionFromKind } from '../shogi/InitialPositions'
 import { Position } from '../shogi/Position'
-import { hirate } from '../shogi/PositionInit'
 import History from './History'
-import Meta from './Meta'
+import Meta, { Versions } from './Meta'
 
 export default interface Kifu {
   // 対局者などの対局情報
@@ -11,17 +11,15 @@ export default interface Kifu {
   history: History
 }
 
-export function newKifu(): Kifu {
-  const initPos: Position = hirate()
+export function newKifu(posKind: string = HandicapKinds.hirate): Kifu {
+  const initPos: Position = positionFromKind(posKind)
   return {
     meta: {
-      version: '1',
+      version: Versions.latest,
       player: { sente: '', gote: '' },
-      handicap: '平手',
-      initPos,
+      handicap: posKind,
     },
     history: {
-      // TODO: 持ち方考える
       moves: [
         {
           index: 0,

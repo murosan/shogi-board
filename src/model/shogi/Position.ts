@@ -7,7 +7,6 @@ export interface Position {
   pos: Piece[][]
 
   // 先手の持ち駒[歩の枚数, 香の枚数, 桂, 銀, 金, 角, 飛]
-  // TODO: Turnは [先手:1] [後手:-1] にしたので修正するか検討
   cap0: number[]
 
   // 後手の持ち駒[歩の枚数, 香の枚数, 桂, 銀, 金, 角, 飛]

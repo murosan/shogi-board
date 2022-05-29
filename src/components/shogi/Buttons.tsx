@@ -20,9 +20,8 @@ import { StoreContext } from '../../store/Store'
 import './Buttons.scss'
 
 const Buttons: FC = () => {
-  const { gameState, displayState, engineState, config } = React.useContext(
-    StoreContext
-  )
+  const { gameState, displayState, engineState, config } =
+    React.useContext(StoreContext)
   const { currentMove, kifu } = gameState
   const i: number = currentMove.index
 

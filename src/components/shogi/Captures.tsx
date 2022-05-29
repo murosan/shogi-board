@@ -64,10 +64,10 @@ const Captures: FC<Props> = (props: Props) => {
 
   function getSelectedClass(pieceId: Piece, index: number): string {
     return !!selected &&
-    selected.piece &&
-    selected.row === -1 &&
-    selected.column === -1 &&
-    Math.abs(selected.piece) === pieceId /* TODO: すげー嫌 */ &&
+      selected.piece &&
+      selected.row === -1 &&
+      selected.column === -1 &&
+      Math.abs(selected.piece) === pieceId /* TODO: すげー嫌 */ &&
       selected.i === index
       ? 'Piece-Selected'
       : ''

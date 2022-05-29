@@ -21,20 +21,20 @@
   "bugs": "https://github.com/murosan/shogi-board/issues",
   "homepage": "https://murosan.github.io/shogi-board",
   "engines": {
-    "node": ">=13.7.0"
+    "node": ">=14.7.0"
   },
   "dependencies": {
-    "@types/clipboard": "^2.0.1",
+    "@types/clipboard": "^2.0.7",
     "@types/enzyme": "3.10.4",
     "@types/enzyme-adapter-react-16": "^1.0.3",
     "@types/jest": "^24.0.13",
-    "@types/lodash.debounce": "^4.0.6",
+    "@types/lodash.debounce": "^4.0.7",
     "@types/node": "13.1.2",
     "@types/react": "16.9.17",
     "@types/react-dom": "16.9.4",
     "@types/shortid": "^0.0.29",
-    "axios": "^0.21.1",
-    "clipboard": "^2.0.6",
+    "axios": "^0.27.2",
+    "clipboard": "^2.0.11",
     "interval-promise": "^1.4.0",
     "lodash.debounce": "^4.0.8",
     "mobx": "^5.10.1",
@@ -43,20 +43,20 @@
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-scripts": "3.4.1",
-    "shortid": "2.2.15",
+    "shortid": "2.2.16",
     "typescript": "3.9.6"
   },
   "devDependencies": {
-    "codecov": "^3.7.1",
+    "codecov": "^3.8.3",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.2",
-    "gh-pages": "^3.1.0",
-    "husky": "^4.2.5",
+    "gh-pages": "4.0.0",
+    "husky": "^8.0.0",
     "jest": "24.9.0",
-    "lint-staged": "^10.2.11",
+    "lint-staged": "^12.4.2",
     "prettier": "^2.0.5",
     "react-test-renderer": "16.12.0",
-    "source-map-explorer": "^2.4.2",
+    "source-map-explorer": "^2.5.2",
     "ts-jest": "24.2.0"
   },
   "scripts": {
@@ -69,7 +69,8 @@
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "test:ci": "CI=true node --max_old_space_size=1024 --trace-gc ./node_modules/react-scripts/bin/react-scripts.js test --maxWorkers=2 --coverage --reporters=default",
     "lint": "prettier --write '**/*.{js,jsx,ts,tsx,json,yml,css,scss,md,html}'",
-    "analyze": "source-map-explorer build/static/js/main.*"
+    "analyze": "source-map-explorer build/static/js/main.*",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -85,11 +86,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,json,yml,css,scss,md,html}": [

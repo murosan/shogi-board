@@ -1,6 +1,6 @@
 ---
 id: install_tools
-title: 各種ツールのインストール方法
+title: 各種ツールのインストール方法(macOS)
 ---
 
 Shogi Board をセットアップするために必要な各種ツールのインストール方法一覧です。  
@@ -9,24 +9,17 @@ Shogi Board をセットアップするために必要な各種ツールのイ�
 
 - [Git](#git)
   - [macOS](#macos)
-  - [Windows](#windows)
 - [Homebrew](#homebrew)
 - [Node.js](#nodejs)
   - [macOS](#macos-1)
-  - [Windows](#windows-1)
 - [Yarn](#yarn)
   - [macOS](#macos-2)
-  - [Windows](#windows-2)
 
 ## Git
 
 #### macOS
 
 macOS にはデフォルトで Git がインストールされています。
-
-#### Windows
-
-Help wanted
 
 ## Homebrew
 
@@ -67,15 +60,11 @@ nodebrew 1.0.1
 3. `Node.js` をインストールします
 
 ```sh
-$ nodebrew install-binary v13.14.0
-$ use v13.14.0
+$ nodebrew install-binary v14.19.3
+$ use v14.19.3
 $ node -v
-v13.14.0
+v14.19.3
 ```
-
-#### Windows
-
-Help wanted
 
 ## Yarn
 
@@ -88,7 +77,3 @@ Homebrew がインストールされている前提です(<u>[インストール
 ```sh
 $ brew install yarn
 ```
-
-#### Windows
-
-Help wanted

@@ -7,7 +7,7 @@ title: Getting Started
 
 ## 方法 1. Playground
 
-もっとも簡単な方法です。まずはこちらでお試しください。
+まずはこちらでお試しください。
 
 <u>https://murosan.github.io/shogi-board/playground</u>
 
@@ -19,16 +19,14 @@ title: Getting Started
 ## 方法 2. PWA
 
 Shogi Board は `v3.0.0` から PWA(Progressive Web Apps) に対応しています。  
-Chrome などで、 <u>[Playground](/shogi-board/playground/)</u> にアクセスすると
-URL 欄の右端に `+` マークが表示されますので、クリックして Chrome アプリに追加してください。
+<u>[Playground](/shogi-board/playground/)</u> にアクセスするとインストールできます。
 
-iOS や Android における「ホーム画面に追加」と同じ仕組みです。
+Chrome でインストールする方法は、以下を御覧ください。
+https://support.google.com/chrome/answer/9658361
 
 次回以降は、アプリのアイコンをクリックすることで
 <u>[Playground](/shogi-board/playground/)</u>
 を表示することができます。
-
-一手間かかりますが、もっともオススメの方法です。
 
 - メリット
   - オフラインでも使用可能

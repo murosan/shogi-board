@@ -15,9 +15,8 @@ import Texts from './form/Texts'
 const GET_RESULT_INTERVAL = 1000 // ms
 
 const Detail: FC = () => {
-  const { gameState, displayState, engineState }: Store = React.useContext(
-    StoreContext
-  )
+  const { gameState, displayState, engineState }: Store =
+    React.useContext(StoreContext)
   const { current, options, sbclient }: EngineState = engineState
   if (!current || !options) return <div />
 

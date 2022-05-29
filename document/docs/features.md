@@ -15,7 +15,7 @@ Windows は、開発者がデバイスを所持していないため基本的に
 その場合、 <u>[issue](https://github.com/murosan/shogi-board/issues)</u>
 やプルリクエストをいただければ対応します。
 
-スマートフォンは非対応です
+スマートフォンは非対応です。
 
 ## 機能
 

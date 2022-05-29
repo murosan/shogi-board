@@ -56,13 +56,13 @@ $ go get -u github.com/murosan/shogi-board-server
 
 ### B. ダウンロードして使用する場合
 
-- Linux 用バイナリは用意してません。要望があれば対応します。
-- Windows は開発者がデバイスを所持していないため、動作確認できていません。
-  動かない場合、<u>[issue](https://github.com/murosan/shogi-board/issues)</u> へお願いします。
-
 以下のページからバイナリをダウンロードできます。
 
 <u>https://github.com/murosan/shogi-board-server/releases</u>
+
+- Linux 用バイナリは用意していません。要望があれば対応します。
+- Windows は開発者がデバイスを所持していないため、動作確認できていません。
+  動かない場合、<u>[issue](https://github.com/murosan/shogi-board/issues)</u> へお願いします。
 
 ## 3. 設定ファイルを用意する
 
@@ -105,7 +105,7 @@ $ shogi-board-server -app_config ./app.config.yml
 
 - macOS の場合
   - `ターミナル.app` を開く
-  - `sbserver` をドラッグ&ドロップする
+  - Finder から、`sbserver`をターミナルへドラッグ&ドロップする
   - `Enter`
 - Windows の場合 (Help wanted)
   - `sbserver.exe` をダブルクリック？

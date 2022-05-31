@@ -37,6 +37,11 @@ const Buttons: FC = () => {
     await engineState.stopThinking()
   }
 
+  const copyKifuOnClick: () => Promise<void> = async () => {
+    const txt = getAsString(kifu)
+    await navigator.clipboard.writeText(txt)
+  }
+
   const bgImg = (url: string) => ({ backgroundImage: `url(${url})` })
 
   return (
@@ -68,7 +73,7 @@ const Buttons: FC = () => {
       />
       <button
         className="Copy"
-        data-clipboard-text={getAsString(kifu)}
+        onClick={copyKifuOnClick}
         style={bgImg(CopyKifuImg)}
       />
       <button

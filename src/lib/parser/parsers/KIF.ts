@@ -1,4 +1,4 @@
-import { canPromote } from '../../../handler/game/piece'
+import { canPromote, promote } from '../../../handler/game/piece'
 import { move as movePos } from '../../../handler/game/position'
 import { genKifuString } from '../../../handler/kifu/genKifuString'
 import getCurrent from '../../../handler/kifu/getCurrent'
@@ -10,7 +10,6 @@ import { Move } from '../../../model/kifu/Move'
 import { HandicapKinds } from '../../../model/shogi/InitialPositions'
 import { Piece } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
-import { Position } from '../../../model/shogi/Position'
 import { literal, oneOf, Parser, rep, s, success } from '../parser'
 import {
   column as columnParser,
@@ -114,6 +113,7 @@ const source: Parser<Point> = ss('(')
   .right(columnParser)
   .comb(rowParser)
   .left(ss(')'))
+  .or(s('打').map(s => [-1, -1])) // 持ち駒から
   .map(toPoint)
 
 // Parser<number> の型を変えている
@@ -138,24 +138,33 @@ export function move(prev: Move): Parser<Move> {
     .left(literal(ln))
     .left(ln)
     .map(([[[[[idx, dest], piece], prm], source], [time, timeTotal]]) => {
+      const promo = (() => {
+        if (prm === '成') return true
+        const promotable = canPromote({
+          sourceRow: source.row,
+          destRow: dest.row,
+          piece,
+        })
+        if (promotable) return false
+        return
+      })()
+
       const base: {
         source: Point
         dest: Point
         piece: Piece
         prevDest: Point
         promote?: boolean
-      } = { source, dest, piece, prevDest: prev.dest }
+      } = {
+        source,
+        dest,
+        piece: promo ? promote(piece) : piece,
+        prevDest: prev.dest,
+      }
+      if (promo !== undefined) base.promote = promo
 
-      if (prm === '成') base.promote = true
-      else if (canPromote({ sourceRow: source.row, destRow: dest.row, piece }))
-        base.promote = false
-
-      const mprops: (pos: Position) => MoveProps = (pos: Position) => ({
-        ...base,
-        pos,
-      })
-      const before: MoveProps = mprops(prev.pos)
-      const after: MoveProps = mprops(movePos(before))
+      const before: MoveProps = { ...base, pos: prev.pos }
+      const after: MoveProps = { ...base, pos: movePos(before) }
       const kifuString: string = genKifuString(before)
 
       const times: { time?: number; timeTotal?: number } = {}

@@ -14,9 +14,9 @@ import {
   Fu1,
   Gin0,
   Gin1,
-  Kaku0,
   Kaku1,
   Kin1,
+  Uma0,
 } from '../../../model/shogi/Piece'
 import { Parser, ParseResult, success } from '../parser'
 import { cmt, KIF, meta, metaField } from './KIF'
@@ -302,7 +302,7 @@ describe('KIF', () => {
       source: { column: 7, row: 7 },
       dest: { column: 1, row: 1 },
       prevDest: move3.dest,
-      piece: Kaku0,
+      piece: Uma0,
       pos: move3.pos,
       promote: true,
     }
@@ -438,6 +438,127 @@ describe('KIF', () => {
       history: {
         moves: [move0, move1, move2, move3, move4],
         index: 4,
+      },
+    }
+
+    spec(input, success(expected, ''))
+  })
+
+  it('持ち駒の使用', () => {
+    const input = `
+1 ７六歩(77)
+2 ３四歩(33)
+3 ２二角成(88)
+4 同銀(31)
+5 ８八銀(79)
+6 ５五角打
+`
+
+    const move0: Move = {
+      index: 0,
+      str: '開始局面',
+      source: { column: -1, row: -1 },
+      dest: { column: -1, row: -1 },
+      piece: Empty,
+      pos: hirate(),
+    }
+
+    const moveProps1: MoveProps = {
+      source: { column: 6, row: 6 },
+      dest: { column: 6, row: 5 },
+      prevDest: move0.dest,
+      piece: Fu0,
+      pos: move0.pos,
+    }
+    const move1: Move = {
+      ...moveProps1,
+      index: 1,
+      str: '７六歩',
+      pos: move(moveProps1),
+    }
+
+    const moveProps2: MoveProps = {
+      source: { column: 2, row: 2 },
+      dest: { column: 2, row: 3 },
+      prevDest: move1.dest,
+      piece: Fu1,
+      pos: move1.pos,
+    }
+    const move2: Move = {
+      ...moveProps2,
+      index: 2,
+      str: '３四歩',
+      pos: move(moveProps2),
+    }
+
+    const moveProps3: MoveProps = {
+      source: { column: 7, row: 7 },
+      dest: { column: 1, row: 1 },
+      prevDest: move2.dest,
+      piece: Uma0,
+      pos: move2.pos,
+      promote: true,
+    }
+    const move3: Move = {
+      ...moveProps3,
+      index: 3,
+      str: '２二角成',
+      pos: move(moveProps3),
+    }
+
+    const moveProps4: MoveProps = {
+      source: { column: 2, row: 0 },
+      dest: { column: 1, row: 1 },
+      prevDest: move3.dest,
+      piece: Gin1,
+      pos: move3.pos,
+    }
+    const move4: Move = {
+      ...moveProps4,
+      index: 4,
+      str: '同銀',
+      pos: move(moveProps4),
+    }
+
+    const moveProps5: MoveProps = {
+      source: { column: 6, row: 8 },
+      dest: { column: 7, row: 7 },
+      prevDest: move4.dest,
+      piece: Gin0,
+      pos: move4.pos,
+    }
+    const move5: Move = {
+      ...moveProps5,
+      index: 5,
+      str: '８八銀',
+      pos: move(moveProps5),
+    }
+
+    const moveProps6: MoveProps = {
+      source: { column: -1, row: -1 },
+      dest: { column: 4, row: 4 },
+      prevDest: move5.dest,
+      piece: Kaku1,
+      pos: move5.pos,
+    }
+    const move6: Move = {
+      ...moveProps6,
+      index: 6,
+      str: '５五角',
+      pos: move(moveProps6),
+    }
+
+    const expected: Kifu = {
+      meta: {
+        version: Versions.latest,
+        handicap: '平手',
+        date: {},
+        player: { sente: '', gote: '' },
+        other: new Map<string, string>(),
+      },
+      history: {
+        moves: [move0, move1, move2, move3, move4, move5, move6],
+        index: 6,
       },
     }
 

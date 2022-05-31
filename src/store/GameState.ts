@@ -49,4 +49,6 @@ export interface GameState {
 
   // 棋譜をクリックして表示局面を変える
   clickKifu(moveCount: number, branchIndex?: number): void
+
+  setKifu(kifu: Kifu): void
 }

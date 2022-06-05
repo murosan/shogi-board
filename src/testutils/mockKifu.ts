@@ -2,18 +2,14 @@ import Kifu from '../model/kifu/Kifu'
 import { Move } from '../model/kifu/Move'
 import { Empty } from '../model/shogi/Piece'
 import Point from '../model/shogi/Point'
-import { Position } from '../model/shogi/Position'
-import { hirate } from '../model/shogi/PositionInit'
 import { Sente } from '../model/shogi/Turn'
 
 export function mockKifu(): Kifu {
-  const mockPos: Position = hirate()
   return {
     meta: {
       version: '1',
       player: { sente: '', gote: '' },
       handicap: '平手',
-      initPos: mockPos,
     },
     history: {
       moves: [
@@ -53,13 +49,11 @@ export function mockKifu(): Kifu {
 
 // 分岐で先頭しかないやつ
 export function mockKifu2(): Kifu {
-  const mockPos: Position = hirate()
   return {
     meta: {
       version: '1',
       player: { sente: '', gote: '' },
       handicap: '平手',
-      initPos: mockPos,
     },
     history: {
       moves: [

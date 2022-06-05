@@ -20,6 +20,8 @@
 .Move {
   display: flex;
   padding: 0.2em 0;
+  cursor: pointer;
+
   .Number {
     color: $GrayBase;
     margin-right: 0.05em;

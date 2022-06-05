@@ -1,4 +1,4 @@
-import { hirate } from '../../../model/shogi/PositionInit'
+import { hirate } from '../../../model/shogi/InitialPositions'
 import getEmpties from './getEmpties'
 
 describe('getEmpties', () => {

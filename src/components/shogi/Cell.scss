@@ -36,6 +36,8 @@ $edgeTextSize: 1.2vw;
 }
 
 .Piece-Turn {
+  cursor: pointer;
+
   &:hover {
     background-color: $GreenHover;
   }
@@ -52,6 +54,7 @@ $edgeTextSize: 1.2vw;
 }
 
 .Piece-Targeted {
+  cursor: pointer;
   background-color: $GreenHover;
 }
 

@@ -1,4 +1,4 @@
-import { hirate } from '../model/shogi/PositionInit'
+import { hirate } from '../model/shogi/InitialPositions'
 
 export default function () {
   return {

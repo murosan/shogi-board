@@ -107,7 +107,7 @@ export function literal(until: Parser<string> = oneOf(ws)): Parser<string> {
   return Parser(s => {
     if (s.length === 0) return null
     for (let i = 0; i < s.length; i++) {
-      if (until.parse(s[i])) return success(s.substr(0, i), s.substring(i))
+      if (until.parse(s[i])) return success(s.slice(0, i), s.substring(i))
     }
     return success(s, '')
   })

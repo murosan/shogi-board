@@ -43,7 +43,7 @@ const metaCmt: Parser<[string, string]> = cmt.map(_ => ['', ''])
 const metaBlank: Parser<[string, string]> = noln.right(ln).map(_ => ['', ''])
 
 const metaToken = s('：')
-export const metaField: Parser<[string, string]> = literal(metaToken)
+export const metaField: Parser<[string, string]> = literal(metaToken.or(ln))
   .left(metaToken)
   .comb(literal(ln))
   .left(ln)
@@ -183,15 +183,13 @@ export function move(prev: Move): Parser<Move> {
 // http://kakinoki.o.oo7.jp/kif_format.html
 export const KIF: Parser<Kifu> = Parser(_input => {
   const input = _input.trimRight() + '\n'
-  const { value: metaValue, next } = meta
-    .left(separator.fallback(''))
-    .parse(input.replace(/\r/g, ''))!
+  const metaResult = meta.left(separator).parse(input)!
 
-  let kifu: Kifu = newKifu(metaValue.handicap)
-  kifu.meta = metaValue
+  let kifu: Kifu = newKifu(metaResult.value.handicap)
+  kifu.meta = metaResult.value
 
   let prev: Move = getCurrent(kifu)
-  let nextInput: string = next
+  let nextInput: string = metaResult.next
   while (true) {
     const programComment = cmt.parse(nextInput)
     if (programComment) {

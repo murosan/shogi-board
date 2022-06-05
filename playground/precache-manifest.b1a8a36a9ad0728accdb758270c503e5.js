@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ce29bbd7b423d294990636cb0a34265b",
+    "revision": "22a82a2eae2feeda9cd1ccc43e514229",
     "url": "/shogi-board/playground/index.html"
   },
   {
-    "revision": "f32b92816f5a9c40223a",
-    "url": "/shogi-board/playground/static/css/main.dd4a43f6.chunk.css"
+    "revision": "3007dd63baee2de4c9ac",
+    "url": "/shogi-board/playground/static/css/main.1ba3008f.chunk.css"
   },
   {
-    "revision": "2d9406b02a87b57c42ee",
-    "url": "/shogi-board/playground/static/js/2.0ec83d39.chunk.js"
+    "revision": "e8e06fa43ff57e498e93",
+    "url": "/shogi-board/playground/static/js/2.83275186.chunk.js"
   },
   {
-    "revision": "77ad66a8a2388cdd2be5a99fa928a462",
-    "url": "/shogi-board/playground/static/js/2.0ec83d39.chunk.js.LICENSE.txt"
+    "revision": "6c3725e495cde2c880f78db892d03b7d",
+    "url": "/shogi-board/playground/static/js/2.83275186.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "f32b92816f5a9c40223a",
-    "url": "/shogi-board/playground/static/js/main.6cd5745a.chunk.js"
+    "revision": "3007dd63baee2de4c9ac",
+    "url": "/shogi-board/playground/static/js/main.3a943cca.chunk.js"
   },
   {
     "revision": "0849734a045384b94034",
@@ -104,10 +104,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/shogi-board/playground/static/media/connect-to-engine.83c1b041.svg"
   },
   {
-    "revision": "6a0a1831ccc2bb9d4173681ced8b84d6",
-    "url": "/shogi-board/playground/static/media/copy-kifu.6a0a1831.svg"
-  },
-  {
     "revision": "edbd2ee375a707478243141478b96c05",
     "url": "/shogi-board/playground/static/media/fu0.edbd2ee3.svg"
   },
@@ -154,6 +150,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "c1889f835dff3de41bafc68f9cec94ef",
     "url": "/shogi-board/playground/static/media/kei1.c1889f83.svg"
+  },
+  {
+    "revision": "12594d8c258acae767f8acb3f7ded018",
+    "url": "/shogi-board/playground/static/media/kifu.12594d8c.svg"
   },
   {
     "revision": "bde10b049d8d6e39d6e1a00c6ebe249b",

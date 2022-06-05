@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import './Checkmark.scss'
 
-const Loader: FC = () => {
+const Checkmark: FC = () => {
   return (
     <div className="checkmark-container">
       <div className="checkmark draw"></div>
@@ -9,4 +9,4 @@ const Loader: FC = () => {
   )
 }
 
-export default Loader
+export default Checkmark

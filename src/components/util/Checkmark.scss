@@ -1,18 +1,18 @@
 // https://codepen.io/scottloway/pen/zqoLyQ
 
 $brand-success: #ffffff;
-$loader-size: 35px;
-$check-height: $loader-size/2;
+$checkmark-size: 35px;
+$check-height: $checkmark-size/2;
 $check-width: $check-height/2;
-$check-left: ($loader-size/6 + $loader-size/12);
+$check-left: ($checkmark-size/6 + $checkmark-size/12);
 $check-thickness: 3px;
 $check-color: $brand-success;
 
 .checkmark-container {
   display: inline-block;
   position: absolute;
-  width: $loader-size;
-  height: $loader-size;
+  width: $checkmark-size;
+  height: $checkmark-size;
 }
 
 .checkmark {

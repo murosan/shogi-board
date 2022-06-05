@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/shogi-board/playground/precache-manifest.b1a8a36a9ad0728accdb758270c503e5.js"
+  "/shogi-board/playground/precache-manifest.1bd3d29206357cd5819ea200f9264a0d.js"
 );
 
 self.addEventListener('message', (event) => {

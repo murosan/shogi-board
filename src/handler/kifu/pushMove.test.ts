@@ -1,23 +1,13 @@
 import Kifu from '../../model/kifu/Kifu'
 import Meta from '../../model/kifu/Meta'
 import { Move } from '../../model/kifu/Move'
-import { Position } from '../../model/shogi/Position'
-import { Sente } from '../../model/shogi/Turn'
 import { mockMove } from '../../testutils/mockKifu'
 import pushMove from './pushMove'
 
-const mockPos: Position = {
-  pos: [],
-  cap0: [],
-  cap1: [],
-  turn: Sente,
-  moveCount: 0,
-}
 const mockMeta: Meta = {
   version: '1',
   player: { sente: '', gote: '' },
   handicap: '平手',
-  initPos: mockPos,
 }
 const head: Move = mockMove('mock0', 0)
 

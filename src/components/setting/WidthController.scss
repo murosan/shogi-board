@@ -27,7 +27,8 @@
     content: '→';
   }
 
-  &:hover {
+  &:hover,
+  &:active {
     color: $White;
     border-right: 1px dashed $White;
   }

@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react-lite'
 import React, { FC } from 'react'
-import { MockupHidden } from '../../model/display/MockupState'
 import { StoreContext } from '../../store/Store'
 import Check from '../form/Check'
 import Text from '../form/Text'
@@ -12,7 +11,7 @@ const Setting: FC = () => {
 
   return (
     <div className="Mockup">
-      <CloseButton onClick={() => displayState.setMockupState(MockupHidden)} />
+      <CloseButton onClick={() => displayState.closeMockup()} />
       <h1>設定</h1>
       <Text
         label="shogi-board-server の URL"
@@ -34,7 +33,7 @@ const Setting: FC = () => {
         onChange={b => config.setSaveToLocalStorage(b)}
       />
       <Check
-        label="幅を記憶する"
+        label="盤の幅を記憶する"
         value={saveBoardWidth}
         name="SaveBoardWidth"
         onChange={b => config.setSaveBoardWidth(b)}

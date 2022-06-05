@@ -40,7 +40,7 @@ import { getTargets } from '../../lib/validatior/getTargets'
  * 生成のルールについては以下を参照
  * https://www.shogi.or.jp/faq/kihuhyouki.html
  *
- * @param p MoveProps
+ * @param props MoveProps
  */
 export function genKifuString(props: MoveProps): string {
   const { source, dest, prevDest, piece, promote, pos } = props

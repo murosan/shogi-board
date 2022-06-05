@@ -13,3 +13,6 @@ export const MockupServerSetting: MockupState = 3
 
 // 設定画面
 export const MockupSetting: MockupState = 4
+
+// 棋譜の`出力/読み込み`選択画面
+export const MockupKifu: MockupState = 5

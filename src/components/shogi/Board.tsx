@@ -2,11 +2,13 @@ import { observer } from 'mobx-react-lite'
 import React, { FC } from 'react'
 import {
   MockupEngineControl,
+  MockupKifu,
   MockupServerSetting,
   MockupSetting,
 } from '../../model/display/MockupState'
 import { StoreContext } from '../../store/Store'
 import Controller from '../engine/connection/Controller'
+import KifuMockup from '../kifu/KifuMockup'
 import Setting from '../setting/Setting'
 import './Board.scss'
 import Cell from './Cell'
@@ -36,6 +38,7 @@ const Board: FC = () => {
     // TODO: server setting は別に分ける？
     if (mockup === MockupSetting || mockup === MockupServerSetting)
       return <Setting />
+    if (mockup === MockupKifu) return <KifuMockup />
   }
 }
 

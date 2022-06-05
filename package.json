@@ -34,7 +34,6 @@
     "@types/react-dom": "16.9.4",
     "@types/shortid": "^0.0.29",
     "axios": "^0.27.2",
-    "clipboard": "^2.0.11",
     "interval-promise": "^1.4.0",
     "lodash.debounce": "^4.0.8",
     "mobx": "^5.10.1",

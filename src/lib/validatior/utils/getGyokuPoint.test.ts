@@ -1,6 +1,6 @@
 import { Empty, Gyoku0, Gyoku1 } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
-import { hirate } from '../../../model/shogi/PositionInit'
+import { hirate } from '../../../model/shogi/InitialPositions'
 import { Gote, Sente } from '../../../model/shogi/Turn'
 import getGyokuPoint from './getGyokuPoint'
 

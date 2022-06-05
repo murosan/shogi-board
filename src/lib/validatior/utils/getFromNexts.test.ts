@@ -1,5 +1,5 @@
 import { Fu0, Fu1 } from '../../../model/shogi/Piece'
-import { hirate } from '../../../model/shogi/PositionInit'
+import { hirate } from '../../../model/shogi/InitialPositions'
 import getFromNexts from './getFromNexts'
 
 describe('getFromNexts', () => {

@@ -212,12 +212,12 @@ describe('DefaultGameState', () => {
     expect(s.currentMove.index).toEqual(3)
   })
 
-  it('棋譜をクリックしてもConfirmオブジェクトがセットされていたら何もしない', async () => {
+  it('Confirmオブジェクトがセットされていても棋譜をクリックすると更新できる', async () => {
     const s = new DefaultGameState()
     s.confirm = { preserved: Empty, promoted: Empty, row: 0, column: 0 }
     s.kifu = mockKifu()
     expect(s.currentMove.index).toEqual(5)
-    s.clickKifu(0)
-    expect(s.currentMove.index).toEqual(5)
+    s.clickKifu(3, 2)
+    expect(s.currentMove.index).toEqual(3)
   })
 })

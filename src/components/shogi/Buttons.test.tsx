@@ -1,4 +1,5 @@
 import React from 'react'
+import { MockupKifu } from '../../model/display/MockupState'
 import { Store } from '../../store/Store'
 import { defaultStore } from '../../store/Store'
 import { shallow } from '../../testutils/component-helper'
@@ -95,8 +96,10 @@ it('五手後に変更ボタンを押すと store の clickKif が実行され�
   expect(store.gameState.clickKifu).toBeCalledWith(10)
 })
 
-// clipboard.js の仕事なのでカバーだけしておく
-it('棋譜コピーボタンを押せる', async () => {
-  const wrapper = shallow(() => <Buttons />)
-  wrapper.find('.Copy').simulate('click')
+it('棋譜ボタンを押せる', async () => {
+  const store: Store = defaultStore()
+  store.displayState.setMockupState = jest.fn()
+  const wrapper = shallow(() => <Buttons />, store)
+  wrapper.find('.CopyOrRead').simulate('click')
+  expect(store.displayState.setMockupState).toBeCalledWith(MockupKifu)
 })

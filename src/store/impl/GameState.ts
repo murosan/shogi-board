@@ -94,16 +94,13 @@ export class DefaultGameState implements GameState {
         piece,
         promote,
       }
-      this.selected = null
-      this.confirm = null
-      this.moveTargets = []
-      this.kifu = pushMove(this.kifu, moveForKifu)
+      this.setKifu(pushMove(this.kifu, moveForKifu))
     }
 
     // Confirm オブジェクトがクリックされたら動かす(成 or 不成の処理)
     if (!isPiece(p.clicked)) {
       const piece: Piece = p.promote ? p.clicked.promoted : p.clicked.preserved
-      moveAndUpdateState(piece, p.promote === true)
+      moveAndUpdateState(piece, p.promote)
       return
     }
 
@@ -133,10 +130,14 @@ export class DefaultGameState implements GameState {
   }
 
   @action clickKifu(moveCount: number, branchIndex?: number): void {
-    if (this.confirm) return
-    this.kifu = changeIndex(this.kifu, moveCount, branchIndex)
+    this.setKifu(changeIndex(this.kifu, moveCount, branchIndex))
+  }
+
+  @action setKifu(kifu: Kifu): void {
     this.selected = null
+    this.confirm = null
     this.moveTargets = []
+    this.kifu = kifu
   }
 }
 

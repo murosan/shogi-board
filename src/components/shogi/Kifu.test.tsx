@@ -1,6 +1,6 @@
 import React from 'react'
 import pushMove from '../../handler/kifu/pushMove'
-import { hirate } from '../../model/shogi/PositionInit'
+import { hirate } from '../../model/shogi/InitialPositions'
 import { defaultStore, Store } from '../../store/Store'
 import { mount, shallow } from '../../testutils/component-helper'
 import { mockKifu, mockKifu2 } from '../../testutils/mockKifu'

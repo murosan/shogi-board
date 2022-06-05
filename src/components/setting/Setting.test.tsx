@@ -1,5 +1,4 @@
 import React from 'react'
-import { MockupHidden } from '../../model/display/MockupState'
 import { Store } from '../../store/Store'
 import { defaultStore } from '../../store/Store'
 import { mount, shallow } from '../../testutils/component-helper'
@@ -7,10 +6,10 @@ import Setting from './Setting'
 
 it('閉じることができる', () => {
   const store: Store = defaultStore()
-  store.displayState.setMockupState = jest.fn()
+  store.displayState.closeMockup = jest.fn()
   const wrapper = shallow(() => <Setting />, store)
   wrapper.find('CloseButton').simulate('click')
-  expect(store.displayState.setMockupState).toHaveBeenCalledWith(MockupHidden)
+  expect(store.displayState.closeMockup).toHaveBeenCalled()
 })
 
 it('serverURL を表示 & 更新できる', () => {

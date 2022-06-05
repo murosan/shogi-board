@@ -1,9 +1,8 @@
 import { observer } from 'mobx-react-lite'
 import React, { FC } from 'react'
-import { getAsString } from '../../handler/kifu/getAsString'
 import ConfigurationImg from '../../img/components/buttons/configuration.svg'
 import ConnectToEngineImg from '../../img/components/buttons/connect-to-engine.svg'
-import CopyKifuImg from '../../img/components/buttons/copy-kifu.svg'
+import KifuImg from '../../img/components/buttons/kifu.svg'
 import NextFiveImg from '../../img/components/buttons/next-five.svg'
 import NextOneImg from '../../img/components/buttons/next-one.svg'
 import PrevFiveImg from '../../img/components/buttons/prev-five.svg'
@@ -12,6 +11,7 @@ import ReverseImg from '../../img/components/buttons/reverse.svg'
 import StopEngineImg from '../../img/components/buttons/stop-engine.svg'
 import {
   MockupEngineControl,
+  MockupKifu,
   MockupServerSetting,
   MockupSetting,
 } from '../../model/display/MockupState'
@@ -22,7 +22,7 @@ import './Buttons.scss'
 const Buttons: FC = () => {
   const { gameState, displayState, engineState, config } =
     React.useContext(StoreContext)
-  const { currentMove, kifu } = gameState
+  const { currentMove } = gameState
   const i: number = currentMove.index
 
   const prevOne: number = i - 1 < 0 ? 0 : i - 1
@@ -35,11 +35,6 @@ const Buttons: FC = () => {
     const { current, state } = engineState
     if (!current || state !== Thinking) return await connectToEngine()
     await engineState.stopThinking()
-  }
-
-  const copyKifuOnClick: () => Promise<void> = async () => {
-    const txt = getAsString(kifu)
-    await navigator.clipboard.writeText(txt)
   }
 
   const bgImg = (url: string) => ({ backgroundImage: `url(${url})` })
@@ -72,9 +67,9 @@ const Buttons: FC = () => {
         style={bgImg(ReverseImg)}
       />
       <button
-        className="Copy"
-        onClick={copyKifuOnClick}
-        style={bgImg(CopyKifuImg)}
+        className="CopyOrRead"
+        onClick={() => displayState.setMockupState(MockupKifu)}
+        style={bgImg(KifuImg)}
       />
       <button
         className="ConnectToEngine"

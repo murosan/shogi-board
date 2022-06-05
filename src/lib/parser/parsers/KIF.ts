@@ -181,7 +181,8 @@ export function move(prev: Move): Parser<Move> {
 }
 
 // http://kakinoki.o.oo7.jp/kif_format.html
-export const KIF: Parser<Kifu> = Parser(input => {
+export const KIF: Parser<Kifu> = Parser(_input => {
+  const input = _input.trimRight() + '\n'
   const { value: metaValue, next } = meta
     .left(separator.fallback(''))
     .parse(input.replace(/\r/g, ''))!
@@ -212,5 +213,6 @@ export const KIF: Parser<Kifu> = Parser(input => {
     nextInput = r.next
   }
 
+  if (nextInput === input) return null
   return success(kifu, nextInput)
 })

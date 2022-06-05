@@ -607,6 +607,6 @@ describe('KIF', () => {
       },
     }
 
-    spec(input, success(expected, '    '))
+    spec(input, success(expected, ''))
   })
 })

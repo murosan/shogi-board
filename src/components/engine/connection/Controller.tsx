@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react-lite'
 import React, { FC } from 'react'
-import { MockupHidden } from '../../../model/display/MockupState'
 import { Connecting, NotConnected } from '../../../model/engine/State'
 import { EngineState } from '../../../store/EngineState'
 import { Store, StoreContext } from '../../../store/Store'
@@ -16,7 +15,7 @@ const Controller: FC = () => {
   const isList: boolean = state === NotConnected || state === Connecting
   const child: JSX.Element = isList ? <List /> : <Detail />
 
-  const onClick = () => displayState.setMockupState(MockupHidden)
+  const onClick = () => displayState.closeMockup()
 
   return (
     <div className="Mockup">

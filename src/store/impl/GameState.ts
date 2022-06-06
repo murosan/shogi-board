@@ -35,6 +35,10 @@ export class DefaultGameState implements GameState {
     this.indexes = this.indexes.slice().reverse()
   }
 
+  @computed get isReversed(): boolean {
+    return this.indexes[0] === 9
+  }
+
   @action clickPiece(p: ClickProps): void {
     const sel: Point | null = this.selected
     const turn: Turn = this.currentMove.pos.turn

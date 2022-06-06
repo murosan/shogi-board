@@ -75,7 +75,7 @@ describe('meta', () => {
 
 # コメント
 
-手合割：角落ち
+手合割：角落ち　　
 
 先手：わたし
 後手：おれ
@@ -123,7 +123,7 @@ describe('meta', () => {
       version: Versions.latest,
       date: {},
       handicap: '平手',
-      player: { sente: '', gote: '' },
+      player: {},
       time: { sente: 0, gote: 0 },
       other: new Map<string, string>([
         ['開始日時', '令和2年7月28日'],
@@ -553,7 +553,7 @@ describe('KIF', () => {
         version: Versions.latest,
         handicap: '平手',
         date: {},
-        player: { sente: '', gote: '' },
+        player: {},
         other: new Map<string, string>(),
       },
       history: {
@@ -598,7 +598,7 @@ describe('KIF', () => {
         version: Versions.latest,
         handicap: '平手',
         date: {},
-        player: { sente: '', gote: '' },
+        player: {},
         other: new Map<string, string>(),
       },
       history: {

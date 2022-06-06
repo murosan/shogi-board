@@ -57,13 +57,14 @@ export const meta: Parser<Meta> = metaFields.map(fields => {
   const m: Meta = {
     version: Versions.latest,
     date: {},
-    player: { sente: '', gote: '' },
+    player: {},
     handicap: HandicapKinds.hirate,
     other: new Map<string, string>(),
   }
 
-  for (let [key, value] of fields) {
+  for (let [key, _value] of fields) {
     if (key === '') continue
+    const value: string = _value.trim()
 
     if (key === '開始日時') {
       const d = toDate(value)

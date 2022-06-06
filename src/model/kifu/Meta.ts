@@ -22,8 +22,8 @@ export default interface Meta {
 
   // 対局者
   player: {
-    sente: string
-    gote: string
+    sente?: string // 先手or下手
+    gote?: string // 後手or上手
   }
 
   time?: {

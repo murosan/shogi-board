@@ -1,0 +1,56 @@
+@import '../../styles/colors';
+@import '../../styles/modules';
+
+.UserInfo {
+  position: relative;
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    'utop utop utop utop'
+    'emp emp emp emp'
+    'ubottom ubottom ubottom ubottom';
+}
+
+$baseMargin: 0.2em;
+
+.UserInfo.Right {
+  margin: 0 0 $baseMargin $baseMargin;
+}
+
+.UserInfo.Left {
+  margin: $baseMargin $baseMargin 0 0;
+}
+
+.UserName {
+  padding: 0 $baseMargin;
+  border: 0.25vw solid $GreenBase;
+  background-color: $GrayTransParent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+
+  .Label {
+    font-size: 0.7em;
+    margin-right: $baseMargin;
+  }
+  .Name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 0.85em;
+  }
+}
+
+.UserNameTop {
+  grid-area: utop;
+}
+
+.UserNameBottom {
+  grid-area: ubottom;
+}

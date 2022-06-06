@@ -44,6 +44,9 @@ export interface GameState {
   // 盤面反転
   reverse(): void
 
+  // 盤面反転されている場合true
+  isReversed: boolean
+
   // 駒をクリックして動かしたりする
   clickPiece(p: ClickProps): void
 

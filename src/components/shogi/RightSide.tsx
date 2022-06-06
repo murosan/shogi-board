@@ -5,17 +5,19 @@ import { StoreContext } from '../../store/Store'
 import Captures from './Captures'
 import Kifu from './Kifu'
 import './RightSide.scss'
+import UserInfo from './UserInfo'
 
 const RightSide: FC = () => {
-  const { indexes, currentMove } = React.useContext(StoreContext).gameState
-  const { turn, cap0, cap1 } = currentMove.pos
-  const caps: number[] = indexes[0] === 9 ? cap1 : cap0
-  const isTurn: boolean = indexes[0] === 9 ? turn === Gote : turn === Sente
+  const { gameState } = React.useContext(StoreContext)
+  const { turn, cap0, cap1 } = gameState.currentMove.pos
+  const caps: number[] = gameState.isReversed ? cap1 : cap0
+  const isTurn: boolean = gameState.isReversed ? turn === Gote : turn === Sente
 
   return (
     <div className="RightSide">
       <div className="RightInfo">
         <Kifu />
+        <UserInfo isRightSide={true} />
       </div>
       <Captures isLeftSide={false} captures={caps} isTurn={isTurn} />
     </div>

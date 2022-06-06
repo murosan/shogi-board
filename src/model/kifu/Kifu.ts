@@ -16,7 +16,7 @@ export function newKifu(posKind: string = HandicapKinds.hirate): Kifu {
   return {
     meta: {
       version: Versions.latest,
-      player: { sente: '', gote: '' },
+      player: {},
       handicap: posKind,
     },
     history: {

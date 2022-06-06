@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/shogi-board/playground/static/css/main.1ba3008f.chunk.css",
-    "main.js": "/shogi-board/playground/static/js/main.b29d5577.chunk.js",
-    "main.js.map": "/shogi-board/playground/static/js/main.b29d5577.chunk.js.map",
+    "main.css": "/shogi-board/playground/static/css/main.6d9b0cc3.chunk.css",
+    "main.js": "/shogi-board/playground/static/js/main.6fdfe60c.chunk.js",
+    "main.js.map": "/shogi-board/playground/static/js/main.6fdfe60c.chunk.js.map",
     "runtime-main.js": "/shogi-board/playground/static/js/runtime-main.d7d5fe78.js",
     "runtime-main.js.map": "/shogi-board/playground/static/js/runtime-main.d7d5fe78.js.map",
     "static/js/2.83275186.chunk.js": "/shogi-board/playground/static/js/2.83275186.chunk.js",
     "static/js/2.83275186.chunk.js.map": "/shogi-board/playground/static/js/2.83275186.chunk.js.map",
     "index.html": "/shogi-board/playground/index.html",
-    "precache-manifest.1bd3d29206357cd5819ea200f9264a0d.js": "/shogi-board/playground/precache-manifest.1bd3d29206357cd5819ea200f9264a0d.js",
+    "precache-manifest.f9ac9a026ebddd00248f460af88bd94e.js": "/shogi-board/playground/precache-manifest.f9ac9a026ebddd00248f460af88bd94e.js",
     "service-worker.js": "/shogi-board/playground/service-worker.js",
-    "static/css/main.1ba3008f.chunk.css.map": "/shogi-board/playground/static/css/main.1ba3008f.chunk.css.map",
+    "static/css/main.6d9b0cc3.chunk.css.map": "/shogi-board/playground/static/css/main.6d9b0cc3.chunk.css.map",
     "static/js/2.83275186.chunk.js.LICENSE.txt": "/shogi-board/playground/static/js/2.83275186.chunk.js.LICENSE.txt",
     "static/media/1.svg": "/shogi-board/playground/static/media/1.6deb9f45.svg",
     "static/media/2.svg": "/shogi-board/playground/static/media/2.d7945250.svg",
@@ -21,10 +21,10 @@
     "static/media/7.svg": "/shogi-board/playground/static/media/7.f7756286.svg",
     "static/media/8.svg": "/shogi-board/playground/static/media/8.33901adb.svg",
     "static/media/9.svg": "/shogi-board/playground/static/media/9.f4885e44.svg",
-    "static/media/configuration.svg": "/shogi-board/playground/static/media/configuration.3bb39912.svg",
-    "static/media/connect-to-engine.svg": "/shogi-board/playground/static/media/connect-to-engine.83c1b041.svg",
+    "static/media/configuration.svg": "/shogi-board/playground/static/media/configuration.373e4b3a.svg",
+    "static/media/connect-to-engine.svg": "/shogi-board/playground/static/media/connect-to-engine.98415f1d.svg",
     "static/media/Cell.scss": "/shogi-board/playground/static/media/uma1.4337e8ec.svg",
-    "static/media/kifu.svg": "/shogi-board/playground/static/media/kifu.12594d8c.svg",
+    "static/media/kifu.svg": "/shogi-board/playground/static/media/kifu.24209af4.svg",
     "static/media/next-five.svg": "/shogi-board/playground/static/media/next-five.af1deb21.svg",
     "static/media/next-one.svg": "/shogi-board/playground/static/media/next-one.23a7a57e.svg",
     "static/media/prev-five.svg": "/shogi-board/playground/static/media/prev-five.b79ad6a0.svg",
@@ -36,7 +36,7 @@
   "entrypoints": [
     "static/js/runtime-main.d7d5fe78.js",
     "static/js/2.83275186.chunk.js",
-    "static/css/main.1ba3008f.chunk.css",
-    "static/js/main.b29d5577.chunk.js"
+    "static/css/main.6d9b0cc3.chunk.css",
+    "static/js/main.6fdfe60c.chunk.js"
   ]
 }

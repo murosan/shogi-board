@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3cf60516a0996b00db1d276dacfef728",
+    "revision": "9a640d77e65b76d30da979752151b242",
     "url": "/shogi-board/playground/index.html"
   },
   {
-    "revision": "3a4ab9358d94c45c35c5",
-    "url": "/shogi-board/playground/static/css/main.1ba3008f.chunk.css"
+    "revision": "6525776dced354f80dc4",
+    "url": "/shogi-board/playground/static/css/main.6d9b0cc3.chunk.css"
   },
   {
     "revision": "e8e06fa43ff57e498e93",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/shogi-board/playground/static/js/2.83275186.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "3a4ab9358d94c45c35c5",
-    "url": "/shogi-board/playground/static/js/main.b29d5577.chunk.js"
+    "revision": "6525776dced354f80dc4",
+    "url": "/shogi-board/playground/static/js/main.6fdfe60c.chunk.js"
   },
   {
     "revision": "0849734a045384b94034",
@@ -96,12 +96,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/shogi-board/playground/static/media/9.f4885e44.svg"
   },
   {
-    "revision": "3bb39912d3c5cbcffef5d524452791ee",
-    "url": "/shogi-board/playground/static/media/configuration.3bb39912.svg"
+    "revision": "373e4b3a7c1be83726dbc255952f19ec",
+    "url": "/shogi-board/playground/static/media/configuration.373e4b3a.svg"
   },
   {
-    "revision": "83c1b041df2f0593bed9b9f31dfcf750",
-    "url": "/shogi-board/playground/static/media/connect-to-engine.83c1b041.svg"
+    "revision": "98415f1df496708ada11050d5b772698",
+    "url": "/shogi-board/playground/static/media/connect-to-engine.98415f1d.svg"
   },
   {
     "revision": "edbd2ee375a707478243141478b96c05",
@@ -152,8 +152,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/shogi-board/playground/static/media/kei1.c1889f83.svg"
   },
   {
-    "revision": "12594d8c258acae767f8acb3f7ded018",
-    "url": "/shogi-board/playground/static/media/kifu.12594d8c.svg"
+    "revision": "24209af480f24ca82431201448bae41c",
+    "url": "/shogi-board/playground/static/media/kifu.24209af4.svg"
   },
   {
     "revision": "bde10b049d8d6e39d6e1a00c6ebe249b",

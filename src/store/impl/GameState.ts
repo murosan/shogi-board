@@ -25,7 +25,6 @@ export class DefaultGameState implements GameState {
   @observable confirm: Confirm | null = null
   @observable moveTargets: Point[] = []
   @observable kifu: Kifu = newKifu()
-  @observable prevDestination: Point | null = null
 
   @computed get currentMove(): Move {
     return getCurrent(this.kifu)
@@ -78,7 +77,6 @@ export class DefaultGameState implements GameState {
     const dest: Point = { row: p.row, column: p.column }
 
     const moveAndUpdateState = (piece: Piece, promote?: boolean) => {
-      this.prevDestination = dest
       const moveProps: MoveProps = {
         pos: this.currentMove.pos,
         source,

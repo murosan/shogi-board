@@ -33,11 +33,6 @@ export interface GameState {
   // 棋譜
   kifu: Kifu
 
-  // 前回の移動先。棋譜で `同歩` のような文字列を作成するため
-  // ただし、通常は使われることはない。将棋ソフトから読みを受け取った場合、最初の手を`同歩`の
-  // ように表現するのが難しいため、仕方なく作ったもの。
-  prevDestination: Point | null
-
   // 棋譜の現在表示局面を返す
   currentMove: Move
 

@@ -154,19 +154,17 @@ export function move(prev: Move): Parser<Move> {
         source: Point
         dest: Point
         piece: Piece
-        prevDest: Point
         promote?: boolean
       } = {
         source,
         dest,
         piece: promo ? promote(piece) : piece,
-        prevDest: prev.dest,
       }
       if (promo !== undefined) base.promote = promo
 
       const before: MoveProps = { ...base, pos: prev.pos }
       const after: MoveProps = { ...base, pos: movePos(before) }
-      const kifuString: string = genKifuString(before)
+      const kifuString: string = genKifuString(before, prev.dest)
 
       const times: { time?: number; timeTotal?: number } = {}
       if (time) times.time = time

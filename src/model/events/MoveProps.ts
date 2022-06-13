@@ -17,13 +17,6 @@ export interface MoveProps {
     column: number
   }
 
-  // 一手前の移動先
-  // 同じだったら`同歩`のような棋譜を生成するため
-  prevDest?: {
-    row: number
-    column: number
-  }
-
   // 移動する駒
   piece: Piece
 

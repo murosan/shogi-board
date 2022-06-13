@@ -26,7 +26,7 @@ import { genKifuString } from './genKifuString'
 interface TestProps {
   source: Point
   dest: Point
-  prevDest?: Point
+  prev?: Point
   setups: Point[]
   turn?: Turn
   piece: Piece
@@ -58,7 +58,7 @@ class Setup extends TestRunner {
   turn: Turn
   source: Point
   dest: Point
-  prevDest: Point | null
+  prev: Point
   setups: Point[]
 
   expected: string
@@ -68,7 +68,7 @@ class Setup extends TestRunner {
   constructor({
     source,
     dest,
-    prevDest,
+    prev,
     setups,
     turn,
     piece,
@@ -78,7 +78,7 @@ class Setup extends TestRunner {
     super()
     this.source = source
     this.dest = dest
-    this.prevDest = prevDest || null
+    this.prev = prev || { column: -1, row: -1 }
     this.setups = setups
     this.turn = turn || Sente
     this.expected = expected
@@ -100,11 +100,10 @@ class Setup extends TestRunner {
       pos: this.position,
       source: this.source,
       dest: this.dest,
-      prevDest: this.prevDest || undefined,
       piece: this.piece,
       promote: this.promote,
     }
-    expect(genKifuString(p)).toBe(this.expected)
+    expect(genKifuString(p, this.prev)).toBe(this.expected)
   }
 }
 
@@ -228,7 +227,7 @@ it(
     setups: [{ column: 1, row: 3, piece: Fu1 }],
     source: { column: 1, row: 7 },
     dest: { column: 1, row: 3 },
-    prevDest: { column: 1, row: 3 },
+    prev: { column: 1, row: 3 },
     piece: Hisha0,
     expected: '同飛',
   })
@@ -240,7 +239,7 @@ it(
         ],
         source: { column: 2, row: 0 },
         dest: { column: 1, row: 1 },
-        prevDest: { column: 1, row: 1 },
+        prev: { column: 1, row: 1 },
         piece: Gin1,
         turn: Gote,
         expected: '同銀',
@@ -254,7 +253,7 @@ it(
         ],
         source: { column: 6, row: 6 },
         dest: { column: 2, row: 2 },
-        prevDest: { column: 2, row: 2 },
+        prev: { column: 2, row: 2 },
         piece: Kaku0,
         promote: true,
         expected: '同角成',
@@ -269,7 +268,7 @@ it(
     setups: [{ column: 1, row: 3, piece: Fu1 }],
     source: { column: 1, row: 7 },
     dest: { column: 1, row: 3 },
-    prevDest: { column: 1, row: 1 },
+    prev: { column: 1, row: 1 },
     piece: Hisha0,
     expected: '２四飛',
   })
@@ -281,7 +280,7 @@ it(
         ],
         source: { column: 2, row: 0 },
         dest: { column: 1, row: 1 },
-        prevDest: { column: 4, row: 1 },
+        prev: { column: 4, row: 1 },
         piece: Gin1,
         expected: '２二銀',
       })

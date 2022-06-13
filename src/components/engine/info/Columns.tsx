@@ -13,8 +13,7 @@ const Columns: FC = () => {
   const columns = result.map(i => {
     let prevDest: Point = gameState.currentMove.dest
     const moves = i.moves.map((m, n) => {
-      m.prevDest = prevDest
-      const kifu = genKifuString(m)
+      const kifu = genKifuString(m, prevDest)
       prevDest = m.dest
       // TODO: key
       return (

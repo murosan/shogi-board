@@ -41,9 +41,10 @@ import { getTargets } from '../../lib/validatior/getTargets'
  * https://www.shogi.or.jp/faq/kihuhyouki.html
  *
  * @param props MoveProps
+ * @param prev Point 前回の指し手
  */
-export function genKifuString(props: MoveProps): string {
-  const { source, dest, prevDest, piece, promote, pos } = props
+export function genKifuString(props: MoveProps, prev: Point): string {
+  const { source, dest, piece, promote, pos } = props
   const { row: srow, column: scol } = source
   const { row: drow, column: dcol } = dest
 
@@ -54,7 +55,7 @@ export function genKifuString(props: MoveProps): string {
   let base: string
 
   // 同~ のように表記するか
-  const isSame: boolean = prevDest?.row === drow && prevDest?.column === dcol
+  const isSame: boolean = prev.row === drow && prev.column === dcol
   if (isSame) base = `同${pc}`
   else base = `${dc}${dr}${pc}`
 

@@ -168,7 +168,6 @@ describe('KIF', () => {
     const moveProps1: MoveProps = {
       source: { column: 6, row: 6 },
       dest: { column: 6, row: 5 },
-      prevDest: move0.dest,
       piece: Fu0,
       pos: move0.pos,
     }
@@ -184,7 +183,6 @@ describe('KIF', () => {
     const moveProps2: MoveProps = {
       source: { column: 7, row: 2 },
       dest: { column: 7, row: 3 },
-      prevDest: move1.dest,
       piece: Fu1,
       pos: move1.pos,
     }
@@ -201,7 +199,6 @@ describe('KIF', () => {
     const moveProps3: MoveProps = {
       source: { column: 1, row: 6 },
       dest: { column: 1, row: 5 },
-      prevDest: move2.dest,
       piece: Fu0,
       pos: move2.pos,
     }
@@ -259,7 +256,6 @@ describe('KIF', () => {
     const moveProps1: MoveProps = {
       source: { column: 2, row: 2 },
       dest: { column: 2, row: 3 },
-      prevDest: move0.dest,
       piece: Fu1,
       pos: move0.pos,
     }
@@ -273,7 +269,6 @@ describe('KIF', () => {
     const moveProps2: MoveProps = {
       source: { column: 6, row: 6 },
       dest: { column: 6, row: 5 },
-      prevDest: move1.dest,
       piece: Fu0,
       pos: move1.pos,
     }
@@ -287,7 +282,6 @@ describe('KIF', () => {
     const moveProps3: MoveProps = {
       source: { column: 3, row: 0 },
       dest: { column: 2, row: 1 },
-      prevDest: move2.dest,
       piece: Kin1,
       pos: move2.pos,
     }
@@ -301,7 +295,6 @@ describe('KIF', () => {
     const moveProps4: MoveProps = {
       source: { column: 7, row: 7 },
       dest: { column: 1, row: 1 },
-      prevDest: move3.dest,
       piece: Uma0,
       pos: move3.pos,
       promote: true,
@@ -316,7 +309,6 @@ describe('KIF', () => {
     const moveProps5: MoveProps = {
       source: { column: 2, row: 0 },
       dest: { column: 1, row: 1 },
-      prevDest: move4.dest,
       piece: Gin1,
       pos: move4.pos,
     }
@@ -370,7 +362,6 @@ describe('KIF', () => {
     const moveProps1: MoveProps = {
       source: { column: 2, row: 2 },
       dest: { column: 2, row: 3 },
-      prevDest: move0.dest,
       piece: Fu1,
       pos: move0.pos,
     }
@@ -384,7 +375,6 @@ describe('KIF', () => {
     const moveProps2: MoveProps = {
       source: { column: 6, row: 6 },
       dest: { column: 6, row: 5 },
-      prevDest: move1.dest,
       piece: Fu0,
       pos: move1.pos,
     }
@@ -398,7 +388,6 @@ describe('KIF', () => {
     const moveProps3: MoveProps = {
       source: { column: 1, row: 1 },
       dest: { column: 7, row: 7 },
-      prevDest: move2.dest,
       piece: Kaku1,
       pos: move2.pos,
       promote: false,
@@ -413,7 +402,6 @@ describe('KIF', () => {
     const moveProps4: MoveProps = {
       source: { column: 6, row: 8 },
       dest: { column: 7, row: 7 },
-      prevDest: move3.dest,
       piece: Gin0,
       pos: move3.pos,
     }
@@ -466,7 +454,6 @@ describe('KIF', () => {
     const moveProps1: MoveProps = {
       source: { column: 6, row: 6 },
       dest: { column: 6, row: 5 },
-      prevDest: move0.dest,
       piece: Fu0,
       pos: move0.pos,
     }
@@ -480,7 +467,6 @@ describe('KIF', () => {
     const moveProps2: MoveProps = {
       source: { column: 2, row: 2 },
       dest: { column: 2, row: 3 },
-      prevDest: move1.dest,
       piece: Fu1,
       pos: move1.pos,
     }
@@ -494,7 +480,6 @@ describe('KIF', () => {
     const moveProps3: MoveProps = {
       source: { column: 7, row: 7 },
       dest: { column: 1, row: 1 },
-      prevDest: move2.dest,
       piece: Uma0,
       pos: move2.pos,
       promote: true,
@@ -509,7 +494,6 @@ describe('KIF', () => {
     const moveProps4: MoveProps = {
       source: { column: 2, row: 0 },
       dest: { column: 1, row: 1 },
-      prevDest: move3.dest,
       piece: Gin1,
       pos: move3.pos,
     }
@@ -523,7 +507,6 @@ describe('KIF', () => {
     const moveProps5: MoveProps = {
       source: { column: 6, row: 8 },
       dest: { column: 7, row: 7 },
-      prevDest: move4.dest,
       piece: Gin0,
       pos: move4.pos,
     }
@@ -537,7 +520,6 @@ describe('KIF', () => {
     const moveProps6: MoveProps = {
       source: { column: -1, row: -1 },
       dest: { column: 4, row: 4 },
-      prevDest: move5.dest,
       piece: Kaku1,
       pos: move5.pos,
     }
@@ -582,7 +564,6 @@ describe('KIF', () => {
     const moveProps1: MoveProps = {
       source: { column: 6, row: 6 },
       dest: { column: 6, row: 5 },
-      prevDest: move0.dest,
       piece: Fu0,
       pos: move0.pos,
     }

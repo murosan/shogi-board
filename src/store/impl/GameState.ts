@@ -81,12 +81,11 @@ export class DefaultGameState implements GameState {
         pos: this.currentMove.pos,
         source,
         dest,
-        prevDest: this.currentMove.dest,
         piece,
         promote,
       }
       const pos: Position = move(moveProps)
-      const kifuStr: string = genKifuString(moveProps)
+      const kifuStr: string = genKifuString(moveProps, this.currentMove.dest)
       const moveForKifu: Move = {
         index: this.currentMove.index + 1,
         str: kifuStr,

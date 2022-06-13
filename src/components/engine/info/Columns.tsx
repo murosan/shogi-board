@@ -11,7 +11,7 @@ const Columns: FC = () => {
   if (!result) return <div />
 
   const columns = result.map(i => {
-    let prevDest: Point | null = gameState.prevDestination
+    let prevDest: Point = gameState.currentMove.dest
     const moves = i.moves.map((m, n) => {
       if (prevDest) m.prevDest = prevDest
       const kifu = genKifuString(m)

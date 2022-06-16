@@ -14,11 +14,12 @@ const Columns: FC = () => {
     let prevDest: Point = gameState.currentMove.dest
     const moves = i.moves.map((m, n) => {
       const kifu = genKifuString(m, prevDest)
+      const txt = kifu.length === 2 ? `${kifu[0]}　${kifu[1]}` : kifu
       prevDest = m.dest
       // TODO: key
       return (
         <div key={n} className="EngineInfoRowContent">
-          {kifu}
+          {txt}
         </div>
       )
     })

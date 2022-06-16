@@ -22,7 +22,7 @@ it('評価値だけでも表示できる', async () => {
   expect(wrapper.find('.EngineInfoRow')).toHaveLength(2)
   expect(wrapper.find('.EngineInfoRowLabel')).toHaveLength(2)
   expect(wrapper.find('.EngineInfoRowContent')).toHaveLength(1)
-  expect(wrapper.text()).toContain(score)
+  expect(wrapper.text()).toContain(`${score}`)
   expect(wrapper.text()).toContain('読み')
 })
 

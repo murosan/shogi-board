@@ -16,6 +16,7 @@ export type Parser<T> = {
   failif(cb: (v: T) => boolean): Parser<T>
 }
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export function Parser<T>(pf: ParserFunc<T>): Parser<T> {
   return {
     parse: pf,

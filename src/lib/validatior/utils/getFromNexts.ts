@@ -1,7 +1,11 @@
 import { Piece } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 
-export default function (pos: Piece[][], nexts: number[][], p: Piece): Point[] {
+export default function getFromNexts(
+  pos: Piece[][],
+  nexts: number[][],
+  p: Piece
+): Point[] {
   const points: Point[] = []
 
   for (let i = 0; i < nexts.length; i++) {

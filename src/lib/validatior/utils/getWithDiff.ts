@@ -1,7 +1,7 @@
 import { Piece } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 
-export default function (
+export default function getWithDiff(
   pos: Piece[][],
   row: number,
   column: number,

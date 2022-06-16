@@ -8,7 +8,7 @@ import { Move } from '../../model/kifu/Move'
  * @param old Kifu
  * @param m Move 追加する一手
  */
-export default function (old: Kifu, m: Move): Kifu {
+export default function pushMove(old: Kifu, m: Move): Kifu {
   return {
     meta: old.meta,
     history: pushToHistory(old.history, m),

@@ -16,11 +16,11 @@ it('serverURL を表示 & 更新できる', () => {
   const store: Store = defaultStore()
   const { config } = store
   const url = 'http://localhost/test/serverURL'
-  config.serverURL = url
+  config.setServerURL(url)
   config.setServerURL = jest.fn()
   const wrapper = shallow(() => <Setting />, store)
 
-  const input = wrapper.find('Text').dive().find('.FormTextInput')
+  const input = wrapper.find('Memo(Text)').dive().find('.FormTextInput')
   expect(input.prop('value')).toEqual(url)
 
   const updatedURL = `${url}/after`
@@ -33,7 +33,7 @@ it('着色設定のチェックを切り替えることができる', () => {
   const store: Store = defaultStore()
   const { config } = store
   const wrapper = mount(() => <Setting />, store)
-  const checkbox = () => wrapper.find('Check').at(0)
+  const checkbox = () => wrapper.find('Memo(Check)').at(0)
   expect(checkbox().prop('value')).toBeTruthy()
   expect(config.paintTargets).toBeTruthy()
   wrapper
@@ -47,7 +47,7 @@ it('設定を保存するチェックを切り替えることができる', () =
   const store: Store = defaultStore()
   const { config } = store
   const wrapper = mount(() => <Setting />, store)
-  const checkbox = () => wrapper.find('Check').at(1)
+  const checkbox = () => wrapper.find('Memo(Check)').at(1)
   expect(checkbox().prop('value')).toBeFalsy()
   expect(config.saveToLocalStorage).toBeFalsy()
   wrapper
@@ -62,7 +62,7 @@ it('ボードエリアの幅を記憶するチェックを切り替えること�
   const store: Store = defaultStore()
   const { config } = store
   const wrapper = mount(() => <Setting />, store)
-  const checkbox = () => wrapper.find('Check').at(2)
+  const checkbox = () => wrapper.find('Memo(Check)').at(2)
   expect(checkbox().prop('value')).toBeFalsy()
   expect(config.saveBoardWidth).toBeFalsy()
   wrapper

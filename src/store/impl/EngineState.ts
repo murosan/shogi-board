@@ -1,6 +1,5 @@
-import { action, computed, observable } from 'mobx'
+import { action, computed, makeObservable, observable } from 'mobx'
 import { ShogiBoardClient } from '../../infrastructure/ShogiBoardClient'
-import { EngineState } from '../EngineState'
 import { Info } from '../../model/engine/Info'
 import { Options } from '../../model/engine/Optoin'
 import {
@@ -12,28 +11,49 @@ import {
   Thinking,
 } from '../../model/engine/State'
 import { Position } from '../../model/shogi/Position'
+import { EngineState } from '../EngineState'
 
 export class DefaultEngineState implements EngineState {
-  @observable names: string[] = []
-  @observable current: string | null = null
-  @observable options: Options | null = null
-  @observable state: State = NotConnected
-  @observable result: Info[] | null = null
-  @observable serverURL: string = ''
+  names: string[] = []
+  current: string | null = null
+  options: Options | null = null
+  state: State = NotConnected
+  result: Info[] | null = null
+  serverURL: string = ''
 
-  @computed get sbclient(): ShogiBoardClient {
+  constructor() {
+    makeObservable(this, {
+      names: observable,
+      current: observable,
+      options: observable,
+      state: observable,
+      result: observable,
+      serverURL: observable,
+      sbclient: computed,
+      setNames: action,
+      setState: action,
+      connect: action,
+      disconnect: action,
+      startThinking: action,
+      stopThinking: action,
+      setResult: action,
+      setServerURL: action,
+    })
+  }
+
+  get sbclient(): ShogiBoardClient {
     return new ShogiBoardClient(this.current || '', this.serverURL)
   }
 
-  @action async setNames(names: string[]): Promise<void> {
+  async setNames(names: string[]): Promise<void> {
     this.names = names
   }
 
-  @action async setState(state: State): Promise<void> {
+  async setState(state: State): Promise<void> {
     this.state = state
   }
 
-  @action async connect(name: string): Promise<void> {
+  async connect(name: string): Promise<void> {
     if (!this.names.includes(name))
       throw new Error('Unknown engine name. name=' + name)
 
@@ -50,7 +70,7 @@ export class DefaultEngineState implements EngineState {
     }
   }
 
-  @action async disconnect(): Promise<void> {
+  async disconnect(): Promise<void> {
     try {
       await this.sbclient.close()
     } catch (e) {
@@ -62,7 +82,7 @@ export class DefaultEngineState implements EngineState {
     }
   }
 
-  @action async startThinking(): Promise<void> {
+  async startThinking(): Promise<void> {
     if (!this.current)
       throw new Error('[startThinking] current engine is not set')
 
@@ -70,7 +90,7 @@ export class DefaultEngineState implements EngineState {
     await this.setState(Thinking)
   }
 
-  @action async stopThinking(): Promise<void> {
+  async stopThinking(): Promise<void> {
     if (!this.current)
       throw new Error('[stopThinking] current engine is not set')
     if (this.state !== Thinking) return
@@ -79,7 +99,7 @@ export class DefaultEngineState implements EngineState {
     await this.setState(StandBy)
   }
 
-  @action async setResult(i: Info[]): Promise<void> {
+  async setResult(i: Info[]): Promise<void> {
     this.result = i
   }
 
@@ -87,7 +107,7 @@ export class DefaultEngineState implements EngineState {
     await this.sbclient.setPosition(p)
   }
 
-  @action async setServerURL(s: string): Promise<void> {
+  async setServerURL(s: string): Promise<void> {
     this.serverURL = s
   }
 }

@@ -7,6 +7,7 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,

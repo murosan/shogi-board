@@ -1,4 +1,4 @@
-import { observable, observe } from 'mobx'
+import { makeObservable, observable, reaction } from 'mobx'
 import { createContext } from 'react'
 import { Connected } from '../model/engine/State'
 import { Move } from '../model/kifu/Move'
@@ -26,24 +26,33 @@ export interface Store {
 }
 
 class DefaultStore implements Store {
+  gameState: GameState = new DefaultGameState()
+  engineState: EngineState = new DefaultEngineState()
+  displayState: DisplayState = new DefaultDisplayState()
+  config: Config = new DefaultConfig()
+
   constructor() {
+    makeObservable(this, {
+      gameState: observable,
+      engineState: observable,
+      displayState: observable,
+      config: observable,
+    })
+
     this.engineState.setServerURL(this.config.serverURL)
 
     // gameState で現在局面に変更があったら、将棋エンジンに局面をセットする
-    observe(this.gameState, 'currentMove', change =>
-      this.updatePosition(change.newValue)
+    reaction(
+      () => this.gameState.currentMove,
+      currentMove => this.updatePosition({ ...currentMove })
     )
 
     // config の serverURL に変更があったら、engineState の serverURL を更新する
-    observe(this.config, 'serverURL', change =>
-      this.engineState.setServerURL(change.newValue)
+    reaction(
+      () => this.config.serverURL,
+      serverURL => this.engineState.setServerURL(serverURL)
     )
   }
-
-  @observable gameState: GameState = new DefaultGameState()
-  @observable engineState: EngineState = new DefaultEngineState()
-  @observable displayState: DisplayState = new DefaultDisplayState()
-  @observable config: Config = new DefaultConfig()
 
   async updatePosition(move?: Move): Promise<void> {
     const setPositionExecutable: boolean = this.engineState.state >= Connected

@@ -1,4 +1,4 @@
-import { action, observable } from 'mobx'
+import { action, makeObservable, observable } from 'mobx'
 
 interface Option<T> {
   readonly name: string
@@ -15,23 +15,27 @@ export class Button implements Option<any> {
 }
 
 export class Check implements Option<boolean> {
-  @observable value: boolean
+  value: boolean
   readonly name: string
   readonly default: boolean
   constructor(name: string, value: boolean, initial: boolean) {
+    makeObservable(this, {
+      value: observable,
+      setValue: action,
+    })
     this.name = name
     this.value = value
     this.default = initial
   }
 
-  @action setValue(value: boolean): void {
+  setValue(value: boolean): void {
     this.value = value
   }
 }
 
 export class Range implements Option<string> {
-  @observable value: number
-  @observable inputValue: string
+  value: number
+  inputValue: string
   readonly name: string
   readonly default: number
   readonly min: number
@@ -43,6 +47,11 @@ export class Range implements Option<string> {
     min: number,
     max: number
   ) {
+    makeObservable(this, {
+      value: observable,
+      inputValue: observable,
+      setValue: action,
+    })
     this.name = name
     this.value = value
     this.inputValue = value.toString()
@@ -51,7 +60,7 @@ export class Range implements Option<string> {
     this.max = max
   }
 
-  @action setValue(value: string): void {
+  setValue(value: string): void {
     this.inputValue = value
     const n: number = Number(this.inputValue)
     if (Number.isNaN(n) || n < this.min || n > this.max) return
@@ -60,34 +69,42 @@ export class Range implements Option<string> {
 }
 
 export class Select implements Option<string> {
-  @observable value: string
+  value: string
   readonly name: string
   readonly default: string
   readonly vars: string[]
   constructor(name: string, value: string, initial: string, vars: string[]) {
+    makeObservable(this, {
+      value: observable,
+      setValue: action,
+    })
     this.name = name
     this.value = value
     this.default = initial
     this.vars = vars
   }
 
-  @action setValue(value: string) {
+  setValue(value: string) {
     this.value = value
   }
 }
 
 export class Text implements Option<string> {
-  @observable value: string
+  value: string
   readonly name: string
   readonly default: string
 
   constructor(name: string, value: string, initial: string) {
+    makeObservable(this, {
+      value: observable,
+      setValue: action,
+    })
     this.name = name
     this.value = value
     this.default = initial
   }
 
-  @action setValue(value: string) {
+  setValue(value: string) {
     this.value = value
   }
 }

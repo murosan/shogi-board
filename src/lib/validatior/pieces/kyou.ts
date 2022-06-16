@@ -4,7 +4,7 @@ import { Position } from '../../../model/shogi/Position'
 import getEmpties from '../utils/getEmpties'
 import getWithDiff from '../utils/getWithDiff'
 
-export default function (pos: Position, p: Point): Point[] {
+export default function kyou(pos: Position, p: Point): Point[] {
   if (!p.piece || (p.piece !== Kyou0 && p.piece !== Kyou1))
     throw new Error('Called validation for kyou, but piece id was not kyou.')
 

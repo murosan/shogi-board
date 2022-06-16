@@ -1,7 +1,7 @@
 import { Piece, Empty } from '../../../model/shogi/Piece'
 import Point from '../../../model/shogi/Point'
 
-export default function (
+export default function getEmpties(
   pos: Piece[][],
   invalidRows?: number[],
   invalidColumns?: number[]

@@ -1,22 +1,12 @@
 import Kifu from '../../model/kifu/Kifu'
 import Meta from '../../model/kifu/Meta'
-import { Position } from '../../model/shogi/Position'
-import { Sente } from '../../model/shogi/Turn'
 import { mockKifu } from '../../testutils/mockKifu'
 import { getAsString } from './getAsString'
 
-const mockPos: Position = {
-  pos: [],
-  cap0: [],
-  cap1: [],
-  turn: Sente,
-  moveCount: 0,
-}
 const mockMeta: Meta = {
   version: '1',
   player: { sente: '', gote: '' },
   handicap: '平手',
-  initPos: mockPos,
 }
 
 it('棋譜を文字列で取得できる', async () => {

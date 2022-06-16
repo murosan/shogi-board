@@ -8,7 +8,7 @@ import RightSide from './RightSide'
 it('レンダリングできる', async () => {
   const wrapper = shallow(() => <RightSide />)
   expect(wrapper.find('.RightSide')).toHaveLength(1)
-  const capProps = wrapper.find('Captures').props() as CapProps
+  const capProps = wrapper.find('Memo(Captures)').props() as CapProps
   expect(capProps.isLeftSide).toBeFalsy()
   expect(capProps.isTurn).toBeTruthy()
   expect(capProps.captures).toEqual([0, 0, 0, 0, 0, 0, 0])
@@ -19,7 +19,7 @@ it('反転していてもレンダリングできる', async () => {
   store.gameState.reverse()
   const wrapper = shallow(() => <RightSide />, store)
   expect(wrapper.find('.RightSide')).toHaveLength(1)
-  const capProps = wrapper.find('Captures').props() as CapProps
+  const capProps = wrapper.find('Memo(Captures)').props() as CapProps
   expect(capProps.isLeftSide).toBeFalsy()
   expect(capProps.isTurn).toBeFalsy()
   expect(capProps.captures).toEqual([0, 0, 0, 0, 0, 0, 0])

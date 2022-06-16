@@ -29,7 +29,7 @@ it('クリップボードにコピーできる', async () => {
   jest.spyOn(navigator.clipboard, 'writeText')
 
   expect(navigator.clipboard.writeText).toHaveBeenCalledTimes(0)
-  wrapper.find('Button').at(0).simulate('click')
+  wrapper.find('Memo(Button)').at(0).simulate('click')
   await flushPromises()
   expect(navigator.clipboard.writeText).toHaveBeenCalledTimes(1)
 })
@@ -44,7 +44,7 @@ it('クリップボードから読み込める', async () => {
   const wrapper = shallow(() => <KifuMockup />, store)
 
   expect(navigator.clipboard.readText).toBeCalledTimes(0)
-  wrapper.find('Button').at(1).simulate('click')
+  wrapper.find('Memo(Button)').at(1).simulate('click')
   await flushPromises()
 
   expect(navigator.clipboard.readText).toBeCalledTimes(1)
@@ -62,7 +62,7 @@ it('クリップボードから読み込むとき、棋譜のパースに失敗�
   window.alert = jest.fn()
   const wrapper = shallow(() => <KifuMockup />, store)
 
-  wrapper.find('Button').at(1).simulate('click')
+  wrapper.find('Memo(Button)').at(1).simulate('click')
   await flushPromises()
 
   expect(navigator.clipboard.readText).toBeCalledTimes(1)

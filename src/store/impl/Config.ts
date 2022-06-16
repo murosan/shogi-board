@@ -1,13 +1,13 @@
 import debounce from 'lodash.debounce'
-import { action, observable } from 'mobx'
+import { action, makeObservable, observable } from 'mobx'
 import { Config } from '../Config'
 
 export class DefaultConfig implements Config {
-  @observable paintTargets: boolean
-  @observable serverURL: string
-  @observable saveToLocalStorage: boolean
-  @observable saveBoardWidth: boolean
-  @observable appWidth: number | null
+  paintTargets: boolean
+  serverURL: string
+  saveToLocalStorage: boolean
+  saveBoardWidth: boolean
+  appWidth: number | null
 
   private readonly keys = {
     paintTargets: 'paintTargets',
@@ -18,6 +18,18 @@ export class DefaultConfig implements Config {
   }
 
   constructor() {
+    makeObservable(this, {
+      paintTargets: observable,
+      serverURL: observable,
+      saveToLocalStorage: observable,
+      saveBoardWidth: observable,
+      appWidth: observable,
+      setPaintTargets: action,
+      setServerURL: action,
+      setSaveToLocalStorage: action,
+      setSaveBoardWidth: action,
+      setAppWidth: action,
+    })
     const {
       paintTargets,
       serverURL,
@@ -41,19 +53,16 @@ export class DefaultConfig implements Config {
     })()
   }
 
-  @action
   async setPaintTargets(b: boolean): Promise<void> {
     this.paintTargets = b
     if (this.saveToLocalStorage) this.set(this.keys.paintTargets, String(b))
   }
 
-  @action
   async setServerURL(s: string): Promise<void> {
     this.serverURL = s
     if (this.saveToLocalStorage) this.set(this.keys.serverURL, s)
   }
 
-  @action
   async setSaveToLocalStorage(b: boolean): Promise<void> {
     this.saveToLocalStorage = b
     const { saveToLocalStorage, serverURL, paintTargets } = this.keys
@@ -70,7 +79,6 @@ export class DefaultConfig implements Config {
     keys.forEach(key => this.remove(key))
   }
 
-  @action
   async setSaveBoardWidth(b: boolean): Promise<void> {
     this.saveBoardWidth = b
     if (!b) {
@@ -83,7 +91,6 @@ export class DefaultConfig implements Config {
     if (w) this.saveAppWidth(w)
   }
 
-  @action
   async setAppWidth(w?: number): Promise<void> {
     if (!w) {
       this.appWidth = null

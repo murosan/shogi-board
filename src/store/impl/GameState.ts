@@ -1,4 +1,4 @@
-import { action, computed, observable } from 'mobx'
+import { action, computed, makeObservable, observable } from 'mobx'
 import { canPromote, mustPromote, promote } from '../../handler/game/piece'
 import { move } from '../../handler/game/position'
 import { changeIndex } from '../../handler/kifu/changeIndex'
@@ -20,25 +20,41 @@ import { Gote, Sente, Turn } from '../../model/shogi/Turn'
 import { GameState } from '../GameState'
 
 export class DefaultGameState implements GameState {
-  @observable indexes: number[] = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-  @observable selected: Point | null = null
-  @observable confirm: Confirm | null = null
-  @observable moveTargets: Point[] = []
-  @observable kifu: Kifu = newKifu()
+  indexes: number[] = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  selected: Point | null = null
+  confirm: Confirm | null = null
+  moveTargets: Point[] = []
+  kifu: Kifu = newKifu()
 
-  @computed get currentMove(): Move {
+  constructor() {
+    makeObservable(this, {
+      indexes: observable,
+      selected: observable,
+      confirm: observable,
+      moveTargets: observable,
+      kifu: observable,
+      currentMove: computed,
+      reverse: action,
+      isReversed: computed,
+      clickPiece: action,
+      clickKifu: action,
+      setKifu: action,
+    })
+  }
+
+  get currentMove(): Move {
     return getCurrent(this.kifu)
   }
 
-  @action reverse(): void {
+  reverse(): void {
     this.indexes = this.indexes.slice().reverse()
   }
 
-  @computed get isReversed(): boolean {
+  get isReversed(): boolean {
     return this.indexes[0] === 9
   }
 
-  @action clickPiece(p: ClickProps): void {
+  clickPiece(p: ClickProps): void {
     const sel: Point | null = this.selected
     const turn: Turn = this.currentMove.pos.turn
 
@@ -130,11 +146,11 @@ export class DefaultGameState implements GameState {
     moveAndUpdateState(piece, mp || undefined)
   }
 
-  @action clickKifu(moveCount: number, branchIndex?: number): void {
+  clickKifu(moveCount: number, branchIndex?: number): void {
     this.setKifu(changeIndex(this.kifu, moveCount, branchIndex))
   }
 
-  @action setKifu(kifu: Kifu): void {
+  setKifu(kifu: Kifu): void {
     this.selected = null
     this.confirm = null
     this.moveTargets = []

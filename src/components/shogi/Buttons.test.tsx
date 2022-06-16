@@ -40,7 +40,7 @@ it('一手前に変更ボタンを押してもエラーにならない', async (
 
 it('一手前に変更ボタンを押すと store の clickKif が実行される2', async () => {
   const store: Store = defaultStore()
-  store.gameState.kifu = mockKifu()
+  store.gameState.setKifu(mockKifu())
   store.gameState.clickKifu = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)
 
@@ -74,7 +74,7 @@ it('五手前に変更ボタンを押すと store の clickKif が実行され�
 
 it('五手前に変更ボタンを押すと store の clickKif が実行される2', async () => {
   const store: Store = defaultStore()
-  store.gameState.kifu = mockKifu()
+  store.gameState.setKifu(mockKifu())
   store.gameState.clickKifu = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)
 
@@ -86,7 +86,7 @@ it('五手前に変更ボタンを押すと store の clickKif が実行され�
 
 it('五手後に変更ボタンを押すと store の clickKif が実行される', async () => {
   const store: Store = defaultStore()
-  store.gameState.kifu = mockKifu()
+  store.gameState.setKifu(mockKifu())
   store.gameState.clickKifu = jest.fn()
   const wrapper = shallow(() => <Buttons />, store)
 

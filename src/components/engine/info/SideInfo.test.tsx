@@ -6,5 +6,5 @@ it('思考結果が空なら表示なし', async () => {
   const wrapper = shallow(() => <SideInfo />)
   expect(wrapper.find('.EngineSideInfo')).toHaveLength(1)
   expect(wrapper.find('.EngineSideInfoContainer')).toHaveLength(1)
-  expect(wrapper.find('Columns')).toHaveLength(1)
+  expect(wrapper.find('Memo(Columns)')).toHaveLength(1)
 })

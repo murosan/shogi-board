@@ -17,6 +17,7 @@ import { Move } from '../model/kifu/Move'
 import { ResponseInfo } from '../model/response/ResponseInfo'
 import { Empty } from '../model/shogi/Piece'
 import { Position } from '../model/shogi/Position'
+import { Gote } from '../model/shogi/Turn'
 
 const DEBOUNCE_MILLIS = 1000
 
@@ -142,13 +143,17 @@ export class ShogiBoardClient {
             const m = info.moves[i]
             const source = { row: m.source!.row, column: m.source!.column }
             const dest = { row: m.dest!.row, column: m.dest!.column }
-            const piece = m.pieceId || p.pos[source.row][source.column]
+            let piece = m.pieceId || p.pos[source.row][source.column]
             if (piece === Empty) break
+            // 後手が持ち駒を打つとき、将棋エンジンが先手駒の表記で結果を返す模様？
+            // なので後手番の駒に変える
+            if (p.turn === Gote && piece > 0) piece *= -1
+            if (m.isPromoted) piece = promote(piece)
             const mp: MoveProps = {
               pos: p,
               source,
               dest,
-              piece: m.isPromoted ? promote(piece) : piece,
+              piece,
               promote: m.isPromoted,
             }
             moves.push(mp)

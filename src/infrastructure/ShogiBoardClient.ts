@@ -1,6 +1,7 @@
 import axios from 'axios'
 import debounce from 'lodash.debounce'
 import shortid from 'shortid'
+import { promote } from '../handler/game/piece'
 import { move } from '../handler/game/position'
 import { Info } from '../model/engine/Info'
 import {
@@ -147,7 +148,7 @@ export class ShogiBoardClient {
               pos: p,
               source,
               dest,
-              piece,
+              piece: m.isPromoted ? promote(piece) : piece,
               promote: m.isPromoted,
             }
             moves.push(mp)

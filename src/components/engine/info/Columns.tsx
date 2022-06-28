@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react-lite'
 import React, { FC } from 'react'
 import { genKifuString } from '../../../handler/kifu/genKifuString'
+import Point from '../../../model/shogi/Point'
 import { StoreContext } from '../../../store/Store'
 import './Columns.scss'
-import Point from '../../../model/shogi/Point'
 
 const Columns: FC = () => {
   const { engineState, gameState } = React.useContext(StoreContext)

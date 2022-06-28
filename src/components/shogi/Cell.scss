@@ -7,27 +7,19 @@ $ImgPiecesPath: '../../img/pieces';
 $borderColor: rgb(0, 0, 0);
 $edgeTextSize: 1.2vw;
 
-@mixin bordered($borderWidth: 0.15vw) {
-  .Piece-Bordered {
-    border-bottom: $borderWidth solid $borderColor;
-    border-right: $borderWidth solid $borderColor;
-  }
+$borderWidth: 0.15vw;
 
-  .Piece-Left {
-    border-left: $borderWidth solid $borderColor;
-  }
-
-  .Piece-Top {
-    border-top: $borderWidth solid $borderColor;
-  }
+.Piece-Bordered {
+  border-bottom: $borderWidth solid $borderColor;
+  border-right: $borderWidth solid $borderColor;
 }
 
-@include bordered();
+.Piece-Left {
+  border-left: $borderWidth solid $borderColor;
+}
 
-@for $i from 1 through 3 {
-  .App.Border-#{$i} {
-    @include bordered(#{$i}px);
-  }
+.Piece-Top {
+  border-top: $borderWidth solid $borderColor;
 }
 
 .Piece {

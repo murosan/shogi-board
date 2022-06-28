@@ -1,7 +1,8 @@
 @import '../../styles/colors';
 @import '../../styles/modules';
 
-.OptionButton button {
+.OptionButton button,
+.OptionButtonReverse button {
   width: 100%;
   overflow: hidden;
 }
@@ -13,6 +14,16 @@
 
   &:active {
     background-color: $White;
+  }
+}
+
+.OptionButtonReverse .FormButton {
+  @include buttonReverse(darken($GreenSelected, 10%));
+  margin-bottom: 0.5em;
+  height: 35px;
+
+  &:active {
+    background-color: $GreenSelected;
   }
 }
 

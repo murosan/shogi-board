@@ -17,16 +17,6 @@ const App: FC = () => {
   if (isThinking) classes.push('App-SideInfo')
   else classes.push('App-BoardOnly')
 
-  if (appWidth) {
-    const w = (n: number) => {
-      if (isThinking) return (n * 2) / 3
-      return n
-    }
-    if (appWidth >= w(1500)) classes.push('Border-3')
-    if (appWidth >= w(800)) classes.push('Border-2')
-    classes.push('Border-1')
-  }
-
   const className = classes.join(' ')
   const style: CSSProperties = { width: appWidth ? `${appWidth}px` : '100%' }
 

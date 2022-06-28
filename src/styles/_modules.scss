@@ -35,21 +35,37 @@
   }
 }
 
-@mixin button($color) {
+@mixin buttonDefaults {
   display: block;
   height: 35px;
-  color: $color;
   padding: 0.2em 1em;
   text-decoration: none;
-  border: solid 1px $color;
   border-radius: 3px;
   transition: 0.2s;
   font-size: 0.9em;
   font-family: inherit;
   outline: 0;
+}
+
+@mixin button($color) {
+  @include buttonDefaults;
+  color: $color;
   background-color: white;
+  border: solid 1px $color;
   &:hover {
-    background: $color;
     color: white;
+    background-color: $color;
+  }
+}
+
+@mixin buttonReverse($color) {
+  @include buttonDefaults;
+  color: white;
+  background-color: $color;
+  border: none;
+  &:hover {
+    color: $color;
+    background-color: white;
+    border: solid 1px $color;
   }
 }

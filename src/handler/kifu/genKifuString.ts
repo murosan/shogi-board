@@ -44,11 +44,12 @@ import { getTargets } from '../../lib/validatior/getTargets'
  * @param prev Point 前回の指し手
  */
 export function genKifuString(props: MoveProps, prev: Point): string {
-  const { source, dest, piece, promote, pos } = props
-  const { row: srow, column: scol } = source
+  const { source, dest, piece: _piece, promote, pos } = props
+  const piece = promote ? demote(_piece) : _piece
+  const { row: srow } = source
   const { row: drow, column: dcol } = dest
 
-  const pc: string = pieceString(promote ? demote(piece) : piece)
+  const pc: string = pieceString(piece)
 
   const dr: string = rowString(drow)
   const dc: string = columnString(dcol)
@@ -60,7 +61,7 @@ export function genKifuString(props: MoveProps, prev: Point): string {
   else base = `${dc}${dr}${pc}`
 
   // 味方の同じ種類の駒が他にあれば取得し、dest に移動できるものをリストアップする
-  const sourcePoint = { row: srow, column: scol, piece }
+  const sourcePoint = { ...source, piece }
   const targettings: Point[] = findSamePieces(sourcePoint, pos).filter(p =>
     getTargets(pos, p).some(
       ({ row, column }) => row === drow && column === dcol

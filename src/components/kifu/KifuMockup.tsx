@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import React, { FC, useState } from 'react'
 import { getAsString } from '../../handler/kifu/getAsString'
+import { hasComment } from '../../handler/kifu/hasComment'
 import { KifuFormats, KifuParser } from '../../lib/parser/parsers/kifu'
 import { Store, StoreContext } from '../../store/Store'
 import Button from '../form/Button'
@@ -48,6 +49,7 @@ const KifuMockup: FC = () => {
       return
     }
     setParseState(ParseState.parsing)
+
     const result = KifuParser(KifuFormats.kif).parse(textareaInput)
     if (!result) {
       setParseState(ParseState.failure)
@@ -56,7 +58,9 @@ const KifuMockup: FC = () => {
       return
     }
     setParseState(ParseState.success)
+
     gameState.setKifu(result.value)
+    displayState.setShowCommentArea(hasComment(result.value))
     displayState.closeMockup()
   }
 

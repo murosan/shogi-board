@@ -6,6 +6,7 @@ import './App.scss'
 import SideInfo from './engine/info/SideInfo'
 import WidthController from './setting/WidthController'
 import BoardArea from './shogi/BoardArea'
+import CommentArea from './shogi/CommentArea'
 
 const App: FC = () => {
   const { engineState, config } = React.useContext(StoreContext)
@@ -27,6 +28,7 @@ const App: FC = () => {
         <BoardArea />
         {isThinking ? <SideInfo /> : null}
       </div>
+      <CommentArea />
     </div>
   )
 }

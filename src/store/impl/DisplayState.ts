@@ -5,14 +5,17 @@ import { DisplayState } from '../DisplayState'
 export class DefaultDisplayState implements DisplayState {
   mockup: MockupState = MockupHidden
   resizing: boolean = false
+  showCommentArea: boolean = false
 
   constructor() {
     makeObservable(this, {
       mockup: observable,
       resizing: observable,
+      showCommentArea: observable,
       setMockupState: action,
       closeMockup: action,
       setResizing: action,
+      setShowCommentArea: action,
     })
   }
 
@@ -22,6 +25,10 @@ export class DefaultDisplayState implements DisplayState {
 
   async closeMockup(): Promise<void> {
     this.mockup = MockupHidden
+  }
+
+  async setShowCommentArea(show: boolean): Promise<void> {
+    this.showCommentArea = show
   }
 
   setResizing(b: boolean): void {

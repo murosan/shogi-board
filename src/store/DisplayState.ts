@@ -10,11 +10,16 @@ export interface DisplayState {
   // ボードエリアをリサイズ中かどうか
   resizing: boolean
 
+  // コメントを表示するか
+  showCommentArea: boolean
+
   // MockupState を更新する
   setMockupState(state: MockupState): Promise<void>
 
   // モックアップを閉じる
   closeMockup(): Promise<void>
+
+  setShowCommentArea(show: boolean): Promise<void>
 
   setResizing(b: boolean): void
 }

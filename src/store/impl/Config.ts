@@ -8,6 +8,7 @@ export class DefaultConfig implements Config {
   saveToLocalStorage: boolean
   saveBoardWidth: boolean
   appWidth: number | null
+  storeKifu: boolean
 
   private readonly keys = {
     paintTargets: 'paintTargets',
@@ -15,6 +16,7 @@ export class DefaultConfig implements Config {
     saveToLocalStorage: 'saveToLocalStorage',
     saveBoardWidth: 'saveBoardWidth',
     appWidth: 'appWidth',
+    storeKifu: 'storeKifu',
   }
 
   constructor() {
@@ -24,11 +26,14 @@ export class DefaultConfig implements Config {
       saveToLocalStorage: observable,
       saveBoardWidth: observable,
       appWidth: observable,
+      storeKifu: observable,
+
       setPaintTargets: action,
       setServerURL: action,
       setSaveToLocalStorage: action,
       setSaveBoardWidth: action,
       setAppWidth: action,
+      setStoreKifu: action,
     })
     const {
       paintTargets,
@@ -36,6 +41,7 @@ export class DefaultConfig implements Config {
       saveToLocalStorage,
       saveBoardWidth,
       appWidth,
+      storeKifu,
     } = this.keys
     this.paintTargets = !(this.get(paintTargets) === 'false')
     this.serverURL = this.get(serverURL) || ''
@@ -51,6 +57,7 @@ export class DefaultConfig implements Config {
       if (isNaN(n)) return null
       return n
     })()
+    this.storeKifu = this.get(storeKifu) === 'true'
   }
 
   async setPaintTargets(b: boolean): Promise<void> {
@@ -65,17 +72,18 @@ export class DefaultConfig implements Config {
 
   async setSaveToLocalStorage(b: boolean): Promise<void> {
     this.saveToLocalStorage = b
-    const { saveToLocalStorage, serverURL, paintTargets } = this.keys
+    const { saveToLocalStorage, serverURL, paintTargets, storeKifu } = this.keys
 
     if (this.saveToLocalStorage) {
       this.set(saveToLocalStorage, `${b}`)
       this.set(serverURL, this.serverURL)
       this.set(paintTargets, `${this.paintTargets}`)
+      this.set(storeKifu, `${this.storeKifu}`)
       return
     }
 
     // false なら削除する
-    const keys = [saveToLocalStorage, serverURL, paintTargets]
+    const keys = [saveToLocalStorage, serverURL, paintTargets, storeKifu]
     keys.forEach(key => this.remove(key))
   }
 
@@ -105,6 +113,11 @@ export class DefaultConfig implements Config {
     (w: number) => this.set(this.keys.appWidth, `${w}`),
     1000
   )
+
+  async setStoreKifu(b: boolean): Promise<void> {
+    this.storeKifu = b
+    if (this.saveToLocalStorage) this.set(this.keys.storeKifu, String(b))
+  }
 
   private set(key: string, value: string): void {
     localStorage.setItem(key, value)

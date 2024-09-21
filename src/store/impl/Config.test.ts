@@ -35,7 +35,8 @@ it('初期化して値を更新できる', async () => {
   expect(config.saveToLocalStorage).toBeFalsy()
   expect(config.saveBoardWidth).toBeFalsy()
   expect(config.appWidth).toBeNull()
-  expect(get).toHaveBeenCalledTimes(4)
+  expect(config.storeKifu).toBeFalsy()
+  expect(get).toHaveBeenCalledTimes(5)
 
   await config.setPaintTargets(false)
   expect(set).toHaveBeenCalledTimes(0) // localStorage には保存しない
@@ -43,38 +44,41 @@ it('初期化して値を更新できる', async () => {
 
   await config.setSaveToLocalStorage(true)
   expect(config.saveToLocalStorage).toBeTruthy()
-  expect(set).toHaveBeenCalledTimes(3) // 他の値も保存される
+  expect(set).toHaveBeenCalledTimes(4) // 他の値も保存される
 
   const url = 'http://localhost/abc/def'
   await config.setServerURL(url)
   expect(config.serverURL).toBe(url)
-  expect(set).toHaveBeenCalledTimes(4)
+  expect(set).toHaveBeenCalledTimes(5)
 
   await config.setSaveBoardWidth(true)
   expect(config.saveBoardWidth).toBeTruthy()
-  expect(set).toHaveBeenCalledTimes(5) // appWidth は null なので保存されない
+  expect(set).toHaveBeenCalledTimes(6) // appWidth は null なので保存されない
   await config.setSaveBoardWidth(false)
   expect(remove).toHaveBeenCalledTimes(2)
 
   const width1 = 800
   await config.setAppWidth(width1)
   expect(config.appWidth).toBe(width1)
-  expect(set).toHaveBeenCalledTimes(5) // 呼ばれない
+  expect(set).toHaveBeenCalledTimes(6) // 呼ばれない
 
   await config.setSaveBoardWidth(true)
   expect(config.saveBoardWidth).toBeTruthy()
-  expect(set).toHaveBeenCalledTimes(7) // 呼ばれる
+  expect(set).toHaveBeenCalledTimes(8) // 呼ばれる
 
   const width2 = 1000
   await config.setAppWidth(width2)
   expect(config.appWidth).toBe(width2)
-  expect(set).toHaveBeenCalledTimes(8)
+  expect(set).toHaveBeenCalledTimes(9)
 
   await config.setSaveBoardWidth(false)
   expect(remove).toHaveBeenCalledTimes(4)
 
   await config.setSaveToLocalStorage(false)
-  expect(remove).toHaveBeenCalledTimes(7)
+  expect(remove).toHaveBeenCalledTimes(8)
+
+  await config.setStoreKifu(true)
+  expect(config.storeKifu).toBeTruthy()
 })
 
 it('savePaintTargets', async () => {
@@ -111,6 +115,7 @@ it('初期値を読み込める', async () => {
     if (key === 'serverURL') return `${url}`
     if (key === 'saveToLocalStorage') return `${true}`
     if (key === 'saveBoardWidth') return `${true}`
+    if (key === 'storeKifu') return `${false}`
     return null
   })
 

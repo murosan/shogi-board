@@ -24,4 +24,9 @@ export interface Config {
   appWidth: number | null
 
   setAppWidth(w?: number): Promise<void>
+
+  // localStorageに棋譜を保存し、リロードしても棋譜が保持されるようにするか
+  storeKifu: boolean
+
+  setStoreKifu(b: boolean): Promise<void>
 }

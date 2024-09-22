@@ -7,34 +7,33 @@ import CloseButton from '../util/CloseButton'
 
 const Setting: FC = () => {
   const { config, displayState } = React.useContext(StoreContext)
-  const { paintTargets, serverURL, saveToLocalStorage, saveBoardWidth } = config
 
   return (
     <div className="Mockup">
       <CloseButton onClick={() => displayState.closeMockup()} />
       <h1>設定</h1>
       <Text
-        label="shogi-board-server の URL"
-        value={serverURL}
+        label="shogi-board-serverのURL"
+        value={config.serverURL}
         allowEmpty={true}
         onChange={s => config.setServerURL(s)}
         placeholder="(例)http://localhost:8080"
       />
       <Check
         label="駒が移動できるマスに色を付ける"
-        value={paintTargets}
+        value={config.paintTargets}
         name="PaintTargets"
         onChange={b => config.setPaintTargets(b)}
       />
       <Check
-        label="ブラウザに設定を保存する"
-        value={saveToLocalStorage}
-        name="SaveToLocalStorage"
-        onChange={b => config.setSaveToLocalStorage(b)}
+        label="棋譜をブラウザに保存する"
+        value={config.saveKifuToLocalStorage}
+        name="SaveKifuToLocalStorage"
+        onChange={b => config.setSaveKifuToLocalStorage(b)}
       />
       <Check
-        label="盤の幅を記憶する"
-        value={saveBoardWidth}
+        label="盤の幅をブラウザに保存する"
+        value={config.boardWidth.save}
         name="SaveBoardWidth"
         onChange={b => config.setSaveBoardWidth(b)}
       />

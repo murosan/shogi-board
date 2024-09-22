@@ -9,19 +9,17 @@ export interface Config {
 
   setServerURL(s: string): Promise<void>
 
-  // localStorage に保存するか
-  saveToLocalStorage: boolean
-
-  setSaveToLocalStorage(b: boolean): Promise<void>
-
-  // ボードエリアの幅を localStorage に保存するか
-  saveBoardWidth: boolean
+  // ボードエリアの幅
+  boardWidth: {
+    save: boolean // localStorage に保存するかどうか
+    width: number | null // ボードエリアの幅(px)。幅が null の場合は 100% が適用される
+  }
 
   setSaveBoardWidth(b: boolean): Promise<void>
+  setBoardWidth(v: number | null): Promise<void>
 
-  // ボードエリアの幅 px で指定される
-  // null の場合は 100% が適用される
-  appWidth: number | null
+  // localStorageに棋譜を保存し、リロードしても棋譜が保持されるようにするか
+  saveKifuToLocalStorage: boolean
 
-  setAppWidth(w?: number): Promise<void>
+  setSaveKifuToLocalStorage(b: boolean): Promise<void>
 }

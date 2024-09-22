@@ -25,7 +25,7 @@ it('将棋エンジンが思考中なら、SideInfo を表示する', async () =
 
 it('ボードエリアの幅が指定されていたら style をつける', async () => {
   const store: Store = defaultStore()
-  await store.config.setAppWidth(800)
+  await store.config.setBoardWidth(800)
   const wrapper = shallow(() => <App />, store)
   expect(wrapper.find('.App')).toHaveLength(1)
   expect(wrapper.find('.App-BoardOnly')).toHaveLength(1)

@@ -1,118 +1,75 @@
 import debounce from 'lodash.debounce'
 import { action, makeObservable, observable } from 'mobx'
+import {
+  BoardWidthStorage,
+  ConfigStorage,
+} from '../../infrastructure/local-storage'
 import { Config } from '../Config'
 
 export class DefaultConfig implements Config {
   paintTargets: boolean
   serverURL: string
-  saveToLocalStorage: boolean
-  saveBoardWidth: boolean
-  appWidth: number | null
-
-  private readonly keys = {
-    paintTargets: 'paintTargets',
-    serverURL: 'serverURL',
-    saveToLocalStorage: 'saveToLocalStorage',
-    saveBoardWidth: 'saveBoardWidth',
-    appWidth: 'appWidth',
+  boardWidth: {
+    save: boolean
+    width: number | null
   }
+  saveKifuToLocalStorage: boolean
+
+  private storage = new ConfigStorage()
+  private boardWidthStorage = new BoardWidthStorage()
 
   constructor() {
     makeObservable(this, {
       paintTargets: observable,
       serverURL: observable,
-      saveToLocalStorage: observable,
-      saveBoardWidth: observable,
-      appWidth: observable,
+      boardWidth: observable,
+      saveKifuToLocalStorage: observable,
+
       setPaintTargets: action,
       setServerURL: action,
-      setSaveToLocalStorage: action,
       setSaveBoardWidth: action,
-      setAppWidth: action,
+      setBoardWidth: action,
+      setSaveKifuToLocalStorage: action,
     })
-    const {
-      paintTargets,
-      serverURL,
-      saveToLocalStorage,
-      saveBoardWidth,
-      appWidth,
-    } = this.keys
-    this.paintTargets = !(this.get(paintTargets) === 'false')
-    this.serverURL = this.get(serverURL) || ''
-    this.saveToLocalStorage = this.get(saveToLocalStorage) === 'true'
-    this.saveBoardWidth = this.get(saveBoardWidth) === 'true'
-    this.appWidth = (() => {
-      if (!this.saveBoardWidth) return null
 
-      const v = this.get(appWidth)
-      if (!v) return null
-
-      const n = Number(v)
-      if (isNaN(n)) return null
-      return n
-    })()
+    this.paintTargets = this.storage.getPaintTargets()
+    this.serverURL = this.storage.getServerURL()
+    this.boardWidth = this.boardWidthStorage.getBoardWidth()
+    this.saveKifuToLocalStorage = this.storage.getSaveKifuToLocalStorage()
   }
 
   async setPaintTargets(b: boolean): Promise<void> {
     this.paintTargets = b
-    if (this.saveToLocalStorage) this.set(this.keys.paintTargets, String(b))
+    this.storage.setPaintTargets(b)
   }
 
   async setServerURL(s: string): Promise<void> {
     this.serverURL = s
-    if (this.saveToLocalStorage) this.set(this.keys.serverURL, s)
-  }
-
-  async setSaveToLocalStorage(b: boolean): Promise<void> {
-    this.saveToLocalStorage = b
-    const { saveToLocalStorage, serverURL, paintTargets } = this.keys
-
-    if (this.saveToLocalStorage) {
-      this.set(saveToLocalStorage, `${b}`)
-      this.set(serverURL, this.serverURL)
-      this.set(paintTargets, `${this.paintTargets}`)
-      return
-    }
-
-    // false なら削除する
-    const keys = [saveToLocalStorage, serverURL, paintTargets]
-    keys.forEach(key => this.remove(key))
+    this.storage.setServerURL(s)
   }
 
   async setSaveBoardWidth(b: boolean): Promise<void> {
-    this.saveBoardWidth = b
-    if (!b) {
-      this.remove(this.keys.saveBoardWidth)
-      this.remove(this.keys.appWidth)
-      return
-    }
-    this.set(this.keys.saveBoardWidth, 'true')
-    const w = this.appWidth
-    if (w) this.saveAppWidth(w)
+    const w = this.boardWidth.width
+    this.boardWidth = { width: w, save: b }
+    this.saveBoardWidthDebounce({ save: b, width: w })
   }
 
-  async setAppWidth(w?: number): Promise<void> {
-    if (!w) {
-      this.appWidth = null
-      this.remove(this.keys.appWidth)
-      return
-    }
-    this.appWidth = w
-    if (this.saveBoardWidth) this.saveAppWidth(w)
+  async setBoardWidth(v: number | null): Promise<void> {
+    const save = this.boardWidth.save
+    this.boardWidth = { save, width: v }
+    if (save) this.saveBoardWidthDebounce({ save, width: v })
   }
 
-  saveAppWidth = debounce(
-    (w: number) => this.set(this.keys.appWidth, `${w}`),
+  saveBoardWidthDebounce = debounce(
+    (arg: { save: boolean; width: number | null }) => {
+      if (arg.save) this.boardWidthStorage.setBoardWidth(arg.save, arg.width)
+      else this.boardWidthStorage.clear()
+    },
     1000
   )
 
-  private set(key: string, value: string): void {
-    localStorage.setItem(key, value)
-  }
-  private get(key: string): string | null {
-    return localStorage.getItem(key)
-  }
-  private remove(key: string): void {
-    localStorage.removeItem(key)
+  async setSaveKifuToLocalStorage(b: boolean): Promise<void> {
+    this.saveKifuToLocalStorage = b
+    this.storage.setSaveKifuToLocalStorage(b)
   }
 }

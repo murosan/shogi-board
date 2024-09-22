@@ -43,32 +43,17 @@ it('着色設定のチェックを切り替えることができる', () => {
   expect(checkbox().prop('value')).toBeFalsy()
 })
 
-it('設定を保存するチェックを切り替えることができる', () => {
-  const store: Store = defaultStore()
-  const { config } = store
-  const wrapper = mount(() => <Setting />, store)
-  const checkbox = () => wrapper.find('Memo(Check)').at(1)
-  expect(checkbox().prop('value')).toBeFalsy()
-  expect(config.saveToLocalStorage).toBeFalsy()
-  wrapper
-    .find('#FormCheck-SaveToLocalStorage')
-    .simulate('change', { target: { checked: true } })
-  wrapper.update()
-  expect(config.saveToLocalStorage).toBeTruthy()
-  expect(checkbox().prop('value')).toBeTruthy()
-})
-
 it('ボードエリアの幅を記憶するチェックを切り替えることができる', () => {
   const store: Store = defaultStore()
   const { config } = store
   const wrapper = mount(() => <Setting />, store)
   const checkbox = () => wrapper.find('Memo(Check)').at(2)
   expect(checkbox().prop('value')).toBeFalsy()
-  expect(config.saveBoardWidth).toBeFalsy()
+  expect(config.boardWidth.save).toBeFalsy()
   wrapper
     .find('#FormCheck-SaveBoardWidth')
     .simulate('change', { target: { checked: true } })
   wrapper.update()
-  expect(config.saveBoardWidth).toBeTruthy()
+  expect(config.boardWidth.save).toBeTruthy()
   expect(checkbox().prop('value')).toBeTruthy()
 })

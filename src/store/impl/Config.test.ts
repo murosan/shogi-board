@@ -25,61 +25,80 @@ beforeEach(() => {
 
   const d = debounce as jest.Mock
   d.mockClear()
-  d.mockImplementation((cb, duration) => () => cb())
+  d.mockImplementation((cb, duration) => (arg: any) => cb(arg))
 })
+
+function resetTimes() {
+  get.mockReset()
+  set.mockReset()
+  remove.mockReset()
+}
 
 it('初期化して値を更新できる', async () => {
   const config = new DefaultConfig()
   expect(config.paintTargets).toBeTruthy()
   expect(config.serverURL).toBe('')
-  expect(config.saveToLocalStorage).toBeFalsy()
-  expect(config.saveBoardWidth).toBeFalsy()
-  expect(config.appWidth).toBeNull()
-  expect(get).toHaveBeenCalledTimes(4)
+  expect(config.boardWidth.save).toBeFalsy()
+  expect(config.boardWidth.width).toBeNull()
+  expect(config.saveKifuToLocalStorage).toBeFalsy()
+  expect(get).toHaveBeenCalledTimes(5)
+
+  resetTimes()
 
   await config.setPaintTargets(false)
-  expect(set).toHaveBeenCalledTimes(0) // localStorage には保存しない
+  expect(set).toHaveBeenCalledTimes(1)
   expect(config.paintTargets).toBeFalsy()
 
-  await config.setSaveToLocalStorage(true)
-  expect(config.saveToLocalStorage).toBeTruthy()
-  expect(set).toHaveBeenCalledTimes(3) // 他の値も保存される
+  resetTimes()
 
   const url = 'http://localhost/abc/def'
   await config.setServerURL(url)
   expect(config.serverURL).toBe(url)
-  expect(set).toHaveBeenCalledTimes(4)
+  expect(set).toHaveBeenCalledTimes(1)
+
+  resetTimes()
 
   await config.setSaveBoardWidth(true)
-  expect(config.saveBoardWidth).toBeTruthy()
-  expect(set).toHaveBeenCalledTimes(5) // appWidth は null なので保存されない
+  expect(config.boardWidth.save).toBeTruthy()
+  expect(set).toHaveBeenCalledTimes(1) // 幅がnullなのでsaveだけ呼ばれる
+  expect(remove).toHaveBeenCalledTimes(1) // 幅がnullなのでremoveが呼ばれる
   await config.setSaveBoardWidth(false)
-  expect(remove).toHaveBeenCalledTimes(2)
+  expect(remove).toHaveBeenCalledTimes(3)
+
+  resetTimes()
 
   const width1 = 800
-  await config.setAppWidth(width1)
-  expect(config.appWidth).toBe(width1)
-  expect(set).toHaveBeenCalledTimes(5) // 呼ばれない
+  await config.setBoardWidth(width1)
+  expect(config.boardWidth.width).toBe(width1)
+  expect(set).toHaveBeenCalledTimes(0) // saveBoardWidthがfalseなので呼ばれない
+
+  resetTimes()
 
   await config.setSaveBoardWidth(true)
-  expect(config.saveBoardWidth).toBeTruthy()
-  expect(set).toHaveBeenCalledTimes(7) // 呼ばれる
+  expect(config.boardWidth.save).toBeTruthy()
+  expect(set).toHaveBeenCalledTimes(2) // saveBoardWidthがtrueなので呼ばれる
+
+  resetTimes()
 
   const width2 = 1000
-  await config.setAppWidth(width2)
-  expect(config.appWidth).toBe(width2)
-  expect(set).toHaveBeenCalledTimes(8)
+  await config.setBoardWidth(width2)
+  expect(config.boardWidth.width).toBe(width2)
+  expect(set).toHaveBeenCalledTimes(2)
+
+  resetTimes()
 
   await config.setSaveBoardWidth(false)
-  expect(remove).toHaveBeenCalledTimes(4)
+  expect(remove).toHaveBeenCalledTimes(2) // boardWidthも同時に削除
 
-  await config.setSaveToLocalStorage(false)
-  expect(remove).toHaveBeenCalledTimes(7)
+  resetTimes()
+
+  await config.setSaveKifuToLocalStorage(true)
+  expect(config.saveKifuToLocalStorage).toBeTruthy()
+  expect(set).toHaveBeenCalledTimes(1)
 })
 
 it('savePaintTargets', async () => {
   const config = new DefaultConfig()
-  config.saveToLocalStorage = true // localStorege.set が走らないように直接代入
   expect(set).toHaveBeenCalledTimes(0)
   await config.setPaintTargets(true)
   expect(set).toHaveBeenCalledTimes(1)
@@ -89,54 +108,45 @@ it('savePaintTargets', async () => {
 
 it('setServerUrl 1', async () => {
   const config = new DefaultConfig()
-  config.saveToLocalStorage = true // localStorege.set が走らないように直接代入
   expect(set).toHaveBeenCalledTimes(0)
   await config.setServerURL('url')
   expect(set).toHaveBeenCalledTimes(1)
-})
-
-it('setServerUrl 2', async () => {
-  const config = new DefaultConfig()
-  expect(set).toHaveBeenCalledTimes(0)
-  await config.setServerURL('url')
-  expect(set).toHaveBeenCalledTimes(0)
 })
 
 it('初期値を読み込める', async () => {
   const width = 1000
   const url = 'http://localhost/abc/def'
   get.mockImplementation(key => {
-    if (key === 'appWidth') return `${width}`
     if (key === 'paintTargets') return `${false}`
     if (key === 'serverURL') return `${url}`
-    if (key === 'saveToLocalStorage') return `${true}`
     if (key === 'saveBoardWidth') return `${true}`
+    if (key === 'boardWidth') return `${width}`
+    if (key === 'saveKifu') return `${false}`
     return null
   })
 
   const config = new DefaultConfig()
-  expect(config.appWidth).toBe(width)
+  expect(config.boardWidth.width).toBe(width)
   expect(config.paintTargets).toBeFalsy()
   expect(config.serverURL).toBe(url)
-  expect(config.saveToLocalStorage).toBeTruthy()
-  expect(config.saveBoardWidth).toBeTruthy()
+  expect(config.boardWidth.save).toBeTruthy()
 })
 
-it('appWidth に変な値が来たらセットしない1', async () => {
+it('width に変な値が来たらセットしない1', async () => {
   get.mockImplementation(key => {
     if (key === 'saveBoardWidth') return `${true}`
-    if (key === 'appWidth') return `aiueo`
+    if (key === 'boardWidth') return `aiueo`
     return null
   })
   const config = new DefaultConfig()
-  expect(config.appWidth).toBeNull()
+  expect(config.boardWidth.width).toBeNull()
 })
 
-it('appWidth に変な値が来たらセットしない2', async () => {
+it('width に変な値が来たらセットしない2', async () => {
   get.mockImplementation(key => {
     if (key === 'saveBoardWidth') return `${true}`
     return null
   })
   const config = new DefaultConfig()
-  expect(config.appWidth).toBeNull()
+  expect(config.boardWidth.width).toBeNull()
 })

@@ -22,8 +22,8 @@ const Setting: FC = () => {
     const container = document.getElementById('root') as HTMLDivElement
     const containerWidth = container.clientWidth
     const pos = containerWidth - e.clientX
-    if (pos <= 0) config.setAppWidth()
-    else config.setAppWidth(containerWidth - pos * 2)
+    if (pos <= 0) config.setBoardWidth(null)
+    else config.setBoardWidth(containerWidth - pos * 2)
   }
 
   useEffect(() => {

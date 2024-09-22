@@ -10,7 +10,7 @@ import CommentArea from './shogi/CommentArea'
 
 const App: FC = () => {
   const { engineState, config } = React.useContext(StoreContext)
-  const { appWidth } = config
+  const { width } = config.boardWidth
 
   const isThinking: boolean = engineState.state === Thinking
 
@@ -19,7 +19,7 @@ const App: FC = () => {
   else classes.push('App-BoardOnly')
 
   const className = classes.join(' ')
-  const style: CSSProperties = { width: appWidth ? `${appWidth}px` : '100%' }
+  const style: CSSProperties = { width: width ? `${width}px` : '100%' }
 
   return (
     <div className="AppContainer" style={style}>

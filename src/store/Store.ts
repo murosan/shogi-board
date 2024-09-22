@@ -1,5 +1,6 @@
 import { makeObservable, observable, reaction } from 'mobx'
 import { createContext } from 'react'
+import { KifuStorage } from '../infrastructure/local-storage'
 import { Connected } from '../model/engine/State'
 import { Move } from '../model/kifu/Move'
 import { Config } from './Config'
@@ -31,6 +32,8 @@ class DefaultStore implements Store {
   displayState: DisplayState = new DefaultDisplayState()
   config: Config = new DefaultConfig()
 
+  private kifuStorage = new KifuStorage()
+
   constructor() {
     makeObservable(this, {
       gameState: observable,
@@ -40,6 +43,12 @@ class DefaultStore implements Store {
     })
 
     this.engineState.setServerURL(this.config.serverURL)
+
+    // ローカルストレージに前回の棋譜が保存されていたら読み込む
+    if (this.config.saveKifuToLocalStorage) {
+      const loaded = this.kifuStorage.getKifu()
+      if (loaded) this.gameState.setKifu(loaded)
+    }
 
     // gameState で現在局面に変更があったら、将棋エンジンに局面をセットする
     reaction(
@@ -51,6 +60,20 @@ class DefaultStore implements Store {
     reaction(
       () => this.config.serverURL,
       serverURL => this.engineState.setServerURL(serverURL)
+    )
+
+    // 棋譜が更新されたらローカルストレージに保存
+    reaction(
+      () => this.gameState.kifu,
+      kifu =>
+        this.config.saveKifuToLocalStorage && this.kifuStorage.setKifu(kifu)
+    )
+    reaction(
+      () => this.config.saveKifuToLocalStorage,
+      save => {
+        if (save) this.kifuStorage.setKifu(this.gameState.kifu)
+        else this.kifuStorage.deleteKifu()
+      }
     )
   }
 

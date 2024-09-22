@@ -27,7 +27,7 @@ it('ボードエリアの幅を変更できる', () => {
   const store: Store = defaultStore()
   const { config, displayState } = store
   const wrapper = mount(() => <WidthController />, store)
-  expect(config.appWidth).toBeNull()
+  expect(config.boardWidth.width).toBeNull()
 
   const moveTo = (n: number) => {
     wrapper
@@ -40,19 +40,19 @@ it('ボードエリアの幅を変更できる', () => {
   }
 
   moveTo(900) // 100px 左に動かした
-  expect(config.appWidth).toEqual(800)
+  expect(config.boardWidth.width).toEqual(800)
 
   moveTo(950) // 50px 右に動かした
-  expect(config.appWidth).toEqual(900)
+  expect(config.boardWidth.width).toEqual(900)
 
   moveTo(1000) // 50px 右に動かし、一番右に戻した
-  expect(config.appWidth).toBeNull()
+  expect(config.boardWidth.width).toBeNull()
 
   moveTo(1200) // 右側を突き抜けることはできない
-  expect(config.appWidth).toBeNull()
+  expect(config.boardWidth.width).toBeNull()
 
   // mouseDown せずに mouseMove しても動かない
   eventMap['mousemove']({ clientX: 800 })
   eventMap['mouseup']()
-  expect(config.appWidth).toBeNull()
+  expect(config.boardWidth.width).toBeNull()
 })

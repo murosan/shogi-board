@@ -106,11 +106,8 @@ export function genKifuString(props: MoveProps, prev: Point): string {
   // MoveProps を参照。
   if (promote) base += '成'
   // 成れる駒なら 不成 とする
-  else if (
-    promote === false && // undefined を弾いている
-    canPromote({ sourceRow: srow, destRow: drow, piece: piece })
-  )
-    base += '不成'
+  // undefined を弾いている
+  else if (promote === false) base += '不成'
 
   return base
 }

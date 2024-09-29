@@ -104,7 +104,7 @@ const Cell: FC<Props> = (props: Props) => {
     const className = 'Piece-Confirm Piece-Confirm' + Number(isGote)
 
     const promote = () => click(cf, true)
-    const preserve = () => click(cf)
+    const preserve = () => click(cf, false)
 
     // TODO: この方法だと画面幅によって1pxずれる
     return (
@@ -115,7 +115,7 @@ const Cell: FC<Props> = (props: Props) => {
     )
   }
 
-  function click(cf?: Confirm, promote?: true) {
+  function click(cf?: Confirm, promote?: boolean) {
     if (confirm && !cf) return
     const clicked: Confirm | Piece = cf || getPiece()
     const p: ClickProps = { clicked, row, column, promote }

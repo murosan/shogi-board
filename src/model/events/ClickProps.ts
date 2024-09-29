@@ -14,7 +14,7 @@ export type ClickProps = {
   // 持ち駒が選択された場合のみ、何枚目のという情報が入る
   i?: number
 
-  // Confirm オブジェクトが選択された時のみ、成場合は true にする
-  // 不成は指定なし(undefined)で良いÏ
-  promote?: true
+  // Confirm オブジェクトが選択された時のみ、成る場合は true にする
+  // 不成は false
+  promote?: boolean
 }

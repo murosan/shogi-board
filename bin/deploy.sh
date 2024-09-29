@@ -24,14 +24,33 @@ yarn build
 # en → ja
 cd $DOCS_ROOT/website/build/shogi-board
 
+check_sed_version() {
+  if sed --version >/dev/null 2>&1; then
+    echo "gnu"
+  else
+    echo "bsd"
+  fi
+}
+
+sed_version=$(check_sed_version)
+
 # sitemap
-sed -i '' -e 's/hreflang="en"/hreflang="ja"/g' ./sitemap.xml
-sed -i '' -e 's/shogi-board\/en\//shogi-board\//g' ./sitemap.xml
+if [ "$sed_version" = "gnu" ]; then
+  sed -i -e 's/hreflang="en"/hreflang="ja"/g' ./sitemap.xml
+  sed -i -e 's/shogi-board\/en\//shogi-board\//g' ./sitemap.xml
+else
+  sed -i '' -e 's/hreflang="en"/hreflang="ja"/g' ./sitemap.xml
+  sed -i '' -e 's/shogi-board\/en\//shogi-board\//g' ./sitemap.xml
+fi
+
 
 # html files
 function replace() {
-  find . -type f -name "*.html" -print0 | \
-  xargs -0 sed -i '' -e "s/$1/$2/g"
+  if [ "$sed_version" = "gnu" ]; then
+    find . -type f -name "*.html" -print0 | xargs -0 sed -i -e "s/$1/$2/g"
+  else
+    find . -type f -name "*.html" -print0 | xargs -0 sed -i '' -e "s/$1/$2/g"
+  fi
 }
 
 replace 'html lang=""' 'html lang="ja"'
@@ -47,4 +66,4 @@ node $PROJECT_ROOT/bin/ga.js remove
 # deploy
 read -p "Are you sure to deploy? [y/n]" CONFIRM
 if [[ $CONFIRM != "y" ]]; then exit 1; fi
-gh-pages -m '[ci skip] Updates' -d .
+$PROJECT_ROOT/node_modules/gh-pages/bin/gh-pages.js -m '[ci skip] Updates' -d .

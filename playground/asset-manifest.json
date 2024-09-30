@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/shogi-board/playground/static/css/main.646b9f13.css",
-    "main.js": "/shogi-board/playground/static/js/main.8722f2ce.js",
+    "main.js": "/shogi-board/playground/static/js/main.f69f15fd.js",
     "static/media/tatami.jpg": "/shogi-board/playground/static/media/tatami.4b025306b406863e84e6.jpg",
     "static/media/gin1.svg": "/shogi-board/playground/static/media/gin1.74c9671b73abe056a1b6.svg",
     "static/media/gin0.svg": "/shogi-board/playground/static/media/gin0.d7aa5cee6fbb9fa7d791.svg",
@@ -51,10 +51,10 @@
     "static/media/next-one.svg": "/shogi-board/playground/static/media/next-one.b089204be15b9690684d7adfbfb03983.svg",
     "static/media/prev-one.svg": "/shogi-board/playground/static/media/prev-one.4c68ce2e037171e7c36cfcced97e2f0c.svg",
     "main.646b9f13.css.map": "/shogi-board/playground/static/css/main.646b9f13.css.map",
-    "main.8722f2ce.js.map": "/shogi-board/playground/static/js/main.8722f2ce.js.map"
+    "main.f69f15fd.js.map": "/shogi-board/playground/static/js/main.f69f15fd.js.map"
   },
   "entrypoints": [
     "static/css/main.646b9f13.css",
-    "static/js/main.8722f2ce.js"
+    "static/js/main.f69f15fd.js"
   ]
 }

@@ -2,6 +2,7 @@ import { action, computed, makeObservable, observable } from 'mobx'
 import { canPromote, mustPromote, promote } from '../../handler/game/piece'
 import { move } from '../../handler/game/position'
 import { changeIndex } from '../../handler/kifu/changeIndex'
+import deleteMove from '../../handler/kifu/deleteMove'
 import { genKifuString } from '../../handler/kifu/genKifuString'
 import getCurrent from '../../handler/kifu/getCurrent'
 import pushMove from '../../handler/kifu/pushMove'
@@ -148,6 +149,10 @@ export class DefaultGameState implements GameState {
 
   clickKifu(moveCount: number, branchIndex?: number): void {
     this.setKifu(changeIndex(this.kifu, moveCount, branchIndex))
+  }
+
+  deleteMove(move: Move): void {
+    this.setKifu(deleteMove(this.kifu, move))
   }
 
   setKifu(kifu: Kifu): void {

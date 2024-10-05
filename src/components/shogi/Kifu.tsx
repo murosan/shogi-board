@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import React, { FC, useEffect } from 'react'
 import { intoView } from '../../handler/dom/intoView'
+import CloseImg from '../../img/components/buttons/close.svg'
 import Branch from '../../model/kifu/Branch'
 import History, { isBranch, KifuComponent } from '../../model/kifu/History'
 import { Move } from '../../model/kifu/Move'
@@ -8,6 +9,7 @@ import { StoreContext } from '../../store/Store'
 import './Kifu.scss'
 
 const CURRENT_KIFU_ELM_ID = 'Move-Current'
+const DELETE_KIFU_TXT = 'これ以降の棋譜を削除します'
 
 const Kifu: FC = () => {
   const { gameState } = React.useContext(StoreContext)
@@ -48,6 +50,7 @@ const Kifu: FC = () => {
       otherHeadsDom.push(
         <div key={key} className="Branch" onClick={onClick}>
           <span>{txt}</span>
+          {renderDeleteMoveButton(m)}
         </div>
       )
     }
@@ -66,6 +69,7 @@ const Kifu: FC = () => {
       <div key={n} className="Move" id={id} onClick={onClick}>
         <div className="Number code">{n + '.'}</div>
         <div className="MoveText">{kifuText(m)}</div>
+        {n > 0 && renderDeleteMoveButton(m)}
       </div>
     )
   }
@@ -75,6 +79,20 @@ const Kifu: FC = () => {
     // 同 で始まっていて2文字だったら空白を入れる
     if (s.length === 2 && s[0] === '同') return `同　${s[1]}`
     return s
+  }
+
+  function renderDeleteMoveButton(m: Move): JSX.Element {
+    return (
+      <span
+        className="DeleteMove"
+        style={{ backgroundImage: `url(${CloseImg})` }}
+        onClick={async (e: React.MouseEvent<HTMLDivElement>) => {
+          window.confirm(DELETE_KIFU_TXT) && gameState.deleteMove(m)
+          e.stopPropagation()
+        }}
+        title={DELETE_KIFU_TXT}
+      />
+    )
   }
 }
 

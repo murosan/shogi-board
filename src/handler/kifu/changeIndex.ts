@@ -21,13 +21,13 @@ function changeHistory(h: History, x: number, y?: number): History {
   const last: KifuComponent = h.moves[lastIndex]
   const init: KifuComponent[] = h.moves.slice(0, lastIndex)
 
-  const xPassesIfBranch: number = x <= lastIndex ? 0 : x - lastIndex
+  const xPassesIfBranch: number = Math.max(0, x - lastIndex)
 
   const moves: KifuComponent[] = isBranch(last)
     ? init.concat(changeBranch(last, xPassesIfBranch, y))
     : h.moves.slice()
 
-  const index: number = x <= lastIndex ? x : lastIndex
+  const index: number = Math.min(x, lastIndex)
 
   return { moves, index }
 }

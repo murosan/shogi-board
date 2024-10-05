@@ -19,17 +19,18 @@
 
 .Move {
   display: flex;
-  padding: 0.2em 0;
+  padding: 0.2rem 0;
   cursor: pointer;
+  position: relative;
 
   .Number {
     color: $GrayBase;
-    margin-right: 0.05em;
+    margin-right: 0.05rem;
     margin-left: 1vw;
   }
   .MoveText {
     white-space: nowrap;
-    margin-right: 0.25em;
+    margin-right: 0.25rem;
   }
 }
 
@@ -46,6 +47,21 @@
 .Branch {
   &:hover {
     background-color: $GrayHover;
+  }
+
+  .DeleteMove {
+    @include backImgCenter;
+    display: none;
+    position: relative;
+    margin-left: 1.5rem;
+    padding: 0.25rem;
+    width: 0.8rem;
+  }
+
+  &:hover {
+    .DeleteMove {
+      display: inline-block;
+    }
   }
 }
 

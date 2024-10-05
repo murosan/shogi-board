@@ -16,10 +16,10 @@ export default function pushMove(old: Kifu, m: Move): Kifu {
 }
 
 function pushToHistory(h: History, m: Move): History {
-  const lastIsCurrent: boolean = h.index === h.moves.length - 1
+  const isLast: boolean = h.index === h.moves.length - 1
   const last: KifuComponent = h.moves[h.index]
 
-  if (lastIsCurrent && isBranch(last))
+  if (isLast && isBranch(last))
     return {
       moves: h.moves
         .slice(0, h.moves.length - 1)
@@ -29,7 +29,7 @@ function pushToHistory(h: History, m: Move): History {
 
   const nextIndex: number = h.index + 1
 
-  if (lastIsCurrent)
+  if (isLast)
     return {
       moves: h.moves.concat(m),
       index: nextIndex,
@@ -97,7 +97,7 @@ function toHistory(c: KifuComponent[]): History {
   return { moves: c, index: 0 }
 }
 
-function moveEquals(a: Move, b: Move): boolean {
+export function moveEquals(a: Move, b: Move): boolean {
   return (
     a.index === b.index &&
     a.source.row === b.source.row &&
@@ -105,6 +105,7 @@ function moveEquals(a: Move, b: Move): boolean {
     a.dest.row === b.dest.row &&
     a.dest.column === b.dest.column &&
     a.piece === b.piece &&
-    a.promote === b.promote
+    a.promote === b.promote &&
+    a.str === b.str
   )
 }

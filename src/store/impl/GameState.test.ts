@@ -1,8 +1,9 @@
 import * as PositionHandler from '../../handler/game/position'
 import * as KifuHandler from '../../handler/kifu/genKifuString'
-import { GameState } from '../GameState'
+import { Move } from '../../model/kifu/Move'
 import { Empty, Fu0, Fu1, Kei1, To0 } from '../../model/shogi/Piece'
-import { mockKifu } from '../../testutils/mockKifu'
+import { mockKifu, mockMove } from '../../testutils/mockKifu'
+import { GameState } from '../GameState'
 import { DefaultGameState } from './GameState'
 
 describe('DefaultGameState', () => {
@@ -210,6 +211,14 @@ describe('DefaultGameState', () => {
     expect(s.currentMove.index).toEqual(5)
     s.clickKifu(3, 2)
     expect(s.currentMove.index).toEqual(3)
+  })
+
+  it('棋譜のMoveを削除できる', async () => {
+    const s = new DefaultGameState()
+    s.kifu = mockKifu()
+    expect(s.currentMove.index).toEqual(5)
+    s.deleteMove(s.kifu.history.moves[2] as Move)
+    expect(s.currentMove.index).toEqual(1)
   })
 
   it('Confirmオブジェクトがセットされていても棋譜をクリックすると更新できる', async () => {

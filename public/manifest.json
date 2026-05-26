@@ -3,8 +3,8 @@
   "theme_color": "#31353d",
   "background_color": "#31353d",
   "display": "standalone",
-  "scope": "/shogi-board/playground/",
-  "start_url": "/shogi-board/playground/",
+  "scope": "/shogi-board-miao4/",
+  "start_url": "/shogi-board-miao4/",
   "icons": [
     {
       "src": "icon-192x192.png",

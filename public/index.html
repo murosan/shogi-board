@@ -42,21 +42,27 @@
   </head>
   <body>
     <header class="headerMain">
-      <a href="/shogi-board/" target="_self"> <h1>将棋盤・Shogi Board</h1></a>
+      <a href="%PUBLIC_URL%/" target="_self">
+        <h1>miao4 棋譜ビューア (将棋盤 fork: murosan/shogi-board)</h1></a
+      >
       <nav>
         <ul class="nav-site nav-site-internal">
           <li class="">
-            <a href="/shogi-board/playground/" target="_self">Playground</a>
-          </li>
-          <li class="">
-            <a href="/shogi-board/docs/features" target="_self">Docs</a>
-          </li>
-          <li class="">
-            <a href="https://github.com/murosan/shogi-board" target="_self"
-              >GitHub</a
+            <a
+              href="https://github.com/soy-tuber/shogi-board-miao4"
+              target="_blank"
+              rel="noreferrer noopener"
+              >GitHub (this fork)</a
             >
           </li>
-          <li class=""><a href="/shogi-board/blog/" target="_self">Blog</a></li>
+          <li class="">
+            <a
+              href="https://github.com/murosan/shogi-board"
+              target="_blank"
+              rel="noreferrer noopener"
+              >upstream: murosan/shogi-board</a
+            >
+          </li>
         </ul>
       </nav>
     </header>
@@ -64,11 +70,10 @@
     <div id="root"></div>
     <footer>
       <div class="footerContent">
-        <span>Copyright © 2020 murosan</span>
-        <div>
-          <a href="/shogi-board/" target="_self"> - top</a>
-          <a href="/shogi-board/docs/features" target="_self"> - document</a>
-        </div>
+        <span
+          >Based on Shogi Board by murosan (MIT) — kifu picker fork for miao4
+          Floodgate logs</span
+        >
       </div>
     </footer>
   </body>

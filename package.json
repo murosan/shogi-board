@@ -19,7 +19,7 @@
     "url": "https://github.com/murosan/shogi-board"
   },
   "bugs": "https://github.com/murosan/shogi-board/issues",
-  "homepage": "https://murosan.github.io/shogi-board",
+  "homepage": "https://soy-tuber.github.io/shogi-board-miao4",
   "engines": {
     "node": ">=14.7.0"
   },
@@ -62,7 +62,8 @@
     "start": "react-scripts start",
     "start:doc": "cd document/website; yarn start",
     "build": "react-scripts build",
-    "deploy": "bin/deploy.sh",
+    "deploy": "react-scripts build && gh-pages -d build -m '[ci skip] Updates'",
+    "deploy:legacy": "bin/deploy.sh",
     "test": "react-scripts test",
     "test:c": "react-scripts test --coverage --watchAll=false",
     "test:debug": "react-scripts --inspect-brk test --runInBand",

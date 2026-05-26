@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { getAsString } from '../../handler/kifu/getAsString'
 import { hasComment } from '../../handler/kifu/hasComment'
 import { KifuFormats, KifuParser } from '../../lib/parser/parsers/kifu'
@@ -10,6 +10,18 @@ import CloseButton from '../util/CloseButton'
 import Loader from '../util/Loader'
 import './KifuMockup.scss'
 
+interface KifuIndexEntry {
+  file: string
+  session: string
+  game_index_in_session: number
+  account: string
+  my_color: 'BLACK' | 'WHITE'
+  opp_name: string
+  result: string
+  moves: number
+  session_log: string
+}
+
 const ParseState = {
   standby: 'standby',
   parsing: 'parsing',
@@ -17,16 +29,50 @@ const ParseState = {
   failure: 'failure',
 }
 
+const KIFU_BASE = `${process.env.PUBLIC_URL || ''}/kifu`
+
 const KifuMockup: FC = () => {
   const [copied, setCopied] = useState(false)
   const [parseState, setParseState] = useState(ParseState.standby)
   const [textareaInput, setTextareaInput] = useState('')
   const [readErrorText, setReadErrorText] = useState('')
+  const [bundledList, setBundledList] = useState<KifuIndexEntry[]>([])
+  const [selectedFile, setSelectedFile] = useState('')
 
   const { gameState, displayState }: Store = React.useContext(StoreContext)
   const { kifu } = gameState
 
   const checkmarkTimeout = 1500
+
+  // Load the bundled kifu index once
+  useEffect(() => {
+    let cancelled = false
+    fetch(`${KIFU_BASE}/index.json`)
+      .then(r => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((data: KifuIndexEntry[]) => {
+        if (!cancelled) setBundledList(data)
+      })
+      .catch(() => {
+        /* index not present — picker hidden */
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  const onSelectBundled = async (file: string) => {
+    setSelectedFile(file)
+    setReadErrorText('')
+    if (!file) return
+    try {
+      const r = await fetch(`${KIFU_BASE}/${file}`)
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
+      const text = await r.text()
+      setTextareaInput(text)
+    } catch (e) {
+      setReadErrorText(`棋譜の取得に失敗しました: ${e}`)
+    }
+  }
 
   const copyKifuOnClick: () => Promise<void> = async () => {
     const txt = getAsString(kifu)
@@ -69,6 +115,50 @@ const KifuMockup: FC = () => {
     return <span className="ErrorText">{readErrorText}</span>
   })()
 
+  const bundledPicker =
+    bundledList.length === 0 ? null : (
+      <div className="KifuMockupContent">
+        <h1>収録棋譜から選ぶ (miao4 / SOJO)</h1>
+        <p>※ Floodgate 50局 (新しい順)</p>
+        <select
+          className="TextAreaForKifuInput"
+          style={{ height: 'auto', padding: '6px' }}
+          value={selectedFile}
+          onChange={e => onSelectBundled(e.target.value)}
+        >
+          <option value="">-- 棋譜を選択 --</option>
+          {bundledList.map((g, i) => {
+            const color = g.my_color === 'BLACK' ? '先' : '後'
+            const label = `${(i + 1)
+              .toString()
+              .padStart(2, '0')}. [${color}] vs ${g.opp_name} — ${g.result} (${
+              g.moves
+            }手, ${g.session} #${g.game_index_in_session})`
+            return (
+              <option key={g.file} value={g.file}>
+                {label}
+              </option>
+            )
+          })}
+        </select>
+        {selectedFile && (
+          <p>
+            原ログ:{' '}
+            <a
+              href={`${KIFU_BASE}/${
+                bundledList.find(g => g.file === selectedFile)?.session_log ||
+                ''
+              }`}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              raw log
+            </a>
+          </p>
+        )}
+      </div>
+    )
+
   return (
     <div className="Mockup">
       <CloseButton onClick={() => displayState.closeMockup()} />
@@ -80,6 +170,8 @@ const KifuMockup: FC = () => {
           <Button label="クリップボードにコピー" onClick={copyKifuOnClick} />
         </div>
       </div>
+
+      {bundledPicker}
 
       <div className="KifuMockupContent">
         <h1>読み込み</h1>

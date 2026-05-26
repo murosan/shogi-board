@@ -251,20 +251,11 @@ def render_kif(game, label, idx_in_session, approx_start, my_account):
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
-    raw_dir = os.path.join(OUT_DIR, "raw")
-    os.makedirs(raw_dir, exist_ok=True)
 
     # Collect all games newest-first
     all_games = []  # list of (game_dict, session_label, idx_in_session, approx_start, log_name, my_account)
     for log_name, label, start, my_account in SESSIONS:
         path = os.path.join(LOG_DIR, log_name)
-        # Copy raw log to public, applying redaction patterns
-        with open(path, encoding="utf-8", errors="replace") as src:
-            content = src.read()
-        for pat, repl in LOG_REDACT_PATTERNS:
-            content = content.replace(pat, repl)
-        with open(os.path.join(raw_dir, log_name), "w", encoding="utf-8") as dst:
-            dst.write(content)
         games = parse_log(path)
         for i, g in enumerate(games):
             all_games.append((g, label, i, start, log_name, my_account))
@@ -299,7 +290,6 @@ def main():
         index_entries.append({
             "file": kif_filename,
             "session": session_label,
-            "session_log": f"raw/{log_name}",
             "game_index_in_session": idx_in_session + 1,
             "account": my_account,
             "my_color": my_color,

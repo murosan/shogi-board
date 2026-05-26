@@ -19,7 +19,6 @@ interface KifuIndexEntry {
   opp_name: string
   result: string
   moves: number
-  session_log: string
 }
 
 const ParseState = {
@@ -141,21 +140,6 @@ const KifuMockup: FC = () => {
             )
           })}
         </select>
-        {selectedFile && (
-          <p>
-            原ログ:{' '}
-            <a
-              href={`${KIFU_BASE}/${
-                bundledList.find(g => g.file === selectedFile)?.session_log ||
-                ''
-              }`}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              raw log
-            </a>
-          </p>
-        )}
       </div>
     )
 

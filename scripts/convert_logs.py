@@ -25,8 +25,13 @@ OUT_DIR = r"D:\shogi-board-miao4\public\kifu"
 
 SESSIONS = [
     # (log_filename, label, approx_start_iso, my_account)  — newest first
-    ("floodgate_20260526_222702.log", "2026-05-26 (SOJO CO-20)", "2026-05-26T22:27:02", "miao4"),
-    ("floodgate_20260515_205350.log", "2026-05-15 (SOJO 42連勝)", "2026-05-15T20:53:50", "miao4"),
+    ("floodgate_20260526_222702.log", "2026-05-26 (miao4)", "2026-05-26T22:27:02", "miao4"),
+    ("floodgate_20260515_205350.log", "2026-05-15 (miao4 42連勝)", "2026-05-15T20:53:50", "miao4"),
+]
+
+# Strings stripped from raw log copies (戦略にかかわるため非公開)
+LOG_REDACT_PATTERNS = [
+    ("[SOJO]", "[Engine]"),
 ]
 
 COL_FULL = ["", "１", "２", "３", "４", "５", "６", "７", "８", "９"]
@@ -253,7 +258,13 @@ def main():
     all_games = []  # list of (game_dict, session_label, idx_in_session, approx_start, log_name, my_account)
     for log_name, label, start, my_account in SESSIONS:
         path = os.path.join(LOG_DIR, log_name)
-        shutil.copy(path, os.path.join(raw_dir, log_name))
+        # Copy raw log to public, applying redaction patterns
+        with open(path, encoding="utf-8", errors="replace") as src:
+            content = src.read()
+        for pat, repl in LOG_REDACT_PATTERNS:
+            content = content.replace(pat, repl)
+        with open(os.path.join(raw_dir, log_name), "w", encoding="utf-8") as dst:
+            dst.write(content)
         games = parse_log(path)
         for i, g in enumerate(games):
             all_games.append((g, label, i, start, log_name, my_account))

@@ -118,7 +118,7 @@ const KifuMockup: FC = () => {
   const bundledPicker =
     bundledList.length === 0 ? null : (
       <div className="KifuMockupContent">
-        <h1>収録棋譜から選ぶ (miao4 / SOJO)</h1>
+        <h1>収録棋譜から選ぶ (miao4)</h1>
         <p>※ Floodgate 50局 (新しい順)</p>
         <select
           className="TextAreaForKifuInput"
